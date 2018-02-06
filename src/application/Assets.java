@@ -1,5 +1,7 @@
+package application;
+
 /**
  * Created by henrytran1 on 06/02/2018.
  */
-public class Sprite {
+public class Assets {
 }

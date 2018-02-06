@@ -14,7 +14,7 @@
 
 <!-- Sett opp 2x2 grid layout -->
 
-<GridPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="MainController">
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
    
    	<!-- Sett opp menybar -->
@@ -35,10 +35,10 @@
    	<!-- Sett opp "canvas" for å tegne grafikk -->
    	<HBox styleClass="graphics" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.rowSpan="1">
    		<stylesheets>
-            <URL value="@application.css" />
+            <URL value="@../application.css" />
          </stylesheets>
       <children>
-            <VBox prefHeight="600.0" prefWidth="206.0">
+            <VBox maxWidth="206.0" minHeight="206.0" minWidth="206.0" prefHeight="600.0" prefWidth="206.0">
                <children>
                   <Label text="Name:" />
                   <TextField />
@@ -53,6 +53,7 @@
                   <Insets left="20.0" top="20.0" />
                </padding>
             </VBox>
+            <AnchorPane fx:id="propertyView" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" />
       		<Canvas fx:id="graphics" height="600" onMouseDragged="#mouseDragged" width="700" />
       </children>
    	</HBox>

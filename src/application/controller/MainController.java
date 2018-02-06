@@ -1,25 +1,75 @@
+package application.controller;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+
+import static com.sun.glass.ui.MenuItem.Separator;
 
 /*
  * Controllerklasse som styrer kommunikasjon med bruker og GUI
  */
 
 public class MainController implements Initializable {
-	
-	// Intern modell-klasse (deklarert her for enkelhetens skyld)
+
+    @FXML private ChoiceBox typeSelector;
+    @FXML private AnchorPane propertyView;
+
+	public void addAsset(ActionEvent event) {
+
+	}
+
+    // denne metoden blir kalt automatisk i oppstarten av programmet
+    // kan assosieres med konstrukt�r
+    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {ChoiceBox cb = new ChoiceBox();
+        typeSelector.setItems(FXCollections.observableArrayList("Player", "NPC ", "Object"));
+        typeSelector.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> typeChange(typeSelector.getItems().get((Integer) number2).toString()));
+    }
+
+    private void typeChange(String type) {
+        try {
+            Pane pane = FXMLLoader.load(getClass().getResource("/application/layout/" + type + ".fxml"));
+            propertyView.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Intern modell-klasse (deklarert her for enkelhetens skyld)
 	// Burde v�re deklarert som en modell (f.eks. i model pakke ved bruk
 	// av MVC
 	private static class Point {
@@ -36,16 +86,7 @@ public class MainController implements Initializable {
 	@FXML private ColorPicker colorPicker;
 	@FXML private Slider sizeSlider;
 	private List<Point> plist;
-	
-	// denne metoden blir kalt automatisk i oppstarten av programmet
-	// kan assosieres med konstrukt�r
-	public void initialize(java.net.URL location,
-            java.util.ResourceBundle resources) {
-		colorPicker.setValue(Color.BLUE);
-		sizeSlider.setValue(5.0);
-		plist = new ArrayList<Point>();
-		draw();
-	}
+
 	
 	// hjelpemetode som tegner grafikk til 'canvas' omr�det i GUI
 	private void draw() {
@@ -76,6 +117,7 @@ public class MainController implements Initializable {
 		plist.clear();
 		draw();
 	}
+
 	
 	public void newColorEvent(ActionEvent event) {
 		draw();
