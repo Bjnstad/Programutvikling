@@ -1,4 +1,4 @@
-import FileHandler.Asset;
+import game.FileHandler.Asset;
 import game.Character;
 
 /**

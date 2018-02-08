@@ -1,5 +1,7 @@
 package application.controller;
 
+import game.FileHandler.FileHandler;
+import game.assets.Object;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +22,13 @@ public class ObjectController implements Initializable {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Open File");
         File file = chooser.showOpenDialog(new Stage());
+
+        Object object = new Object("My asset", file);
+
+        FileHandler fh = new FileHandler();
+
+        fh.saveAsset(object);
     }
 
-    
+
 }
