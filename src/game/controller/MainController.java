@@ -55,6 +55,7 @@ public class MainController implements Initializable {
             controller.setMainController(this); // Set ref to main controller
             loader.setController(controller); // Set controller to view
             Pane pane = loader.load();
+            mainView.getChildren().clear(); // Clear old view
             mainView.getChildren().add(pane); // Change anchorpane to view
         } catch (IOException e) {
             e.printStackTrace();
