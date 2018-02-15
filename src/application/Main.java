@@ -14,7 +14,7 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("layout/Main.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../game/layout/Main.fxml"));
 	       
 		Scene scene = new Scene(root, 800, 600);
 	    
