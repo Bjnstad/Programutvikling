@@ -50,19 +50,6 @@ public class MainController2 implements Initializable {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Intern modell-klasse (deklarert her for enkelhetens skyld)
 	// Burde v�re deklarert som en modell (f.eks. i model pakke ved bruk
 	// av MVC
