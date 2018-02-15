@@ -1,22 +1,31 @@
 package game.character;
 
 public class Character {
-    private float posX = 1;
-    private float posY = 1;
+    private double posX = 0;
+    private double posY = 0;
 
-    public void setPosX(float posX) {
+    public void setPosX(double posX) {
         this.posX = posX;
     }
 
-    public void setPosY(float posY) {
+    public void setPosY(double posY) {
         this.posY = posY;
     }
 
-    public float getPosX() {
+
+    public void addPosX(double speed) {
+        this.posX += speed;
+    }
+
+    public void addPosY(double speed) {
+        this.posY += speed;
+    }
+
+    public double getPosX() {
         return this.posX;
     }
 
-    public float getPosY() {
+    public double getPosY() {
         return this.posY;
     }
 }

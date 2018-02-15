@@ -4,9 +4,11 @@ import game.GameState;
 import game.State;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 
 import java.io.File;
 import java.net.URL;
@@ -48,6 +50,11 @@ public class EditorController extends GameState implements Controller {
     @Override
     public void onClose () {
 
+    }
+
+    @Override
+    public EventHandler<KeyEvent> getEventHandler() {
+        return null;
     }
 
     public ObservableList<String> getAllAssets() {

@@ -4,9 +4,12 @@ import game.character.Enemy;
 import game.character.Player;
 import game.world.GameMap;
 import game.world.GameObject;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 public class GameController implements Controller {
@@ -20,6 +23,8 @@ public class GameController implements Controller {
     Canvas graphics;
 
     private MainController mainController;
+
+    int calc = 0;
 
 
 
@@ -46,37 +51,42 @@ public class GameController implements Controller {
             int calcX = (int)(mainController.getWidth() / GameMap.MIN_SIZE_X);
             int calcY = (int)(mainController.getHeight() / GameMap.MIN_SIZE_Y);
 
-            int calc;
+            double restX = 0;
+            double restY = 0;
+
             if(calcX < calcY) {
                 calc = calcX;
+                restX = (mainController.getHeight() - mainController.getWidth()) / 2;
             } else {
                 calc = calcY;
+                restY = (mainController.getWidth() - mainController.getHeight()) / 2;
             }
 
 
-
-
             gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-            for(int y = (int)player.getPosY(); y < GameMap.MIN_SIZE_Y + player.getPosY(); y++) {
-                for (int x = (int)player.getPosY(); x < GameMap.MIN_SIZE_X + player.getPosX(); x++) {
-                    GameObject gameObject = map.getObject(x, y);
-                    if(gameObject == null) {
-                        // No object
+            for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
+                for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
+                    gc.setFill(map.getBackgroundColor());
+                    gc.fillRect(x * calc + restY, y * calc + restX, calc, calc);
+                }
+            }
 
-                        gc.setFill(map.getBackgroundColor());
-                        gc.fillRect(x * calc, y * calc, calc, calc);
-                    } else {
+
+            for(int y = 0; y < map.getHeight(); y++) {
+                for (int x = 0; x < map.getWidth(); x++) {
+                    GameObject gameObject = map.getObject(x, y);
+                    if(gameObject != null) {
                         // Is object
 
                         gc.setFill(gameObject.getAsset());
-                        gc.fillRect(x * calc, y * calc, calc, calc);
+                        gc.fillRect(x * calc + player.getPosX() + restY, y * calc + player.getPosY() + restX, calc, calc);
                     }
                 }
             }
 
             // RENDER PLAYER
             gc.setFill(Color.YELLOW);
-            gc.fillRect(GameMap.MIN_SIZE_X/2 * calc, GameMap.MIN_SIZE_Y/2 * calc, calc, calc);
+            gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY, GameMap.MIN_SIZE_Y/2 * calc + restX, calc, calc);
 
 
         }
@@ -85,6 +95,27 @@ public class GameController implements Controller {
     @Override
     public void onClose() {
 
+    }
+
+    @Override
+    public EventHandler<KeyEvent> getEventHandler() {
+        double speed = 2.5d;
+        return (event -> {
+            switch (event.getCode()) {
+                case W:
+                    player.addPosY(speed);
+                    break;
+                case A:
+                    player.addPosX(speed);
+                    break;
+                case S:
+                    player.addPosY(-speed);
+                    break;
+                case D:
+                    player.addPosX(-speed);
+                    break;
+            }
+        });
     }
 
     @Override
