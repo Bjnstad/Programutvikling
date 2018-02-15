@@ -1,11 +1,15 @@
 package game.controller;
 
 import game.State;
+import game.utils.InputHandler;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,21 +20,26 @@ public class MainController implements Initializable {
     @FXML
     AnchorPane mainView;
 
+    private Timeline timeline;
+    private Controller controller;
+    private InputHandler inputHandler;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setState(State.MAIN_MENU);
+
+        KeyFrame frame = new KeyFrame(Duration.seconds(0.5), event -> gameloop());
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-
-
-
-
-
-
+    private void gameloop() {
+        controller.render();
+    }
 
     public void setState(State state) {
         String source;
-        Controller controller;
         switch (state) {
             case MAIN_MENU:
                 source = "MainMenu";
@@ -41,6 +50,7 @@ public class MainController implements Initializable {
                 controller = new EditorController();
                 break;
             case GAME:
+                timeline.play();
                 source = "Game";
                 controller = new GameController();
                 break;
@@ -55,13 +65,22 @@ public class MainController implements Initializable {
             controller.setMainController(this); // Set ref to main controller
             loader.setController(controller); // Set controller to view
             Pane pane = loader.load();
-            
             mainView.getChildren().clear(); // Clear old view
             mainView.getChildren().add(pane); // Change anchorpane to view
+
+
 
             controller.initiate();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public double getWidth() {
+        return mainView.getWidth();
+    }
+
+    public double getHeight() {
+        return mainView.getHeight();
     }
 }
