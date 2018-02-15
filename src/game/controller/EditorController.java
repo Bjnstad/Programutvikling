@@ -1,10 +1,15 @@
 package game.controller;
 
+import FileHandler.FileHandler;
 import game.GameState;
 import game.State;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.event.EventHandler;
+
+import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -18,17 +23,25 @@ import java.util.ResourceBundle;
 
 
 public class EditorController extends GameState implements Controller {
+
     private MainController mainController;
+    private FileHandler fileHandler;
 
 
     @FXML
     ListView listView;
 
+
     public EditorController() {
         super(State.EDITOR);
     }
 
+    @FXML
+    public void newFile(ActionEvent event){
+        System.out.println("");
 
+
+    }
 
     @Override
     public void setMainController (MainController mainController) {
@@ -37,10 +50,14 @@ public class EditorController extends GameState implements Controller {
 
     @Override
     public void initiate () {
-        ObservableList<String> items = getAllAssets();
+        FileHandler fileHandler = new FileHandler();
+
+        ObservableList<String> items = fileHandler.getAllAssets();
+
         listView.setItems(items);
 
     }
+
 
     @Override
     public void render () {
@@ -51,6 +68,7 @@ public class EditorController extends GameState implements Controller {
     public void onClose () {
 
     }
+
 
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
