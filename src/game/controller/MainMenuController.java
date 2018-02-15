@@ -20,6 +20,20 @@ public class MainMenuController implements Controller {
     private MainController mainController = null;
 
 
+    @Override
+    public void initiate() {
+
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    @Override
+    public void onClose() {
+
+    }
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;

@@ -20,6 +20,21 @@ public class GameController implements Initializable, Controller {
 
 
     @Override
+    public void initiate() {
+
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    @Override
+    public void onClose() {
+
+    }
+
+    @Override
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
