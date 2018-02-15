@@ -1,6 +1,6 @@
-package game.FileHandler;
+package FileHandler;
 
-import game.assets.Object;
+import assets.Object;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

@@ -1,9 +1,8 @@
 package application.controller;
 
-import game.FileHandler.Asset;
-import game.FileHandler.FileHandler;
+import FileHandler.Asset;
+import FileHandler.FileHandler;
 import game.Map;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

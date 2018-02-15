@@ -11,5 +11,5 @@
             fx:controller="application.controller.NPCController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <Label text="NPC"/>
+    <Label text="game.NPC"/>
 </AnchorPane>

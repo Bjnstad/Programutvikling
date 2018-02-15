@@ -1,4 +1,4 @@
-package game.FileHandler;
+package FileHandler;
 
 import java.io.File;
 

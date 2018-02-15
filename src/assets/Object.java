@@ -1,6 +1,6 @@
-package game.assets;
+package assets;
 
-import game.FileHandler.Asset;
+import FileHandler.Asset;
 
 import java.io.File;
 

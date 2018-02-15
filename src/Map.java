@@ -1,6 +1,6 @@
 package game;
 
-import game.FileHandler.Asset;
+import FileHandler.Asset;
 
 public class Map {
 

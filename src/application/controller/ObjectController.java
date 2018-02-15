@@ -1,11 +1,9 @@
 package application.controller;
 
-import game.FileHandler.FileHandler;
-import game.assets.Object;
-import javafx.event.ActionEvent;
+import FileHandler.FileHandler;
+import assets.Object;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

@@ -37,7 +37,7 @@ public class MainController2 implements Initializable {
     // denne metoden blir kalt automatisk i oppstarten av programmet
     // kan assosieres med konstrukt�r
     public void initialize(URL location, java.util.ResourceBundle resources) {ChoiceBox cb = new ChoiceBox();
-        typeSelector.setItems(FXCollections.observableArrayList("Player", "NPC ", "Object"));
+        typeSelector.setItems(FXCollections.observableArrayList("game.character.Player", "game.NPC ", "Object"));
         typeSelector.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> typeChange(typeSelector.getItems().get((Integer) number2).toString()));
     }
 

@@ -3,8 +3,15 @@ package game;
 /**
  * Created by henrytran1 on 06/02/2018.
  */
-public class GameState {
-    public enum state{
-        NOTRUNNING, RUNNING, PAUSE
+public abstract class GameState {
+    private State state;
+    public GameState(State state){
+        this.state = state;
+    }
+    public abstract void initiate();
+    public abstract void render();
+    public abstract void onClose();
+    public  State getState() {
+        return this.state;
     }
 }
