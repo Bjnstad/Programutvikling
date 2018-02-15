@@ -1,13 +1,15 @@
 package game.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,14 +25,19 @@ public class MainMenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
+    @FXML
+    public void editor(ActionEvent event) {
+
+    }
+
+    @FXML
     public void play(ActionEvent event) {
 
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("layout/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("layout/Game.fxml"));
 
         try {
             Parent root = loader.load();
-            gifController = loader.getController();
+            //gifController = loader.getController();
 
             Stage gifStage = new Stage();
             gifStage.setScene(new Scene(root));
@@ -42,10 +49,8 @@ public class MainMenuController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load the gif (s305061) FXML document, IO expectedException");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Failed to load the gif (s305061) FXML document");
         }
 
     }
