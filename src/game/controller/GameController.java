@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameController implements Initializable {
+public class GameController implements Initializable, Controller {
 
     private MainController mainController;
 
@@ -19,4 +19,8 @@ public class GameController implements Initializable {
     }
 
 
+    @Override
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 }

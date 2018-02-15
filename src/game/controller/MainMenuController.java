@@ -1,5 +1,7 @@
 package game.controller;
 
+import application.Main;
+import game.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
+public class MainMenuController implements Controller {
+
+    private MainController mainController = null;
+
+
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+
 
     @FXML
     Button options;
@@ -21,37 +33,13 @@ public class MainMenuController implements Initializable {
     @FXML
     Button hightscore;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
-
     @FXML
     public void editor(ActionEvent event) {
-
+        mainController.setState(State.EDITOR);
     }
 
     @FXML
     public void play(ActionEvent event) {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("layout/Game.fxml"));
-
-        try {
-            Parent root = loader.load();
-            //gifController = loader.getController();
-
-            Stage gifStage = new Stage();
-            gifStage.setScene(new Scene(root));
-
-            //gifController.initialize(gifStage, canvasController.getGol());
-            gifStage.setTitle("Create GIF");
-
-            gifStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        mainController.setState(State.GAME);
     }
 }
