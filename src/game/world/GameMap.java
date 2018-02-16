@@ -24,7 +24,7 @@ public class GameMap {
         return this.backgroundColor;
     }
 
-    public boolean setGameObjects(GameObject gameObjects, int posX, int posY) {
+    public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
         for (int x = posX; x < posX + gameObjects.getSizeX(); x++) {
             for (int y = posY; y < posY + gameObjects.getSizeY(); y++) {
                 if (willCollide(x, y)) return false;
