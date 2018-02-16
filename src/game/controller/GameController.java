@@ -1,5 +1,6 @@
 package game.controller;
 
+import game.State;
 import game.character.Enemy;
 import game.character.Player;
 import game.world.GameMap;
@@ -33,8 +34,8 @@ public class GameController implements Controller {
         this.player = new Player(Color.YELLOW);
 
         map = new GameMap(100, 100);
-        System.out.println(map.setGameObjects(new GameObject(Color.RED, 2, 2), 5, 5));
-        map.setGameObjects(new GameObject(Color.BLUE, 5, 5), 12, 14);
+        System.out.println(map.setGameObject(new GameObject(Color.RED, 2, 2), 5, 5));
+        map.setGameObject(new GameObject(Color.BLUE, 5, 5), 12, 14);
 
     }
 
@@ -86,7 +87,7 @@ public class GameController implements Controller {
 
             // RENDER PLAYER
             gc.setFill(Color.YELLOW);
-            gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY, GameMap.MIN_SIZE_Y/2 * calc + restX, calc, calc);
+            gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + restX - calc/2, calc, calc);
 
 
         }
@@ -113,6 +114,11 @@ public class GameController implements Controller {
                     break;
                 case D:
                     player.addPosX(-speed);
+                    break;
+
+
+                case ESCAPE:
+                    mainController.setState(State.MAIN_MENU);
                     break;
             }
         });
