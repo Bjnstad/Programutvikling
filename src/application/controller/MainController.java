@@ -50,8 +50,8 @@ public class MainController implements Initializable {
 		FileHandler fh = new FileHandler();
 
 		ListView<String> list = new ListView<String>();
-		ObservableList<String> items = fh.getAllAssets();
-		assets.setItems(items);
+		//ObservableList<String> items = fh.getAllAssets();
+		//assets.setItems(items);
 
 
 		draw();

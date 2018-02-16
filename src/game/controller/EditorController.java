@@ -3,21 +3,11 @@ package game.controller;
 import FileHandler.FileHandler;
 import game.GameState;
 import game.State;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import javafx.event.EventHandler;
-
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
-
-import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 
@@ -52,15 +42,18 @@ public class EditorController extends GameState implements Controller {
     public void initiate () {
         FileHandler fileHandler = new FileHandler();
 
-        ObservableList<String> items = fileHandler.getAllAssets();
 
-        listView.setItems(items);
+        //ObservableList<String> items = fileHandler.getAllAssets();
+
+        listView.setItems(fileHandler.getAllNames());
+        listView.setCellFactory(param -> fileHandler.getAllAssets());
 
     }
 
 
     @Override
     public void render () {
+
 
     }
 
@@ -73,25 +66,6 @@ public class EditorController extends GameState implements Controller {
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
         return null;
-    }
-
-    public ObservableList<String> getAllAssets() {
-        File folder = new File("assets");
-        if(folder == null) return null;
-
-        ObservableList<String>  list = FXCollections.observableArrayList ();
-
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-                // TODO: Maybe handle dir
-            } else {
-                list.add(fileEntry.getName());
-                System.out.println(fileEntry.getName());
-            }
-        }
-
-        return list;
-
     }
 
 
