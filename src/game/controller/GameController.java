@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
@@ -64,6 +63,7 @@ public class GameController implements Controller {
             }
 
 
+
             gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
             for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
                 for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
@@ -90,6 +90,21 @@ public class GameController implements Controller {
             gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + restX - calc/2, calc, calc);
 
 
+
+            for(int y = 0; y < map.getHeight(); y++) {
+                for (int x = 0; x < map.getWidth(); x++) {
+                    gc.setFill(Color.BLACK);
+                    gc.fillRect(x * calc + restY + player.getPosX(), y * calc + restX + player.getPosY(), calc, 1);
+                    gc.fillRect(x * calc + restY + player.getPosX(), y * calc + restX + player.getPosY(), 1, calc);
+                }
+            }
+
+            gc.setFill(Color.BLACK);
+            gc.fillRect(0,  0, restY, mainController.getHeight());
+            gc.fillRect(mainController.getWidth() - restY,  0, restY, mainController.getHeight());
+
+            gc.fillRect(0,  0, mainController.getWidth(), restX);
+            gc.fillRect(0,  mainController.getHeight() - restX, mainController.getWidth(), restX);
         }
     }
 
@@ -100,19 +115,23 @@ public class GameController implements Controller {
 
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
-        double speed = 2.5d;
+        double speed = 6.5d;
         return (event -> {
             switch (event.getCode()) {
                 case W:
+                    printPlayerPos();
                     player.addPosY(speed);
                     break;
                 case A:
+                    printPlayerPos();
                     player.addPosX(speed);
                     break;
                 case S:
+                    printPlayerPos();
                     player.addPosY(-speed);
                     break;
                 case D:
+                    printPlayerPos();
                     player.addPosX(-speed);
                     break;
 
@@ -122,6 +141,13 @@ public class GameController implements Controller {
                     break;
             }
         });
+    }
+
+
+    private void printPlayerPos() {
+        System.out.println("-------------");
+        System.out.println("X :" + player.getPosX());
+        System.out.println("Y :" + player.getPosY());
     }
 
     @Override

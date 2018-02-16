@@ -3,8 +3,8 @@ package game.world;
 import javafx.scene.paint.Color;
 
 public class GameMap {
-    public static final int MIN_SIZE_X = 20;
-    public static final int MIN_SIZE_Y = 20;
+    public static final int MIN_SIZE_X = 22;
+    public static final int MIN_SIZE_Y = 22;
 
     private GameObject[][] gameObjects;
     private Color backgroundColor; // Default background color
