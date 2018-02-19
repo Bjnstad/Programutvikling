@@ -12,7 +12,7 @@
    <children>
       <AnchorPane layoutX="658.0" layoutY="32.0" prefHeight="568.0" prefWidth="142.0">
          <children>
-            <ListView layoutX="1.0" prefHeight="561.0" prefWidth="141.0" fx:id="listView" />
+            <ListView fx:id="listView" layoutX="1.0" prefHeight="561.0" prefWidth="141.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-1.0" prefHeight="36.0" prefWidth="600.0">
@@ -21,9 +21,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                      <MenuItem mnemonicParsing="false" text="New file" onAction="#newFile" />
-
-                      <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -42,7 +40,7 @@
       </AnchorPane>
       <AnchorPane layoutX="6.0" layoutY="36.0" prefHeight="560.0" prefWidth="651.0">
          <children>
-            <Canvas height="560.0" layoutX="1.0" layoutY="1.0" width="651.0" />
+            <Canvas fx:id="graphics" height="560.0" layoutX="1.0" layoutY="1.0" width="651.0" />
          </children>
       </AnchorPane>
    </children>
