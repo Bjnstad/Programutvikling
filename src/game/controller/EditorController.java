@@ -49,9 +49,7 @@ public class EditorController extends GameState implements Controller {
 
     @FXML
     public void newFile(ActionEvent event){
-        System.out.println("");
-
-
+        mainController.setState(State.MAIN_MENU);
     }
 
     @Override
@@ -77,14 +75,16 @@ public class EditorController extends GameState implements Controller {
 
     @Override
     public void render () {
+        if(map == null) return; // No map set
+        GraphicsContext gc = graphics.getGraphicsContext2D();
 
-        if(graphics != null && map != null) {
-            GraphicsContext gc = graphics.getGraphicsContext2D();
+        graphics.setWidth(651);
+        graphics.setHeight(560);
 
-            graphics.setWidth(651);
-            graphics.setHeight(560);
+        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
+        map.render(gc, true);
 
-            int calcX = (int)(651 / GameMap.MIN_SIZE_X);
+        /*    int calcX = (int)(651 / GameMap.MIN_SIZE_X);
             int calcY = (int)(560 / GameMap.MIN_SIZE_Y);
 
             double restX = 0;
@@ -100,7 +100,6 @@ public class EditorController extends GameState implements Controller {
 
 
 
-            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
             for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
                 for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
                     gc.setFill(map.getBackgroundColor());
@@ -147,7 +146,7 @@ public class EditorController extends GameState implements Controller {
 
             gc.fillRect(0,  0, mainController.getWidth(), restX);
             gc.fillRect(0,  mainController.getHeight() - restX, mainController.getWidth(), restX);
-        }
+        }*/
 
     }
 

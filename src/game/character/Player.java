@@ -1,17 +1,17 @@
 package game.character;
 
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 public class Player extends Character {
 
-    private Color color; // TODO: Change to sprite
+    private Image avatar; // TODO: Change to sprite
 
-    public Player(Color color) {
-        this.color = color;
+    public Player(Image avatar) {
+        this.avatar = avatar;
     }
 
-    public Color getColor() {
-        return color;
+    public Image getAvatar() {
+        return avatar;
     }
 
 }

@@ -1,5 +1,6 @@
 package game.world;
 
+import game.character.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -59,13 +60,21 @@ public class GameMap {
     }
 
 
-    public void render(GraphicsContext gc) {
-        this.render(gc, 0, 0, false);
+    public void render(GraphicsContext gc, boolean grid) {
+        this.render(gc, 0, 0, grid, null);
     }
 
-    public void render(GraphicsContext gc, double offsetX, double offsetY, boolean grid) {
-        double size = 0;
+    public void render(GraphicsContext gc, double offsetX, double offsetY, boolean grid, Player player) {
+        double size;
 
+        double POX = 0; // Player offset X
+        double POY = 0; // Player offset Y
+        if (player != null) {
+            POX = player.getPosX();
+            POY = player.getPosY();
+        }
+
+        // TODO: dirty code
         double calcX = gc.getCanvas().getWidth() / GameMap.MIN_SIZE_X;
         double calcY = gc.getCanvas().getHeight() / GameMap.MIN_SIZE_Y;
 
@@ -73,35 +82,40 @@ public class GameMap {
             size = calcX;
         } else {
             size = calcY;
-        }
+        } // end of diry code
+
+
+
 
         // Render map color
         for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
             for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
                 gc.setFill(backgroundColor);
-                gc.fillRect(x * size + offsetY, y * size + offsetX, size, size);
+                gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, size);
             }
         }
 
-        // Render objects
+        /* Render objects */
         for(int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
                     gc.setFill(gameObject.getAsset());
-                    gc.fillRect(x * size + offsetY, y * size + offsetX, size, size);
+                    gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, size);
                 }
             }
         }
 
+        /* Draw grid */
         if(grid) {
-            gc.setFill(Color.BLACK);
-            gc.fillRect(0,  0, offsetY, gc.getCanvas().getHeight());
-            gc.fillRect( gc.getCanvas().getWidth() - offsetY,  0, offsetY, gc.getCanvas().getHeight());
-
-            gc.fillRect(0, 0, gc.getCanvas().getWidth(), offsetX);
-            gc.fillRect(0, gc.getCanvas().getHeight() - offsetX, gc.getCanvas().getWidth(), offsetX);
+            for(int y = 0; y < MIN_SIZE_X; y++) {
+                for (int x = 0; x < MIN_SIZE_X; x++) {
+                    gc.setFill(Color.BLACK);
+                    gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, 1);
+                    gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, 1, size);
+                }
+            }
         }
     }
 }

@@ -24,7 +24,6 @@ public class GameController implements Controller {
     Canvas graphics;
 
     private MainController mainController;
-    private Image image = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
 
     int calc = 0;
 
@@ -32,10 +31,11 @@ public class GameController implements Controller {
 
     @Override
     public void initiate() {
-        this.player = new Player(Color.YELLOW);
-
+        this.player = new Player(new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png"));
         map = new GameMap(100, 100);
-        System.out.println(map.setGameObject(new GameObject(Color.RED, 2, 2), 5, 5));
+
+        // Adding items to map
+        System.out.println(map.setGameObject(new GameObject(Color.RED, 2, 2), 7, 5));
         map.setGameObject(new GameObject(Color.BLUE, 5, 5), 12, 14);
 
     }
@@ -44,47 +44,37 @@ public class GameController implements Controller {
     //TODO: NEED CLEAN/REWRITE
     @Override
     public void render() {
-        if(graphics != null && map != null) {
-            GraphicsContext gc = graphics.getGraphicsContext2D();
+        if(map == null) return; // No map set.
 
-            graphics.setWidth(mainController.getWidth());
-            graphics.setHeight(mainController.getHeight());
+        GraphicsContext gc = graphics.getGraphicsContext2D();
 
-            int calcX = (int)(mainController.getWidth() / GameMap.MIN_SIZE_X);
-            int calcY = (int)(mainController.getHeight() / GameMap.MIN_SIZE_Y);
+        graphics.setWidth(mainController.getWidth());
+        graphics.setHeight(mainController.getHeight());
 
-            double restX = 0;
-            double restY = 0;
+        int calcX = (int)(mainController.getWidth() / GameMap.MIN_SIZE_X);
+        int calcY = (int)(mainController.getHeight() / GameMap.MIN_SIZE_Y);
 
-            if(calcX < calcY) {
-                calc = calcX;
-                restX = (mainController.getHeight() - mainController.getWidth()) / 2;
-            } else {
-                calc = calcY;
-                restY = (mainController.getWidth() - mainController.getHeight()) / 2;
-            }
+        double offsetX = 0;
+        double offsetY = 0;
 
-            // Clear the canvas
-            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-
-            map.render(gc, restX + player.getPosY(), restY + player.getPosX(), true);
-
-            // RENDER PLAYER
-           // gc.setFill(Color.YELLOW);
-            gc.drawImage(image, 100,100,100,100);
-            gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + restX - calc/2, calc, calc);
-
-
-
-            for(int y = 0; y < map.getHeight(); y++) {
-                for (int x = 0; x < map.getWidth(); x++) {
-                    gc.setFill(Color.BLACK);
-                    gc.fillRect(x * calc + restY + player.getPosX(), y * calc + restX + player.getPosY(), calc, 1);
-                    gc.fillRect(x * calc + restY + player.getPosX(), y * calc + restX + player.getPosY(), 1, calc);
-                }
-            }
-
+        if(calcX < calcY) {
+            calc = calcX;
+            offsetX = (mainController.getHeight() - mainController.getWidth()) / 2;
+        } else {
+            calc = calcY;
+            offsetY = (mainController.getWidth() - mainController.getHeight()) / 2;
         }
+
+        // Clear the canvas
+        //gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
+
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+
+        map.render(gc, offsetX, offsetY, true, player);
+
+        // RENDER PLAYERa
+        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc*4)/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc*4)/2, calc*4, calc*4);
     }
 
     @Override
