@@ -1,5 +1,6 @@
 package game.world;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class GameMap {
@@ -55,5 +56,42 @@ public class GameMap {
     public int getHeight() {
         if(gameObjects == null) return -1;
         return this.gameObjects.length;
+    }
+
+
+    public void render(GraphicsContext gc) {
+        this.render(gc, 0, 0, false);
+    }
+
+    public void render(GraphicsContext gc, double offsetX, double offsetY, boolean grid) {
+        int size = 16;
+        // Render map color
+        for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
+            for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
+                gc.setFill(backgroundColor);
+                gc.fillRect(x * size + offsetY, y * size + offsetX, size, size);
+            }
+        }
+
+        // Render objects
+        for(int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                GameObject gameObject = getObject(x, y);
+                if(gameObject != null) {
+                    // Is object
+                    gc.setFill(gameObject.getAsset());
+                    gc.fillRect(x * size + offsetY, y * size + offsetX, size, size);
+                }
+            }
+        }
+
+        if(grid) {
+            gc.setFill(Color.BLACK);
+            gc.fillRect(0,  0, offsetY, gc.getCanvas().getHeight());
+            gc.fillRect( gc.getCanvas().getWidth() - offsetY,  0, offsetY, gc.getCanvas().getHeight());
+
+            gc.fillRect(0, 0, gc.getCanvas().getWidth(), offsetX);
+            gc.fillRect(0, gc.getCanvas().getHeight() - offsetX, gc.getCanvas().getWidth(), offsetX);
+        }
     }
 }

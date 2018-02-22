@@ -62,28 +62,10 @@ public class GameController implements Controller {
                 restY = (mainController.getWidth() - mainController.getHeight()) / 2;
             }
 
-
-
+            // Clear the canvas
             gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-            for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
-                for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
-                    gc.setFill(map.getBackgroundColor());
-                    gc.fillRect(x * calc + restY, y * calc + restX, calc, calc);
-                }
-            }
 
-
-            for(int y = 0; y < map.getHeight(); y++) {
-                for (int x = 0; x < map.getWidth(); x++) {
-                    GameObject gameObject = map.getObject(x, y);
-                    if(gameObject != null) {
-                        // Is object
-
-                        gc.setFill(gameObject.getAsset());
-                        gc.fillRect(x * calc + player.getPosX() + restY, y * calc + player.getPosY() + restX, calc, calc);
-                    }
-                }
-            }
+            map.render(gc, restX + player.getPosY(), restY + player.getPosX(), true);
 
             // RENDER PLAYER
             gc.setFill(Color.YELLOW);
@@ -99,12 +81,6 @@ public class GameController implements Controller {
                 }
             }
 
-            gc.setFill(Color.BLACK);
-            gc.fillRect(0,  0, restY, mainController.getHeight());
-            gc.fillRect(mainController.getWidth() - restY,  0, restY, mainController.getHeight());
-
-            gc.fillRect(0,  0, mainController.getWidth(), restX);
-            gc.fillRect(0,  mainController.getHeight() - restX, mainController.getWidth(), restX);
         }
     }
 
