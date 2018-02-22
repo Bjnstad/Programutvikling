@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
@@ -23,6 +24,7 @@ public class GameController implements Controller {
     Canvas graphics;
 
     private MainController mainController;
+    private Image image = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
 
     int calc = 0;
 
@@ -68,7 +70,8 @@ public class GameController implements Controller {
             map.render(gc, restX + player.getPosY(), restY + player.getPosX(), true);
 
             // RENDER PLAYER
-            gc.setFill(Color.YELLOW);
+           // gc.setFill(Color.YELLOW);
+            gc.drawImage(image, 100,100,100,100);
             gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + restX - calc/2, calc, calc);
 
 

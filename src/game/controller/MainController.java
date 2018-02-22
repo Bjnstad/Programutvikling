@@ -50,6 +50,7 @@ public class MainController implements Initializable {
                 controller = new MainMenuController();
                 break;
             case EDITOR:
+                timeline.play();
                 source = "Editor";
                 controller = new EditorController();
                 break;
@@ -74,7 +75,6 @@ public class MainController implements Initializable {
             mainView.getChildren().add(pane); // Change anchorpane to view
 
             Scene scene = mainView.getScene();
-
             if(scene != null) {
                 scene.setOnKeyPressed(controller.getEventHandler());
             }
