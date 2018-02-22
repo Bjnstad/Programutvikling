@@ -64,7 +64,17 @@ public class GameMap {
     }
 
     public void render(GraphicsContext gc, double offsetX, double offsetY, boolean grid) {
-        int size = 16;
+        double size = 0;
+
+        double calcX = gc.getCanvas().getWidth() / GameMap.MIN_SIZE_X;
+        double calcY = gc.getCanvas().getHeight() / GameMap.MIN_SIZE_Y;
+
+        if(calcX < calcY) {
+            size = calcX;
+        } else {
+            size = calcY;
+        }
+
         // Render map color
         for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
             for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
