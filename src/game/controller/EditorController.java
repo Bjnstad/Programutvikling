@@ -5,14 +5,21 @@ import game.GameState;
 import game.State;
 import game.world.GameMap;
 import game.world.GameObject;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import game.editor.*;
+
+import java.io.InputStream;
 
 
 public class EditorController extends GameState implements Controller {
@@ -21,6 +28,13 @@ public class EditorController extends GameState implements Controller {
     private FileHandler fileHandler;
 
     private GameMap map;
+
+    private final Image IMAGE_RUBY  = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
+    private final Image IMAGE_APPLE  = new Image("http://findicons.com/files/icons/832/social_and_web/64/apple.png");
+    private final Image IMAGE_VISTA  = new Image("http://antaki.ca/bloom/img/windows_64x64.png");
+    private final Image IMAGE_TWITTER = new Image("http://files.softicons.com/download/social-media-icons/fresh-social-media-icons-by-creative-nerds/png/64x64/twitter-bird.png");
+
+    private Image[] listOfImages = {IMAGE_RUBY, IMAGE_APPLE, IMAGE_VISTA, IMAGE_TWITTER};
 
     @FXML
     Canvas graphics;
@@ -49,13 +63,14 @@ public class EditorController extends GameState implements Controller {
     public void initiate () {
         FileHandler fileHandler = new FileHandler();
 
+        ImageList imageList = new ImageList();
+        imageList.initiate();
 
         //ObservableList<String> items = fileHandler.getAllAssets();
+        //listView.setItems(fileHandler.getAllNames());
+        //listView.setCellFactory(param -> fileHandler.getAllAssets());
 
-        listView.setItems(fileHandler.getAllNames());
-        listView.setCellFactory(param -> fileHandler.getAllAssets());
         map = new GameMap(300,300);
-
 
     }
 
@@ -66,11 +81,11 @@ public class EditorController extends GameState implements Controller {
         if(graphics != null && map != null) {
             GraphicsContext gc = graphics.getGraphicsContext2D();
 
-            graphics.setWidth(mainController.getWidth());
-            graphics.setHeight(mainController.getHeight());
+            graphics.setWidth(651);
+            graphics.setHeight(560);
 
-            int calcX = (int)(mainController.getWidth() / GameMap.MIN_SIZE_X);
-            int calcY = (int)(mainController.getHeight() / GameMap.MIN_SIZE_Y);
+            int calcX = (int)(651 / GameMap.MIN_SIZE_X);
+            int calcY = (int)(560 / GameMap.MIN_SIZE_Y);
 
             double restX = 0;
             double restY = 0;
@@ -107,7 +122,13 @@ public class EditorController extends GameState implements Controller {
             }
 
             // RENDER PLAYER
-            gc.setFill(Color.YELLOW);
+            gc.setFill(Color.RED);
+            listView.getCellFactory();
+
+
+            gc.drawImage(listOfImages[0], 100, 100, 100, 100);
+          //  Image img = new Image((InputStream) listView.getItems().get(1));
+         //   gc.drawImage(img, 100, 100, 100, 100);
             gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + restY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + restX - calc/2, calc, calc);
 
 
@@ -138,7 +159,13 @@ public class EditorController extends GameState implements Controller {
 
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
-        return null;
+        return (event -> {
+            switch (event.getCode()) {
+                case ESCAPE:
+                    mainController.setState(State.MAIN_MENU);
+                    break;
+            }
+        });
     }
 
 

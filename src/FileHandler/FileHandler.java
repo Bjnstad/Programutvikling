@@ -87,9 +87,6 @@ public class FileHandler {
         //File folder = new File("assets");
         //if(folder == null) return null;
 
-
-
-
          return (new ListCell<String>() {
             private ImageView imageView = new ImageView();
             @Override
@@ -99,28 +96,20 @@ public class FileHandler {
                     setText(null);
                     setGraphic(null);
                 } else {
-
                     if (dir.isDirectory()){
                         for (final File f : dir.listFiles(IMAGE_FILTER)){
-
                                 if (name.equals(f.getName())) {
                                     Image image = new Image(f.toURI().toString());
                                     imageView.setImage(image);
-                                    imageView.setImage(image);
+                                   // imageView.setImage(image);
                                     setText(f.getName());
-
                                 }
-
                         }
                         setGraphic(imageView);
                     }
-                    
                 }
             }
         });
-
-
-
 
         //return list;
 
@@ -149,4 +138,5 @@ public class FileHandler {
             return "";
         }
     }
+
 }
