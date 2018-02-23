@@ -31,13 +31,12 @@ public class GameController implements Controller {
 
     @Override
     public void initiate() {
-        this.player = new Player(new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png"));
+        this.player = new Player(new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png"), 4, 4);
         map = new GameMap(100, 100);
 
         // Adding items to map
         System.out.println(map.setGameObject(new GameObject(Color.RED, 2, 2), 7, 5));
         map.setGameObject(new GameObject(Color.BLUE, 5, 5), 12, 14);
-
     }
 
 
@@ -74,7 +73,7 @@ public class GameController implements Controller {
         map.render(gc, offsetX, offsetY, true, player);
 
         // RENDER PLAYERa
-        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc*4)/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc*4)/2, calc*4, calc*4);
+        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc*player.getPosX())/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc * player.getSizeY())/2, calc * player.getSizeX(), calc * player.getSizeY());
     }
 
     @Override
