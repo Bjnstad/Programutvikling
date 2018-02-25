@@ -55,11 +55,17 @@ public class EditorController extends GameState implements Controller {
         FileHandler fileHandler = new FileHandler();
 
         ImageList imageList = new ImageList();
-        imageList.initiate();
+        //imageList.initiate();
+       // listView.setItems(imageList.getAllAssetNames());
+
+
+        listView.setItems(imageList.getAllNames());
+
 
         //ObservableList<String> items = fileHandler.getAllAssets();
         //listView.setItems(fileHandler.getAllNames());
-        //listView.setCellFactory(param -> fileHandler.getAllAssets());
+        listView.setCellFactory(param -> imageList.getAllAssets());
+
 
         map = new GameMap(300,300);
 
