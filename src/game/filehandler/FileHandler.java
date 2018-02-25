@@ -1,6 +1,5 @@
-package FileHandler;
+package game.filehandler;
 
-import assets.Object;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
@@ -47,7 +46,7 @@ public class FileHandler {
     private static final String PATH_FOR_ASSETS = "assets";
 
     public boolean saveAsset(Object object) {
-
+/*
         BufferedWriter writer = null;
         try {
             BufferedImage bi = ImageIO.read(object.getImage());
@@ -57,10 +56,10 @@ public class FileHandler {
 
 
 
-                writer = new BufferedWriter(new FileWriter(PATH_FOR_ASSETS + "/" + object.getName() + ".txt"));
-                writer.write("width:" + object.getWidth());
-                writer.write("\n");
-                writer.write("height:" + object.getHeight());
+            writer = new BufferedWriter(new FileWriter(PATH_FOR_ASSETS + "/" + object.getName() + ".txt"));
+            writer.write("width:" + object.getWidth());
+            writer.write("\n");
+            writer.write("height:" + object.getHeight());
 
 
 
@@ -77,7 +76,7 @@ public class FileHandler {
             {
             }
         }
-
+*/
 
 
         return true;
@@ -87,7 +86,7 @@ public class FileHandler {
         //File folder = new File("assets");
         //if(folder == null) return null;
 
-         return (new ListCell<String>() {
+        return (new ListCell<String>() {
             private ImageView imageView = new ImageView();
             @Override
             public void updateItem(String name, boolean empty) {
@@ -98,12 +97,12 @@ public class FileHandler {
                 } else {
                     if (dir.isDirectory()){
                         for (final File f : dir.listFiles(IMAGE_FILTER)){
-                                if (name.equals(f.getName())) {
-                                    Image image = new Image(f.toURI().toString());
-                                    imageView.setImage(image);
-                                   // imageView.setImage(image);
-                                    setText(f.getName());
-                                }
+                            if (name.equals(f.getName())) {
+                                Image image = new Image(f.toURI().toString());
+                                imageView.setImage(image);
+                                // imageView.setImage(image);
+                                setText(f.getName());
+                            }
                         }
                         setGraphic(imageView);
                     }

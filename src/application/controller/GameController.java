@@ -1,4 +1,4 @@
-package game.controller;
+package application.controller;
 
 import game.State;
 import game.character.Enemy;
@@ -47,8 +47,8 @@ public class GameController implements Controller {
 
         GraphicsContext gc = graphics.getGraphicsContext2D();
 
-        graphics.setWidth(mainController.getWidth());
-        graphics.setHeight(mainController.getHeight());
+        graphics.setWidth(mainController.getWidth()); // Set width of canvas
+        graphics.setHeight(mainController.getHeight()); // Set width of canvas
 
         int calcX = (int)(mainController.getWidth() / GameMap.MIN_SIZE_X);
         int calcY = (int)(mainController.getHeight() / GameMap.MIN_SIZE_Y);
@@ -72,8 +72,10 @@ public class GameController implements Controller {
 
         map.render(gc, offsetX, offsetY, true, player);
 
-        // RENDER PLAYERa
-        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc*player.getPosX())/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc * player.getSizeY())/2, calc * player.getSizeX(), calc * player.getSizeY());
+        // RENDER PLAYER
+        gc.setFill(Color.YELLOW);
+        gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + offsetY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - calc/2, player.getSizeX()*calc, player.getSizeY()*calc);
+        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc)/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc)/2, calc * player.getSizeX(), calc * player.getSizeY());
     }
 
     @Override

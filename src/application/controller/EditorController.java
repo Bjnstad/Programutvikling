@@ -1,12 +1,9 @@
-package game.controller;
+package application.controller;
 
-import FileHandler.FileHandler;
 import game.GameState;
 import game.State;
+import game.filehandler.FileHandler;
 import game.world.GameMap;
-import game.world.GameObject;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +11,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import game.editor.*;
-
-import java.io.InputStream;
 
 
 public class EditorController extends GameState implements Controller {
@@ -72,6 +65,10 @@ public class EditorController extends GameState implements Controller {
 
     }
 
+    @FXML
+    private void close(ActionEvent event) {
+        mainController.setState(State.MAIN_MENU);
+    }
 
     @Override
     public void render () {

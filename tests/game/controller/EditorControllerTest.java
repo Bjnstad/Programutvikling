@@ -1,8 +1,8 @@
 package game.controller;
 
+import application.controller.EditorController;
+import application.controller.MainController;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by henrytran1 on 19/02/2018.

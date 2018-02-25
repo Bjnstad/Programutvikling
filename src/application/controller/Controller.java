@@ -1,4 +1,4 @@
-package game.controller;
+package application.controller;
 
 import game.State;
 import javafx.event.EventHandler;

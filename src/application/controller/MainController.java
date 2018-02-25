@@ -1,59 +1,93 @@
 package application.controller;
 
-import FileHandler.Asset;
-import FileHandler.FileHandler;
-import game.Map;
-import javafx.collections.ObservableList;
+import game.State;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ListView;
-import javafx.scene.paint.Color;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-	private static final int NUMBER_OF_BITS = 16;
+    @FXML
+    AnchorPane mainView;
 
-	@FXML
-	Canvas graphics;
+    private Timeline timeline; // Timeline for gameloop
+    private Controller controller; // Current controller
 
-	@FXML
-	ListView assets;
-
-	private Map map;
-
-	public void draw() {
-		GraphicsContext gc = graphics.getGraphicsContext2D();
-		Asset[][] board = map.getBoard();
-
-		// TODO: Lage flere farger, bakgrunn
-		if(graphics != null && board != null) {
-			graphics.setHeight(map.getHeight() * NUMBER_OF_BITS);
-			graphics.setWidth(map.getWidth() * NUMBER_OF_BITS);
-
-			gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-			for(int y = 0; y < board.length; y++) {
-				for (int x = 0; x < board[0].length; x++) {
-					if(board[y][x] == null) {
-						gc.setFill(Color.RED);
-						gc.fillRect(x * NUMBER_OF_BITS, y * NUMBER_OF_BITS, NUMBER_OF_BITS, NUMBER_OF_BITS);
-					}
-				}
-			}
-		}
-	}
-
-    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-		this.map = new Map();
-
-		FileHandler fh = new FileHandler();
-
-		ListView<String> list = new ListView<String>();
-		//ObservableList<String> items = fh.getAllAssets();
-		//assets.setItems(items);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setState(State.MAIN_MENU);
 
 
-		draw();
+        // TODO: To be removed?
+        KeyFrame frame = new KeyFrame(Duration.seconds(0.1), event -> gameloop());
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    private void gameloop() {
+        controller.render();
+    }
+
+    public void setState(State state) {
+        String source;
+        switch (state) {
+            case MAIN_MENU:
+                source = "MainMenu";
+                controller = new MainMenuController();
+                break;
+            case EDITOR:
+                timeline.play();
+                source = "Editor";
+                controller = new EditorController();
+                break;
+            case GAME:
+                timeline.play();
+                source = "Game";
+                controller = new GameController();
+                break;
+
+
+            default:
+                return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/layout/" + source + ".fxml"));
+            controller.setMainController(this); // Set ref to main controller
+            loader.setController(controller); // Set controller to view
+
+            Pane pane = loader.load();
+
+            mainView.getChildren().clear(); // Clear old view
+            mainView.getChildren().add(pane); // Change anchorpane to view
+
+            Scene scene = mainView.getScene();
+
+            if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
+
+            controller.initiate();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public double getWidth() {
+        return mainView.getWidth();
+    }
+
+    public double getHeight() {
+        return mainView.getHeight();
     }
 }
