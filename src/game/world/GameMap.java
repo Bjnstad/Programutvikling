@@ -18,14 +18,6 @@ public class GameMap {
         backgroundColor = Color.GRAY;
     }
 
-    public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
-    }
-
-    public Color getBackgroundColor() {
-        return this.backgroundColor;
-    }
-
     public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
         for (int x = posX; x < posX + gameObjects.getSizeX(); x++) {
             for (int y = posY; y < posY + gameObjects.getSizeY(); y++) {
@@ -88,10 +80,10 @@ public class GameMap {
 
 
         // Render map color
+        gc.setFill(backgroundColor);
         for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
             for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
-                gc.setFill(backgroundColor);
-                gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, size);
+                gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, size);
             }
         }
 
@@ -102,18 +94,18 @@ public class GameMap {
                 if(gameObject != null) {
                     // Is object
                     gc.setFill(gameObject.getAsset());
-                    gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, size);
+                    gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, size);
                 }
             }
         }
 
         /* Draw grid */
+        gc.setFill(Color.BLACK);
         if(grid) {
             for(int y = 0; y < MIN_SIZE_X; y++) {
                 for (int x = 0; x < MIN_SIZE_X; x++) {
-                    gc.setFill(Color.BLACK);
-                    gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, 1);
-                    gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, 1, size);
+                    gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, 1);
+                    gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, 1, size);
                 }
             }
         }

@@ -25,7 +25,7 @@ public class GameController implements Controller {
 
     private MainController mainController;
 
-    int calc = 0;
+    double calc = 0;
 
 
 
@@ -45,24 +45,26 @@ public class GameController implements Controller {
     public void render() {
         if(map == null) return; // No map set.
 
+        double size;
+
         GraphicsContext gc = graphics.getGraphicsContext2D();
 
         graphics.setWidth(mainController.getWidth()); // Set width of canvas
         graphics.setHeight(mainController.getHeight()); // Set width of canvas
 
-        int calcX = (int)(mainController.getWidth() / GameMap.MIN_SIZE_X);
-        int calcY = (int)(mainController.getHeight() / GameMap.MIN_SIZE_Y);
-
         double offsetX = 0;
         double offsetY = 0;
 
+        double calcX = gc.getCanvas().getWidth() / GameMap.MIN_SIZE_X;
+        double calcY = gc.getCanvas().getHeight() / GameMap.MIN_SIZE_Y;
+
         if(calcX < calcY) {
-            calc = calcX;
-            offsetX = (mainController.getHeight() - mainController.getWidth()) / 2;
+            size = calcX;
+            offsetY = (mainController.getHeight() - mainController.getWidth()) / 2;
         } else {
-            calc = calcY;
-            offsetY = (mainController.getWidth() - mainController.getHeight()) / 2;
-        }
+            size = calcY;
+            offsetX = (mainController.getWidth() - mainController.getHeight()) / 2;
+        } // end of diry code
 
         // Clear the canvas
         //gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
@@ -74,8 +76,8 @@ public class GameController implements Controller {
 
         // RENDER PLAYER
         gc.setFill(Color.YELLOW);
-        gc.fillRect(GameMap.MIN_SIZE_X/2 * calc + offsetY - calc/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - calc/2, player.getSizeX()*calc, player.getSizeY()*calc);
-        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc)/2, GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc)/2, calc * player.getSizeX(), calc * player.getSizeY());
+        gc.fillRect(offsetX + (GameMap.MIN_SIZE_Y/2) * size - player.getSizeX()/2*size, GameMap.MIN_SIZE_Y/2 * size + offsetY - size, player.getSizeX()*size, player.getSizeY()*size);
+        gc.drawImage(player.getAvatar(),GameMap.MIN_SIZE_X/2 * calc + offsetY - (calc* player.getSizeX()), GameMap.MIN_SIZE_Y/2 * calc + offsetX - (calc* player.getSizeY()), calc * player.getSizeX(), calc * player.getSizeY());
     }
 
     @Override
