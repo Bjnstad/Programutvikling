@@ -94,7 +94,8 @@ public class GameMap {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
-                    gc.setFill(gameObject.getAsset());
+                    gc.drawImage(gameObject.getAsset(), gameObject.getSizeX(), gameObject.getSizeY());
+                    gc.setFill(Color.RED);
                     gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, size);
                 }
             }
