@@ -10,6 +10,7 @@ public class GameMap {
 
     private GameObject[][] gameObjects;
     private Color backgroundColor; // Default background color
+    int calc = 0;
 
 
     public GameMap(int width, int height) {

@@ -1,5 +1,6 @@
 package game.world;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class GameObject {
@@ -7,9 +8,10 @@ public class GameObject {
     private int sizeY;
 
     private Color color; //TODO: Change to image
+    private Image image;
 
-    public GameObject(Color color, int sizeX, int sizeY) {
-        this.color = color;
+    public GameObject(Image image, int sizeX, int sizeY) {
+        this.image = image;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
     }
@@ -27,7 +29,7 @@ public class GameObject {
      * TODO: change to image
      * @return color
      */
-    public Color getAsset() {
-        return this.color;
+    public Image getAsset() {
+        return this.image;
     }
 }

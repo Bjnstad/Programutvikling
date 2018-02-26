@@ -27,16 +27,15 @@ public class GameController implements Controller {
 
     double calc = 0;
 
-
-
+    private Image tempImage = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
     @Override
     public void initiate() {
         this.player = new Player(new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png"), 4, 4);
         map = new GameMap(100, 100);
 
         // Adding items to map
-        System.out.println(map.setGameObject(new GameObject(Color.RED, 2, 2), 7, 5));
-        map.setGameObject(new GameObject(Color.BLUE, 5, 5), 12, 14);
+        System.out.println(map.setGameObject(new GameObject(tempImage, 2, 2), 7, 5));
+        map.setGameObject(new GameObject(tempImage, 5, 5), 12, 14);
     }
 
 
