@@ -1,37 +1,51 @@
 package game.world;
 
-import game.GameState;
-import game.State;
 import game.character.Enemy;
 import game.character.Player;
-import game.world.GameMap;
+import game.utils.Offset;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
-/**
- * Created by henrytran1 on 06/02/2018.
- */
-public class GameWorld extends GameState {
+public class GameWorld {
     private int currentLevel;
     private Player player;
     private Enemy[] enemies;
     private GameMap map;
 
-    public GameWorld() {
-        super(State.GAME);
+
+    public GameWorld(GameMap map) {
+        if(map == null) throw new NullPointerException(); // Map cannot be null
+        this.map = map;
+        this.player = new Player();
+        this.enemies = new Enemy[0];
     }
 
+    public void render(Canvas canvas) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Offset offset = calcOffset(canvas); // Calculate values for offset
 
-    @Override
-    public void initiate() {
+        // Make screen black
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
+        // Render map with objects
+        map.render(gc, offset, true, player);
+
+        // Render characters
+        for (Enemy enemy : enemies) enemy.render(gc, offset);
+        player.render(gc, offset);
     }
 
-    @Override
-    public void render() {
-
-    }
-
-    @Override
-    public void onClose() {
-
+    private Offset calcOffset(Canvas c) {
+        Offset o = new Offset();
+        if(c.getWidth() < c.getHeight()) {
+            o.setSize(c.getWidth() / GameMap.MIN_SIZE_X);
+            o.setOffsetY((c.getHeight() - c.getWidth())/2);
+        } else {
+            o.setSize(c.getHeight() / GameMap.MIN_SIZE_Y);
+            o.setOffsetX((c.getWidth() - c.getHeight())/2);
+        }
+        return o;
     }
 }

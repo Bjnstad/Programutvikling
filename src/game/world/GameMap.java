@@ -1,6 +1,7 @@
 package game.world;
 
 import game.character.Player;
+import game.utils.Offset;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -52,14 +53,7 @@ public class GameMap {
         return this.gameObjects.length;
     }
 
-
-    public void render(GraphicsContext gc, boolean grid) {
-        this.render(gc, 0, 0, grid, null);
-    }
-
-    public void render(GraphicsContext gc, double offsetX, double offsetY, boolean grid, Player player) {
-        double size;
-
+    public void render(GraphicsContext gc, Offset offset, boolean grid, Player player) {
         double POX = 0; // Player offset X
         double POY = 0; // Player offset Y
         if (player != null) {
@@ -67,24 +61,11 @@ public class GameMap {
             POY = player.getPosY();
         }
 
-        // TODO: dirty code
-        double calcX = gc.getCanvas().getWidth() / GameMap.MIN_SIZE_X;
-        double calcY = gc.getCanvas().getHeight() / GameMap.MIN_SIZE_Y;
-
-        if(calcX < calcY) {
-            size = calcX;
-        } else {
-            size = calcY;
-        } // end of diry code
-
-
-
-
         // Render map color
         gc.setFill(backgroundColor);
         for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
             for (int x = 0; x < GameMap.MIN_SIZE_X; x++) {
-                gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, size);
+                gc.fillRect(x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, offset.getSize(), offset.getSize());
             }
         }
 
@@ -96,7 +77,7 @@ public class GameMap {
                     // Is object
                     gc.drawImage(gameObject.getAsset(), gameObject.getSizeX(), gameObject.getSizeY());
                     gc.setFill(Color.RED);
-                    gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, size);
+                    gc.fillRect(x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, offset.getSize(), offset.getSize());
                 }
             }
         }
@@ -106,8 +87,8 @@ public class GameMap {
         if(grid) {
             for(int y = 0; y < MIN_SIZE_X; y++) {
                 for (int x = 0; x < MIN_SIZE_X; x++) {
-                    gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, size, 1);
-                    gc.fillRect(x * size + offsetX + POX, y * size + offsetY + POY, 1, size);
+                    gc.fillRect(x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, offset.getSize(), 1);
+                    gc.fillRect(x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, 1, offset.getSize());
                 }
             }
         }

@@ -169,7 +169,7 @@ public class EditorController extends GameState implements Controller {
         graphics.setHeight(560);
 
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-        map.render(gc, true);
+        //map.render(gc, true);
 
 
     }
