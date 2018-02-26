@@ -10,6 +10,7 @@ public class GameMap {
 
     private GameObject[][] gameObjects;
     private Color backgroundColor; // Default background color
+    int calc = 0;
 
 
     public GameMap(int width, int height) {
@@ -101,7 +102,9 @@ public class GameMap {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
-                    gc.setFill(gameObject.getAsset());
+
+                    gc.drawImage(gameObject.getAsset(), gameObject.getSizeX(), gameObject.getSizeY());
+                    gc.setFill(Color.RED);
                     gc.fillRect(x * size + offsetY + POX, y * size + offsetX + POY, size, size);
                 }
             }

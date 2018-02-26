@@ -2,27 +2,24 @@ package game.editor;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by henrytran1 on 20/02/2018.
  */
 public class ImageList {
 
+
+    private HashMap<String, Image> resourceMap;
+
+    public ImageList() {
+        this.resourceMap = new HashMap<>();
+    }
 
     // File representing the folder that you select using a FileChooser
     static final File dir = new File("assets");
@@ -64,6 +61,7 @@ public class ImageList {
                                 Image image = new Image(f.toURI().toString());
                                 imageView.setImage(image);
                                 // imageView.setImage(image);
+                                resourceMap.put(f.getName(), image);
                                 setText(f.getName());
                             }
                         }
@@ -100,6 +98,11 @@ public class ImageList {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public Image getResource(String name)
+    {
+        return resourceMap.get(name);
     }
 
 }

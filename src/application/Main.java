@@ -18,7 +18,7 @@ public class Main extends Application {
 	       
 		Scene scene = new Scene(root, 800, 600);
 	    
-		primaryStage.setTitle("FXML eksempel, med grafikk");
+		primaryStage.setTitle("HAC");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
