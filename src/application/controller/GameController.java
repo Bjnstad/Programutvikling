@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class GameController implements Controller {
 
@@ -35,6 +36,18 @@ public class GameController implements Controller {
 
 
         gameWorld = new GameWorld(map);
+
+        graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>(){
+
+                    @Override
+                    public void handle(MouseEvent event) {
+                      
+                        System.out.println("x: " + event.getX());
+                        System.out.println("y: " + event.getY());
+
+                    }
+                });
     }
 
     /**
@@ -89,6 +102,8 @@ public class GameController implements Controller {
             }
         });
     }
+
+
 
     @Override
     public void setMainController(MainController mainController) {
