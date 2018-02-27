@@ -56,12 +56,16 @@ public class Character {
         return avatar;
     }
 
+    public void move(double x, double y) {
+
+    }
+
 
     public void render(GraphicsContext gc, Offset offset) {
         // RENDER PLAYER
         gc.setFill(Color.YELLOW);
-        gc.fillRect(offset.getOffsetX() + (GameMap.MIN_SIZE_Y/2) * offset.getSize() - sizeX/2* offset.getSize(), GameMap.MIN_SIZE_Y/2 * offset.getSize() + offset.getOffsetY() - offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
-        gc.drawImage(avatar,GameMap.MIN_SIZE_X/2 * offset.getSize() + offset.getOffsetY() - (offset.getSize()* sizeX), GameMap.MIN_SIZE_Y/2 * offset.getSize() + offset.getOffsetX() - (offset.getSize()* sizeY), offset.getSize() * sizeX, offset.getSize() *sizeX);
+        gc.fillRect(offset.getOffsetX() + (GameMap.MIN_SIZE_X/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (GameMap.MIN_SIZE_Y/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
+        gc.drawImage(avatar,offset.getOffsetX() + (GameMap.MIN_SIZE_X/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (GameMap.MIN_SIZE_Y/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
 
     }
 }

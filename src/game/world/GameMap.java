@@ -75,7 +75,6 @@ public class GameMap {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
-                    gc.drawImage(gameObject.getAsset(), gameObject.getSizeX(), gameObject.getSizeY());
                     gc.setFill(Color.RED);
                     gc.fillRect(x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, offset.getSize(), offset.getSize());
                 }

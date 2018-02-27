@@ -19,6 +19,7 @@ public class GameWorld {
         this.map = map;
         this.player = new Player();
         this.enemies = new Enemy[0];
+        this.currentLevel = 0;
     }
 
     public void render(Canvas canvas) {
