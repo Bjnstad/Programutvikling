@@ -60,7 +60,7 @@ public class ImageList {
                             if (name.equals(f.getName())) {
                                 Image image = new Image(f.toURI().toString());
                                 imageView.setImage(image);
-                                // imageView.setImage(image);
+
                                 resourceMap.put(f.getName(), image);
                                 setText(f.getName());
                             }
@@ -70,8 +70,6 @@ public class ImageList {
                 }
             }
         });
-
-        //return list;
 
     }
 

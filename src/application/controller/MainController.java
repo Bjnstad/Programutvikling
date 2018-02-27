@@ -23,6 +23,7 @@ public class MainController implements Initializable {
     private Timeline timeline; // Timeline for gameloop
     private Controller controller; // Current controller
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setState(State.MAIN_MENU);
@@ -76,10 +77,14 @@ public class MainController implements Initializable {
 
             if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
 
+            
+
             controller.initiate();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 

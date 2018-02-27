@@ -3,6 +3,7 @@ package application.controller;
 import game.GameState;
 import game.State;
 import game.filehandler.FileHandler;
+import game.utils.Offset;
 import game.world.GameMap;
 import game.world.GameObject;
 import javafx.beans.value.ChangeListener;
@@ -37,13 +38,7 @@ public class EditorController extends GameState implements Controller {
 
     private GameMap map;
 
-    private final Image IMAGE_RUBY  = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
-    private final Image IMAGE_APPLE  = new Image("http://findicons.com/files/icons/832/social_and_web/64/apple.png");
-    private final Image IMAGE_VISTA  = new Image("http://antaki.ca/bloom/img/windows_64x64.png");
-    private final Image IMAGE_TWITTER = new Image("http://files.softicons.com/download/social-media-icons/fresh-social-media-icons-by-creative-nerds/png/64x64/twitter-bird.png");
     private Image tempImage = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
-
-    private Image[] listOfImages = {IMAGE_RUBY, IMAGE_APPLE, IMAGE_VISTA, IMAGE_TWITTER};
 
     private ImageList imageList;
 
@@ -138,18 +133,9 @@ public class EditorController extends GameState implements Controller {
 
                         System.out.println(inputSizeX.getText() + inputSizeY.getText());
 
-                        MultipleSelectionModel model = listView.getSelectionModel();
-
-
-
-
                     }
                 });
-
-
             }
-
-
         });
 
 
@@ -164,12 +150,15 @@ public class EditorController extends GameState implements Controller {
     public void render () {
         if(map == null) return; // No map set
         GraphicsContext gc = graphics.getGraphicsContext2D();
+        Offset offset = calcOffset(graphics); // Calculate values for offset
+
 
         graphics.setWidth(651);
         graphics.setHeight(560);
 
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-        //map.render(gc, true);
+        map.render(gc, offset, true, null);
+
 
 
     }
@@ -177,7 +166,18 @@ public class EditorController extends GameState implements Controller {
     @Override
     public void onClose () {
 
+    }
 
+    private Offset calcOffset(Canvas c) {
+        Offset o = new Offset();
+        if(c.getWidth() < c.getHeight()) {
+            o.setSize(c.getWidth() / GameMap.MIN_SIZE_X);
+            o.setOffsetY((c.getHeight() - c.getWidth())/2);
+        } else {
+            o.setSize(c.getHeight() / GameMap.MIN_SIZE_Y);
+            o.setOffsetX((c.getWidth() - c.getHeight())/2);
+        }
+        return o;
     }
 
 

@@ -5,6 +5,7 @@ public class Offset {
     private double offsetY = 0;
     private double size = 1;
 
+
     public double getOffsetY() {
         return offsetY;
     }
