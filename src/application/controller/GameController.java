@@ -70,16 +70,16 @@ public class GameController implements Controller {
         return (event -> {
             switch (event.getCode()) {
                 case W:
-                    //gameWorld.addPosY(speed);
+                    gameWorld.movePlayer(0, speed);
                     break;
                 case A:
-                    //player.addPosX(speed);
+                    gameWorld.movePlayer(speed, 0);
                     break;
                 case S:
-                    //player.addPosY(-speed);
+                    gameWorld.movePlayer(0, -speed);
                     break;
                 case D:
-                    //player.addPosX(-speed);
+                    gameWorld.movePlayer(-speed, 0);
                     break;
 
 

@@ -56,11 +56,6 @@ public class Character {
         return avatar;
     }
 
-    public void move(double x, double y) {
-
-    }
-
-
     public void render(GraphicsContext gc, Offset offset) {
         // RENDER PLAYER
         gc.setFill(Color.YELLOW);

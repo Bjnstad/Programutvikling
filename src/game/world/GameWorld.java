@@ -1,5 +1,6 @@
 package game.world;
 
+import game.character.Character;
 import game.character.Enemy;
 import game.character.Player;
 import game.utils.Offset;
@@ -48,5 +49,19 @@ public class GameWorld {
             o.setOffsetX((c.getWidth() - c.getHeight())/2);
         }
         return o;
+    }
+
+    public boolean movePlayer(double x, double y) {
+        return move(player, x, y);
+    }
+
+    public boolean move(Character character, double x, double y) {
+        if(!map.willCollide((int)(character.getPosX() + x), (int)(character.getPosY() + y))) {
+            character.addPosX(x);
+            character.addPosY(y);
+            System.out.println("Adding");
+            return true;
+        }
+        return false;
     }
 }
