@@ -1,6 +1,7 @@
 package application.controller;
 
 import game.State;
+import game.character.Bullet;
 import game.world.GameMap;
 import game.world.GameObject;
 import game.world.GameWorld;
@@ -10,6 +11,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+
+import java.util.ArrayList;
 
 public class GameController implements Controller {
 
@@ -37,17 +40,20 @@ public class GameController implements Controller {
 
         gameWorld = new GameWorld(map);
 
+
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
 
+
                     @Override
                     public void handle(MouseEvent event) {
-                      
-                        System.out.println("x: " + event.getX());
-                        System.out.println("y: " + event.getY());
+                        double calculatedX = (event.getX() - gameWorld.getOffset().getOffsetX())/gameWorld.getOffset().getSize();
+                        double calculatedY = (event.getY() - gameWorld.getOffset().getOffsetY())/gameWorld.getOffset().getSize();
+                        gameWorld.shoot(event.getX(), event.getY());
 
                     }
                 });
+
     }
 
     /**
@@ -61,6 +67,18 @@ public class GameController implements Controller {
 
         // Render GameWorld
         gameWorld.render(graphics);
+
+
+        ArrayList bullets = gameWorld.getBullets();
+        for (int i = 0; i < bullets.size(); i++) {
+            Bullet b = (Bullet) bullets.get(i);
+            if(b.isVisible() == true){
+                b.update();
+            }else{
+                bullets.remove(i);
+            }
+
+        }
     }
 
     /**

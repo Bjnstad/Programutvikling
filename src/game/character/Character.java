@@ -6,12 +6,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+
 public class Character {
     private double posX = 0;
     private double posY = 0;
     private Image avatar; // TODO: Change to sprite
     private int sizeX;
     private int sizeY;
+
+
+
 
     public Character(Image avatar, int sizeX, int sizeY) {
         this.avatar = avatar;
@@ -59,8 +63,15 @@ public class Character {
     public void render(GraphicsContext gc, Offset offset) {
         // RENDER PLAYER
         gc.setFill(Color.YELLOW);
+
         gc.fillRect(offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
         gc.drawImage(avatar,offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
+
+    }
+    public void renderEnemy(GraphicsContext gc, Offset offset, Player player) {
+        // RENDER PLAYER
+        gc.drawImage(avatar,offset.getOffsetX() + posX * offset.getSize() + player.getPosX(), offset.getOffsetY() + posY * offset.getSize() + player.getPosY(), sizeX * offset.getSize(),sizeY * offset.getSize());
+
 
     }
 }

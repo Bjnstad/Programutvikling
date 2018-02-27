@@ -1,12 +1,16 @@
 package game.world;
 
+import game.character.Bullet;
 import game.character.Character;
 import game.character.Enemy;
 import game.character.Player;
 import game.utils.Offset;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class GameWorld {
     private int currentLevel;
@@ -14,14 +18,19 @@ public class GameWorld {
     private Enemy[] enemies;
     private GameMap map;
     private Offset offset;
+    private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+
+    private Image tempZombie = new Image("https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/edd/2015/09/Zombie-Army-Character-Royalty-Free-Game-Art.png");
 
 
     public GameWorld(GameMap map) {
         if(map == null) throw new NullPointerException(); // Map cannot be null
         this.map = map;
         this.player = new Player();
-        this.enemies = new Enemy[0];
+        this.enemies = new Enemy[1];
         this.currentLevel = 0;
+
+        this.enemies[0] = new Enemy(tempZombie, 4, 4, 6, 6);
     }
 
     public void render(Canvas canvas) {
@@ -35,9 +44,21 @@ public class GameWorld {
         // Render map with objects
         map.render(gc, offset, true, player);
 
+
         // Render characters
-        for (Enemy enemy : enemies) enemy.render(gc, offset);
+        for (Enemy enemy : enemies) {
+            enemy.renderEnemy(gc, offset, player);
+        }
+
+        //Render bullets
+        for (Bullet bullet : bullets){
+
+            gc.setFill(Color.YELLOW);
+            gc.fillRect(bullet.getX(),bullet.getY(), 10, 5);
+        }
+
         player.render(gc, offset);
+
     }
 
     private void calcOffset(Canvas c) {
@@ -54,6 +75,16 @@ public class GameWorld {
 
     public boolean movePlayer(double x, double y) {
         return move(player, x, y);
+    }
+
+    public void shoot(double endX, double endY){
+        Bullet b = new Bullet(offset.getOffsetX() + ((double)GameMap.MIN_SIZE_X/2) * offset.getSize() - player.getSizeX()/2* offset.getSize(), offset.getOffsetY() + ((double)GameMap.MIN_SIZE_Y/2) * offset.getSize() - player.getSizeY()/2* offset.getSize(), endX, endY);
+        bullets.add(b);
+        System.out.println("Added bullet");
+    }
+
+    public ArrayList getBullets(){
+        return bullets;
     }
 
     public boolean move(Character character, double x, double y) {
@@ -77,5 +108,9 @@ public class GameWorld {
     private double playerCoordinates(double pos, boolean isX) {
         if(isX) return (offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - player.getSizeX()/2* offset.getSize() + player.getPosX())/offset.getSize();
         return (offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - player.getSizeY()/2* offset.getSize() + player.getPosY())/offset.getSize();
+    }
+
+    public Offset getOffset() {
+        return offset;
     }
 }
