@@ -36,7 +36,9 @@ public class GameMap {
     }
 
     public boolean willCollide(int posX, int posY) {
-        return posX >= 0 && posY >= 0 && posX <= getWidth() && posY <= getHeight() && gameObjects[posX] == null && gameObjects[posY] == null;
+        if(posX < 0 || posY < 0 || posX >= getWidth() || posY >= getHeight()) return true;
+        if(gameObjects[posY][posX] != null) return true;
+        return false;
     }
 
     public GameObject getObject(int x, int y) {

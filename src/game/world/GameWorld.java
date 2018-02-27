@@ -57,8 +57,16 @@ public class GameWorld {
     }
 
     public boolean move(Character character, double x, double y) {
-        System.out.println(playerCoordinates(x, true));
-        if(!map.willCollide((int)(character.getPosX() + x), (int)(character.getPosY() + y))) {
+        int rX = GameMap.MIN_SIZE_X - 1 - (int)playerCoordinates(x, true);
+        int rY = GameMap.MIN_SIZE_Y - 1 - (int)playerCoordinates(y, false);
+
+        if(map.willCollide(rX, rY)) {
+            System.out.println("collide!");
+        } else {
+            System.out.println("Free ");
+        }
+
+        if(!map.willCollide(rX, rY)) {
             character.addPosX(x);
             character.addPosY(y);
             return true;
@@ -67,6 +75,7 @@ public class GameWorld {
     }
 
     private double playerCoordinates(double pos, boolean isX) {
-        return offset.getOffsetX() + (GameMap.MIN_SIZE_X/2) * offset.getSize() - player.getSizeX()/2* offset.getSize();
+        if(isX) return (offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - player.getSizeX()/2* offset.getSize() + player.getPosX())/offset.getSize();
+        return (offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - player.getSizeY()/2* offset.getSize() + player.getPosY())/offset.getSize();
     }
 }
