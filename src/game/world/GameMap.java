@@ -60,7 +60,6 @@ public class GameMap {
             POX = player.getPosX();
             POY = player.getPosY();
         }
-
         // Render map color
         gc.setFill(backgroundColor);
         for(int y = 0; y < GameMap.MIN_SIZE_Y; y++) {
@@ -77,6 +76,8 @@ public class GameMap {
                     // Is object
                     gc.setFill(Color.RED);
                     gc.fillRect(x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, offset.getSize(), offset.getSize());
+                    gc.drawImage(gameObject.getAsset(),x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, gameObject.getSizeX() * offset.getSize(), gameObject.getSizeY() * offset.getSize());
+
                 }
             }
         }
