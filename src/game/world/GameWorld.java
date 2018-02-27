@@ -13,6 +13,7 @@ public class GameWorld {
     private Player player;
     private Enemy[] enemies;
     private GameMap map;
+    private Offset offset;
 
 
     public GameWorld(GameMap map) {
@@ -25,7 +26,7 @@ public class GameWorld {
 
     public void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Offset offset = calcOffset(canvas); // Calculate values for offset
+        calcOffset(canvas); // Calculate values for offset
 
         // Make screen black
         gc.setFill(Color.BLACK);
@@ -39,7 +40,7 @@ public class GameWorld {
         player.render(gc, offset);
     }
 
-    private Offset calcOffset(Canvas c) {
+    private void calcOffset(Canvas c) {
         Offset o = new Offset();
         if(c.getWidth() < c.getHeight()) {
             o.setSize(c.getWidth() / GameMap.MIN_SIZE_X);
@@ -48,7 +49,7 @@ public class GameWorld {
             o.setSize(c.getHeight() / GameMap.MIN_SIZE_Y);
             o.setOffsetX((c.getWidth() - c.getHeight())/2);
         }
-        return o;
+        offset = o;
     }
 
     public boolean movePlayer(double x, double y) {
@@ -56,12 +57,16 @@ public class GameWorld {
     }
 
     public boolean move(Character character, double x, double y) {
+        System.out.println(playerCoordinates(x, true));
         if(!map.willCollide((int)(character.getPosX() + x), (int)(character.getPosY() + y))) {
             character.addPosX(x);
             character.addPosY(y);
-            System.out.println("Adding");
             return true;
         }
         return false;
+    }
+
+    private double playerCoordinates(double pos, boolean isX) {
+        return offset.getOffsetX() + (GameMap.MIN_SIZE_X/2) * offset.getSize() - player.getSizeX()/2* offset.getSize();
     }
 }
