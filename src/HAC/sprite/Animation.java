@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * Created by henrytran1 on 27/02/2018.
  */
 public class Animation {
-    private int frameCount;                 // Counts ticks for change
-    private int frameDelay;                 // frame delay 1-12 (You will have to play around with this)
-    private int currentFrame;               // animations current frame
-    private int animationDirection;         // animation direction (i.e counting forward or backward)
+    private int frameCount;
+    private int frameDelay;
+    private int currentFrame;
+    private int animationDirection;
     private int totalFrames;
 
     private boolean stopped;

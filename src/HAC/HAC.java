@@ -2,6 +2,7 @@ package HAC;
 
 import HAC.character.Enemy;
 import HAC.character.Player;
+import HAC.sprite.Animation;
 import HAC.world.GameMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,6 +23,7 @@ public class HAC {
     private Enemy[] enemies;
     private Timeline timeline;
     private Player player;
+
 
     public HAC(GameMap gameMap, Canvas canvas) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
@@ -54,19 +56,36 @@ public class HAC {
     private void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(gc, camera);
-        gc.drawImage(player.getAvatar(), camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
+        //gc.drawImage(player.getAvatar(), camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
 
-        gc.setFill(Color.YELLOW);
-        gc.fillRect(camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
+        //gc.setFill(Color.YELLOW);
+        //gc.fillRect(camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
 
 //        for(Enemy enemy : enemies) enemy.renderBullet(gc);
-        player.renderBullet(gc);
+        player.render(player.animation.getAnimation(), gc, camera);
 
     }
 
     public boolean move(double x, double y) {
+
         int rx = (int)(camera.getPlayerPosition(player.getSizeX(), true) + (double)player.getSizeX()/2 * Math.signum(x) - x / camera.getScale()- Math.signum(x));
         int ry = (int)(camera.getPlayerPosition(player.getSizeY(), false) + (double)player.getSizeY()/2 * Math.signum(y) - y / camera.getScale() - Math.signum(y));
+
+        System.out.println(Math.signum(x));
+        player.animation.setWalkingDown();
+
+        if(x == 0 && y < 1){
+        }else if(x > 1 && y == 0){
+            player.animation.setWalkLeft();
+        }else if(x == 0.0 && y > 1){
+            player.animation.setWalkingUp();
+        }else if (x < 0 && y == 0){
+            player.animation.setWalkRight();
+        }
+        player.animation.startAnimation();
+        player.animation.updateAnimation();
+        //double rx = camera.getPlayerPosition(player.getSizeX(), true) - Math.signum(x)*((double)player.getSizeX() / 2  - 1);
+
 
         System.out.println("-------");
         System.out.println("X: " + rx);
@@ -113,7 +132,18 @@ public class HAC {
     }
 
     public void shoot(double endX, double endY) {
-        player.shoot(camera.getPlayerPosition(player.getSizeX(), true), camera.getPlayerPosition(player.getSizeY(), false), endX, endY);
+        player.animation.startShoot();
+        player.animation.startAnimation();
+        player.animation.updateAnimation();
+        player.shoot(camera.getPlayerPosition(player.getSizeX(), true) ,camera.getPlayerPosition(player.getSizeY(), false), endX / camera.getScale(), endY /camera.getScale());
+        System.out.println("-------");
+
+     //   System.out.println("Scaled X: " + camera.scaleX(camera.getPlayerPosition(player.getSizeX(), true)));
+     //   System.out.println("Scaled Y: " + camera.scaleY(camera.getPlayerPosition(player.getSizeY(), false)));
+        System.out.println("Not Scaled X: " + camera.getPlayerPosition(player.getSizeX(), true));
+        System.out.println("Not Scaled Y: " + camera.getPlayerPosition(player.getSizeY(), false));
+
+
     }
 
 

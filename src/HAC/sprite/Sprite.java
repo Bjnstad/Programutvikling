@@ -11,7 +11,12 @@ import java.io.IOException;
 public class Sprite {
 
     private  BufferedImage spriteSheet;
+    private String spriteFileName;
     private  final int TILE_SIZE = 64;
+
+    public Sprite(String spriteFileName){
+        this.spriteFileName = spriteFileName;
+    }
 
     public BufferedImage loadSprite(String file){
         BufferedImage sprite = null;
@@ -27,8 +32,7 @@ public class Sprite {
 
     public  BufferedImage getSprite(int gridX, int gridY){
         if(spriteSheet == null){
-            spriteSheet = loadSprite("player_animations_walking");
-
+            spriteSheet = loadSprite(this.spriteFileName);
         }
         return spriteSheet.getSubimage(gridX * TILE_SIZE, gridY * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }

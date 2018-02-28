@@ -1,10 +1,16 @@
 package HAC.character;
 
+import HAC.Camera;
 import HAC.sprite.Animation;
+import HAC.sprite.AnimationReader;
+import HAC.sprite.Sprite;
+import HAC.world.GameMap;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Character {
@@ -14,6 +20,8 @@ public class Character {
     private int sizeX;
     private int sizeY;
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    public AnimationReader animation = new AnimationReader();
+
 
 
 
@@ -62,6 +70,8 @@ public class Character {
     }
 
 
+
+
     public void shoot(double startX, double startY, double endX, double endY){
         Bullet b = new Bullet(startX, startY, endX, endY);
         bullets.add(b);
@@ -74,13 +84,18 @@ public class Character {
         return bullets;
     }
 
-    public void renderBullet(GraphicsContext gc) {
+    public void render(Animation animation, GraphicsContext gc, Camera camera) {
 
         for (int i = 0; i < bullets.size(); i++) {
             if(bullets.get(i).isVisible()) {
                 bullets.get(i).update();
                 gc.setFill(Color.YELLOW);
-                gc.fillRect(bullets.get(i).getX(),bullets.get(i).getY(), 10, 5);
+                gc.fillRect(camera.scaleX(bullets.get(i).getX()),camera.scaleY(bullets.get(i).getY()), 10, 5);
+                System.out.println("-------");
+
+                System.out.println("Scale bullet x: " + camera.scaleX(bullets.get(i).getX()));
+                System.out.println("Scale bullet y: " + camera.scaleY(bullets.get(i).getY()));
+
             }else{
                 bullets.remove(i);
             }
@@ -91,7 +106,7 @@ public class Character {
 
   //     gc.fillRect(offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
      //   gc.drawImage(avatar,offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
- //       gc.drawImage(SwingFXUtils.toFXImage(animation.getSprite(), null),offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
+        gc.drawImage(SwingFXUtils.toFXImage(animation.getSprite(), null), camera.getCenterX(sizeX), camera.getCenterY(sizeY), sizeX * camera.getScale(), sizeY * camera.getScale());
 
     }
     public void renderEnemy(GraphicsContext gc, Player player) {
