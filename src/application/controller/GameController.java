@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -32,24 +33,17 @@ public class GameController implements Controller {
 
 
 
-
-        /*
-
         // TODO: #1 Move to own controller class
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
 
-
                     @Override
                     public void handle(MouseEvent event) {
-                        double calculatedX = (event.getX() - gameWorld.getOffset().getOffsetX())/gameWorld.getOffset().getSize();
-                        double calculatedY = (event.getY() - gameWorld.getOffset().getOffsetY())/gameWorld.getOffset().getSize();
-                        gameWorld.shoot(event.getX(), event.getY());
+                        game.shoot(event.getX(), event.getY());
 
                     }
                 });
-*/
-        //Sets walking and shooting sprite
+
     }
 
     /**

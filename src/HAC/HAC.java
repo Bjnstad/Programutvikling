@@ -1,5 +1,6 @@
 package HAC;
 
+import HAC.character.Enemy;
 import HAC.character.Player;
 import HAC.world.GameMap;
 import javafx.animation.KeyFrame;
@@ -18,9 +19,8 @@ public class HAC {
     private GameMap gameMap;
     private Canvas canvas;
     private Camera camera;
-
+    private Enemy[] enemies;
     private Timeline timeline;
-
     private Player player;
 
     public HAC(GameMap gameMap, Canvas canvas) {
@@ -55,8 +55,13 @@ public class HAC {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(gc, camera);
         gc.drawImage(player.getAvatar(), camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
+
         gc.setFill(Color.YELLOW);
         gc.fillRect(camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
+
+//        for(Enemy enemy : enemies) enemy.renderBullet(gc);
+        player.renderBullet(gc);
+
     }
 
     public boolean move(double x, double y) {
@@ -106,6 +111,9 @@ public class HAC {
     }
 
 
+    public void shoot(double endX, double endY) {
+        player.shoot(camera.getPlayerPosition(player.getSizeX(), true), camera.getPlayerPosition(player.getSizeY(), false), endX, endY);
+    }
 
 
     /**

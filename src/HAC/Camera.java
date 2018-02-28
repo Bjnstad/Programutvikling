@@ -53,8 +53,10 @@ public class Camera {
     }
 
     public double getPlayerPosition(int size, boolean getX) {
+
         if(getX) return (double)(ZOOM) / 2 - (double)(size)/2 - POX / scale;
         return (double)(ZOOM) / 2 - (double)(size)/2 - POY / scale;
+
     }
 
 

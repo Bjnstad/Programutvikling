@@ -3,6 +3,9 @@ package HAC.character;
 import HAC.sprite.Animation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class Character {
     private double posX = 0;
@@ -10,6 +13,7 @@ public class Character {
     private Image avatar; // TODO: Change to sprite
     private int sizeX;
     private int sizeY;
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
 
 
@@ -57,7 +61,31 @@ public class Character {
         return avatar;
     }
 
-    public void render(Animation animation, GraphicsContext gc) {
+
+    public void shoot(double startX, double startY, double endX, double endY){
+        Bullet b = new Bullet(startX, startY, endX, endY);
+        bullets.add(b);
+        //  animation = shootLeft;
+        //   animation.start();
+
+    }
+
+    public ArrayList getBullets(){
+        return bullets;
+    }
+
+    public void renderBullet(GraphicsContext gc) {
+
+        for (int i = 0; i < bullets.size(); i++) {
+            if(bullets.get(i).isVisible()) {
+                bullets.get(i).update();
+                gc.setFill(Color.YELLOW);
+                gc.fillRect(bullets.get(i).getX(),bullets.get(i).getY(), 10, 5);
+            }else{
+                bullets.remove(i);
+            }
+        }
+
         // RENDER PLAYER
        // gc.setFill(Color.YELLOW);
 

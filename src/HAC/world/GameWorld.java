@@ -148,8 +148,6 @@ public class GameWorld {
       //  animation = shootLeft;
      //   animation.start();
 
-
-
     }
 
     public ArrayList getBullets(){
