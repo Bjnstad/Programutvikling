@@ -91,10 +91,6 @@ public class Character {
                 bullets.get(i).update();
                 gc.setFill(Color.YELLOW);
                 gc.fillRect(camera.scaleX(bullets.get(i).getX()),camera.scaleY(bullets.get(i).getY()), 10, 5);
-                System.out.println("-------");
-
-                System.out.println("Scale bullet x: " + camera.scaleX(bullets.get(i).getX()));
-                System.out.println("Scale bullet y: " + camera.scaleY(bullets.get(i).getY()));
 
             }else{
                 bullets.remove(i);

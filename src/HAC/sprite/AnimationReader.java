@@ -21,11 +21,11 @@ public class AnimationReader {
     private BufferedImage[] standingAnimation = {sprite.getSprite(3, 0)};
 
     // These are animation states
-    private Animation walkingUp = new Animation(walkingUpAnimation, 2);
-    private Animation walkingDown = new Animation(walkingDownAnimation, 2);
+    private Animation walkingUp = new Animation(walkingUpAnimation, 1);
+    private Animation walkingDown = new Animation(walkingDownAnimation, 1);
     private Animation walkLeft = new Animation(walkingLeftAnimation, 1);
-    private Animation walkRight = new Animation(walkingRightAnimation, 2);
-    private Animation standing = new Animation(standingAnimation, 2);
+    private Animation walkRight = new Animation(walkingRightAnimation, 1);
+    private Animation standing = new Animation(standingAnimation, 1);
 
     // This is the default standing animation
     private Animation animation = standing;

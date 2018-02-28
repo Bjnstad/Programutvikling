@@ -71,7 +71,6 @@ public class HAC {
         int rx = (int)(camera.getPlayerPosition(player.getSizeX(), true) + (double)player.getSizeX()/2 * Math.signum(x) - x / camera.getScale()- Math.signum(x));
         int ry = (int)(camera.getPlayerPosition(player.getSizeY(), false) + (double)player.getSizeY()/2 * Math.signum(y) - y / camera.getScale() - Math.signum(y));
 
-        System.out.println(Math.signum(x));
         player.animation.setWalkingDown();
 
         if(x == 0 && y < 1){
@@ -82,46 +81,11 @@ public class HAC {
         }else if (x < 0 && y == 0){
             player.animation.setWalkRight();
         }
+
         player.animation.startAnimation();
         player.animation.updateAnimation();
-        //double rx = camera.getPlayerPosition(player.getSizeX(), true) - Math.signum(x)*((double)player.getSizeX() / 2  - 1);
 
-
-        System.out.println("-------");
-        System.out.println("X: " + rx);
-        System.out.println("Y: " + ry);
-
-
-        if(!gameMap.willCollide(rx, ry)) {
-            camera.move(x,y);
-        } else {
-            /*
-            if(y == 0) {
-                camera.setPOX(rx + 0.1 * Math.signum(x));
-            } else if (x == 0) {
-                camera.setPOY(ry + 0.1 * Math.signum(y));
-            } else {
-                camera.setPOX(rx + 0.1 * Math.signum(x));
-                camera.setPOY(ry + 0.1 * Math.signum(y));
-            }
-            */
-        }
-        /*
-        int rX = GameMap.MIN_SIZE_X - 1 - (int)playerCoordinates(x, true);
-        int rY = GameMap.MIN_SIZE_Y - 1 - (int)playerCoordinates(y, false);
-
-        if(map.willCollide(rX, rY)) {
-            System.out.println("collide!");
-        } else {
-            System.out.println("Free ");
-        }
-
-        if(!map.willCollide(rX, rY)) {
-            character.addPosX(x);
-            character.addPosY(y);
-            return true;
-        }
-        return false;*/
+        if(!gameMap.willCollide(rx, ry))camera.move(x,y);
 
         return true;
     }
@@ -135,16 +99,8 @@ public class HAC {
         player.animation.startShoot();
         player.animation.startAnimation();
         player.animation.updateAnimation();
-        player.shoot(camera.getPlayerPosition(player.getSizeX(), true) ,camera.getPlayerPosition(player.getSizeY(), false), endX / camera.getScale(), endY /camera.getScale());
-        System.out.println("-------");
-
-     //   System.out.println("Scaled X: " + camera.scaleX(camera.getPlayerPosition(player.getSizeX(), true)));
-     //   System.out.println("Scaled Y: " + camera.scaleY(camera.getPlayerPosition(player.getSizeY(), false)));
-        System.out.println("Not Scaled X: " + camera.getPlayerPosition(player.getSizeX(), true));
-        System.out.println("Not Scaled Y: " + camera.getPlayerPosition(player.getSizeY(), false));
-
-
-    }
+        player.shoot(camera.getPlayerPosition(player.getSizeX(), true) + player.getSizeX()/2 ,camera.getPlayerPosition(player.getSizeY(), false) + player.getSizeY()/2, endX / camera.getScale(), endY /camera.getScale());
+   }
 
 
     /**
