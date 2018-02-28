@@ -1,4 +1,4 @@
-package game.sprite;
+package HAC.sprite;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

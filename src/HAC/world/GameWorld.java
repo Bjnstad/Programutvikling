@@ -1,12 +1,12 @@
-package game.world;
+package HAC.world;
 
-import game.character.Bullet;
-import game.character.Character;
-import game.character.Enemy;
-import game.character.Player;
-import game.sprite.Animation;
-import game.sprite.Sprite;
-import game.utils.Offset;
+import HAC.Camera;
+import HAC.character.Bullet;
+import HAC.character.Character;
+import HAC.character.Enemy;
+import HAC.character.Player;
+import HAC.sprite.Animation;
+import HAC.sprite.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -16,6 +16,68 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class GameWorld {
+    /*
+    private Camera camera;
+
+
+    public GameWorld(Canvas canvas, GameMap map) {
+        if(canvas == null || map == null) throw new NullPointerException(); // Map cannot be null
+        this.map = map;
+        this.camera = new Camera(canvas);
+
+        this.player = new Player();
+        this.enemies = new Enemy[1];
+
+        this.currentLevel = 0; // TODO: Jump to level propmt at start?
+
+        // TODO: #3 Loader for enemies
+        this.enemies[0] = new Enemy(tempZombie, 4, 4, 6, 6);
+    }
+
+    public void render(Canvas canvas) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Make screen black
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+
+        // Render map with objects
+        map.render(gc, );
+
+
+        // Render characters
+        for (Enemy enemy : enemies) {
+            enemy.renderEnemy(gc, offset, player);
+        }
+
+        //Render bullets
+        for (Bullet bullet : bullets){
+
+            gc.setFill(Color.YELLOW);
+            gc.fillRect(bullet.getX(),bullet.getY(), 10, 5);
+        }
+
+        //player.render(gc, offset);
+        player.render(animation, gc, offset);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private int currentLevel;
     private Player player;
     private Enemy[] enemies;
@@ -62,56 +124,6 @@ public class GameWorld {
     // This is the default standing animation
     private Animation animation = standing;
 
-    public GameWorld(GameMap map) {
-        if(map == null) throw new NullPointerException(); // Map cannot be null
-        this.map = map;
-        this.player = new Player();
-        this.enemies = new Enemy[1];
-        this.currentLevel = 0;
-
-        this.enemies[0] = new Enemy(tempZombie, 4, 4, 6, 6);
-    }
-
-    public void render(Canvas canvas) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        calcOffset(canvas); // Calculate values for offset
-
-        // Make screen black
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-
-        // Render map with objects
-        map.render(gc, offset, true, player);
-
-
-        // Render characters
-        for (Enemy enemy : enemies) {
-            enemy.renderEnemy(gc, offset, player);
-        }
-
-        //Render bullets
-        for (Bullet bullet : bullets){
-
-            gc.setFill(Color.YELLOW);
-            gc.fillRect(bullet.getX(),bullet.getY(), 10, 5);
-        }
-
-        //player.render(gc, offset);
-        player.render(animation, gc, offset);
-
-    }
-
-    private void calcOffset(Canvas c) {
-        Offset o = new Offset();
-        if(c.getWidth() < c.getHeight()) {
-            o.setSize(c.getWidth() / GameMap.MIN_SIZE_X);
-            o.setOffsetY((c.getHeight() - c.getWidth())/2);
-        } else {
-            o.setSize(c.getHeight() / GameMap.MIN_SIZE_Y);
-            o.setOffsetX((c.getWidth() - c.getHeight())/2);
-        }
-        offset = o;
-    }
 
     public boolean movePlayer(double x, double y) {
         if(x == 0 && y < 1){
@@ -169,5 +181,5 @@ public class GameWorld {
 
     public Offset getOffset() {
         return offset;
-    }
+    }*/
 }

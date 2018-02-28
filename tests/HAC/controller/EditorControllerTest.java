@@ -1,4 +1,4 @@
-package game.controller;
+package HAC.controller;
 
 import application.controller.EditorController;
 import application.controller.MainController;

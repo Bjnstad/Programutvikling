@@ -1,4 +1,6 @@
-package game;
+package HAC;
+
+import application.State;
 
 public abstract class GameState {
     private State state;

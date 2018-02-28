@@ -1,4 +1,4 @@
-package game.character;
+package HAC.character;
 
 import javafx.scene.image.Image;
 

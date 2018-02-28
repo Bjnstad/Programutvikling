@@ -1,6 +1,6 @@
 package application.controller;
 
-import game.State;
+import application.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,11 +14,6 @@ public class MainMenuController implements Controller {
 
     @Override
     public void initiate() {
-
-    }
-
-    @Override
-    public void render() {
 
     }
 

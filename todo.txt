@@ -1,0 +1,6 @@
+#1 - move mouse event handler to own class
+#2 - Assign bullets in own system
+#3 - Loader for enemies
+
+
+Create loader for maps with one default map

@@ -1,4 +1,4 @@
-package game.character;
+package HAC.character;
 
 /**
  * Created by henrytran1 on 27/02/2018.

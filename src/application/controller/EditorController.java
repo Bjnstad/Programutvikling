@@ -1,13 +1,10 @@
 package application.controller;
 
-import game.GameState;
-import game.State;
-import game.filehandler.FileHandler;
-import game.utils.Offset;
-import game.world.GameMap;
-import game.world.GameObject;
-import javafx.beans.value.ChangeListener;
-import javafx.collections.ObservableList;
+import HAC.GameState;
+import application.State;
+import HAC.filehandler.FileHandler;
+import HAC.world.GameMap;
+import HAC.world.GameObject;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,14 +14,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import game.editor.*;
+import HAC.editor.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -150,14 +144,14 @@ public class EditorController extends GameState implements Controller {
     public void render () {
         if(map == null) return; // No map set
         GraphicsContext gc = graphics.getGraphicsContext2D();
-        Offset offset = calcOffset(graphics); // Calculate values for offset
+  //      Offset offset = calcOffset(graphics); // Calculate values for offset
 
 
         graphics.setWidth(651);
         graphics.setHeight(560);
 
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-        map.render(gc, offset, true, null);
+        //map.render(gc, offset, true, null);
 
 
 
@@ -167,7 +161,7 @@ public class EditorController extends GameState implements Controller {
     public void onClose () {
 
     }
-
+/*
     private Offset calcOffset(Canvas c) {
         Offset o = new Offset();
         if(c.getWidth() < c.getHeight()) {
@@ -179,7 +173,7 @@ public class EditorController extends GameState implements Controller {
         }
         return o;
     }
-
+**/
 
     @Override
     public EventHandler<KeyEvent> getEventHandler() {

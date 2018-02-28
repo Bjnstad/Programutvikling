@@ -1,4 +1,4 @@
-package game.sprite;
+package HAC.sprite;
 
 /**
  * Created by henrytran1 on 27/02/2018.

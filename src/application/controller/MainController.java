@@ -1,15 +1,12 @@
 package application.controller;
 
-import game.State;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import application.State;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,26 +16,15 @@ public class MainController implements Initializable {
 
     @FXML
     AnchorPane mainView;
-
-    private Timeline timeline; // Timeline for gameloop
     private Controller controller; // Current controller
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setState(State.MAIN_MENU);
-
-
-        // TODO: To be removed?
-        KeyFrame frame = new KeyFrame(Duration.seconds(0.1), event -> gameloop());
-        timeline = new Timeline();
-        timeline.getKeyFrames().add(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-    private void gameloop() {
-        controller.render();
-    }
+
 
     public void setState(State state) {
         String source;
@@ -48,12 +34,10 @@ public class MainController implements Initializable {
                 controller = new MainMenuController();
                 break;
             case EDITOR:
-                timeline.play();
                 source = "Editor";
                 controller = new EditorController();
                 break;
             case GAME:
-                timeline.play();
                 source = "Game";
                 controller = new GameController();
                 break;

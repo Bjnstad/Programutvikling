@@ -1,16 +1,13 @@
 package application.controller;
 
-import game.State;
-import game.character.Bullet;
-import game.world.GameMap;
-import game.world.GameObject;
-import game.world.GameWorld;
+import HAC.HAC;
+import HAC.world.GameMap;
+import HAC.world.GameObject;
+import application.State;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -19,28 +16,26 @@ public class GameController implements Controller {
     @FXML
     Canvas graphics;
 
-    private MainController mainController;
-    private GameWorld gameWorld;
+    private MainController mainController; // Parent controller
+    private HAC game;
 
-    // TODO: Remove
-    private Image tempImage = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
 
     /**
      * On start of state
      */
     @Override
     public void initiate() {
-        GameMap map = new GameMap(100, 100);
-
-        // Adding items to map
-        // TODO: Remove
-        map.setGameObject(new GameObject(tempImage, 2, 2), 7, 5);
-        map.setGameObject(new GameObject(tempImage, 5, 5), 12, 14);
+        graphics.setWidth(mainController.getWidth());
+        graphics.setHeight(mainController.getHeight());
+        game = new HAC(createSimpleMap(), graphics);
 
 
-        gameWorld = new GameWorld(map);
 
 
+
+        /*
+
+        // TODO: #1 Move to own controller class
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
 
@@ -53,40 +48,15 @@ public class GameController implements Controller {
 
                     }
                 });
-
+*/
         //Sets walking and shooting sprite
-
-
-
-
     }
 
     /**
      * Render canvas, called with time interval from @MainController
      */
-    @Override
-    public void render() {
-        // Set width and height of window to canvas
-        graphics.setWidth(mainController.getWidth());
-        graphics.setHeight(mainController.getHeight());
 
-        // Render GameWorld
-        gameWorld.render(graphics);
-
-
-        ArrayList bullets = gameWorld.getBullets();
-        for (int i = 0; i < bullets.size(); i++) {
-            Bullet b = (Bullet) bullets.get(i);
-            if(b.isVisible() == true){
-                b.update();
-            }else{
-                bullets.remove(i);
-            }
-
-        }
-    }
-
-    /**
+     /**
      * On state close
      */
     @Override
@@ -106,16 +76,16 @@ public class GameController implements Controller {
         return (event -> {
             switch (event.getCode()) {
                 case W:
-                    gameWorld.movePlayer(0, speed);
+                    game.move(0, speed);
                     break;
                 case A:
-                    gameWorld.movePlayer(speed, 0);
+                    game.move(speed, 0);
                     break;
                 case S:
-                    gameWorld.movePlayer(0, -speed);
+                    game.move(0, -speed);
                     break;
                 case D:
-                    gameWorld.movePlayer(-speed, 0);
+                    game.move(-speed, 0);
                     break;
 
 
@@ -131,5 +101,18 @@ public class GameController implements Controller {
     @Override
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+
+    /**
+     * Creates a simple map for testing, should be replaced by map loader or randomized based on pref width/height
+     * @return a simple map with some objects 100 x 100 in size
+     */
+    private GameMap createSimpleMap() {
+        GameMap map = new GameMap(100, 100);
+
+        map.setGameObject(new GameObject(null, 2, 2), 7, 5);
+        map.setGameObject(new GameObject(null, 5, 5), 12, 14);
+        return map;
     }
 }
