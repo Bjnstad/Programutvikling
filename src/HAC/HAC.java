@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -54,20 +55,36 @@ public class HAC {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(gc, camera);
         gc.drawImage(player.getAvatar(), camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
+        gc.setFill(Color.YELLOW);
+        gc.fillRect(camera.getCenterX(player.getSizeX()), camera.getCenterY(player.getSizeY()), player.getSizeX() * camera.getScale(), player.getSizeY() * camera.getScale());
     }
 
     public boolean move(double x, double y) {
-        int rx = (int) (camera.getPlayerPosition(player.getSizeX(), true) + x / camera.getScale() + player.getSizeX() / 2);
-        double ry = camera.getPlayerPosition(player.getSizeY(), false);
+        System.out.println(Math.signum(x));
+        int rx = (int)(camera.getPlayerPosition(player.getSizeX(), true) + x /  camera.getScale() - (double)player.getSizeX()/2 * Math.signum(x));
+        int ry = (int)(camera.getPlayerPosition(player.getSizeY(), false) + y /  camera.getScale() - (double)player.getSizeY()/2 * Math.signum(y));
+        //double rx = camera.getPlayerPosition(player.getSizeX(), true) - Math.signum(x)*((double)player.getSizeX() / 2  - 1);
 
+        camera.move(x,y);
         System.out.println("-------");
-        System.out.println("X: " + (-(double)player.getSizeX()/2 + camera.getPlayerPosition(player.getSizeX(), true)));
-        System.out.println("Y: " + ry);
+        System.out.println("X: " + camera.getPlayerPosition(player.getSizeX(), true));
+        System.out.println("Y: " + camera.getPlayerPosition(player.getSizeY(), false));
 
 
-        camera.move(x, y);
-
-
+        if(!gameMap.willCollide(rx, ry)) {
+            camera.move(x,y);
+        } else {
+            /*
+            if(y == 0) {
+                camera.setPOX(rx + 0.1 * Math.signum(x));
+            } else if (x == 0) {
+                camera.setPOY(ry + 0.1 * Math.signum(y));
+            } else {
+                camera.setPOX(rx + 0.1 * Math.signum(x));
+                camera.setPOY(ry + 0.1 * Math.signum(y));
+            }
+            */
+        }
         /*
         int rX = GameMap.MIN_SIZE_X - 1 - (int)playerCoordinates(x, true);
         int rY = GameMap.MIN_SIZE_Y - 1 - (int)playerCoordinates(y, false);

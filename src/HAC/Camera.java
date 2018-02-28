@@ -44,9 +44,17 @@ public class Camera {
         POY += y;
     }
 
+    public void setPOX(double x) {
+        this.POX = x;
+    }
+
+    public void setPOY(double y) {
+        this.POY = y;
+    }
+
     public double getPlayerPosition(int size, boolean getX) {
-        if(getX) return (double)ZOOM / 2 + size / 2 - POX / scale;
-        return ZOOM / 2 - size / 2 - POY / scale;
+        if(getX) return (double)(ZOOM) / 2 - (double)(size)/2 - POX / scale;
+        return (double)(ZOOM) / 2 - (double)(size)/2 - POY / scale;
     }
 
 
