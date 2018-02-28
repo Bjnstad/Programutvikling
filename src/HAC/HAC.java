@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
- * Main file for game HAC
+ * Main class for game HAC
  */
 public class HAC {
     private final double TIME_FRAME = 0.1;
@@ -65,15 +65,12 @@ public class HAC {
     }
 
     public boolean move(double x, double y) {
-        System.out.println(Math.signum(x));
-        int rx = (int)(camera.getPlayerPosition(player.getSizeX(), true) + x /  camera.getScale() - (double)player.getSizeX()/2 * Math.signum(x));
-        int ry = (int)(camera.getPlayerPosition(player.getSizeY(), false) + y /  camera.getScale() - (double)player.getSizeY()/2 * Math.signum(y));
-        //double rx = camera.getPlayerPosition(player.getSizeX(), true) - Math.signum(x)*((double)player.getSizeX() / 2  - 1);
+        int rx = (int)(camera.getPlayerPosition(player.getSizeX(), true) + (double)player.getSizeX()/2 * Math.signum(x) - x / camera.getScale()- Math.signum(x));
+        int ry = (int)(camera.getPlayerPosition(player.getSizeY(), false) + (double)player.getSizeY()/2 * Math.signum(y) - y / camera.getScale() - Math.signum(y));
 
-        camera.move(x,y);
         System.out.println("-------");
-        System.out.println("X: " + camera.getPlayerPosition(player.getSizeX(), true));
-        System.out.println("Y: " + camera.getPlayerPosition(player.getSizeY(), false));
+        System.out.println("X: " + rx);
+        System.out.println("Y: " + ry);
 
 
         if(!gameMap.willCollide(rx, ry)) {
@@ -110,6 +107,10 @@ public class HAC {
         return true;
     }
 
+    private int postive(double n) {
+        if(n > 0) return -1;
+        return 1;
+    }
 
     public void shoot(double endX, double endY) {
         player.shoot(camera.getPlayerPosition(player.getSizeX(), true), camera.getPlayerPosition(player.getSizeY(), false), endX, endY);

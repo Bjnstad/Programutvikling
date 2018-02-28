@@ -1,6 +1,7 @@
 package HAC;
 
 import HAC.world.GameMap;
+import com.sun.glass.ui.Size;
 import javafx.scene.canvas.Canvas;
 
 public class Camera {
@@ -53,10 +54,8 @@ public class Camera {
     }
 
     public double getPlayerPosition(int size, boolean getX) {
-
-        if(getX) return (double)(ZOOM) / 2 - (double)(size)/2 - POX / scale;
-        return (double)(ZOOM) / 2 - (double)(size)/2 - POY / scale;
-
+        if(getX) return (double)(ZOOM) / 2 - POX/scale;
+        return (double)(ZOOM) / 2 - POY/scale;
     }
 
 
