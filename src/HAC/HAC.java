@@ -15,7 +15,7 @@ import javafx.util.Duration;
  * Main class for game HAC
  */
 public class HAC {
-    private final double TIME_FRAME = 0.1;
+    private final double FPS = 60;
 
     private GameMap gameMap;
     private Canvas canvas;
@@ -35,7 +35,7 @@ public class HAC {
 
         this.player = new Player();
 
-        this.gameMap.setGrid(true); // turn on grid
+        this.gameMap.setGrid(false); // turn on grid
 
         play();
         render();
@@ -47,7 +47,7 @@ public class HAC {
     }
 
     private void initTimeline() {
-        KeyFrame frame = new KeyFrame(Duration.seconds(TIME_FRAME), event -> render());
+        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
         timeline = new Timeline();
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);

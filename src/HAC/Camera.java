@@ -1,7 +1,5 @@
 package HAC;
 
-import HAC.world.GameMap;
-import com.sun.glass.ui.Size;
 import javafx.scene.canvas.Canvas;
 
 public class Camera {

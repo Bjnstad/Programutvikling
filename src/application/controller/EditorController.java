@@ -1,6 +1,5 @@
 package application.controller;
 
-import HAC.GameState;
 import application.State;
 import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
@@ -25,7 +24,7 @@ import javafx.stage.Stage;
 
 
 
-public class EditorController extends GameState implements Controller {
+public class EditorController implements Controller {
 
     private MainController mainController;
     private FileHandler fileHandler;
@@ -43,9 +42,9 @@ public class EditorController extends GameState implements Controller {
     ListView listView;
 
 
-    public EditorController() {
-        super(State.EDITOR);
-    }
+   // public EditorController() {
+    //    super(State.EDITOR);
+//    }
 
     @FXML
     public void newFile(ActionEvent event){
@@ -140,22 +139,6 @@ public class EditorController extends GameState implements Controller {
         mainController.setState(State.MAIN_MENU);
     }
 
-    @Override
-    public void render () {
-        if(map == null) return; // No map set
-        GraphicsContext gc = graphics.getGraphicsContext2D();
-  //      Offset offset = calcOffset(graphics); // Calculate values for offset
-
-
-        graphics.setWidth(651);
-        graphics.setHeight(560);
-
-        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getWidth());
-        //map.render(gc, offset, true, null);
-
-
-
-    }
 
     @Override
     public void onClose () {
