@@ -44,6 +44,7 @@ public class GameController implements Controller {
 
         game.setDevMode(true);
         game.setGrid(true);
+        //game.setPlayerPostion(1,1);
 
 
         // TODO: #1 Move to own controller class

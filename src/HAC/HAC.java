@@ -105,6 +105,10 @@ public class HAC {
         camera.calcOffset();
    }
 
+   public void setPlayerPostion(int x, int y) {
+        camera.setPlayerPosition(x, y);
+   }
+
 
     /**
      * Loads new map

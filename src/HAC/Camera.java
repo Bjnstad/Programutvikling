@@ -5,7 +5,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import javax.swing.plaf.synth.ColorType;
+/**
+ * Camera is used to calculate differences between gameboard and the real canvas.
+ *
+ */
 
 public class Camera {
     public final static int ZOOM = 11; // How many frames to show
@@ -22,11 +25,13 @@ public class Camera {
      * @param canvas shown canvas used to calculate offset and scaling
      */
     public Camera(Canvas canvas) {
+        // TODO: ADD PLAYER ? SHOULD HAVE AN RELATION OR ADDED AS PARAMETER
+
         this.canvas = canvas;
         calcOffset();
 
-
-        // TODO: ADD PLAYER ? SHOULD HAVE AN RELATION OR ADDED AS PARAMETER
+        // Set default position to middle of the zoom
+        //setPlayerPosition(ZOOM/2, ZOOM/2);
     }
 
     /**
@@ -78,8 +83,8 @@ public class Camera {
 
         gc.setFill(Color.WHITE);
         gc.fillText("Player position", canvas.getWidth() - width + 10, 20);
-        gc.fillText("X: "+getPlayerPosition(player.getSizeX(), true),  canvas.getWidth() - width + 10, 35);
-        gc.fillText("Y: "+getPlayerPosition(player.getSizeY(), false),  canvas.getWidth() - width + 10, 50);
+        gc.fillText("X: " + getPlayerX(player.getSizeX()),  canvas.getWidth() - width + 10, 35);
+        gc.fillText("Y: " + getPlayerY(player.getSizeY()),  canvas.getWidth() - width + 10, 50);
     }
 
     /**
@@ -90,6 +95,16 @@ public class Camera {
     public void move(double x, double y){
         POX += x;
         POY += y;
+    }
+
+    /**
+     * Set player position to tiles
+     */
+    public void setPlayerPosition(int x, int y) {
+        double rx = POX - (getPlayerX(1) - x) * scale;
+        double ry = POY - (getPlayerY(1) - y) * scale;
+        setPOX(rx);
+        setPOY(ry);
     }
 
     /**
@@ -121,9 +136,12 @@ public class Camera {
 
 
     public double getPlayerX(int size) {
-        return offsetX + (double)ZOOM / 2;
+        return (double)ZOOM - (POX + offsetX)/scale;
     }
 
+    public double getPlayerY(int size) {
+        return (double)ZOOM / 2 - (POY + offsetY)/scale;
+    }
 
     public double getCenterX() {
         return offsetX + (double)ZOOM / 2 * scale;
@@ -133,8 +151,13 @@ public class Camera {
         return offsetY + (double)ZOOM / 2 * scale;
     }
 
+    /**
+     * Scale up the given gameboard relative values to according pixels on screen
+     * @param x
+     * @return
+     */
     public double scaleX(double x) {
-        return x * scale + POX;
+        return x * scale + POX + offsetX;
     }
 
     public double scaleY(double y) {
