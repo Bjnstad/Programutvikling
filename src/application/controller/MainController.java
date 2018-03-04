@@ -27,6 +27,8 @@ public class MainController implements Initializable {
 
 
     public void setState(State state) {
+        if(controller != null) controller.onClose();
+
         String source;
         switch (state) {
             case MAIN_MENU:
@@ -61,7 +63,7 @@ public class MainController implements Initializable {
 
             if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
 
-            
+
 
             controller.initiate();
 
@@ -71,6 +73,9 @@ public class MainController implements Initializable {
 
     }
 
+    public AnchorPane getMainView() {
+        return mainView;
+    }
 
     public double getWidth() {
         return mainView.getWidth();

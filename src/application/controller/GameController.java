@@ -4,6 +4,9 @@ import HAC.HAC;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.State;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -26,11 +29,21 @@ public class GameController implements Controller {
      */
     @Override
     public void initiate() {
-        graphics.setWidth(mainController.getWidth());
-        graphics.setHeight(mainController.getHeight());
+        ReadOnlyDoubleProperty widthProperty = mainController.getMainView().widthProperty();
+        ReadOnlyDoubleProperty heightProperty = mainController.getMainView().heightProperty();
+
+        graphics.widthProperty().bind(widthProperty);
+        graphics.heightProperty().bind(heightProperty);
+
+        graphics.widthProperty().addListener(event -> game.resize());
+        graphics.heightProperty().addListener(event -> game.resize());
+
+
+
         game = new HAC(createSimpleMap(), graphics);
 
-
+        game.setDevMode(true);
+        game.setGrid(true);
 
 
         // TODO: #1 Move to own controller class

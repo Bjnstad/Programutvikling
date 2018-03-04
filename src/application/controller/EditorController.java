@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -20,9 +19,6 @@ import javafx.scene.layout.VBox;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-
-
 
 public class EditorController implements Controller {
 
