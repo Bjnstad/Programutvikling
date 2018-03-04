@@ -121,7 +121,7 @@ public class Camera {
 
 
     public double getPlayerX(int size) {
-        return offsetX + (double)ZOOM / 2
+        return offsetX + (double)ZOOM / 2;
     }
 
 

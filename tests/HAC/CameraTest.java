@@ -35,7 +35,7 @@ public class CameraTest {
 
 
         assertTrue(printValues(camera.getCenterX(), 800/2));
-        assertTrue(printValues(camera.getCenterY()== round(400/2));
+        assertTrue(printValues(camera.getCenterY(), 400/2));
 
         canvas.setWidth(234);
         canvas.setHeight(456);
