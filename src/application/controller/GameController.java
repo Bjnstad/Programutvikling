@@ -1,6 +1,7 @@
 package application.controller;
 
 import HAC.HAC;
+import HAC.sprite.Sprite;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.State;
@@ -42,8 +43,8 @@ public class GameController implements Controller {
 
         game = new HAC(createSimpleMap(), graphics);
 
-        game.setDevMode(true);
-        game.setGrid(true);
+        //game.setDevMode(true);
+        //game.setGrid(true);
         //game.setPlayerPostion(1,1);
 
 
@@ -80,7 +81,7 @@ public class GameController implements Controller {
     public EventHandler<KeyEvent> getEventHandler() {
 
         // TODO: add acceleration in own controller class
-        double speed = 2;
+        double speed = 6;
         return (event -> {
             switch (event.getCode()) {
                 case W:
@@ -117,7 +118,7 @@ public class GameController implements Controller {
      * @return a simple map with some objects 100 x 100 in size
      */
     private GameMap createSimpleMap() {
-        GameMap map = new GameMap(100, 100);
+        GameMap map = new GameMap(20, 20, new Sprite("background", 32));
 
         map.setGameObject(new GameObject(null, 2, 2), 7, 5);
         map.setGameObject(new GameObject(null, 5, 5), 12, 14);

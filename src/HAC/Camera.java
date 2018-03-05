@@ -31,7 +31,7 @@ public class Camera {
         calcOffset();
 
         // Set default position to middle of the zoom
-        //setPlayerPosition(ZOOM/2, ZOOM/2);
+        setPlayerPosition(0, 0);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Camera {
      * Render marker of player center position as an cross
      */
     public void renderPlayerMarker(Player player) {
-        double markerSize = scale/10;
+        double markerSize = scale/20;
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(Color.RED);

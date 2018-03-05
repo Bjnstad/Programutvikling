@@ -12,10 +12,11 @@ public class Sprite {
 
     private  BufferedImage spriteSheet;
     private String spriteFileName;
-    private  final int TILE_SIZE = 64;
+    private int TILE_SIZE;
 
-    public Sprite(String spriteFileName){
+    public Sprite(String spriteFileName, int size){
         this.spriteFileName = spriteFileName;
+        this.TILE_SIZE = size;
     }
 
     public BufferedImage loadSprite(String file){
@@ -32,7 +33,7 @@ public class Sprite {
 
     public  BufferedImage getSprite(int gridX, int gridY){
         if(spriteSheet == null){
-            spriteSheet = loadSprite(this.spriteFileName);
+            spriteSheet = loadSprite(spriteFileName);
         }
         return spriteSheet.getSubimage(gridX * TILE_SIZE, gridY * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }

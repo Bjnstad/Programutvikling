@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * Created by henrytran1 on 28/02/2018.
  */
 public class AnimationReader {
-    private Sprite sprite = new Sprite("player_animations_walking");
+    private Sprite sprite = new Sprite("player_animations_walking", 64);
     //private Sprite sprite_shooting = new Sprite("player_shooting_animation");
 
     private BufferedImage[] walkingDownAnimation = {sprite.getSprite(0, 2), sprite.getSprite(1, 2), sprite.getSprite(2,2),sprite.getSprite(3,2), sprite.getSprite(4,2), sprite.getSprite(5,2), sprite.getSprite(6,2), sprite.getSprite(7,2), sprite.getSprite(8,2)};
@@ -31,7 +31,7 @@ public class AnimationReader {
     private Animation animation = standing;
 
     public void startShoot() {
-       sprite = new Sprite("player_shooting_animation");
+       sprite = new Sprite("player_shooting_animation", 64);
        BufferedImage[] shootLeftAnimation = {sprite.getSprite(0,1), sprite.getSprite(1,1), sprite.getSprite(2,1), sprite.getSprite(3,1), sprite.getSprite(4,1), sprite.getSprite(5,1), sprite.getSprite(6,1),sprite.getSprite(7,1),sprite.getSprite(8,1), sprite.getSprite(9,1), sprite.getSprite(10,1),sprite.getSprite(11,1),sprite.getSprite(12,1)};
        Animation shootLeft = new Animation(shootLeftAnimation, 2);
        animation = shootLeft;

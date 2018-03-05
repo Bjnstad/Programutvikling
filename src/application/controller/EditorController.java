@@ -1,5 +1,6 @@
 package application.controller;
 
+import HAC.sprite.Sprite;
 import application.State;
 import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
@@ -64,7 +65,7 @@ public class EditorController implements Controller {
 
 
 
-        map = new GameMap(300,300);
+        map = new GameMap(300,300, new Sprite("background",32));
 
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
