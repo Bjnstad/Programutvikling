@@ -21,19 +21,26 @@ public class AnimationReader {
     private BufferedImage[] standingAnimation = {sprite.getSprite(3, 0)};
 
     // These are animation states
+    private SpriteAnimation walkingUp = new SpriteAnimation(walkingUpAnimation, 1);
+    private SpriteAnimation walkingDown = new SpriteAnimation(walkingDownAnimation, 1);
+    private SpriteAnimation walkLeft = new SpriteAnimation(walkingLeftAnimation, 1);
+    private SpriteAnimation walkRight = new SpriteAnimation(walkingRightAnimation, 1);
+    private SpriteAnimation standing = new SpriteAnimation(standingAnimation, 1);
+
+  /*  // These are animation states
     private Animation walkingUp = new Animation(walkingUpAnimation, 1);
     private Animation walkingDown = new Animation(walkingDownAnimation, 1);
     private Animation walkLeft = new Animation(walkingLeftAnimation, 1);
     private Animation walkRight = new Animation(walkingRightAnimation, 1);
-    private Animation standing = new Animation(standingAnimation, 1);
+    private Animation standing = new Animation(standingAnimation, 1);*/
 
     // This is the default standing animation
-    private Animation animation = standing;
+    private SpriteAnimation animation = standing;
 
     public void startShoot() {
        sprite = new Sprite("player_shooting_animation", 64);
        BufferedImage[] shootLeftAnimation = {sprite.getSprite(0,1), sprite.getSprite(1,1), sprite.getSprite(2,1), sprite.getSprite(3,1), sprite.getSprite(4,1), sprite.getSprite(5,1), sprite.getSprite(6,1),sprite.getSprite(7,1),sprite.getSprite(8,1), sprite.getSprite(9,1), sprite.getSprite(10,1),sprite.getSprite(11,1),sprite.getSprite(12,1)};
-       Animation shootLeft = new Animation(shootLeftAnimation, 2);
+       SpriteAnimation shootLeft = new SpriteAnimation(shootLeftAnimation, 2);
        animation = shootLeft;
     }
 
@@ -44,7 +51,7 @@ public class AnimationReader {
         animation.update();
     }
 
-    public Animation getAnimation() {
+    public SpriteAnimation getAnimation() {
         return animation;
     }
 

@@ -58,7 +58,6 @@ public class HAC {
             camera.renderPlayerMarker(player);
             camera.renderPlayerInfo(player);
         } else {
-            //for(Enemy enemy : enemies) enemy.renderBullet(gc);
             player.render(player.animation.getAnimation(), gc, camera);
         }
     }
@@ -87,7 +86,7 @@ public class HAC {
     }
 
     public void shoot(double endX, double endY) {
-        player.animation.startShoot();
+        //player.animation.startShoot();
         player.animation.startAnimation();
         player.animation.updateAnimation();
         player.shoot(camera.getPlayerPosition(player.getSizeX(), true) + player.getSizeX()/2 ,camera.getPlayerPosition(player.getSizeY(), false) + player.getSizeY()/2, endX / camera.getScale(), endY /camera.getScale());

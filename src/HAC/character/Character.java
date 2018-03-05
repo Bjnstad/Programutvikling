@@ -4,6 +4,7 @@ import HAC.Camera;
 import HAC.sprite.Animation;
 import HAC.sprite.AnimationReader;
 import HAC.sprite.Sprite;
+import HAC.sprite.SpriteAnimation;
 import HAC.world.GameMap;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,20 +17,20 @@ import java.util.ArrayList;
 public class Character {
     private double posX = 0;
     private double posY = 0;
-    private Image avatar; // TODO: Change to sprite
+    public CharacterAvatar animation; // TODO: Change to sprite
     private int sizeX;
     private int sizeY;
     private ArrayList<Bullet> bullets = new ArrayList<>();
-    public AnimationReader animation = new AnimationReader();
 
 
 
 
-
-    public Character(Image avatar, int sizeX, int sizeY) {
-        this.avatar = avatar;
+    public Character(CharacterAvatar avatar, int sizeX, int sizeY) {
+        this.animation = avatar;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+
+
     }
 
     public void setPosX(double posX) {
@@ -65,9 +66,7 @@ public class Character {
         return sizeY;
     }
 
-    public Image getAvatar() {
-        return avatar;
-    }
+
 
 
 
@@ -84,7 +83,7 @@ public class Character {
         return bullets;
     }
 
-    public void render(Animation animation, GraphicsContext gc, Camera camera) {
+    public void render(SpriteAnimation animation, GraphicsContext gc, Camera camera) {
 
         for (int i = 0; i < bullets.size(); i++) {
             if(bullets.get(i).isVisible()) {
@@ -97,11 +96,11 @@ public class Character {
             }
         }
 
-        // RENDER PLAYER
-       // gc.setFill(Color.YELLOW);
+        //RENDER PLAYER
+        //gc.setFill(Color.YELLOW);
 
-  //     gc.fillRect(offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
-     //   gc.drawImage(avatar,offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
+        //gc.fillRect(offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
+        //gc.drawImage(avatar,offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
         gc.drawImage(SwingFXUtils.toFXImage(animation.getSprite(), null), camera.getCenterX(), camera.getCenterY(), sizeX * camera.getScale(), sizeY * camera.getScale());
 
     }
