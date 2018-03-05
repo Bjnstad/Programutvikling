@@ -10,13 +10,16 @@ import java.io.IOException;
  */
 public class Sprite {
 
-    private  BufferedImage spriteSheet;
+    private BufferedImage spriteSheet;
     private String spriteFileName;
-    private int TILE_SIZE;
 
-    public Sprite(String spriteFileName, int size){
+    private int tileSize;
+
+    public Sprite(String spriteFileName, int tileSize){
         this.spriteFileName = spriteFileName;
-        this.TILE_SIZE = size;
+        this.spriteSheet = loadSprite(spriteFileName);
+        this.tileSize = tileSize;
+
     }
 
     public BufferedImage loadSprite(String file){
@@ -35,7 +38,7 @@ public class Sprite {
         if(spriteSheet == null){
             spriteSheet = loadSprite(spriteFileName);
         }
-        return spriteSheet.getSubimage(gridX * TILE_SIZE, gridY * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        return spriteSheet.getSubimage(gridX * tileSize, gridY * tileSize, tileSize, tileSize);
     }
 
 }
