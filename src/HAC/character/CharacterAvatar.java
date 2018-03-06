@@ -4,10 +4,7 @@ package HAC.character;
 import HAC.sprite.Sprite;
 import HAC.sprite.SpriteAnimation;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by henrytran1 on 04/03/2018.
@@ -26,7 +23,7 @@ public class CharacterAvatar {
 
 
     public CharacterAvatar(String fileName){
-        sprite = new Sprite(fileName);
+        sprite = new Sprite(fileName, 64);
 
 
         BufferedImage[] walkingLeftAnimation = {sprite.getSprite(0, 1), sprite.getSprite(1, 1), sprite.getSprite(2,1),sprite.getSprite(3,1), sprite.getSprite(4,1), sprite.getSprite(5,1), sprite.getSprite(6,1), sprite.getSprite(7,1), sprite.getSprite(8,1)};
@@ -47,6 +44,7 @@ public class CharacterAvatar {
     public void startAnimation() {
         animation.start();
     }
+
     public void updateAnimation(){
         animation.update();
     }
@@ -74,10 +72,4 @@ public class CharacterAvatar {
     public void setStanding() {
         animation = this.standing;
     }
-
-
-
-
-
-
 }

@@ -83,8 +83,8 @@ public class Camera {
 
         gc.setFill(Color.WHITE);
         gc.fillText("Player position", canvas.getWidth() - width + 10, 20);
-        gc.fillText("X: " + getPlayerX(player.getSizeX()),  canvas.getWidth() - width + 10, 35);
-        gc.fillText("Y: " + getPlayerY(player.getSizeY()),  canvas.getWidth() - width + 10, 50);
+        gc.fillText("X: " + getPlayerX(1),  canvas.getWidth() - width + 10, 35);
+        gc.fillText("Y: " + getPlayerY(1),  canvas.getWidth() - width + 10, 50);
     }
 
     /**
@@ -101,10 +101,11 @@ public class Camera {
      * Set player position to tiles
      */
     public void setPlayerPosition(int x, int y) {
-        double rx = POX - (getPlayerX(1) - x) * scale;
-        double ry = POY - (getPlayerY(1) - y) * scale;
-        setPOX(rx);
-        setPOY(ry);
+        double cx = (((double)x + .5) - (double)ZOOM) * scale - offsetX;
+        double cy = (((double)y + .5) - (double)ZOOM/2) * scale + offsetY;
+
+        setPOX(-cx);
+        setPOY(-cy);
     }
 
     /**
@@ -136,11 +137,12 @@ public class Camera {
 
 
     public double getPlayerX(int size) {
-        return (double)ZOOM - (POX + offsetX)/scale;
+        double r = (double)ZOOM / 2 - (POX + offsetX) / scale;
+        return r;
     }
 
     public double getPlayerY(int size) {
-        return (double)ZOOM / 2 - (POY + offsetY)/scale;
+        return (double)ZOOM / 2 - (POY + offsetY) / scale;
     }
 
     public double getCenterX() {

@@ -43,9 +43,9 @@ public class GameController implements Controller {
 
         game = new HAC(createSimpleMap(), graphics);
 
-        game.setDevMode(false);
-        game.setGrid(true);
-        //game.setPlayerPostion(1,1);
+        game.setDevMode(true);
+        //game.setGrid(true);
+        game.setPlayerPostion(0,1);
 
 
         // TODO: #1 Move to own controller class

@@ -21,10 +21,33 @@ public class CameraTest {
         Camera camera = new Camera(canvas);
 
 
+        camera.setPlayerPosition(0, 0);
+
+        assertTrue(testValues(camera.getPlayerX(1), .5));
+        assertTrue(testValues(camera.getPlayerY(1), .5));
+
         camera.setPlayerPosition(1, 1);
 
-        testValues(camera.getPlayerX(1), 1.5);
-        testValues(camera.getPlayerY(1), 1.5);
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(1), 1.5));
+        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+
+
+        camera.setPlayerPosition(234, 22);
+
+        assertTrue(testValues(camera.getPlayerX(1), 234.5));
+        assertTrue(testValues(camera.getPlayerY(1), 22.5));
     }
 
 
@@ -51,8 +74,8 @@ public class CameraTest {
 
 
     private boolean testValues(double x, double y) {
-        y = round(x);
-        x = round(y);
+        x = round(x);
+        y = round(y);
 
         System.out.println("Is: " + x);
         System.out.println("Expected: " + y);
