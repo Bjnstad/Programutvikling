@@ -6,7 +6,15 @@ import java.awt.image.BufferedImage;
  * Created by henrytran1 on 28/02/2018.
  */
 public class AnimationReader {
-    private Sprite sprite = new Sprite("player_animations_walking", 64);
+
+    /*
+    private Sprite sprite = new Sprite("player_animations_walking");
+
+    public AnimationReader(String fileName){
+
+    }
+
+>>>>>>> more structural changes to sprite
     //private Sprite sprite_shooting = new Sprite("player_shooting_animation");
 
     private BufferedImage[] walkingDownAnimation = {sprite.getSprite(0, 2), sprite.getSprite(1, 2), sprite.getSprite(2,2),sprite.getSprite(3,2), sprite.getSprite(4,2), sprite.getSprite(5,2), sprite.getSprite(6,2), sprite.getSprite(7,2), sprite.getSprite(8,2)};
@@ -32,7 +40,7 @@ public class AnimationReader {
     private Animation walkingDown = new Animation(walkingDownAnimation, 1);
     private Animation walkLeft = new Animation(walkingLeftAnimation, 1);
     private Animation walkRight = new Animation(walkingRightAnimation, 1);
-    private Animation standing = new Animation(standingAnimation, 1);*/
+    private Animation standing = new Animation(standingAnimation, 1);
 
     // This is the default standing animation
     private SpriteAnimation animation = standing;
@@ -74,6 +82,6 @@ public class AnimationReader {
     public void setStanding() {
         animation = this.standing;
     }
-
+*/
 
 }
