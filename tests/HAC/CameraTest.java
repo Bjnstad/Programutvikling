@@ -21,7 +21,7 @@ public class CameraTest {
         Camera camera = new Camera(canvas);
 
 
-        camera.setPlayerPosition(0, 0);
+        //camera.setPlayerPosition(0, 0);
 
         assertTrue(testValues(camera.getPlayerX(1), .5));
         assertTrue(testValues(camera.getPlayerY(1), .5));

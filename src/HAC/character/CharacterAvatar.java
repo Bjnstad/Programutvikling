@@ -21,8 +21,8 @@ public class CharacterAvatar {
 
 
 
-    public CharacterAvatar(String fileName){
-        sprite = new Sprite(fileName, 64);
+    public CharacterAvatar(String fileName, int size){
+        sprite = new Sprite(fileName, size);
 
 
         BufferedImage[] walkingLeftAnimation = {sprite.getSprite(0, 1), sprite.getSprite(1, 1), sprite.getSprite(2,1),sprite.getSprite(3,1), sprite.getSprite(4,1), sprite.getSprite(5,1), sprite.getSprite(6,1), sprite.getSprite(7,1), sprite.getSprite(8,1)};

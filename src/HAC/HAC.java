@@ -105,7 +105,7 @@ public class HAC {
    }
 
    public void setPlayerPostion(int x, int y) {
-        camera.setPlayerPosition(x, y);
+       // camera.setPlayerPosition(x, y);
    }
 
 

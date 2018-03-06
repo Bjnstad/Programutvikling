@@ -101,8 +101,8 @@ public class Camera {
      * Set player position to tiles
      */
     public void setPlayerPosition(int x, int y) {
-        double cx = (((double)x + .5) - (double)ZOOM) * scale - offsetX;
-        double cy = (((double)y + .5) - (double)ZOOM/2) * scale + offsetY;
+        double cx = (((double)x + .5) - (double)ZOOM/2) * scale;
+        double cy = (((double)y + .5) - (double)ZOOM/2) * scale;
 
         setPOX(-cx);
         setPOY(-cy);
@@ -137,12 +137,11 @@ public class Camera {
 
 
     public double getPlayerX(int size) {
-        double r = (double)ZOOM / 2 - (POX + offsetX) / scale;
-        return r;
+        return (double)ZOOM / 2 - POX / scale;
     }
 
     public double getPlayerY(int size) {
-        return (double)ZOOM / 2 - (POY + offsetY) / scale;
+        return (double)ZOOM / 2 - POY / scale;
     }
 
     public double getCenterX() {
