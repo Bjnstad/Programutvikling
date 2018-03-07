@@ -37,7 +37,7 @@ public class Camera {
     /**
      * Sets offset X and Y with with purpose to display to make a squared window
      * Sets scale to correctly display sizes based on zoom
-     */
+     */ 
     public void calcOffset() {
         // Get width and height from canvas
         double width = canvas.getWidth();
