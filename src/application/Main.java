@@ -10,8 +10,13 @@ import javafx.fxml.FXMLLoader;
  * Opprett JavaFX GUI program. Bruk FXMLLoader for � laste inn FXML
  * som beskriver GUI.
  */
-
 public class Main extends Application {
+
+	/**
+	 *
+	 * @param primaryStage
+	 * @throws Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("layout/Main.fxml"));
@@ -23,6 +28,10 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * ...
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

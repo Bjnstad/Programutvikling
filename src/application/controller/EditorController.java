@@ -21,6 +21,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Editor implements Controller
+ */
 public class EditorController implements Controller {
 
     private MainController mainController;
@@ -43,27 +46,34 @@ public class EditorController implements Controller {
     //    super(State.EDITOR);
 //    }
 
+    /**
+     * Sets the main menu state
+     * @param event
+     */
     @FXML
     public void newFile(ActionEvent event){
         mainController.setState(State.MAIN_MENU);
     }
 
+    /**
+     * Sets main controller .....
+     * @param mainController
+     */
     @Override
     public void setMainController (MainController mainController) {
         this.mainController = mainController;
     }
 
+    /**
+     * Initiating filehandler
+     */
     @Override
     public void initiate () {
         FileHandler fileHandler = new FileHandler();
-
         imageList = new ImageList();
 
         listView.setItems(imageList.getAllNames());
-
         listView.setCellFactory(param -> imageList.getAllAssets());
-
-
 
         map = new GameMap(300,300, new Sprite("background",32));
 
@@ -106,8 +116,11 @@ public class EditorController implements Controller {
 
                 primaryStage.show();
 
-
                 submit.setOnAction(new EventHandler<ActionEvent>() {
+                    /**
+                     * Description
+                     * @param e
+                     */
                     @Override public void handle(ActionEvent e) {
                         int inputX = Integer.parseInt(inputSizeX.getText());
                         int inputY = Integer.parseInt(inputSizeY.getText());
@@ -131,11 +144,14 @@ public class EditorController implements Controller {
 
     }
 
+    /**
+     * Close
+     * @param event
+     */
     @FXML
     private void close(ActionEvent event) {
         mainController.setState(State.MAIN_MENU);
     }
-
 
     @Override
     public void onClose () {
@@ -155,6 +171,10 @@ public class EditorController implements Controller {
     }
 **/
 
+    /**
+     * Description
+     * @return .....
+     */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
         return (event -> {
