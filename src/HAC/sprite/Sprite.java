@@ -5,9 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by henrytran1 on 27/02/2018.
- */
 public class Sprite {
 
     private BufferedImage spriteSheet;
@@ -15,13 +12,22 @@ public class Sprite {
 
     private int tileSize;
 
+    /**
+     * Sprite to the game
+     * @param spriteFileName
+     * @param tileSize
+     */
     public Sprite(String spriteFileName, int tileSize){
         this.spriteFileName = spriteFileName;
         this.spriteSheet = loadSprite(spriteFileName);
         this.tileSize = tileSize;
-
     }
 
+    /**
+     * Loading the sprite
+     * @param file
+     * @return sprite
+     */
     public BufferedImage loadSprite(String file){
         BufferedImage sprite = null;
 
@@ -34,7 +40,13 @@ public class Sprite {
         return sprite;
     }
 
-    public  BufferedImage getSprite(int gridX, int gridY){
+    /**
+     * Gets the sprite
+     * @param gridX
+     * @param gridY
+     * @return spritesheet
+     */
+    public BufferedImage getSprite(int gridX, int gridY){
         if(spriteSheet == null){
             spriteSheet = loadSprite(spriteFileName);
         }

@@ -11,6 +11,12 @@ public class GameMap {
     private Sprite background; // Default background color
     private boolean grid; // Should draw grid?
 
+    /**
+     * Gamemap to the game
+     * @param width
+     * @param height
+     * @param background
+     */
     public GameMap(int width, int height, Sprite background) {
         if(width < Camera.ZOOM || height < Camera.ZOOM) throw new IllegalStateException("Width/Height cant be smaller than " + Camera.ZOOM);
 
@@ -18,6 +24,13 @@ public class GameMap {
         this.background = background;
     }
 
+    /**
+     * Sets the position of the gameobjects
+     * @param gameObjects
+     * @param posX
+     * @param posY
+     * @return
+     */
     public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
         for (int x = posX; x < posX + gameObjects.getSizeX(); x++) {
             for (int y = posY; y < posY + gameObjects.getSizeY(); y++) {
@@ -33,22 +46,42 @@ public class GameMap {
         return true;
     }
 
+    /**
+     * If gameobjects collides
+     * @param posX position to x
+     * @param posY position to y
+     * @return .....
+     */
     public boolean willCollide(int posX, int posY) {
         if(posX <= -1 || posY <= -1 || posX >= getWidth() || posY >= getHeight()) return true;
         if(gameBoard[posY][posX] != null) return true;
         return false;
     }
 
+    /**
+     * Gets the gameobject
+     * @param x the width to x in the game
+     * @param y the height  to y in the game
+     * @return ....
+     */
     public GameObject getObject(int x, int y) {
         if (x < 0 || x < getWidth()) return null;
         if (y < 0 || y < getHeight()) return null;
         return this.gameBoard[y][x];
     }
 
+    /**
+     * Gets the width
+     * @return
+     */
     public int getWidth() {
         return this.gameBoard[0].length;
     }
 
+    /**
+     * Gets the height
+     * @return the length of game
+     */
     public int getHeight() {
         return this.gameBoard.length;
     }
@@ -61,6 +94,11 @@ public class GameMap {
         this.grid = grid;
     }
 
+    /**
+     *
+     * @param gc
+     * @param camera
+     */
     public void render(GraphicsContext gc, Camera camera) {
 
         // Make screen black
@@ -101,8 +139,6 @@ public class GameMap {
 
 
                 if(x > 0 && x < getWidth() && y > 0 && y < getHeight()) {
-
-
                 }
             }
         }

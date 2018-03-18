@@ -11,31 +11,40 @@ import org.testng.annotations.Test;
 class EditorControllerTest {
     private MainController mainController;
 
+    /**
+     * Sets the main controller
+     */
     @Test
     void setMainController() {
         EditorController editorController = new EditorController();
         editorController.setMainController(mainController);
-
     }
 
+    /**
+     * ....
+     */
     @Test
     void initiate() {
-
     }
 
+    /**
+     * ....
+     */
     @Test
     void render() {
-
     }
 
+    /**
+     * ....
+     */
     @Test
     void onClose() {
-
     }
 
+    /**
+     * Gets the event handler
+     */
     @Test
     void getEventHandler() {
-
     }
-
 }

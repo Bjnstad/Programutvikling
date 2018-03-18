@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
- * Created by henrytran1 on 06/02/2018.
+ * Filehandler
  */
 public class FileHandler {
     private final Image IMAGE_RUBY  = new Image("https://upload.wikimedia.org/wikipedia/commons/f/f1/Ruby_logo_64x64.png");
@@ -19,6 +19,9 @@ public class FileHandler {
     private final Image IMAGE_VISTA  = new Image("http://antaki.ca/bloom/img/windows_64x64.png");
     private final Image IMAGE_TWITTER = new Image("http://files.softicons.com/download/social-media-icons/fresh-social-media-icons-by-creative-nerds/png/64x64/twitter-bird.png");
 
+    /**
+     * A list of the images
+     */
     private Image[] listOfImages = {IMAGE_RUBY, IMAGE_APPLE, IMAGE_VISTA, IMAGE_TWITTER};
 
     static final String[] EXTENSIONS = new String[]{
@@ -31,6 +34,12 @@ public class FileHandler {
     // filter to identify images based on their extensions
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
+        /**
+         *
+         * @param dir
+         * @param name
+         * @return
+         */
         @Override
         public boolean accept(final File dir, final String name) {
             for (final String ext : EXTENSIONS) {
@@ -42,9 +51,13 @@ public class FileHandler {
         }
     };
 
-
     private static final String PATH_FOR_ASSETS = "assets";
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     public boolean saveAsset(Object object) {
 /*
         BufferedWriter writer = null;
@@ -82,12 +95,22 @@ public class FileHandler {
         return true;
     }
 
+    /**
+     * Lists the cell in the game
+     * @return cell
+     */
     public ListCell<String> getAllAssets() {
         //File folder = new File("assets");
         //if(folder == null) return null;
 
         return (new ListCell<String>() {
             private ImageView imageView = new ImageView();
+
+            /**
+             * Updates the item
+             * @param name
+             * @param empty
+             */
             @Override
             public void updateItem(String name, boolean empty) {
                 super.updateItem(name, empty);
@@ -109,12 +132,14 @@ public class FileHandler {
                 }
             }
         });
-
         //return list;
-
     }
 
-
+    /**
+     * Gets the file extension
+     * @param file
+     * @return a string
+     */
     private String getFileExtension(File file) {
         String name = file.getName();
         try {
@@ -123,5 +148,4 @@ public class FileHandler {
             return "";
         }
     }
-
 }

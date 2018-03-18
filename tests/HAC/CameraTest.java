@@ -12,6 +12,9 @@ import java.math.RoundingMode;
 public class CameraTest {
     public static final int MARGIN_OF_ERROR = 5;
 
+    /**
+     * Position to the player
+     */
     @Test
     public void playerPosition() {
         Canvas canvas = new Canvas();
@@ -19,7 +22,6 @@ public class CameraTest {
         canvas.setWidth(234);
         canvas.setHeight(456);
         Camera camera = new Camera(canvas);
-
 
         //camera.setPlayerPosition(0, 0);
 
@@ -43,14 +45,15 @@ public class CameraTest {
         assertTrue(testValues(camera.getPlayerX(1), 1.5));
         assertTrue(testValues(camera.getPlayerY(1), 1.5));
 
-
         camera.setPlayerPosition(234, 22);
 
         assertTrue(testValues(camera.getPlayerX(1), 234.5));
         assertTrue(testValues(camera.getPlayerY(1), 22.5));
     }
 
-
+    /**
+     * The center values to the game
+     */
     @Test
     public void centerValues() {
         Canvas canvas = new Canvas();
@@ -58,7 +61,6 @@ public class CameraTest {
         canvas.setWidth(800);
 
         Camera camera = new Camera(canvas);
-
 
         assertTrue(testValues(camera.getCenterX(), 800/2));
         assertTrue(testValues(camera.getCenterY(), 400/2));
@@ -69,10 +71,14 @@ public class CameraTest {
 
         assertTrue(testValues(camera.getCenterX(), 234/2));
         assertTrue(testValues(camera.getCenterY(),456/2));
-
     }
 
-
+    /**
+     * The test values
+     * @param x
+     * @param y
+     * @return
+     */
     private boolean testValues(double x, double y) {
         x = round(x);
         y = round(y);
@@ -82,6 +88,11 @@ public class CameraTest {
         return x == y;
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
     private double round(double value) {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(MARGIN_OF_ERROR, RoundingMode.DOWN);

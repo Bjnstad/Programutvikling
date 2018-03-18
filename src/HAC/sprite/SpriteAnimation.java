@@ -3,11 +3,7 @@ package HAC.sprite;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- * Created by henrytran1 on 04/03/2018.
- */
 public class SpriteAnimation {
-
     private int frameCount;
     private double frameDelay;
     private int currentFrame;
@@ -16,6 +12,11 @@ public class SpriteAnimation {
     private ArrayList<SpriteFrame> spriteFrames = new ArrayList<>();
     private int animationDirection;
 
+    /**
+     * The spriteanimation to the game
+     * @param spriteFrames
+     * @param frameDelay
+     */
     public SpriteAnimation(BufferedImage[] spriteFrames, double frameDelay){
         this.stopped = true;
         this.frameDelay = frameDelay;
@@ -23,7 +24,6 @@ public class SpriteAnimation {
         //Loops through spriteFrames array, and adds SpriteFrame to ArrayList.
         for (int i = 0; i < spriteFrames.length; i++) {
             addSpriteFrame(spriteFrames[i], frameDelay);
-
         }
 
         //Set initial frame settings
@@ -31,9 +31,11 @@ public class SpriteAnimation {
         this.currentFrame = 0;
         this.totalFrames = this.spriteFrames.size();
         this.animationDirection = 1;
-
     }
 
+    /**
+     * Starts the spriteanimation
+     */
     public void start(){
         if (!stopped){
             return;
@@ -44,14 +46,26 @@ public class SpriteAnimation {
         stopped = false;
     }
 
+    /**
+     * Adds the sprite frame
+     * @param frame
+     * @param duration
+     */
     private void addSpriteFrame(BufferedImage frame, double duration){
         spriteFrames.add(new SpriteFrame(frame, duration));
     }
 
+    /**
+     * Gets the sprite bufferedimage
+     * @return spriteframes
+     */
     public BufferedImage getSprite(){
         return spriteFrames.get(currentFrame).getSpriteFrame();
     }
 
+    /**
+     * Update the spriteanimation
+     */
     public void update(){
         if(!stopped){
             frameCount++;
@@ -66,6 +80,4 @@ public class SpriteAnimation {
             }
         }
     }
-
-
 }
