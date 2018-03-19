@@ -12,7 +12,7 @@ public class GameMap {
     private boolean grid; // Should draw grid?
 
     public GameMap(int width, int height, Sprite background) {
-        if(width < Camera.ZOOM || height < Camera.ZOOM) throw new IllegalStateException("Width/Height cant be smaller than " + Camera.ZOOM);
+        //if(width < Camera.getZoo || height < Camera.ZOOM) throw new IllegalStateException("Width/Height cant be smaller than " + Camera.ZOOM);
 
         this.gameBoard = new GameObject[width][height];
         this.background = background;
@@ -68,8 +68,8 @@ public class GameMap {
         gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
         // Render map colora
-        for(int y =  (int)(camera.getPlayerY(1) - (double)camera.ZOOM/2); y < (int)(camera.getPlayerY(1) + (double)camera.ZOOM/2); y++) {
-            for (int x = (int)(camera.getPlayerX(1) - (double)camera.ZOOM/2); x < (int)(camera.getPlayerX(1) + (double)camera.ZOOM/2); x++) {
+        for(int y =  (int)(camera.getPlayerY(1) - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY(1) + (double)camera.getZoom()/2); y++) {
+            for (int x = (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX(1) + (double)camera.getZoom()/2); x++) {
                 // TOP LEFT
                 if(x == 0 && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
 
@@ -77,7 +77,7 @@ public class GameMap {
                 if(y == 0 && x > 0 && x < getWidth()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
 
                 // TOP RIGHT
-                if(x == 0 && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+                if(x == getWidth() && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
 
                 // Right
                 if(y > 0 && y < getHeight() && x == getWidth()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
@@ -90,6 +90,8 @@ public class GameMap {
 
 
                 //BOTTOM LEFT
+                if(x == 0 && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+
 
 
                 // LEFT
@@ -108,8 +110,8 @@ public class GameMap {
         }
 
         /* Render objects */
-        for(int y = (int)(camera.getPlayerY(1) - (double)camera.ZOOM/2); y < (int)(camera.getPlayerY(1) + (double)camera.ZOOM/2); y++) {
-            for (int x = (int)(camera.getPlayerX(1) - (double)camera.ZOOM/2); x < (int)(camera.getPlayerX(1) + (double)camera.ZOOM/2); x++) {
+        for(int y = (int)(camera.getPlayerY(1) - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY(1) + (double)camera.getZoom()/2); y++) {
+            for (int x = (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX(1) + (double)camera.getZoom()/2); x++) {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
@@ -124,8 +126,8 @@ public class GameMap {
         /* Draw grid */
         if(grid) {
             gc.setFill(Color.BLACK);
-            for(int y = (int)(camera.getPlayerY(1) - (double)camera.ZOOM/2); y < (int)(camera.getPlayerY(1) + (double)camera.ZOOM/2); y++) {
-                for (int x = (int)(camera.getPlayerX(1) - (double)camera.ZOOM/2); x < (int)(camera.getPlayerX(1) - (double)camera.ZOOM/2); x++) {
+            for(int y = (int)(camera.getPlayerY(1) - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY(1) + (double)camera.getZoom()/2); y++) {
+                for (int x = (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x++) {
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), camera.getScale(), 1);
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), 1, camera.getScale());
                 }

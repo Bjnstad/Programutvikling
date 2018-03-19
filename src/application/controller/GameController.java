@@ -43,7 +43,7 @@ public class GameController implements Controller {
 
         game = new HAC(createSimpleMap(), graphics);
 
-        game.setDevMode(true);
+        //game.setDevMode(true);
         //game.setGrid(true);
         game.setPlayerPostion(0,1);
 
@@ -81,7 +81,7 @@ public class GameController implements Controller {
     public EventHandler<KeyEvent> getEventHandler() {
 
         // TODO: add acceleration in own controller class
-        double speed = 6;
+        double speed = .2;
         return (event -> {
             switch (event.getCode()) {
                 case W:

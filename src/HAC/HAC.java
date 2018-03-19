@@ -63,8 +63,6 @@ public class HAC {
     }
 
     public boolean move(double x, double y) {
-        int rx = (int)(camera.getPlayerPosition(player.getSizeX(), true) + (double)player.getSizeX()/2 * Math.signum(x) - x / camera.getScale()- Math.signum(x));
-        int ry = (int)(camera.getPlayerPosition(player.getSizeY(), false) + (double)player.getSizeY()/2 * Math.signum(y) - y / camera.getScale() - Math.signum(y));
 
         player.animation.setWalkingDown();
 
@@ -89,7 +87,7 @@ public class HAC {
         //player.animation.startShoot();
         player.animation.startAnimation();
         player.animation.updateAnimation();
-        player.shoot(camera.getPlayerPosition(player.getSizeX(), true) + player.getSizeX()/2 ,camera.getPlayerPosition(player.getSizeY(), false) + player.getSizeY()/2, endX / camera.getScale(), endY /camera.getScale());
+        //player.shoot(camera.getPlayerPosition(player.getSizeX(), true) + player.getSizeX()/2 ,camera.getPlayerPosition(player.getSizeY(), false) + player.getSizeY()/2, endX / camera.getScale(), endY /camera.getScale());
    }
 
    public void setDevMode(boolean devMode) {

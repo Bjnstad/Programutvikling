@@ -11,7 +11,8 @@ import javafx.scene.paint.Color;
  */
 
 public class Camera {
-    public final static int ZOOM = 11; // How many frames to show
+
+    private int zoom = 15; // How many frames to show
 
     private double offsetX; // Offset X padding to make HAC view squared
     private double offsetY; // Offset Y padding to make HAC view squared
@@ -31,13 +32,13 @@ public class Camera {
         calcOffset();
 
         // Set default position to middle of the zoom
-        setPlayerPosition(0, 0);
+        //setPlayerPosition(0, 0);
     }
 
     /**
      * Sets offset X and Y with with purpose to display to make a squared window
      * Sets scale to correctly display sizes based on zoom
-     */ 
+     */
     public void calcOffset() {
         // Get width and height from canvas
         double width = canvas.getWidth();
@@ -45,10 +46,10 @@ public class Camera {
 
 
         if(width < height) {
-            scale = width / ZOOM;
+            scale = width / zoom;
             offsetY = (height - width) /2;
         } else {
-            scale = height / ZOOM;
+            scale = height / zoom;
             offsetX = (width - height) /2;
         }
     }
@@ -101,8 +102,8 @@ public class Camera {
      * Set player position to tiles
      */
     public void setPlayerPosition(int x, int y) {
-        double cx = (((double)x + .5) - (double)ZOOM/2) * scale;
-        double cy = (((double)y + .5) - (double)ZOOM/2) * scale;
+        double cx = (((double)x + .5) - (double) zoom /2) * scale;
+        double cy = (((double)y + .5) - (double) zoom /2) * scale;
 
         setPOX(-cx);
         setPOY(-cy);
@@ -124,32 +125,20 @@ public class Camera {
         this.POY = y;
     }
 
-    /**
-     *
-     * @param size
-     * @param getX
-     * @return
-     */
-    public double getPlayerPosition(int size, boolean getX) {
-        if(getX) return (double)(ZOOM) / 2 - POX/scale + offsetX;
-        return (double)(ZOOM) / 2 - POY/scale + offsetY;
-    }
-
-
     public double getPlayerX(int size) {
-        return (double)ZOOM / 2 - POX / scale;
+        return (double) zoom / 2 - POX;
     }
 
     public double getPlayerY(int size) {
-        return (double)ZOOM / 2 - POY / scale;
+        return (double) zoom / 2 - POY;
     }
 
     public double getCenterX() {
-        return offsetX + (double)ZOOM / 2 * scale;
+        return offsetX + (double) zoom / 2 * scale;
     }
 
     public double getCenterY() {
-        return offsetY + (double)ZOOM / 2 * scale;
+        return offsetY + (double) zoom / 2 * scale;
     }
 
     /**
@@ -158,11 +147,11 @@ public class Camera {
      * @return
      */
     public double scaleX(double x) {
-        return x * scale + POX + offsetX;
+        return (x + POX) * scale + offsetX;
     }
 
     public double scaleY(double y) {
-        return y * scale + POY;
+        return (y + POY) * scale + offsetY;
     }
 
     public double getOffsetX() {
@@ -175,5 +164,13 @@ public class Camera {
 
     public double getScale() {
         return scale;
+    }
+
+    public int getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
     }
 }
