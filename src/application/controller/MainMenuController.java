@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Menu Controller implements Controller
+ */
 public class MainMenuController implements Controller {
 
     private MainController mainController = null;
-
 
     @Override
     public void initiate() {

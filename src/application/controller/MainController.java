@@ -12,23 +12,36 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller implements Initializable
+ */
 public class MainController implements Initializable {
 
     @FXML
     AnchorPane mainView;
     private Controller controller; // Current controller
 
-
+    /**
+     * Description
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setState(State.MAIN_MENU);
     }
 
 
-
+    /**
+     * Sets the state (of the game)?
+     * @param state
+     */
     public void setState(State state) {
         if(controller != null) controller.onClose();
 
+        /**
+         * ....
+         */
         String source;
         switch (state) {
             case MAIN_MENU:
@@ -73,14 +86,26 @@ public class MainController implements Initializable {
 
     }
 
+    /**
+     * ...
+     * @return main view
+     */
     public AnchorPane getMainView() {
         return mainView;
     }
 
+    /**
+     * Gets the current width of the board.
+     * @return the width of the board
+     */
     public double getWidth() {
         return mainView.getWidth();
     }
 
+    /**
+     * Gets the current height of the board.
+     * @return the height of the board
+     */
     public double getHeight() {
         return mainView.getHeight();
     }

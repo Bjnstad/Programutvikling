@@ -7,9 +7,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Camera is used to calculate differences between gameboard and the real canvas.
- *
  */
-
 public class Camera {
 
     private int zoom = 15; // How many frames to show
@@ -44,7 +42,6 @@ public class Camera {
         double width = canvas.getWidth();
         double height = canvas.getHeight();
 
-
         if(width < height) {
             scale = width / zoom;
             offsetY = (height - width) /2;
@@ -76,7 +73,6 @@ public class Camera {
     public void renderPlayerInfo(Player player) {
         int width = 120;
         int height = 70;
-
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
@@ -125,18 +121,37 @@ public class Camera {
         this.POY = y;
     }
 
+    
+    /**
+     * Gets the player of x
+     * @param size
+     * @return
+     */
     public double getPlayerX(int size) {
         return (double) zoom / 2 - POX;
     }
 
+    /**
+     * Gets the player of y
+     * @param size
+     * @return
+     */
     public double getPlayerY(int size) {
         return (double) zoom / 2 - POY;
     }
 
+    /**
+     * Gets the center of x
+     * @return
+     */
     public double getCenterX() {
         return offsetX + (double) zoom / 2 * scale;
     }
 
+    /**
+     * Gets the center of y
+     * @return
+     */
     public double getCenterY() {
         return offsetY + (double) zoom / 2 * scale;
     }
@@ -150,18 +165,35 @@ public class Camera {
         return (x + POX) * scale + offsetX;
     }
 
+    /**
+     * Scale up the given gameboard relative values to according pixels on screen
+     * @param y
+     * @return
+     */
     public double scaleY(double y) {
         return (y + POY) * scale + offsetY;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getOffsetX() {
         return offsetX;
     }
 
+    /**
+     *
+     * @return offsett y
+     */
     public double getOffsetY() {
         return offsetY;
     }
 
+    /**
+     * Gets the scale
+     * @return scale
+     */
     public double getScale() {
         return scale;
     }

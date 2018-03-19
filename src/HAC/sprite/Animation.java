@@ -4,9 +4,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- * Created by henrytran1 on 27/02/2018.
- */
 public class Animation {
     private int frameCount;
     private int frameDelay;
@@ -17,6 +14,11 @@ public class Animation {
     private boolean stopped;
     private ArrayList<Frame> frames = new ArrayList<Frame>();    // Arraylist of frames
 
+    /**
+     * Animation...
+     * @param frames
+     * @param frameDelay
+     */
     public Animation(BufferedImage[] frames, int frameDelay) {
         this.frameDelay = frameDelay;
         this.stopped = true;
@@ -30,9 +32,11 @@ public class Animation {
         this.currentFrame = 0;
         this.animationDirection = 1;
         this.totalFrames = this.frames.size();
-
     }
 
+    /**
+     * Start the animation/game
+     */
     public void start() {
         if (!stopped) {
             return;
@@ -45,6 +49,9 @@ public class Animation {
         stopped = false;
     }
 
+    /**
+     * Stop the animation/game
+     */
     public void stop() {
         if (frames.size() == 0) {
             return;
@@ -53,6 +60,9 @@ public class Animation {
         stopped = true;
     }
 
+    /**
+     * Restart the game
+     */
     public void restart() {
         if (frames.size() == 0) {
             return;
@@ -62,12 +72,20 @@ public class Animation {
         currentFrame = 0;
     }
 
+    /**
+     * Reset the game
+     */
     public void reset() {
         this.stopped = true;
         this.frameCount = 0;
         this.currentFrame = 0;
     }
 
+    /**
+     * Adds the frame of the game
+     * @param frame
+     * @param duration
+     */
     private void addFrame(BufferedImage frame, int duration) {
         if (duration <= 0) {
             System.err.println("Invalid duration: " + duration);
@@ -78,10 +96,17 @@ public class Animation {
         currentFrame = 0;
     }
 
+    /**
+     * Buffered image to the game
+     * @return frames of the game
+     */
     public BufferedImage getSprite() {
         return frames.get(currentFrame).getFrame();
     }
 
+    /**
+     * Update the game
+     */
     public void update() {
         if (!stopped) {
             frameCount++;
@@ -97,6 +122,5 @@ public class Animation {
                 }
             }
         }
-
     }
 }

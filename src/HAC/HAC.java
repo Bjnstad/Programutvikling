@@ -24,7 +24,11 @@ public class HAC {
     private Player player;
     private boolean devMode = false;
 
-
+    /**
+     * ....
+     * @param gameMap
+     * @param canvas
+     */
     public HAC(GameMap gameMap, Canvas canvas) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
         if(canvas == null) throw new NullPointerException("JavaFx canvas cannot be null");
@@ -38,11 +42,17 @@ public class HAC {
         play();
     }
 
+    /**
+     *
+     */
     public void play() {
         if(timeline == null) initTimeline();
         timeline.play();
     }
 
+    /**
+     *
+     */
     private void initTimeline() {
         KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
         timeline = new Timeline();
@@ -50,6 +60,9 @@ public class HAC {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
+    /**
+     *
+     */
     private void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(gc, camera); // Render map and objects with offset
@@ -62,6 +75,12 @@ public class HAC {
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean move(double x, double y) {
 
         player.animation.setWalkingDown();
@@ -83,6 +102,11 @@ public class HAC {
         return true;
     }
 
+    /**
+     *
+     * @param endX
+     * @param endY
+     */
     public void shoot(double endX, double endY) {
         //player.animation.startShoot();
         player.animation.startAnimation();
@@ -90,22 +114,37 @@ public class HAC {
         //player.shoot(camera.getPlayerPosition(player.getSizeX(), true) + player.getSizeX()/2 ,camera.getPlayerPosition(player.getSizeY(), false) + player.getSizeY()/2, endX / camera.getScale(), endY /camera.getScale());
    }
 
+    /**
+     * Sets the devmode
+     * @param devMode
+     */
    public void setDevMode(boolean devMode) {
         this.devMode = devMode;
    }
 
+    /**
+     * Sets the grid of the game
+     * @param grid
+     */
    public void setGrid(boolean grid) {
         gameMap.setGrid(grid);
    }
 
+    /**
+     * resize the game
+     */
    public void resize() {
         camera.calcOffset();
    }
 
+    /**
+     * Sets the okayer position
+     * @param x position
+     * @param y position
+     */
    public void setPlayerPostion(int x, int y) {
        // camera.setPlayerPosition(x, y);
    }
-
 
     /**
      * Loads new map

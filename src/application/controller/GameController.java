@@ -16,6 +16,9 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
+/**
+ * GameController implements Controller
+ */
 public class GameController implements Controller {
 
     @FXML
@@ -39,8 +42,6 @@ public class GameController implements Controller {
         graphics.widthProperty().addListener(event -> game.resize());
         graphics.heightProperty().addListener(event -> game.resize());
 
-
-
         game = new HAC(createSimpleMap(), graphics);
 
         //game.setDevMode(true);
@@ -52,6 +53,10 @@ public class GameController implements Controller {
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
 
+                    /**
+                     * Description
+                     * @param event X, Y
+                     */
                     @Override
                     public void handle(MouseEvent event) {
                         game.shoot(event.getX(), event.getY());
@@ -70,7 +75,6 @@ public class GameController implements Controller {
      */
     @Override
     public void onClose() {
-
     }
 
     /**
