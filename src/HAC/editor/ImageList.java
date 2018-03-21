@@ -13,17 +13,17 @@ import java.util.HashMap;
  * Created by henrytran1 on 20/02/2018.
  */
 public class ImageList {
+
+
     private HashMap<String, Image> resourceMap;
 
-    /**
-     * List of images
-     */
     public ImageList() {
         this.resourceMap = new HashMap<>();
     }
 
     // File representing the folder that you select using a FileChooser
     static final File dir = new File("assets");
+
     static final String[] EXTENSIONS = new String[]{
             "gif", "png", "bmp", "jpg"
     };
@@ -31,12 +31,6 @@ public class ImageList {
     // filter to identify images based on their extensions
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
-        /**
-         *
-         * @param dir
-         * @param name
-         * @return
-         */
         @Override
         public boolean accept(final File dir, final String name) {
             for (final String ext : EXTENSIONS) {
@@ -48,22 +42,12 @@ public class ImageList {
         }
     };
 
-    /**
-     *
-     * @return
-     */
     public ListCell<String> getAllAssets() {
         //File folder = new File("assets");
         //if(folder == null) return null;
+
         return (new ListCell<String>() {
-
             private ImageView imageView = new ImageView();
-
-            /**
-             *
-             * @param name
-             * @param empty
-             */
             @Override
             public void updateItem(String name, boolean empty) {
                 super.updateItem(name, empty);
@@ -89,10 +73,7 @@ public class ImageList {
 
     }
 
-    /**
-     *
-     * @return
-     */
+
     public ObservableList<String> getAllNames() {
         ObservableList<String> res = FXCollections.observableArrayList();
 
@@ -104,14 +85,10 @@ public class ImageList {
                 res.add(f.getName());
             }
         }
+
         return res;
     }
 
-    /**
-     * Gets the file extension
-     * @param file
-     * @return
-     */
     private String getFileExtension(File file) {
         String name = file.getName();
         try {
@@ -121,11 +98,6 @@ public class ImageList {
         }
     }
 
-    /**
-     * Gets the resource to the image
-     * @param name
-     * @return the map to the resource
-     */
     public Image getResource(String name)
     {
         return resourceMap.get(name);
