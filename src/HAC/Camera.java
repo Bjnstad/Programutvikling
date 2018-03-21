@@ -80,8 +80,8 @@ public class Camera {
 
         gc.setFill(Color.WHITE);
         gc.fillText("Player position", canvas.getWidth() - width + 10, 20);
-        gc.fillText("X: " + getPlayerX(1),  canvas.getWidth() - width + 10, 35);
-        gc.fillText("Y: " + getPlayerY(1),  canvas.getWidth() - width + 10, 50);
+        gc.fillText("X: " + getPlayerX(),  canvas.getWidth() - width + 10, 35);
+        gc.fillText("Y: " + getPlayerY(),  canvas.getWidth() - width + 10, 50);
     }
 
     /**
@@ -121,27 +121,25 @@ public class Camera {
         this.POY = y;
     }
 
-    
+
     /**
      * Gets the player of x
-     * @param size
      * @return
      */
-    public double getPlayerX(int size) {
+    public double getPlayerX() {
         return (double) zoom / 2 - POX;
     }
 
     /**
      * Gets the player of y
-     * @param size
      * @return
      */
-    public double getPlayerY(int size) {
+    public double getPlayerY() {
         return (double) zoom / 2 - POY;
     }
 
     /**
-     * Gets the center of x
+     * Returns the X coordinate for center of the screen in real pixels
      * @return
      */
     public double getCenterX() {
@@ -149,7 +147,7 @@ public class Camera {
     }
 
     /**
-     * Gets the center of y
+     * Returns the Y coordinate for center of the screen in real pixels
      * @return
      */
     public double getCenterY() {

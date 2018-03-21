@@ -106,8 +106,8 @@ public class GameMap {
         gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
         // Render map colora
-        for(int y =  (int)(camera.getPlayerY(1) - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY(1) + (double)camera.getZoom()/2); y++) {
-            for (int x = (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX(1) + (double)camera.getZoom()/2); x++) {
+        for(int y =  (int)(camera.getPlayerY() - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY() + (double)camera.getZoom()/2); y++) {
+            for (int x = (int)(camera.getPlayerX() - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX() + (double)camera.getZoom()/2); x++) {
                 // TOP LEFT
                 if(x == 0 && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
 
@@ -115,7 +115,7 @@ public class GameMap {
                 if(y == 0 && x > 0 && x < getWidth()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
 
                 // TOP RIGHT
-                if(x == getWidth() && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+                if(x == getWidth() && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
 
                 // Right
                 if(y > 0 && y < getHeight() && x == getWidth()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
@@ -146,14 +146,14 @@ public class GameMap {
         }
 
         /* Render objects */
-        for(int y = (int)(camera.getPlayerY(1) - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY(1) + (double)camera.getZoom()/2); y++) {
-            for (int x = (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX(1) + (double)camera.getZoom()/2); x++) {
+        for(int y =  (int)(camera.getPlayerY() - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY() + (double)camera.getZoom()/2); y++) {
+            for (int x = (int)(camera.getPlayerX() - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX() + (double)camera.getZoom()/2); x++) {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
                     gc.setFill(Color.RED);
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-                   // gc.drawImage(gameObject.getAsset(),x * offset.getSize() + offset.getOffsetX() + POX, y * offset.getSize() + offset.getOffsetY() + POY, gameObject.getSizeX() * offset.getSize(), gameObject.getSizeY() * offset.getSize());
+                    gc.drawImage(gameObject.getAsset(),camera.scaleX(x), camera.scaleY(y), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
 
                 }
             }
@@ -162,8 +162,8 @@ public class GameMap {
         /* Draw grid */
         if(grid) {
             gc.setFill(Color.BLACK);
-            for(int y = (int)(camera.getPlayerY(1) - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY(1) + (double)camera.getZoom()/2); y++) {
-                for (int x = (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX(1) - (double)camera.getZoom()/2); x++) {
+            for(int y = (int)(camera.getPlayerY() - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY() + (double)camera.getZoom()/2); y++) {
+                for (int x = (int)(camera.getPlayerX() - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX() - (double)camera.getZoom()/2); x++) {
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), camera.getScale(), 1);
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), 1, camera.getScale());
                 }

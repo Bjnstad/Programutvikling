@@ -25,30 +25,30 @@ public class CameraTest {
 
         //camera.setPlayerPosition(0, 0);
 
-        assertTrue(testValues(camera.getPlayerX(1), .5));
-        assertTrue(testValues(camera.getPlayerY(1), .5));
+        assertTrue(testValues(camera.getPlayerX(), .5));
+        assertTrue(testValues(camera.getPlayerY(), .5));
 
         camera.setPlayerPosition(1, 1);
 
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
-        assertTrue(testValues(camera.getPlayerX(1), 1.5));
-        assertTrue(testValues(camera.getPlayerY(1), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
+        assertTrue(testValues(camera.getPlayerX(), 1.5));
+        assertTrue(testValues(camera.getPlayerY(), 1.5));
 
         camera.setPlayerPosition(234, 22);
 
-        assertTrue(testValues(camera.getPlayerX(1), 234.5));
-        assertTrue(testValues(camera.getPlayerY(1), 22.5));
+        assertTrue(testValues(camera.getPlayerX(), 234.5));
+        assertTrue(testValues(camera.getPlayerY(), 22.5));
     }
 
     /**

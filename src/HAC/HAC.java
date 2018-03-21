@@ -82,7 +82,6 @@ public class HAC {
      * @return
      */
     public boolean move(double x, double y) {
-
         player.animation.setWalkingDown();
 
         if(x == 0 && y < 1){
@@ -97,7 +96,17 @@ public class HAC {
         player.animation.startAnimation();
         player.animation.updateAnimation();
 
-        //if(gameMap.willCollide(rx, ry)) return false;
+
+
+        ;
+
+
+        int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
+        int ry = (int)(camera.getPlayerY() + player.getSizeY() /2 * Math.signum(y) + y);
+
+        System.out.println(rx);
+
+        if(gameMap.willCollide(rx, ry)) return false;
         camera.move(x,y);
         return true;
     }

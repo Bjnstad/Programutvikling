@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -7,21 +11,20 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="658.0" layoutY="32.0" prefHeight="568.0" prefWidth="142.0">
+      <AnchorPane layoutX="658.0" layoutY="32.0" prefHeight="568.0" prefWidth="142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <children>
-            <ListView fx:id="listView" layoutX="1.0" prefHeight="561.0" prefWidth="141.0" />
+            <ListView fx:id="listView" layoutX="1.0" prefHeight="561.0" prefWidth="141.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-1.0" prefHeight="36.0" prefWidth="600.0">
+      <AnchorPane layoutX="-1.0" prefHeight="36.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MenuBar layoutX="1.0" layoutY="4.0" prefHeight="29.0" prefWidth="800.0">
+            <MenuBar layoutX="1.0" layoutY="4.0" prefHeight="29.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" onAction="#close"/>
+                    <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -38,9 +41,9 @@
             </MenuBar>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="6.0" layoutY="36.0" prefHeight="560.0" prefWidth="651.0">
+      <AnchorPane layoutX="6.0" layoutY="36.0" prefHeight="560.0" prefWidth="651.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="36.0">
          <children>
-            <Canvas fx:id="graphics" height="560.0" layoutX="1.0" layoutY="1.0" width="651.0" />
+            <Canvas fx:id="graphics" height="560.0" layoutX="1.0" layoutY="1.0" width="651.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>
