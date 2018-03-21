@@ -19,7 +19,7 @@ public class HAC {
     private GameMap gameMap;
     private Canvas canvas;
     private Camera camera;
-    private Enemy[] enemies;
+    private Enemy[] enemies = new Enemy[1];
     private Timeline timeline;
     private Player player;
     private boolean devMode = false;
@@ -38,6 +38,7 @@ public class HAC {
         this.camera = new Camera(canvas);
 
         this.player = new Player();
+        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,213,14);
 
         play();
     }
@@ -72,6 +73,7 @@ public class HAC {
             camera.renderPlayerInfo(player);
         } else {
             player.render(player.animation.getAnimation(), gc, camera);
+            enemies[0].renderEnemy(enemies[0].animation.getAnimation(), gc, camera, enemies[0]);
         }
     }
 
