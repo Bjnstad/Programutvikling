@@ -1,6 +1,7 @@
 package application.controller;
 
 import HAC.sprite.Sprite;
+import HAC.HacEditor;
 import application.State;
 import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
@@ -11,29 +12,24 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import HAC.editor.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.io.File;
 
-/**
- * Editor implements Controller
- */
 public class EditorController implements Controller {
 
     private MainController mainController;
     private FileHandler fileHandler;
-
-    private GameMap map;
-
-    private Image tempImage = new Image("https://i.pinimg.com/originals/6f/6e/c3/6f6ec310eedfbcb45f300d24d0ea0cda.png");
-
     private ImageList imageList;
+    private HacEditor map;
+    final FileChooser fileChooser = new FileChooser();
+
 
     @FXML
     Canvas graphics;
@@ -42,40 +38,43 @@ public class EditorController implements Controller {
     ListView listView;
 
 
-   // public EditorController() {
-    //    super(State.EDITOR);
-//    }
 
-    /**
-     * Sets the main menu state
-     * @param event
-     */
+
+   // public EditorController() {
+   //     super(State.EDITOR);
+   // }
+
     @FXML
     public void newFile(ActionEvent event){
         mainController.setState(State.MAIN_MENU);
     }
 
-    /**
-     * Sets main controller .....
-     * @param mainController
-     */
     @Override
     public void setMainController (MainController mainController) {
         this.mainController = mainController;
     }
 
-    /**
-     * Initiating filehandler
-     */
     @Override
     public void initiate () {
         FileHandler fileHandler = new FileHandler();
+
         imageList = new ImageList();
 
         listView.setItems(imageList.getAllNames());
+
         listView.setCellFactory(param -> imageList.getAllAssets());
 
-        map = new GameMap(300,300, new Sprite("background",32));
+        map = new HacEditor(new GameMap(300,300, new Sprite("background", 32)), graphics);
+
+        graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(event.getX());
+                System.out.println(event.getY());
+                map.move(event.getX(), event.getY());
+                map.render();
+            }
+        });
 
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -92,7 +91,6 @@ public class EditorController implements Controller {
 
                 double height = 60;
                 double width = 70;
-
 
                 Button submit = new Button("Submit");
 
@@ -113,14 +111,9 @@ public class EditorController implements Controller {
 
                 root.setLeft(Vertikalboks);
                 root.setCenter(submit);
-
                 primaryStage.show();
 
                 submit.setOnAction(new EventHandler<ActionEvent>() {
-                    /**
-                     * Description
-                     * @param e
-                     */
                     @Override public void handle(ActionEvent e) {
                         int inputX = Integer.parseInt(inputSizeX.getText());
                         int inputY = Integer.parseInt(inputSizeY.getText());
@@ -128,13 +121,14 @@ public class EditorController implements Controller {
                         int posX = Integer.parseInt(inputPosX.getText());
                         int posY = Integer.parseInt(inputPosY.getText());
 
-
                         listView.getSelectionModel().getSelectedItems();
 
                         GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
                         map.setGameObject(object, posX, posY);
+                        map.render();
 
                         System.out.println(inputSizeX.getText() + inputSizeY.getText());
+
 
                     }
                 });
@@ -144,43 +138,57 @@ public class EditorController implements Controller {
 
     }
 
-    /**
-     * Close
-     * @param event
-     */
     @FXML
     private void close(ActionEvent event) {
         mainController.setState(State.MAIN_MENU);
     }
 
+    @FXML
+    private void save(ActionEvent event){
+        map.saveFile();
+        System.out.println("Saved");
+    }
+
+    @FXML
+    private void Import(ActionEvent event){
+        System.out.println("hei");
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            map.openFile(file);
+        }
+
+    }
+
+
     @Override
     public void onClose () {
 
     }
-/*
-    private Offset calcOffset(Canvas c) {
-        Offset o = new Offset();
-        if(c.getWidth() < c.getHeight()) {
-            o.setSize(c.getWidth() / GameMap.MIN_SIZE_X);
-            o.setOffsetY((c.getHeight() - c.getWidth())/2);
-        } else {
-            o.setSize(c.getHeight() / GameMap.MIN_SIZE_Y);
-            o.setOffsetX((c.getWidth() - c.getHeight())/2);
-        }
-        return o;
-    }
-**/
 
-    /**
-     * Description
-     * @return .....
-     */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
+        double speed = 6;
+
         return (event -> {
             switch (event.getCode()) {
                 case ESCAPE:
                     mainController.setState(State.MAIN_MENU);
+                    break;
+                case W:
+                    map.move(0, speed);
+                    map.render();
+                    break;
+                case A:
+                    map.move(speed, 0);
+                    map.render();
+                    break;
+                case S:
+                    map.move(0, -speed);
+                    map.render();
+                    break;
+                case D:
+                    map.move(-speed, 0);
+                    map.render();
                     break;
             }
         });

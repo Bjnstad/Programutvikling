@@ -1,0 +1,21 @@
+{
+image_asset: javafx.scene.image.Image@beb39aa,
+GameObject_SizeX: 1,
+GameObject_SizeY: 1,
+Position_X: 1,
+Position_Y: 1,
+},
+{
+image_asset: javafx.scene.image.Image@3535a5f1,
+GameObject_SizeX: 123,
+GameObject_SizeY: 123,
+Position_X: 123,
+Position_Y: 123,
+},
+{
+image_asset: javafx.scene.image.Image@19a22e7a,
+GameObject_SizeX: 12,
+GameObject_SizeY: 12,
+Position_X: 12,
+Position_Y: 12,
+},

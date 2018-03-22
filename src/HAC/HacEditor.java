@@ -2,7 +2,10 @@ package HAC;
 
 import HAC.character.Enemy;
 import HAC.character.Player;
+import HAC.editor.ExportHac;
+import HAC.editor.HacParser;
 import HAC.world.GameMap;
+import HAC.world.GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
@@ -10,10 +13,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.io.File;
+
 /**
  * Main class for game HAC
  */
-public class HAC {
+public class HacEditor {
     private final static double FPS = 60;
 
     private GameMap gameMap;
@@ -23,13 +28,16 @@ public class HAC {
     private Timeline timeline;
     private Player player;
     private boolean devMode = false;
+    private HacParser hacParser;
+    private ExportHac exportHac;
+
 
     /**
      * ....
      * @param gameMap
      * @param canvas
      */
-    public HAC(GameMap gameMap, Canvas canvas) {
+    public HacEditor(GameMap gameMap, Canvas canvas) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
         if(canvas == null) throw new NullPointerException("JavaFx canvas cannot be null");
 
@@ -38,43 +46,23 @@ public class HAC {
         this.camera = new Camera(canvas);
 
         this.player = new Player();
+        this.hacParser = new HacParser();
+        this.exportHac = new ExportHac();
+
         this.enemies[0] = new Enemy("BODY_skeleton", 2,2,213,14);
-
-        play();
+        this.render();
     }
+
+
 
     /**
      *
      */
-    public void play() {
-        if(timeline == null) initTimeline();
-        timeline.play();
-    }
-
-    /**
-     *
-     */
-    private void initTimeline() {
-        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
-        timeline = new Timeline();
-        timeline.getKeyFrames().add(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-    }
-
-    /**
-     *
-     */
-    private void render() {
+    public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(gc, camera); // Render map and objects with offset
 
-        if(devMode) {
-            camera.renderPlayerMarker(player);
-            camera.renderPlayerInfo(player);
-        } else {
-            player.render(player.animation.getAnimation(), gc, camera);
-            enemies[0].renderEnemy(enemies[0].animation.getAnimation(), gc, camera, enemies[0]);
-        }
+
     }
 
     /**
@@ -98,9 +86,6 @@ public class HAC {
         player.animation.startAnimation();
         player.animation.updateAnimation();
 
-
-
-        ;
 
 
         int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
@@ -167,5 +152,22 @@ public class HAC {
         this.gameMap = gameMap;
 
         render();
+    }
+
+    public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
+        gameMap.setGameObject(gameObjects, posX, posY);
+        exportHac.addElement(gameObjects, posX, posY);
+
+        return true;
+    }
+
+    public void saveFile() {
+        exportHac.createFile();
+
+    }
+
+    public void openFile(File file) {
+        hacParser.parseFile(file);
+
     }
 }
