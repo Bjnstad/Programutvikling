@@ -67,7 +67,7 @@ public class EditorController implements Controller {
         listView.setCellFactory(param -> imageList.getAllAssets());
 
 
-        map = new HACEditor(new GameMap(100,100, new Sprite("background", 32)), graphics);
+        map = new HACEditor(new GameMap(25,25, new Sprite("background", 32)), graphics);
 
 
         editorHandler = new EditorHandler(mainController, map);

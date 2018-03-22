@@ -44,9 +44,7 @@ public class HACEditor {
 
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
-
         this.render();
-
     }
 
 
@@ -67,25 +65,6 @@ public class HACEditor {
      * @return
      */
     public boolean move(double x, double y) {
-        player.animation.setWalkingDown();
-
-        if(x == 0 && y < 1){
-        }else if(x > 1 && y == 0){
-            player.animation.setWalkLeft();
-        }else if(x == 0.0 && y > 1){
-            player.animation.setWalkingUp();
-        }else if (x < 0 && y == 0){
-            player.animation.setWalkRight();
-        }
-
-        player.animation.startAnimation();
-
-        int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
-        int ry = (int)(camera.getPlayerY() + player.getSizeY() /2 * Math.signum(y) + y);
-
-        System.out.println(rx);
-
-        if(gameMap.willCollide(rx, ry)) return false;
         camera.translate(x,y);
         return true;
     }

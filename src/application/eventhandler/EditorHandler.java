@@ -27,19 +27,19 @@ public class EditorHandler{
                     mainController.setState(State.MAIN_MENU);
                     break;
                 case W:
-                    map.move(0, speed);
-                    map.render();
-                    break;
-                case A:
-                    map.move(speed, 0);
-                    map.render();
-                    break;
-                case S:
                     map.move(0, -speed);
                     map.render();
                     break;
-                case D:
+                case A:
                     map.move(-speed, 0);
+                    map.render();
+                    break;
+                case S:
+                    map.move(0, speed);
+                    map.render();
+                    break;
+                case D:
+                    map.move(speed, 0);
                     map.render();
                     break;
             }
