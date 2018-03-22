@@ -21,8 +21,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("layout/Main.fxml"));
 
-		Scene scene = new Scene(root, 800, 400);
-	    
+		Scene scene = new Scene(root, 800, 800);
+
+		primaryStage.setResizable(false);
 		primaryStage.setTitle("HAC");
 		primaryStage.setScene(scene);
 		primaryStage.show();

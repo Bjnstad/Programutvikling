@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  */
 public class Camera {
 
-    private int zoom = 10; // How many frames to show
+    private int zoom = 20; // How many frames to show
 
     private Canvas canvas;
     private double width; // Width of window
@@ -139,8 +139,7 @@ public class Camera {
      * @return
      */
     public double getPlayerX() {
-        return 0;
-        //return (double) zoom / 2 - POX;
+        return (double) zoom / 2 - translateX/scale;
     }
 
     /**
@@ -148,8 +147,7 @@ public class Camera {
      * @return
      */
     public double getPlayerY() {
-        return 0;
-        //return (double) zoom / 2 - POY;
+        return (double) zoom / 2 - translateY/scale;
     }
 
     /**

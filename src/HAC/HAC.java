@@ -6,8 +6,6 @@ import HAC.world.GameMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -70,7 +68,7 @@ public class HAC {
             camera.renderPlayerInfo(player);
         } else {
             player.render(player.animation.getAnimation(), camera);
-            enemies[0].renderEnemy(enemies[0].animation.getAnimation(), camera, enemies[0]);
+            enemies[0].render(enemies[0].animation.getAnimation(), camera);
         }
     }
 
@@ -85,6 +83,7 @@ public class HAC {
         camera.translate(x, y);
         player.setPosX(camera.getTranslateX());
         player.setPosY(camera.getTranslateY());
+        gameMap.renderArea(camera, (int)camera.getPlayerX() -1, (int)camera.getPlayerY() -1,  (int)camera.getPlayerX() +1, (int)camera.getPlayerY() +1);
         return true;
 
 
@@ -124,6 +123,19 @@ public class HAC {
         camera.move(x,y);
         */
     }
+
+    /**
+     * Loads new map
+     * @param gameMap map to load
+     */
+    private void loadMap(GameMap gameMap) {
+        if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
+        this.gameMap = gameMap;
+        gameMap.render(camera);
+    }
+
+
+
 
     /**
      *
@@ -169,15 +181,4 @@ public class HAC {
         // camera.setPlayerPosition(x, y);
     }
 
-    /**
-     * Loads new map
-     * @param gameMap map to load
-     */
-    private void loadMap(GameMap gameMap) {
-        if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
-
-        this.gameMap = gameMap;
-
-        render();
-    }
 }

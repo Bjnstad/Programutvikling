@@ -25,6 +25,68 @@ public class GameMap {
         this.background = background;
     }
 
+    public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
+        System.out.println("SX " + startX);
+        System.out.println("SY " + startY);
+        System.out.println("EX " + endX);
+        System.out.println("EY " + endY);
+
+        for (int x = startX; x <= endX; x++) {
+            for (int y = startY; y <= endY; y++) {
+                renderBlock(camera, x, y);
+            }
+        }
+    }
+
+    private void renderBlock(Camera camera, int x, int y) {
+        GraphicsContext gc = camera.getGraphicsContext();
+
+        // TOP LEFT
+        if(x == 0 && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // TOP
+        if(y == 0 && x > 0 && x < gameBoard[0].length) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // TOP RIGHT
+        if(x == gameBoard[0].length && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // Right
+        if(y > 0 && y < getHeight() && x == gameBoard[0].length) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // BOTTOM RIGHT
+        if(x == gameBoard[0].length && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // BOTTOM
+        if(x > 0 && x < gameBoard[0].length && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        //BOTTOM LEFT
+        if(x == 0 && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // LEFT
+        if(x == 0 && y > 0 && y < getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        // Center
+        if(x > 0 && x < gameBoard[0].length && y > 0 && y < getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Add @GameObject to the board,
      * @param gameObject
@@ -100,43 +162,10 @@ public class GameMap {
        // gc.setFill(Color.BLACK);
      //   gc.fillRect(0,0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        // Render map colora
+        // Render map color
         for(int y = 0; y <=  gameBoard.length; y++) {
             for(int x = 0; x <=  gameBoard[0].length; x++) {
-                // TOP LEFT
-                if(x == 0 && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-                // TOP
-                if(y == 0 && x > 0 && x < gameBoard[0].length) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-                // TOP RIGHT
-                if(x == gameBoard[0].length && y == 0) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 0), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-                // Right
-                if(y > 0 && y < getHeight() && x == gameBoard[0].length) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-                // BOTTOM RIGHT
-                if(x == gameBoard[0].length && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(2, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-                // BOTTOM
-                if(x > 0 && x < gameBoard[0].length && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-
-                //BOTTOM LEFT
-                if(x == 0 && y == getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 2), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-
-
-                // LEFT
-                if(x == 0 && y > 0 && y < getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(0, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-
-                // Center
-                if(x > 0 && x < gameBoard[0].length && y > 0 && y < getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-
-
-                if(x > 0 && x < gameBoard[0].length && y > 0 && y < getHeight()) {
-                }
+                renderBlock(camera, x, y);
             }
         }
 
