@@ -160,7 +160,7 @@ public abstract class Character {
     }
 
     public void renderEnemy(SpriteAnimation animation, GraphicsContext gc, Camera camera, Enemy enemy) {
-        // RENDER PLAYER
+        // RENDER ENEMY
         gc.drawImage(SwingFXUtils.toFXImage(animation.getSprite(), null), camera.scaleX(enemy.getPosX()), camera.scaleY(enemy.getPosY()), sizeX * camera.getScale(), sizeY * camera.getScale());
     }
 }

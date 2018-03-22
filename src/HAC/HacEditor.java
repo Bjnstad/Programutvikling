@@ -8,6 +8,7 @@ import HAC.world.GameMap;
 import HAC.world.GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -51,6 +52,7 @@ public class HacEditor {
 
         this.enemies[0] = new Enemy("BODY_skeleton", 2,2,213,14);
         this.render();
+
     }
 
 
@@ -61,7 +63,6 @@ public class HacEditor {
     public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(gc, camera); // Render map and objects with offset
-
 
     }
 
@@ -84,8 +85,6 @@ public class HacEditor {
         }
 
         player.animation.startAnimation();
-
-
 
         int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
         int ry = (int)(camera.getPlayerY() + player.getSizeY() /2 * Math.signum(y) + y);
@@ -156,6 +155,7 @@ public class HacEditor {
     public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
         gameMap.setGameObject(gameObjects, posX, posY);
         exportHac.addElement(gameObjects, posX, posY);
+        this.render();
 
         return true;
     }
@@ -169,4 +169,5 @@ public class HacEditor {
         hacParser.parseFile(file);
 
     }
+
 }

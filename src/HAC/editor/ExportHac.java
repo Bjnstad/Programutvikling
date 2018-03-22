@@ -14,11 +14,6 @@ public class ExportHac {
     private HacFile hacFile;
     private ArrayList<String> elements = new ArrayList<>();
 
-  /*  public ExportHac(HacFile hacFile, String element){
-        this.hacFile = hacFile;
-        this.elements.add(element);
-
-    }*/
 
     public void addElement(GameObject gameObject, int posX, int posY){
 
