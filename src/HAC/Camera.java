@@ -58,16 +58,17 @@ public class Camera {
      * Render marker of player center position as an cross
      */
     public void renderPlayerMarker(Player player) {
+        System.out.println("called");
         double markerSize = scale/20;
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(Color.RED);
 
         // Horizontal line
-        gc.fillRect(getCenterX() - scale/2, getCenterY() - markerSize/2, scale, markerSize);
+        gc.fillRect(getCenterX() - scale/2 - player.getPosX(), getCenterY() - markerSize/2 - player.getPosY(), scale, markerSize);
 
         // Vertical line
-        gc.fillRect(getCenterX() - markerSize/2, getCenterY() - scale/2, markerSize, scale);
+        gc.fillRect(getCenterX() - markerSize/2 - player.getPosX(), getCenterY() - scale/2 - player.getPosY(), markerSize, scale);
     }
 
     /**

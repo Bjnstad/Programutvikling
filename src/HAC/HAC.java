@@ -118,8 +118,14 @@ public class HAC {
         if(gameMap.willCollide(rx, ry)) return false;
         camera.move(x,y);
         */
-        canvas.setTranslateX(canvas.getTranslateX() + x);
-        canvas.setTranslateY(canvas.getTranslateY() + y);
+
+        double translateX = canvas.getTranslateX();
+        double translateY = canvas.getTranslateY();
+
+        player.setPosX(translateX + x);
+        player.setPosY(translateY + y);
+        canvas.setTranslateX(player.getPosX());
+        canvas.setTranslateY(player.getPosY());
         return true;
     }
 

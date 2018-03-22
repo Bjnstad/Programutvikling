@@ -33,6 +33,9 @@ public class GameController implements Controller {
     @Override
     public void initiate() {
         game = new HAC(createSimpleMap(), graphics, mainController.getWidth(), mainController.getHeight());
+        game.setDevMode(true);
+
+
 
         // TODO: #1 Move to own controller class
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
