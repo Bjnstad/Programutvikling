@@ -80,6 +80,7 @@ public class HAC {
      */
     public boolean move(double x, double y) {
         // TODO Check for collition
+
         camera.translate(x, y);
         player.setPosX(camera.getTranslateX());
         player.setPosY(camera.getTranslateY());
