@@ -6,19 +6,16 @@ import HAC.editor.ExportHac;
 import HAC.editor.HacParser;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 import java.io.File;
 
 /**
  * Main class for game HAC
  */
-public class HacEditor {
+public class HACEditor {
     private final static double FPS = 60;
 
     private GameMap gameMap;
@@ -31,13 +28,12 @@ public class HacEditor {
     private HacParser hacParser;
     private ExportHac exportHac;
 
-
     /**
      * ....
      * @param gameMap
      * @param canvas
      */
-    public HacEditor(GameMap gameMap, Canvas canvas) {
+    public HACEditor(GameMap gameMap, Canvas canvas) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
         if(canvas == null) throw new NullPointerException("JavaFx canvas cannot be null");
 
@@ -60,7 +56,7 @@ public class HacEditor {
      */
     public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gameMap.render(gc, camera); // Render map and objects with offset
+        gameMap.render(camera); // Render map and objects with offset
 
 
     }
@@ -93,7 +89,7 @@ public class HacEditor {
         System.out.println(rx);
 
         if(gameMap.willCollide(rx, ry)) return false;
-        camera.move(x,y);
+        camera.translate(x,y);
         return true;
     }
 

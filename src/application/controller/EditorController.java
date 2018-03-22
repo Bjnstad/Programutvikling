@@ -1,7 +1,7 @@
 package application.controller;
 
 import HAC.sprite.Sprite;
-import HAC.HacEditor;
+import HAC.HACEditor;
 import application.State;
 import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
@@ -27,7 +27,7 @@ public class EditorController implements Controller {
     private MainController mainController;
     private FileHandler fileHandler;
     private ImageList imageList;
-    private HacEditor map;
+    private HACEditor map;
     final FileChooser fileChooser = new FileChooser();
 
 
@@ -64,7 +64,7 @@ public class EditorController implements Controller {
 
         listView.setCellFactory(param -> imageList.getAllAssets());
 
-        map = new HacEditor(new GameMap(300,300, new Sprite("background", 32)), graphics);
+        map = new HACEditor(new GameMap(300,300, new Sprite("background", 32)), graphics);
 
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override

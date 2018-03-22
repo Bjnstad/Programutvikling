@@ -91,10 +91,9 @@ public class GameMap {
      *
      * @param camera
      */
-    public void render(GraphicsContext gc, Camera camera) {
-        System.out.println(gameBoard.length);
-        System.out.println(gameBoard.length * camera.getScale());
-        System.out.println(gameBoard[0].length * camera.getScale());
+    public void render(Camera camera) {
+        GraphicsContext gc = camera.getGraphicsContext();
+
         gc.getCanvas().setHeight((gameBoard.length +1) * camera.getScale());
         gc.getCanvas().setWidth((gameBoard[0].length +1) * camera.getScale());
         // Make screen black

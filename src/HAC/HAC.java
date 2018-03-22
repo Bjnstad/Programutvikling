@@ -17,7 +17,6 @@ public class HAC {
     private final static double FPS = 60;
 
     private GameMap gameMap;
-    private Canvas canvas;
     private Camera camera;
     private Enemy[] enemies = new Enemy[1];
     private Timeline timeline;
@@ -34,7 +33,6 @@ public class HAC {
         if(canvas == null) throw new NullPointerException("JavaFx canvas cannot be null");
 
         this.gameMap = gameMap;
-        this.canvas = canvas;
         this.camera = new Camera(canvas, height, width);
 
         this.player = new Player();
@@ -49,7 +47,7 @@ public class HAC {
     public void play() {
         if(timeline == null) initTimeline();
 
-        gameMap.render(canvas.getGraphicsContext2D(), camera);
+        gameMap.render(camera);
         timeline.play();
     }
 
@@ -67,15 +65,12 @@ public class HAC {
      *
      */
     private void render() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        //gameMap.render(gc, camera); // Render map and objects with offset
-
         if(devMode) {
             camera.renderPlayerMarker(player);
             camera.renderPlayerInfo(player);
         } else {
-            player.render(player.animation.getAnimation(), gc, camera);
-            enemies[0].renderEnemy(enemies[0].animation.getAnimation(), gc, camera, enemies[0]);
+            player.render(player.animation.getAnimation(), camera);
+            enemies[0].renderEnemy(enemies[0].animation.getAnimation(), camera, enemies[0]);
         }
     }
 
@@ -86,8 +81,22 @@ public class HAC {
      * @return
      */
     public boolean move(double x, double y) {
-        x *= 10;
-        y *= 10;
+        // TODO Check for collition
+        camera.translate(x, y);
+        player.setPosX(camera.getTranslateX());
+        player.setPosY(camera.getTranslateY());
+        return true;
+
+
+
+
+
+
+
+
+
+
+
 
 
         /*
@@ -118,15 +127,6 @@ public class HAC {
         if(gameMap.willCollide(rx, ry)) return false;
         camera.move(x,y);
         */
-
-        double translateX = canvas.getTranslateX();
-        double translateY = canvas.getTranslateY();
-
-        player.setPosX(translateX + x);
-        player.setPosY(translateY + y);
-        canvas.setTranslateX(player.getPosX());
-        canvas.setTranslateY(player.getPosY());
-        return true;
     }
 
     /**
