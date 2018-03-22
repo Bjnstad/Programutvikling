@@ -115,10 +115,6 @@ public class HAC {
         player.animation.updateAnimation();
 
 
-
-        ;
-
-
         int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
         int ry = (int)(camera.getPlayerY() + player.getSizeY() /2 * Math.signum(y) + y);
 

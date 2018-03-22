@@ -80,11 +80,12 @@ public class CameraTest {
      * @return
      */
     private boolean testValues(double x, double y) {
+        System.out.println("Before math: " + x);
+        System.out.println("Before math: " + y);
+
         x = round(x);
         y = round(y);
 
-        System.out.println("Is: " + x);
-        System.out.println("Expected: " + y);
         return x == y;
     }
 

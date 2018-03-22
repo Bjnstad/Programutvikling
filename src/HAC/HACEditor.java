@@ -7,6 +7,7 @@ import HAC.editor.HacParser;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -47,6 +48,7 @@ public class HACEditor {
 
         this.enemies[0] = new Enemy("BODY_skeleton", 2,2,213,14);
         this.render();
+
     }
 
 
@@ -57,7 +59,6 @@ public class HACEditor {
     public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameMap.render(camera); // Render map and objects with offset
-
 
     }
 
@@ -80,8 +81,6 @@ public class HACEditor {
         }
 
         player.animation.startAnimation();
-
-
 
         int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
         int ry = (int)(camera.getPlayerY() + player.getSizeY() /2 * Math.signum(y) + y);
@@ -152,6 +151,7 @@ public class HACEditor {
     public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
         gameMap.setGameObject(gameObjects, posX, posY);
         exportHac.addElement(gameObjects, posX, posY);
+        this.render();
 
         return true;
     }
@@ -165,4 +165,5 @@ public class HACEditor {
         hacParser.parseFile(file);
 
     }
+
 }

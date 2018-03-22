@@ -29,6 +29,7 @@ public class EditorController implements Controller {
     private ImageList imageList;
     private HACEditor map;
     final FileChooser fileChooser = new FileChooser();
+    private EditorHandler editorHandler;
 
 
     @FXML
@@ -65,6 +66,8 @@ public class EditorController implements Controller {
         listView.setCellFactory(param -> imageList.getAllAssets());
 
         map = new HACEditor(new GameMap(300,300, new Sprite("background", 32)), graphics);
+
+        editorHandler = new EditorHandler(mainController, map);
 
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
@@ -161,32 +164,12 @@ public class EditorController implements Controller {
 
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
-        double speed = 6;
-
         return (event -> {
-            switch (event.getCode()) {
-                case ESCAPE:
-                    mainController.setState(State.MAIN_MENU);
-                    break;
-                case W:
-                    map.move(0, speed);
-                    map.render();
-                    break;
-                case A:
-                    map.move(speed, 0);
-                    map.render();
-                    break;
-                case S:
-                    map.move(0, -speed);
-                    map.render();
-                    break;
-                case D:
-                    map.move(-speed, 0);
-                    map.render();
-                    break;
-            }
+            editorHandler.getEventHandler(event);
         });
     }
+
+
 
 
 }

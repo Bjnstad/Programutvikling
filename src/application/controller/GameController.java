@@ -40,7 +40,6 @@ public class GameController implements Controller {
         // TODO: #1 Move to own controller class
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
-
                     /**
                      * Description
                      * @param event X, Y
@@ -48,7 +47,6 @@ public class GameController implements Controller {
                     @Override
                     public void handle(MouseEvent event) {
                         game.shoot(event.getX(), event.getY());
-
                     }
                 });
 
