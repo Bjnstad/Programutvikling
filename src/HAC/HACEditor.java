@@ -42,11 +42,9 @@ public class HACEditor {
         this.canvas = canvas;
         this.camera = new Camera(canvas, 200, 200);
 
-        this.player = new Player();
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
 
-        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,213,14);
         this.render();
 
     }

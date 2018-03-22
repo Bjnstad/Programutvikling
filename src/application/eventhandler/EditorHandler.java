@@ -1,7 +1,8 @@
-package application.controller;
+package application.eventhandler;
 
 import HAC.HACEditor;
 import application.State;
+import application.controller.MainController;
 import javafx.scene.input.KeyEvent;
 
 /**
