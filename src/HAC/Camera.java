@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  */
 public class Camera {
 
-    private int zoom = 15; // How many frames to show
+    private int zoom = 5; // How many frames to show
 
     private double offsetX; // Offset X padding to make HAC view squared
     private double offsetY; // Offset Y padding to make HAC view squared
@@ -18,14 +18,19 @@ public class Camera {
     private double POY; // Player Offset Y, offet for player movement y direction
     private double scale; // Multiplier for correctly display gameboard and sizes
     private Canvas canvas;
+    private double width;
+    private double height;
+
 
     /**
      * Camera used for calculation of offset and scaling
      * @param canvas shown canvas used to calculate offset and scaling
      */
-    public Camera(Canvas canvas) {
+    public Camera(Canvas canvas, double width, double height) {
         // TODO: ADD PLAYER ? SHOULD HAVE AN RELATION OR ADDED AS PARAMETER
 
+        this.width = width;
+        this.height = height;
         this.canvas = canvas;
         calcOffset();
 
@@ -39,15 +44,13 @@ public class Camera {
      */
     public void calcOffset() {
         // Get width and height from canvas
-        double width = canvas.getWidth();
-        double height = canvas.getHeight();
 
         if(width < height) {
             scale = width / zoom;
-            offsetY = (height - width) /2;
+            //offsetY = (height - width) /2;
         } else {
             scale = height / zoom;
-            offsetX = (width - height) /2;
+            //offsetX = (width - height) /2;
         }
     }
 

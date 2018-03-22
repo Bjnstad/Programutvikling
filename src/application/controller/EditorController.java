@@ -69,8 +69,6 @@ public class EditorController implements Controller {
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println(event.getX());
-                System.out.println(event.getY());
                 map.move(event.getX(), event.getY());
                 map.render();
             }
@@ -126,10 +124,6 @@ public class EditorController implements Controller {
                         GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
                         map.setGameObject(object, posX, posY);
                         map.render();
-
-                        System.out.println(inputSizeX.getText() + inputSizeY.getText());
-
-
                     }
                 });
             }

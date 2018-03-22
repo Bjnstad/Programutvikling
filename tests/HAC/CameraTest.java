@@ -21,7 +21,7 @@ public class CameraTest {
 
         canvas.setWidth(234);
         canvas.setHeight(456);
-        Camera camera = new Camera(canvas);
+        Camera camera = new Camera(canvas, 200, 200);
 
         //camera.setPlayerPosition(0, 0);
 
@@ -60,7 +60,7 @@ public class CameraTest {
         canvas.setHeight(400);
         canvas.setWidth(800);
 
-        Camera camera = new Camera(canvas);
+        Camera camera = new Camera(canvas, 200, 200);
 
         assertTrue(testValues(camera.getCenterX(), 800/2));
         assertTrue(testValues(camera.getCenterY(), 400/2));

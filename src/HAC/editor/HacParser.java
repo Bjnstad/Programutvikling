@@ -1,6 +1,5 @@
 package HAC.editor;
 
-import com.sun.jdi.IntegerValue;
 import javafx.scene.image.Image;
 
 import java.io.*;

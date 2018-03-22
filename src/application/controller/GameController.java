@@ -27,27 +27,12 @@ public class GameController implements Controller {
     private MainController mainController; // Parent controller
     private HAC game;
 
-
     /**
      * On start of state
      */
     @Override
     public void initiate() {
-        ReadOnlyDoubleProperty widthProperty = mainController.getMainView().widthProperty();
-        ReadOnlyDoubleProperty heightProperty = mainController.getMainView().heightProperty();
-
-        graphics.widthProperty().bind(widthProperty);
-        graphics.heightProperty().bind(heightProperty);
-
-        graphics.widthProperty().addListener(event -> game.resize());
-        graphics.heightProperty().addListener(event -> game.resize());
-
-        game = new HAC(createSimpleMap(), graphics);
-
-        //game.setDevMode(true);
-        //game.setGrid(true);
-        game.setPlayerPostion(0,1);
-
+        game = new HAC(createSimpleMap(), graphics, mainController.getWidth(), mainController.getHeight());
 
         // TODO: #1 Move to own controller class
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
@@ -63,6 +48,25 @@ public class GameController implements Controller {
 
                     }
                 });
+
+
+
+
+
+
+
+        // ReadOnlyDoubleProperty widthProperty = mainController.getMainView().widthProperty();
+        //ReadOnlyDoubleProperty heightProperty = mainController.getMainView().heightProperty();
+
+        //  graphics.widthProperty().bind(widthProperty);
+        //  graphics.heightProperty().bind(heightProperty);
+
+        // graphics.widthProperty().addListener(event -> game.resize());
+        // graphics.heightProperty().addListener(event -> game.resize());
+
+
+        //game.setDevMode(true);
+        //game.setGrid(true);
 
     }
 

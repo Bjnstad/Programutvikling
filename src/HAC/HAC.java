@@ -29,30 +29,32 @@ public class HAC {
      * @param gameMap
      * @param canvas
      */
-    public HAC(GameMap gameMap, Canvas canvas) {
+    public HAC(GameMap gameMap, Canvas canvas, double width, double height) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
         if(canvas == null) throw new NullPointerException("JavaFx canvas cannot be null");
 
         this.gameMap = gameMap;
         this.canvas = canvas;
-        this.camera = new Camera(canvas);
+        this.camera = new Camera(canvas, height, width);
 
         this.player = new Player();
-        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,213,14);
+        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
 
-        play();
+        play(); // Initate game
     }
 
     /**
-     *
+     * Starting gameloop
      */
     public void play() {
         if(timeline == null) initTimeline();
+
+        gameMap.render(canvas.getGraphicsContext2D(), camera);
         timeline.play();
     }
 
     /**
-     *
+     * Initiate timeline
      */
     private void initTimeline() {
         KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
@@ -66,7 +68,7 @@ public class HAC {
      */
     private void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gameMap.render(gc, camera); // Render map and objects with offset
+        //gameMap.render(gc, camera); // Render map and objects with offset
 
         if(devMode) {
             camera.renderPlayerMarker(player);
@@ -84,6 +86,11 @@ public class HAC {
      * @return
      */
     public boolean move(double x, double y) {
+        x *= 10;
+        y *= 10;
+
+
+        /*
         player.animation.setWalkingDown();
 
         if(x == 0 && y < 1){
@@ -110,6 +117,9 @@ public class HAC {
 
         if(gameMap.willCollide(rx, ry)) return false;
         camera.move(x,y);
+        */
+        canvas.setTranslateX(canvas.getTranslateX() + x);
+        canvas.setTranslateY(canvas.getTranslateY() + y);
         return true;
     }
 
@@ -138,7 +148,7 @@ public class HAC {
      * @param grid
      */
     public void setGrid(boolean grid) {
-        gameMap.setGrid(grid);
+        //gameMap.setGrid(grid);
     }
 
     /**

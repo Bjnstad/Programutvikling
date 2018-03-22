@@ -43,7 +43,7 @@ public class HacEditor {
 
         this.gameMap = gameMap;
         this.canvas = canvas;
-        this.camera = new Camera(canvas);
+        this.camera = new Camera(canvas, 200, 200);
 
         this.player = new Player();
         this.hacParser = new HacParser();
@@ -84,7 +84,6 @@ public class HacEditor {
         }
 
         player.animation.startAnimation();
-        player.animation.updateAnimation();
 
 
 
@@ -123,7 +122,7 @@ public class HacEditor {
      * @param grid
      */
     public void setGrid(boolean grid) {
-        gameMap.setGrid(grid);
+        //gameMap.setGrid(grid);
     }
 
     /**
