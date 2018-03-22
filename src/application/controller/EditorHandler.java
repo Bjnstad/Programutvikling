@@ -1,6 +1,6 @@
 package application.controller;
 
-import HAC.HacEditor;
+import HAC.HACEditor;
 import application.State;
 import javafx.scene.input.KeyEvent;
 
@@ -10,8 +10,8 @@ import javafx.scene.input.KeyEvent;
 public class EditorHandler{
 
     private MainController mainController;
-    private HacEditor map;
-    public EditorHandler(MainController mainController, HacEditor hacEditor){
+    private HACEditor map;
+    public EditorHandler(MainController mainController, HACEditor hacEditor){
         this.mainController = mainController;
         this.map = hacEditor;
 
