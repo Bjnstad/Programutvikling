@@ -51,11 +51,6 @@ public class GameController implements Controller {
                 });
 
 
-
-
-
-
-
         // ReadOnlyDoubleProperty widthProperty = mainController.getMainView().widthProperty();
         //ReadOnlyDoubleProperty heightProperty = mainController.getMainView().heightProperty();
 

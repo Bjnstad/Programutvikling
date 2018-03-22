@@ -6,6 +6,7 @@ import application.State;
 import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
+import application.eventhandler.EditorHandler;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +66,9 @@ public class EditorController implements Controller {
 
         listView.setCellFactory(param -> imageList.getAllAssets());
 
-        map = new HACEditor(new GameMap(300,300, new Sprite("background", 32)), graphics);
+
+        map = new HACEditor(new GameMap(100,100, new Sprite("background", 32)), graphics);
+
 
         editorHandler = new EditorHandler(mainController, map);
 
