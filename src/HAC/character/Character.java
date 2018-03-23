@@ -125,38 +125,12 @@ public abstract class Character {
 
     /**
      *
-     * @param animation
      * @param camera
      */
-    public void render(SpriteAnimation animation, Camera camera) {
+    public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
+        gc.drawImage(SwingFXUtils.toFXImage(animation.getAnimation().getSprite(), null), posX*camera.getScale(), posY*camera.getScale(), sizeX * camera.getScale(), sizeY * camera.getScale());
 
-        for (int i = 0; i < bullets.size(); i++) {
-
-
-      /*  for (int i = 0; i < bullets.size(); i++) {
->>>>>>> Removed assets files that are not in use
-            if(bullets.get(i).isVisible()) {
-                bullets.get(i).update();
-                gc.setFill(Color.YELLOW);
-                gc.fillRect(camera.scaleX(bullets.get(i).getX()),camera.scaleY(bullets.get(i).getY()), 10, 5);
-
-            }else{
-                bullets.remove(i);
-            }
-<<<<<<< HEAD
-        }
-=======
-        }*/
-
-            //RENDER PLAYER
-            //gc.setFill(Color.YELLOW);
-
-            //gc.fillRect(offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
-            //gc.drawImage(avatar,offset.getOffsetX() + (((double)GameMap.MIN_SIZE_X-1)/2) * offset.getSize() - sizeX/2* offset.getSize(), offset.getOffsetY() + (((double)GameMap.MIN_SIZE_Y-1)/2) * offset.getSize() - sizeY/2* offset.getSize(), sizeX*offset.getSize(), sizeY*offset.getSize());
-
-            gc.drawImage(SwingFXUtils.toFXImage(animation.getSprite(), null), camera.getCenterX(), camera.getCenterY(), sizeX * camera.getScale(), sizeY * camera.getScale());
-        }
     }
 
     public void renderEnemy(SpriteAnimation animation, Camera camera, Enemy enemy) {

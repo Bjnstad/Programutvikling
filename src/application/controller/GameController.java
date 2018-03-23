@@ -33,7 +33,7 @@ public class GameController implements Controller {
     @Override
     public void initiate() {
         game = new HAC(createSimpleMap(), graphics, mainController.getWidth(), mainController.getHeight());
-        game.setDevMode(true);
+        game.setDevMode(false);
 
 
 
@@ -85,7 +85,7 @@ public class GameController implements Controller {
     public EventHandler<KeyEvent> getEventHandler() {
 
         // TODO: add acceleration in own controller class
-        double speed = 1;
+        double speed = 3;
         return (event -> {
             switch (event.getCode()) {
                 case W:

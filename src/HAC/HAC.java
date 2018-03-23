@@ -67,8 +67,8 @@ public class HAC {
             camera.renderPlayerMarker(player);
             camera.renderPlayerInfo(player);
         } else {
-            player.render(player.animation.getAnimation(), camera);
-            enemies[0].render(enemies[0].animation.getAnimation(), camera);
+            player.render(camera);
+            enemies[0].render(camera);
         }
     }
 
@@ -82,8 +82,8 @@ public class HAC {
         // TODO Check for collition
 
         camera.translate(x, y);
-        player.setPosX(camera.getTranslateX());
-        player.setPosY(camera.getTranslateY());
+        player.setPosX(camera.getPlayerX());
+        player.setPosY(camera.getPlayerY());
         gameMap.renderArea(camera, (int)camera.getPlayerX() -1, (int)camera.getPlayerY() -1,  (int)camera.getPlayerX() +1, (int)camera.getPlayerY() +1);
         return true;
 
