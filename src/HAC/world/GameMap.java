@@ -26,11 +26,6 @@ public class GameMap {
     }
 
     public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
-        System.out.println("SX " + startX);
-        System.out.println("SY " + startY);
-        System.out.println("EX " + endX);
-        System.out.println("EY " + endY);
-
         for (int x = startX; x <= endX; x++) {
             for (int y = startY; y <= endY; y++) {
                 renderBlock(camera, x, y);

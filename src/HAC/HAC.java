@@ -79,31 +79,23 @@ public class HAC {
      * @return
      */
     public boolean move(double x, double y) {
-        // TODO Check for collition
+        int rx = (int)(camera.getPlayerX() + x/camera.getScale() - 1.5 * Math.signum(x));
+        int ry = (int)(camera.getPlayerY() + x/camera.getScale() - 1.5 * Math.signum(y));
+        System.out.println("------");
+        System.out.println(rx);
+        System.out.println(ry);
+        if(gameMap.willCollide(rx, ry)) return false;
 
         camera.translate(x, y);
         player.setPosX(camera.getPlayerX());
         player.setPosY(camera.getPlayerY());
         gameMap.renderArea(camera, (int)camera.getPlayerX() -1, (int)camera.getPlayerY() -1,  (int)camera.getPlayerX() +1, (int)camera.getPlayerY() +1);
-        return true;
 
 
 
-
-
-
-
-
-
-
-
-
-
-        /*
-        player.animation.setWalkingDown();
-
-        if(x == 0 && y < 1){
-        }else if(x > 1 && y == 0){
+        if(x == 0 && y < 1) {
+            player.animation.setWalkingDown();
+        } else if(x > 1 && y == 0){
             player.animation.setWalkLeft();
         }else if(x == 0.0 && y > 1){
             player.animation.setWalkingUp();
@@ -115,14 +107,7 @@ public class HAC {
         player.animation.updateAnimation();
 
 
-        int rx = (int)(camera.getPlayerX() + player.getSizeX() /2 * Math.signum(x) + x);
-        int ry = (int)(camera.getPlayerY() + player.getSizeY() /2 * Math.signum(y) + y);
-
-        System.out.println(rx);
-
-        if(gameMap.willCollide(rx, ry)) return false;
-        camera.move(x,y);
-        */
+        return true;
     }
 
     /**

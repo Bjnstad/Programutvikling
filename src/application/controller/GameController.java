@@ -85,7 +85,7 @@ public class GameController implements Controller {
     public EventHandler<KeyEvent> getEventHandler() {
 
         // TODO: add acceleration in own controller class
-        double speed = 3;
+        double speed = 10;
         return (event -> {
             switch (event.getCode()) {
                 case W:

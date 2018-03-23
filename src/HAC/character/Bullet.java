@@ -18,12 +18,6 @@ public class Bullet {
      * @param endY coordinate of the cell
      */
     public Bullet(double startX, double startY, double endX, double endY){
-        System.out.println("-----");
-        System.out.println("startx: "+startX);
-        System.out.println("starty: "+startY);
-        System.out.println("endx: "+endX);
-        System.out.println("endy: "+endY);
-
         x = startX;
         y = startY;
 
