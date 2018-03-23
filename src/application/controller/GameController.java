@@ -125,7 +125,7 @@ public class GameController implements Controller {
         GameMap map = new GameMap(20, 20, new Sprite("background", 32));
 
         map.setGameObject(new GameObject(null, 2, 2), 7, 5);
-        map.setGameObject(new GameObject(null, 5, 5), 12, 14);
+        map.setGameObject(new GameObject(null, 5, 5), 12, 12);
         return map;
     }
 }

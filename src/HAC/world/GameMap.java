@@ -56,7 +56,17 @@ public class GameMap {
         if(x > 0 && x < gameBoard[0].length && y > 0 && y < getHeight()) gc.drawImage(SwingFXUtils.toFXImage(background.getSprite(1, 1), null), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
     }
 
-
+    /**
+     * If gameobjects collides
+     * @param posX position to x
+     * @param posY position to y
+     * @return .....
+     */
+    public boolean willCollide(int posX, int posY) {
+        if(posX <= -1 || posY <= -1 || posX >= gameBoard[0].length || posY >= getHeight()) return true;
+        if(gameBoard[posY][posX] != null) return true;
+        return false;
+    }
 
 
 
@@ -104,17 +114,7 @@ public class GameMap {
         return true;
     }
 
-    /**
-     * If gameobjects collides
-     * @param posX position to x
-     * @param posY position to y
-     * @return .....
-     */
-    public boolean willCollide(int posX, int posY) {
-        if(posX <= -1 || posY <= -1 || posX >= gameBoard[0].length || posY >= getHeight()) return true;
-        if(gameBoard[posY][posX] != null) return true;
-        return false;
-    }
+
 
     /**
      * Gets the gameobject
@@ -164,15 +164,15 @@ public class GameMap {
             }
         }
 
-        /* Render objects */
-        for(int y =  (int)(camera.getPlayerY() - (double)camera.getZoom()/2); y < (int)(camera.getPlayerY() + (double)camera.getZoom()/2); y++) {
-            for (int x = (int)(camera.getPlayerX() - (double)camera.getZoom()/2); x < (int)(camera.getPlayerX() + (double)camera.getZoom()/2); x++) {
+        /* Render objects *//*
+        for(int y = 0; y <=  gameBoard.length; y++) {
+            for(int x = 0; x <=  gameBoard[0].length; x++) {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
                     gc.setFill(Color.RED);
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-                    gc.drawImage(gameObject.getAsset(),camera.scaleX(x), camera.scaleY(y), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+                    //gc.drawImage(gameObject.getAsset(),camera.scaleX(x), camera.scaleY(y), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
 
                 }
             }

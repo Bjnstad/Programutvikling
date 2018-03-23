@@ -20,6 +20,8 @@ public class HAC {
     private Timeline timeline;
     private Player player;
     private boolean devMode = false;
+    private boolean isRunning = false;
+
 
     /**
      * ....
@@ -34,6 +36,8 @@ public class HAC {
         this.camera = new Camera(canvas, height, width);
 
         this.player = new Player();
+        player.setPosX(camera.getPlayerX());
+        player.setPosY(camera.getPlayerY());
         this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
 
         play(); // Initate game
@@ -44,6 +48,8 @@ public class HAC {
      */
     public void play() {
         if(timeline == null) initTimeline();
+
+        isRunning = true;
 
         gameMap.render(camera);
         timeline.play();
@@ -67,8 +73,13 @@ public class HAC {
             camera.renderPlayerMarker(player);
             camera.renderPlayerInfo(player);
         } else {
+            for(Enemy enemy : enemies) {
+                if(player.willCollide(enemy)) die();
+                enemy.calculateMove(player);
+                gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
+                enemy.render(camera);
+            }
             player.render(camera);
-            enemies[0].render(camera);
         }
     }
 
@@ -79,6 +90,8 @@ public class HAC {
      * @return
      */
     public boolean move(double x, double y) {
+        if (!isRunning) return false;
+
         int rx = (int)(camera.getPlayerX() + x/camera.getScale() - 1.5 * Math.signum(x));
         int ry = (int)(camera.getPlayerY() + x/camera.getScale() - 1.5 * Math.signum(y));
         System.out.println("------");
@@ -89,9 +102,7 @@ public class HAC {
         camera.translate(x, y);
         player.setPosX(camera.getPlayerX());
         player.setPosY(camera.getPlayerY());
-        gameMap.renderArea(camera, (int)camera.getPlayerX() -1, (int)camera.getPlayerY() -1,  (int)camera.getPlayerX() +1, (int)camera.getPlayerY() +1);
-
-
+        gameMap.renderArea(camera, rx -3, ry -3,  rx +2, ry +2);
 
         if(x == 0 && y < 1) {
             player.animation.setWalkingDown();
@@ -109,6 +120,19 @@ public class HAC {
 
         return true;
     }
+
+
+    /**
+     * Called when character dies.
+     */
+    private void die() {
+        timeline.stop();
+        isRunning = false;
+        System.out.println("YOU DIED!");
+    }
+
+
+
 
     /**
      * Loads new map

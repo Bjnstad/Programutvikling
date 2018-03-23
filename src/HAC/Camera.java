@@ -172,7 +172,7 @@ public class Camera {
      * @return
      */
     public double scaleX(double x) {
-        return x * scale + offsetX;
+        return x * scale;
     }
 
     /**
@@ -182,7 +182,7 @@ public class Camera {
      */
     public double scaleY(double y) {
 
-        return y * scale + offsetY;
+        return y * scale;
     }
 
 
