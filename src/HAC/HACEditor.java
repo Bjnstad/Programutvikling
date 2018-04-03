@@ -7,7 +7,6 @@ import HAC.editor.HacParser;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import javafx.animation.Timeline;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -40,7 +39,7 @@ public class HACEditor {
 
         this.gameMap = gameMap;
         this.canvas = canvas;
-        this.camera = new Camera(canvas, 200, 200);
+        this.camera = new Camera(canvas, 500, 500);
 
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
@@ -125,11 +124,11 @@ public class HACEditor {
         render();
     }
 
-    public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
-        gameMap.setGameObject(gameObjects, posX, posY);
-        exportHac.addElement(gameObjects, posX, posY);
-        this.render();
+    public boolean setGameObject(GameObject gameObject) {
+        gameMap.addGameObject(gameObject);
+        exportHac.addElement(gameObject);
 
+        gameMap.drawObject(gameObject, camera);
         return true;
     }
 

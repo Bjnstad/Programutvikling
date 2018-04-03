@@ -11,8 +11,14 @@ import javafx.scene.input.KeyEvent;
 public interface Controller {
     State state = null; //There is differents states in the game.
 
+    /**
+     * Called when controller is to be set.
+     */
     void initiate();
 
+    /**
+     * Called when controller is being replaced.
+     */
     void onClose();
 
     //TODO: need rework

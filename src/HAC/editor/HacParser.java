@@ -40,8 +40,10 @@ public class HacParser {
                 if (m.find() && count < 5) {
                     strArr[count++] = m.group(1);
                 }else if(count == 5){
+                    //hacContent.add(addObject(strArr[0], Integer.valueOf(strArr[1]), Integer.valueOf(strArr[2]),Integer.valueOf(strArr[3]), Integer.valueOf(strArr[4])));
                     //addObject(strArr[0], Integer.valueOf(strArr[1]), Integer.valueOf(strArr[2]),Integer.valueOf(strArr[3]), Integer.valueOf(strArr[4]));
                     System.out.println(Arrays.toString(strArr));
+
                     count = 0;
                 }
                 else {

@@ -15,15 +15,15 @@ public class ExportHac {
     private ArrayList<String> elements = new ArrayList<>();
 
 
-    public void addElement(GameObject gameObject, int posX, int posY){
+    public void addElement(GameObject gameObject){
 
         StringBuilder sb = new StringBuilder();
         sb.append("{" + System.getProperty("line.separator"));
         sb.append("image_asset: " + gameObject.getAsset() +"," + System.getProperty("line.separator"));
         sb.append("GameObject_SizeX: " + gameObject.getSizeX() +"," + System.getProperty("line.separator"));
         sb.append("GameObject_SizeY: " + gameObject.getSizeY() +"," + System.getProperty("line.separator"));
-        sb.append("Position_X: " + posX+ "," + System.getProperty("line.separator"));
-        sb.append("Position_Y: " + posY+ "," + System.getProperty("line.separator"));
+        sb.append("Position_X: " + gameObject.getPosX()+ "," + System.getProperty("line.separator"));
+        sb.append("Position_Y: " + gameObject.getPosY()+ "," + System.getProperty("line.separator"));
         sb.append("}," + System.getProperty("line.separator"));
 
 

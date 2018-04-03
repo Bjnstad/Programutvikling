@@ -22,7 +22,7 @@ public class ImageList {
     }
 
     // File representing the folder that you select using a FileChooser
-    static final File dir = new File("assets");
+    static final File dir = new File("assets/gameobjects");
 
     static final String[] EXTENSIONS = new String[]{
             "gif", "png", "bmp", "jpg"

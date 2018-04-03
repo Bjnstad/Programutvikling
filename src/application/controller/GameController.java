@@ -11,8 +11,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
-
 /**
  * GameController implements Controller.
  */
@@ -104,8 +102,8 @@ public class GameController implements Controller {
     private GameMap createSimpleMap() {
         GameMap map = new GameMap(20, 20, new Sprite("background", 32));
 
-        map.setGameObject(new GameObject(null, 2, 2), 7, 5);
-        map.setGameObject(new GameObject(null, 5, 5), 12, 12);
+        map.addGameObject(new GameObject(null, 7,5, 2, 2));
+        map.addGameObject(new GameObject(null, 12, 12,5, 5));
         return map;
     }
 }

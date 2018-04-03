@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,52 +33,48 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Sets the state
-     * If controller is not null, then controller closes
-     * @param state in the game
+     * @param state what state of application should be shown in the main frame
      */
     public void setState(State state) {
-        if(controller != null) controller.onClose();
+        if(controller != null) controller.onClose(); // Call close for the previous controller.
 
-        String source;
+        String filepath = ""; // Path of the current file
         switch (state) {
             case MAIN_MENU:
-                source = "MainMenu";
+                filepath = "MainMenu";
                 controller = new MainMenuController();
                 break;
             case EDITOR:
-                source = "Editor";
+                filepath = "Editor";
                 controller = new EditorController();
                 break;
             case GAME:
-                source = "Game";
+                filepath = "Game";
                 controller = new GameController();
                 break;
-
-            default:
-                return;
         }
+
+        FXMLLoader loader;
+        Pane pane;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/layout/" + source + ".fxml"));
+            loader = new FXMLLoader(getClass().getResource("/application/layout/" + filepath + ".fxml"));
             controller.setMainController(this); // Set ref to main controller
             loader.setController(controller); // Set controller to view
-
-            Pane pane = loader.load();
-
-            mainView.getChildren().clear(); // Clear old view
-            mainView.getChildren().add(pane); // Change anchorpane to view
-
-            Scene scene = mainView.getScene();
-
-            if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
-
-            controller.initiate();
-
+            pane = loader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("FXML file for " + filepath + " could not be found.");
+            System.exit(1);
+            return;
         }
 
+        mainView.getChildren().clear(); // Clear old view
+        mainView.getChildren().add(pane); // Change anchorpane to view
+
+        Scene scene = mainView.getScene();
+        if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
+
+        controller.initiate(); // Call initiate for new controller
     }
 
     /**

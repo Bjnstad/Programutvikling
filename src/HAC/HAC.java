@@ -44,15 +44,14 @@ public class HAC {
     }
 
     /**
-     * Starting gameloop
+     * Starting gameloop running accordingly to FPS
      */
     public void play() {
         if(timeline == null) initTimeline();
 
+        gameMap.render(camera); // Render the gameboard to the screen.
         isRunning = true;
-
-        gameMap.render(camera);
-        timeline.play();
+        timeline.play(); // Start timeline
     }
 
     /**
@@ -103,20 +102,6 @@ public class HAC {
         player.setPosX(camera.getPlayerX());
         player.setPosY(camera.getPlayerY());
         gameMap.renderArea(camera, rx -3, ry -3,  rx +2, ry +2);
-
-        if(x == 0 && y < 1) {
-            player.animation.setWalkingDown();
-        } else if(x > 1 && y == 0){
-            player.animation.setWalkLeft();
-        }else if(x == 0.0 && y > 1){
-            player.animation.setWalkingUp();
-        }else if (x < 0 && y == 0){
-            player.animation.setWalkRight();
-        }
-
-        player.animation.startAnimation();
-        player.animation.updateAnimation();
-
 
         return true;
     }

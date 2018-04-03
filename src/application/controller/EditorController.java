@@ -83,17 +83,17 @@ public class EditorController implements Controller {
         editorHandler = new EditorHandler(mainController, map);
 
 
+        /*
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
             /**
              * This method makes the object move with a mouseclick.
              * @param event allows us to access the properties of MouseEvent.
-             */
+
             @Override
             public void handle(MouseEvent event) {
                 map.move(event.getX(), event.getY());
-                map.render();
             }
-        });
+        });*/
 
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -143,12 +143,31 @@ public class EditorController implements Controller {
 
                         int posX = Integer.parseInt(inputPosX.getText());
                         int posY = Integer.parseInt(inputPosY.getText());
-
                         listView.getSelectionModel().getSelectedItems();
 
-                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
-                        map.setGameObject(object, posX, posY);
-                        map.render();
+
+                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), posX, posY, inputX, inputY);
+                        map.setGameObject(object);
+
+
+                        System.out.println(object.getAsset());
+
+
+                      /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
+                                System.out.println(object.getAsset());
+
+                                map.setGameObject(object, (int)event.getX(), (int)event.getY());
+                                System.out.println((int)event.getX());
+                                System.out.println((int)event.getY());
+
+                            }
+                        }));
+*/
+
+
                     }
                 });
             }
