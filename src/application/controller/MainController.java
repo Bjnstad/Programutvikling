@@ -39,9 +39,6 @@ public class MainController implements Initializable {
     public void setState(State state) {
         if(controller != null) controller.onClose();
 
-        /**
-         * ....
-         */
         String source;
         switch (state) {
             case MAIN_MENU:
@@ -87,24 +84,14 @@ public class MainController implements Initializable {
     }
 
     /**
-     * ...
-     * @return main view
-     */
-    public AnchorPane getMainView() {
-        return mainView;
-    }
-
-    /**
-     * Gets the current width of the board.
-     * @return the width of the board
+     * @return the width of the window in pixels
      */
     public double getWidth() {
         return mainView.getWidth();
     }
 
     /**
-     * Gets the current height of the board.
-     * @return the height of the board
+     * @return the height of the window in pixels
      */
     public double getHeight() {
         return mainView.getHeight();

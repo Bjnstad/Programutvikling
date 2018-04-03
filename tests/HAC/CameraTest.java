@@ -32,18 +32,6 @@ public class CameraTest {
 
         assertTrue(testValues(camera.getPlayerX(), 1.5));
         assertTrue(testValues(camera.getPlayerY(), 1.5));
-        assertTrue(testValues(camera.getPlayerX(), 1.5));
-        assertTrue(testValues(camera.getPlayerY(), 1.5));
-        assertTrue(testValues(camera.getPlayerX(), 1.5));
-        assertTrue(testValues(camera.getPlayerY(), 1.5));
-        assertTrue(testValues(camera.getPlayerX(), 1.5));
-        assertTrue(testValues(camera.getPlayerY(), 1.5));
-        assertTrue(testValues(camera.getPlayerX(), 1.5));
-        assertTrue(testValues(camera.getPlayerY(), 1.5));
-        assertTrue(testValues(camera.getPlayerX(), 1.5));
-        assertTrue(testValues(camera.getPlayerY(), 1.5));
-        assertTrue(testValues(camera.getPlayerX(), 1.5));
-        assertTrue(testValues(camera.getPlayerY(), 1.5));
 
         camera.setPlayerPosition(234, 22);
 
@@ -56,19 +44,12 @@ public class CameraTest {
      */
     @Test
     public void centerValues() {
-        Canvas canvas = new Canvas();
-        canvas.setHeight(400);
-        canvas.setWidth(800);
+        Camera camera = new Camera(new Canvas(), 200, 200);
 
-        Camera camera = new Camera(canvas, 200, 200);
+        assertTrue(testValues(camera.getCenterX(), 200/2));
+        assertTrue(testValues(camera.getCenterY(), 200/2));
 
-        assertTrue(testValues(camera.getCenterX(), 800/2));
-        assertTrue(testValues(camera.getCenterY(), 400/2));
-
-        canvas.setWidth(234);
-        canvas.setHeight(456);
         camera.calcOffset();
-
         assertTrue(testValues(camera.getCenterX(), 234/2));
         assertTrue(testValues(camera.getCenterY(),456/2));
     }

@@ -19,6 +19,8 @@ public interface Controller {
      * Description
      */
     void onClose();
+
+    //TODO: need rework
     EventHandler<KeyEvent> getEventHandler();
 
     /**

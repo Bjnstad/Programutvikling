@@ -5,9 +5,6 @@ import HAC.sprite.Sprite;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.State;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -25,7 +22,7 @@ public class GameController implements Controller {
     Canvas graphics;
 
     private MainController mainController; // Parent controller
-    private HAC game;
+    private HAC game; // Instance of game
 
     /**
      * On start of state
@@ -49,32 +46,14 @@ public class GameController implements Controller {
                         game.shoot(event.getX(), event.getY());
                     }
                 });
-
-
-        // ReadOnlyDoubleProperty widthProperty = mainController.getMainView().widthProperty();
-        //ReadOnlyDoubleProperty heightProperty = mainController.getMainView().heightProperty();
-
-        //  graphics.widthProperty().bind(widthProperty);
-        //  graphics.heightProperty().bind(heightProperty);
-
-        // graphics.widthProperty().addListener(event -> game.resize());
-        // graphics.heightProperty().addListener(event -> game.resize());
-
-
-        //game.setDevMode(true);
-        //game.setGrid(true);
-
     }
-
-    /**
-     * Render canvas, called with time interval from @MainController
-     */
 
      /**
      * On state close
      */
     @Override
     public void onClose() {
+
     }
 
     /**
@@ -109,8 +88,10 @@ public class GameController implements Controller {
         });
     }
 
-
-
+    /**
+     * Sets parent
+     * @param mainController
+     */
     @Override
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
