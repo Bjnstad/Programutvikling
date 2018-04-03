@@ -76,7 +76,6 @@ public class EditorController implements Controller {
             @Override
             public void handle(MouseEvent event) {
                 map.move(event.getX(), event.getY());
-                map.render();
             }
         });
 
@@ -129,7 +128,7 @@ public class EditorController implements Controller {
 
                         GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), posX, posY, inputX, inputY);
                         map.setGameObject(object);
-                        map.render();
+
                     }
                 });
             }

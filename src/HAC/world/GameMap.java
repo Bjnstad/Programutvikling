@@ -71,34 +71,10 @@ public class GameMap {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Add @GameObject to the board,
      * @param gameObject
-     * @param posX
-     * @param posY
+     *
      * @return if added returns true, false if coordinates is taken or
      */
     public boolean addGameObject(GameObject gameObject) {
@@ -175,6 +151,14 @@ public class GameMap {
 
         for (GameObject gameObject : gameObjects) {
             if(gameObject != null) gc.drawImage(gameObject.getAsset(), gameObject.getPosX(), gameObject.getPosY(), gameObject.getSizeX(), gameObject.getSizeY());
+
         }
+    }
+
+    public void drawObject(GameObject gameObject, Camera camera){
+        GraphicsContext gc = camera.getGraphicsContext();
+
+        gc.drawImage(gameObject.getAsset(),camera.scaleX(gameObject.getPosX()), camera.scaleY(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+
     }
 }
