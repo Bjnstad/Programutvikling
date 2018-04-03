@@ -69,29 +69,6 @@ public class GameMap {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Add @GameObject to the board,
      * @param gameObject
@@ -164,15 +141,15 @@ public class GameMap {
             }
         }
 
-        /* Render objects *//*
-        for(int y = 0; y <=  gameBoard.length; y++) {
-            for(int x = 0; x <=  gameBoard[0].length; x++) {
+
+       /* for(int y = 0; y <=  gameBoard.length-1; y++) {
+            for(int x = 0; x <=  gameBoard[0].length-1; x++) {
                 GameObject gameObject = getObject(x, y);
                 if(gameObject != null) {
                     // Is object
                     gc.setFill(Color.RED);
                     gc.fillRect(camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
-                    //gc.drawImage(gameObject.getAsset(),camera.scaleX(x), camera.scaleY(y), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+                    gc.drawImage(gameObject.getAsset(),camera.scaleX(x), camera.scaleY(y), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
 
                 }
             }
@@ -188,5 +165,12 @@ public class GameMap {
                 }
             }
         }*/
+    }
+
+    public void drawObject(GameObject gameObject, Camera camera, int xPOS, int yPOS){
+        GraphicsContext gc = camera.getGraphicsContext();
+
+        gc.drawImage(gameObject.getAsset(),camera.scaleX(xPOS), camera.scaleY(yPOS), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+
     }
 }

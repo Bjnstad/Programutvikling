@@ -40,7 +40,7 @@ public class HACEditor {
 
         this.gameMap = gameMap;
         this.canvas = canvas;
-        this.camera = new Camera(canvas, 200, 200);
+        this.camera = new Camera(canvas, 500, 500);
 
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
@@ -125,11 +125,11 @@ public class HACEditor {
         render();
     }
 
-    public boolean setGameObject(GameObject gameObjects, int posX, int posY) {
-        gameMap.setGameObject(gameObjects, posX, posY);
-        exportHac.addElement(gameObjects, posX, posY);
-        this.render();
+    public boolean setGameObject(GameObject gameObject, int posX, int posY) {
+        System.out.println(gameMap.setGameObject(gameObject, posX, posY));
+        exportHac.addElement(gameObject, posX, posY);
 
+        gameMap.drawObject(gameObject,camera ,posX, posY);
         return true;
     }
 
