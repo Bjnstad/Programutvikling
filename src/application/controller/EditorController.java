@@ -127,8 +127,8 @@ public class EditorController implements Controller {
 
                         listView.getSelectionModel().getSelectedItems();
 
-                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
-                        map.setGameObject(object, posX, posY);
+                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), posX, posY, inputX, inputY);
+                        map.setGameObject(object);
                         map.render();
                     }
                 });

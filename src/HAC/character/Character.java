@@ -1,17 +1,9 @@
 package HAC.character;
 
 import HAC.Camera;
-import HAC.sprite.Animation;
-import HAC.sprite.AnimationReader;
-import HAC.sprite.Sprite;
 import HAC.sprite.SpriteAnimation;
-import HAC.world.GameMap;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -26,8 +18,6 @@ public abstract class Character {
     public CharacterAvatar animation;
     private int sizeX;
     private int sizeY;
-    private ArrayList<Bullet> bullets = new ArrayList<>();
-
 
     /**
      * Character in the game
@@ -46,6 +36,15 @@ public abstract class Character {
      * @param posX
      */
     public void setPosX(double posX) {
+        double speed = posX - this.posX;
+        if(speed < 1) {
+            animation.setWalkLeft();
+        } else {
+            animation.setWalkRight();
+        }
+        animation.startAnimation();
+        animation.updateAnimation();
+
         this.posX = posX;
     }
 
@@ -54,6 +53,15 @@ public abstract class Character {
      * @param posY
      */
     public void setPosY(double posY) {
+        double speed = posY - this.posY;
+        if(speed > 1) {
+            animation.setWalkingUp();
+        } else {
+            animation.setWalkingDown();
+        }
+        animation.startAnimation();
+        animation.updateAnimation();
+
         this.posY = posY;
     }
 
@@ -64,6 +72,14 @@ public abstract class Character {
      */
 
     public void addPosX(double speed) {
+        if(speed < 0) {
+            animation.setWalkLeft();
+        } else {
+            animation.setWalkRight();
+        }
+        animation.startAnimation();
+        animation.updateAnimation();
+
         this.posX += speed;
     }
 
@@ -72,6 +88,14 @@ public abstract class Character {
      * @param speed
      */
     public void addPosY(double speed) {
+        if(speed < 0) {
+            animation.setWalkingUp();
+        } else {
+            animation.setWalkingDown();
+        }
+        animation.startAnimation();
+        animation.updateAnimation();
+
         this.posY += speed;
     }
 
@@ -107,22 +131,6 @@ public abstract class Character {
         return sizeY;
     }
 
-
-    public void shoot(double startX, double startY, double endX, double endY){
-        Bullet b = new Bullet(startX, startY, endX, endY);
-        bullets.add(b);
-        //  animation = shootLeft;
-        // animation.start();
-    }
-
-    /**
-     * Arraylist of bullets
-     * @return bullets
-     */
-    public ArrayList getBullets(){
-        return bullets;
-    }
-
     /**
      *
      * @param camera
@@ -130,13 +138,5 @@ public abstract class Character {
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
         gc.drawImage(SwingFXUtils.toFXImage(animation.getAnimation().getSprite(), null), posX*camera.getScale(), posY*camera.getScale(), sizeX * camera.getScale(), sizeY * camera.getScale());
-
-    }
-
-    public void renderEnemy(SpriteAnimation animation, Camera camera, Enemy enemy) {
-        // RENDER PLAYER
-        GraphicsContext gc = camera.getGraphicsContext();
-        // RENDER ENEMY
-        gc.drawImage(SwingFXUtils.toFXImage(animation.getSprite(), null), camera.scaleX(enemy.getPosX()), camera.scaleY(enemy.getPosY()), sizeX * camera.getScale(), sizeY * camera.getScale());
     }
 }
