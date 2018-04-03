@@ -11,12 +11,12 @@ public interface Controller {
     State state = null;
 
     /**
-     * Description
+     * Called when controller is to be set.
      */
     void initiate();
 
     /**
-     * Description
+     * Called when controller is being replaced.
      */
     void onClose();
 
@@ -24,7 +24,7 @@ public interface Controller {
     EventHandler<KeyEvent> getEventHandler();
 
     /**
-     * Sets the main controller of the game
+     * Sets the main controller of the game.
      * @param mainController
      * @return main controller
      */

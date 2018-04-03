@@ -34,7 +34,7 @@ public class MainController implements Initializable {
 
 
     /**
-     * Change view of the mainframe 
+     * Change view of the mainframe
      * @param state what state of application should be shown in the main frame
      */
     public void setState(State state) {
