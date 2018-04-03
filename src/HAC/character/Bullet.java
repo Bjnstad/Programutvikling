@@ -1,7 +1,7 @@
 package HAC.character;
 
 /**
- * The bullet in the game
+ * The bullet that is used to shoot in the game.
  */
 public class Bullet {
     private final double speed = 7;
@@ -11,7 +11,7 @@ public class Bullet {
     private boolean visible;
 
     /**
-     * Description
+     * The coordinates to the bullets.
      * @param startX coordinate of the cell
      * @param startY coordinate of the cell
      * @param endX coordinate of the cell
@@ -29,7 +29,7 @@ public class Bullet {
     }
 
     /**
-     * ..
+     * Updates the game
      */
     public void update(){
         x += velocityX;
@@ -41,15 +41,15 @@ public class Bullet {
     }
 
     /**
-     * Gets the state of x
-     * @return x
+     * Gets the state of x.
+     * @return the state to x.
      */
     public double getX() {
         return x;
     }
 
     /**
-     * Sets the state of x
+     * Sets the state of x.
      * @param x
      */
     public void setX(int x) {
@@ -57,7 +57,7 @@ public class Bullet {
     }
 
     /**
-     * Gets the state of y
+     * Gets the state of y.
      * @return y
      */
     public double getY() {
@@ -65,7 +65,7 @@ public class Bullet {
     }
 
     /**
-     * Sets the state of y
+     * Sets the state of y.
      * @param y
      */
     public void setY(int y) {

@@ -22,7 +22,7 @@ public class MainController implements Initializable {
     private Controller controller; // Current controller
 
     /**
-     * Description
+     * Initialize location and resources to the game
      * @param location
      * @param resources
      */
@@ -31,10 +31,10 @@ public class MainController implements Initializable {
         setState(State.MAIN_MENU);
     }
 
-
     /**
-     * Sets the state (of the game)?
-     * @param state
+     * Sets the state
+     * If controller is not null, then controller closes
+     * @param state in the game
      */
     public void setState(State state) {
         if(controller != null) controller.onClose();
@@ -54,7 +54,6 @@ public class MainController implements Initializable {
                 controller = new GameController();
                 break;
 
-
             default:
                 return;
         }
@@ -73,8 +72,6 @@ public class MainController implements Initializable {
 
             if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
 
-
-
             controller.initiate();
 
         } catch (IOException e) {
@@ -84,13 +81,15 @@ public class MainController implements Initializable {
     }
 
     /**
-     * @return the width of the window in pixels
+     * In this method it gets the width to the gameboard.
+     * @return the width of the window in pixels.
      */
     public double getWidth() {
         return mainView.getWidth();
     }
 
     /**
+     * In this method it gets the height to the gameboard.
      * @return the height of the window in pixels
      */
     public double getHeight() {

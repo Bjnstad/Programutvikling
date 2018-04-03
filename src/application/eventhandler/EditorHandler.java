@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * Created by henrytran1 on 22/03/2018.
+ * This class handels the editor.
  */
 public class EditorHandler{
 
@@ -15,10 +16,12 @@ public class EditorHandler{
     public EditorHandler(MainController mainController, HACEditor hacEditor){
         this.mainController = mainController;
         this.map = hacEditor;
-
     }
 
-
+    /**
+     * Gets the event handler when a key is pressed
+     * @param event allows us to access the properties of KeyEvent.
+     */
     public void getEventHandler(KeyEvent event) {
         double speed = 6;
 
@@ -44,5 +47,4 @@ public class EditorHandler{
                     break;
             }
         }
-
 }

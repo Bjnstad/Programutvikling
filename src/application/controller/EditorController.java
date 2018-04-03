@@ -23,6 +23,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.File;
 
+/**
+ * Implements the editor controller to controller
+ */
 public class EditorController implements Controller {
 
     private MainController mainController;
@@ -32,30 +35,37 @@ public class EditorController implements Controller {
     final FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
 
-
     @FXML
     Canvas graphics;
 
     @FXML
     ListView listView;
 
-
-
-
    // public EditorController() {
    //     super(State.EDITOR);
    // }
 
+    /**
+     * This method creates a new file.
+     * @param event allows us to access the properties of ActionEvent.
+     */
     @FXML
     public void newFile(ActionEvent event){
         mainController.setState(State.MAIN_MENU);
     }
 
+    /**
+     * This method sets the main controller.
+     * @param mainController shows what on the screen of the game.
+     */
     @Override
     public void setMainController (MainController mainController) {
         this.mainController = mainController;
     }
 
+    /**
+     * Initiates fileHandler.
+     */
     @Override
     public void initiate () {
         FileHandler fileHandler = new FileHandler();
@@ -72,7 +82,12 @@ public class EditorController implements Controller {
 
         editorHandler = new EditorHandler(mainController, map);
 
+
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
+            /**
+             * This method makes the object move with a mouseclick.
+             * @param event allows us to access the properties of MouseEvent.
+             */
             @Override
             public void handle(MouseEvent event) {
                 map.move(event.getX(), event.getY());
@@ -83,8 +98,12 @@ public class EditorController implements Controller {
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
+            /**
+             *
+             * @param mouseEvent
+             */
             @Override
-            public void handle(MouseEvent arg0) {
+            public void handle(MouseEvent mouseEvent) {
 
                 final Stage primaryStage = new Stage();
                 primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -134,21 +153,31 @@ public class EditorController implements Controller {
                 });
             }
         });
-
-
     }
 
+    /**
+     * This method closes the state of the game.
+     * @param event allows us to access the properties of ActionEvent.
+     */
     @FXML
     private void close(ActionEvent event) {
         mainController.setState(State.MAIN_MENU);
     }
 
+    /**
+     * This method makes it possible to save a file.
+     * @param event allows us to access the properties of ActionEvent.
+     */
     @FXML
     private void save(ActionEvent event){
         map.saveFile();
         System.out.println("Saved");
     }
 
+    /**
+     * This method makes it possible to import a file.
+     * @param event allows us to access the properties of ActionEvent.
+     */
     @FXML
     private void Import(ActionEvent event){
         System.out.println("hei");
@@ -156,23 +185,24 @@ public class EditorController implements Controller {
         if (file != null) {
             map.openFile(file);
         }
-
     }
 
-
+    /**
+     *
+     */
     @Override
     public void onClose () {
 
     }
 
+    /**
+     * This method gets the event handler.
+     * @return the current event
+     */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
         return (event -> {
             editorHandler.getEventHandler(event);
         });
     }
-
-
-
-
 }

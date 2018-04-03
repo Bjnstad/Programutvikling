@@ -66,6 +66,7 @@ public class SpriteAnimation {
     /**
      * Update the spriteanimation
      */
+
     public void update(){
         if(!stopped){
             frameCount++;

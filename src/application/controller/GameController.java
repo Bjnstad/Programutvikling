@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 /**
- * GameController implements Controller
+ * GameController implements Controller.
  */
 public class GameController implements Controller {
 
@@ -25,7 +25,7 @@ public class GameController implements Controller {
     private HAC game; // Instance of game
 
     /**
-     * On start of state
+     * On start of state.
      */
     @Override
     public void initiate() {
@@ -33,13 +33,12 @@ public class GameController implements Controller {
         game.setDevMode(false);
 
 
-
         // TODO: #1 Move to own controller class
         graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
                     /**
-                     * Description
-                     * @param event X, Y
+                     *
+                     * @param event allows us to access the properties of ActionEvent.
                      */
                     @Override
                     public void handle(MouseEvent event) {

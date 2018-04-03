@@ -5,28 +5,22 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
 /**
- * Interface that represents the (logic)? for Game of Life.
+ * Interface that represents the controller of the game.
+ * @author ceciliethoresen
  */
 public interface Controller {
-    State state = null;
+    State state = null; //There is differents states in the game.
 
-    /**
-     * Description
-     */
     void initiate();
 
-    /**
-     * Description
-     */
     void onClose();
 
     //TODO: need rework
     EventHandler<KeyEvent> getEventHandler();
 
     /**
-     * Sets the main controller of the game
-     * @param mainController
-     * @return main controller
+     * This method sets the main controller of the game.
+     * @param mainController shows what on the screen of the game.
      */
     void setMainController(MainController mainController);
 }
