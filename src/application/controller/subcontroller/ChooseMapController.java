@@ -23,9 +23,9 @@ public class ChooseMapController implements SubController {
 
 
     private ObservableList<String> getAllNames() {
+        if (!dir.isDirectory()) return null;
         ObservableList<String> res = FXCollections.observableArrayList();
 
-        if (!dir.isDirectory()) throw new IllegalAccessException(dir + "Does not exist")
             for (final File f : dir.listFiles(IMAGE_FILTER)) {
             System.out.println(getFileExtension(f));
 
