@@ -142,7 +142,6 @@ public class HACEditor {
         ArrayList<GameObject> objects = hacParser.parseFile(file);
         for (int i = 0; i < objects.size(); i++) {
             setGameObject(objects.get(i));
-
         }
 
 

@@ -32,7 +32,7 @@ public class EditorController implements Controller {
     private FileHandler fileHandler;
     private ImageList imageList;
     private HACEditor map;
-    final FileChooser fileChooser = new FileChooser();
+    private FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
 
     @FXML
@@ -199,8 +199,10 @@ public class EditorController implements Controller {
      */
     @FXML
     private void Import(ActionEvent event){
-        System.out.println("hei");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Hac files", "hac");
+        fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
+
         if (file != null) {
             map.openFile(file);
         }

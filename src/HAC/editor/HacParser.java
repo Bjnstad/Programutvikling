@@ -4,14 +4,13 @@ import HAC.world.GameObject;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import sun.misc.BASE64Decoder;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+
+
 
 /**
  * Created by henrytran1 on 06/03/2018.
@@ -30,8 +29,6 @@ public class HacParser {
 
     public ArrayList<GameObject> parseFile(File file){
 
-
-
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));
@@ -48,13 +45,8 @@ public class HacParser {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage image = ImageIO.read(bis);
                 bis.close();
-
-
                 addObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
             }
-
-                                                                                                                                                                                                                                                                                                                                    
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

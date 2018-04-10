@@ -25,7 +25,6 @@ public class ExportHac {
         base64String = base64String.substring(0, base64String.length()-5);
 
         StringBuilder sb = new StringBuilder();
-        //sb.append("image_asset: " + gameObject.getAsset() +"," + System.getProperty("line.separator"));
         sb.append(base64String + "&");
         sb.append(gameObject.getSizeX() +"&");
         sb.append(gameObject.getSizeY() +"&");
@@ -56,6 +55,7 @@ public class ExportHac {
             sb.append(content);
         }
         String content = sb.toString();
+        //File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
         File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
 
 
