@@ -3,7 +3,6 @@ package application.controller;
 import HAC.sprite.Sprite;
 import HAC.HACEditor;
 import application.State;
-import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.eventhandler.EditorHandler;
@@ -29,7 +28,6 @@ import java.io.File;
 public class EditorController implements Controller {
 
     private MainController mainController;
-    private FileHandler fileHandler;
     private ImageList imageList;
     private HACEditor map;
     private FileChooser fileChooser = new FileChooser();
@@ -68,7 +66,7 @@ public class EditorController implements Controller {
      */
     @Override
     public void initiate () {
-        FileHandler fileHandler = new FileHandler();
+        //FileHandler fileHandler = new FileHandler();
 
         imageList = new ImageList();
 

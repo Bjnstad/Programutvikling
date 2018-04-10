@@ -1,5 +1,7 @@
 package HAC.editor;
 
+import HAC.sprite.Sprite;
+import HAC.world.GameMap;
 import HAC.world.GameObject;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -16,22 +18,16 @@ import java.util.ArrayList;
  * Created by henrytran1 on 06/03/2018.
  */
 public class HacParser {
-    private ArrayList<GameObject> hacContent = new ArrayList<>();
 
 
 
-    public void addObject(Image image, int sizeX, int sizeY, int posX, int posY){
-        GameObject hf = new GameObject(image, posY, posX, sizeX, sizeY);
 
-        hacContent.add(hf);
-
-    }
-
-    public ArrayList<GameObject> parseFile(File file){
-
+    public GameMap parseFile(File file){
+        GameMap map = new GameMap(20, 20, new Sprite("background", 32));;
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));
+            
 
             String[] obj = b.readLine().split("#");
             BASE64Decoder decoder = new BASE64Decoder();
@@ -43,12 +39,16 @@ public class HacParser {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage image = ImageIO.read(bis);
                 bis.close();
-                addObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
+
+                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
+
+                System.out.println(map.addGameObject(hf));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }return hacContent;
+        }
+        return map;
     }
 }
