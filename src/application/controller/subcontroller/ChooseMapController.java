@@ -5,32 +5,30 @@ import application.controller.GameController;
 import application.controller.MainMenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 
 public class ChooseMapController implements SubController {
 
+    @FXML
+    ListView maps;
+
+
+
+
     static final File dir = new File("assets/maps");
     private MainMenuController mainMenuController;
-
-    public ChooseMapController() {
-
-        maps.setItems(getAllNames());
-    }
 
 
     private ObservableList<String> getAllNames() {
         if (!dir.isDirectory()) return null;
         ObservableList<String> res = FXCollections.observableArrayList();
 
-            for (final File f : dir.listFiles(IMAGE_FILTER)) {
-            System.out.println(getFileExtension(f));
-
-            if(getFileExtension(f).equals("png")) {
-                System.out.println(f.getName());
+            for (final File f : dir.listFiles()) {
+            if(getFileExtension(f).equals("mhac")) {
                 res.add(f.getName());
             }
         }
@@ -48,8 +46,6 @@ public class ChooseMapController implements SubController {
     }
 
 
-    @FXML
-    ListView maps;
 
     @FXML
     public void importMap(ActionEvent event) {
@@ -67,5 +63,13 @@ public class ChooseMapController implements SubController {
         if (!(controller instanceof MainMenuController))
             throw new IllegalStateException("Unexpected class, should be MainMenuController");
         this.mainMenuController = (MainMenuController) controller; // Cast to MainMenuController.
+
+        System.out.println(maps);
+        //maps.setItems(getAllNames());
+    }
+
+    @Override
+    public void init() {
+        maps.setItems(getAllNames());
     }
 }

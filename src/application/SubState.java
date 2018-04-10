@@ -2,5 +2,6 @@ package application;
 
 public enum SubState {
     PAUSE_MENU,
-    DIE;
+    DIE,
+    CHOOSE_MAP;
 }

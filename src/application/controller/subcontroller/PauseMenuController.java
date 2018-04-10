@@ -18,6 +18,11 @@ public class PauseMenuController implements SubController {
         gameController = (GameController)controller; // Cast controller to GameController
     }
 
+    @Override
+    public void init() {
+
+    }
+
 
     @FXML
     public void resume(javafx.event.ActionEvent event) {

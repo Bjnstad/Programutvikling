@@ -17,6 +17,11 @@ public class DieController implements SubController {
         this.gameController = (GameController) controller; // Cast to GameController.
     }
 
+    @Override
+    public void init() {
+
+    }
+
     @FXML
     public void retry(ActionEvent event) {
         //gameController.new

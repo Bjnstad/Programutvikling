@@ -2,6 +2,7 @@ package application.controller;
 
 import application.State;
 import application.SubState;
+import application.controller.subcontroller.ChooseMapController;
 import application.controller.subcontroller.DieController;
 import application.controller.subcontroller.PauseMenuController;
 import application.controller.subcontroller.SubController;
@@ -101,6 +102,11 @@ public class MainController implements Initializable {
                 subController = new DieController();
                 break;
 
+            case CHOOSE_MAP:
+                filepath = "ChooseMap";
+                subController = new ChooseMapController();
+                break;
+
             default:
                 return;
 
@@ -115,6 +121,7 @@ public class MainController implements Initializable {
             loader.setController(subController); // Set controller to view
             pane = loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             System.err.println("FXML file for " + filepath + " could not be found or is invalid.");
             System.exit(1);
             return;
@@ -122,6 +129,7 @@ public class MainController implements Initializable {
 
 
         mainView.getChildren().add(pane);
+        subController.init();
     }
 
     /**

@@ -4,4 +4,6 @@ import application.controller.Controller;
 
 public interface SubController {
     void setSubController(Controller controller);
+
+    void init();
 }

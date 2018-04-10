@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.State;
+import application.SubState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -48,6 +49,6 @@ public class MainMenuController implements Controller {
 
     @FXML
     public void play(ActionEvent event) {
-        mainController.setState(State.GAME);
+        mainController.addSubState(SubState.CHOOSE_MAP);
     }
 }
