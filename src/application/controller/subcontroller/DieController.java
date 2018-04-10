@@ -14,7 +14,7 @@ public class DieController implements SubController {
     public void setSubController(Controller controller) {
         if (controller == null) throw new NullPointerException("Controller cant be null");
         if (!(controller instanceof GameController)) throw new IllegalStateException("Unexpected class, should be GameController");
-        this.gameController = (GameController) controller; // Cast to die controller.
+        this.gameController = (GameController) controller; // Cast to GameController.
     }
 
     @FXML
