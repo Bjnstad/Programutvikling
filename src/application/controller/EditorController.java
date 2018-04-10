@@ -199,7 +199,8 @@ public class EditorController implements Controller {
      */
     @FXML
     private void Import(ActionEvent event){
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Hac files", "hac");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mHac files", "*.mhac");
+
         fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
 

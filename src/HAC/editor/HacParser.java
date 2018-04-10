@@ -39,8 +39,6 @@ public class HacParser {
 
             for (int i = 0; i <obj.length ; i++) {
                 String[] objContent = obj[i].split("&");
-
-
                 imageByte = decoder.decodeBuffer(objContent[0]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage image = ImageIO.read(bis);

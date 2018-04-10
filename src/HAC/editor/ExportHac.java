@@ -56,7 +56,7 @@ public class ExportHac {
         }
         String content = sb.toString();
         //File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
-        File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
+        File file = new File("assets/maps/newMap.mhac");
 
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
