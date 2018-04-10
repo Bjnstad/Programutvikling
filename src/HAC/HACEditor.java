@@ -139,10 +139,9 @@ public class HACEditor {
     }
 
     public void openFile(File file) {
-        ArrayList<GameObject> objects = hacParser.parseFile(file);
-        for (int i = 0; i < objects.size(); i++) {
-            setGameObject(objects.get(i));
-        }
+        gameMap = hacParser.parseFile(file);
+        this.render();
+
 
 
     }
