@@ -65,12 +65,16 @@ public class Camera {
 
 
 
+    public void setWidth(double width) {
+        this.width = width;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
 
-
-
-
-
-
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+    }
 
 
 

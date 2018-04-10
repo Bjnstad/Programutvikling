@@ -25,8 +25,8 @@ public class GameController implements Controller {
 
     public GameController(GameMap gameMap) {
         GameMap gm = gameMap;
-        if(gameMap == null) gm = createSimpleMap();
-        game = new HAC(gm, graphics, mainController.getWidth(), mainController.getHeight());
+       // if(gameMap == null) gm = createSimpleMap();
+        game = new HAC(gm, new Canvas(), 0, 0);
     }
 
     /**
@@ -34,6 +34,19 @@ public class GameController implements Controller {
      */
     @Override
     public void initiate() {
+        game.getCamera().setWidth(mainController.getWidth());
+        game.getCamera().setHeight(mainController.getHeight());
+        game.getCamera().setCanvas(graphics);
+        game.getCamera().calcOffset();
+
+        game.getPlayer().setPosX(game.getCamera().getPlayerX());
+        game.getPlayer().setPosY(game.getCamera().getPlayerY());
+
+
+        System.out.println(game.getGameMap().getGameObjects().length);
+
+
+        game.play();
     }
 
      /**

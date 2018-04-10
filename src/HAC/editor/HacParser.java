@@ -34,6 +34,8 @@ public class HacParser {
             byte[] imageByte;
 
             for (int i = 0; i <obj.length ; i++) {
+                System.out.println("THE NUMBER IS " + i);
+
                 String[] objContent = obj[i].split("&");
                 imageByte = decoder.decodeBuffer(objContent[0]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);

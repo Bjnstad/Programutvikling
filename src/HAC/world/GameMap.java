@@ -83,16 +83,23 @@ public class GameMap {
 
         for (int x = posX; x < posX + gameObject.getSizeX(); x++) {
             for (int y = posY; y < posY + gameObject.getSizeY(); y++) {
-                if (willCollide(x, y)) return false;
+                //if (willCollide(x, y)) return false;
             }
         }
 
-        GameObject[] result = new GameObject[this.gameObjects.length];
 
-        // Copy in old objects
+
+
+        GameObject[] result = new GameObject[gameObjects.length +1];
         for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
 
-        result[result.length -1] = gameObject;
+        int re = gameObjects.length -1;
+        if(re < 0) re = 0;
+        // Copy in old objects
+
+        result[re] = gameObject;
+
+        gameObjects = result;
         return true;
     }
 
@@ -150,8 +157,8 @@ public class GameMap {
         }
 
         for (GameObject gameObject : gameObjects) {
-            if(gameObject != null) gc.drawImage(gameObject.getAsset(), gameObject.getPosX(), gameObject.getPosY(), gameObject.getSizeX(), gameObject.getSizeY());
-
+            System.out.println("REDNER");
+            if(gameObject != null) gc.drawImage(gameObject.getAsset(), gameObject.getPosX() * camera.getScale(), gameObject.getPosY() * camera.getScale(), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
         }
     }
 
@@ -160,5 +167,10 @@ public class GameMap {
 
         gc.drawImage(gameObject.getAsset(),camera.scaleX(gameObject.getPosX()), camera.scaleY(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
 
+    }
+
+
+    public GameObject[] getGameObjects() {
+        return gameObjects;
     }
 }

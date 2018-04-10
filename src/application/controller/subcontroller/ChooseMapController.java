@@ -1,6 +1,6 @@
 package application.controller.subcontroller;
 
-import HAC.filehandler.FileHandler;
+import HAC.editor.HacParser;
 import HAC.sprite.Sprite;
 import HAC.world.GameMap;
 import application.controller.Controller;
@@ -57,8 +57,8 @@ public class ChooseMapController implements SubController {
 
     @FXML
     public void play(ActionEvent event) {
-        GameMap gameMap = new GameMap(50,50 , new Sprite("background", 32));
-        System.out.println(maps.getSelectionModel().getSelectedItem().toString());
+        HacParser hacParser = new HacParser();
+        GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
         mainMenuController.loadMap(gameMap);
 
     }

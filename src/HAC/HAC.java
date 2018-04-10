@@ -40,7 +40,7 @@ public class HAC {
         player.setPosY(camera.getPlayerY());
         this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
 
-        play(); // Initate game
+        //play(); // Initate game
     }
 
     /**
@@ -154,5 +154,18 @@ public class HAC {
      */
     public boolean isRunning() {
         return isRunning;
+    }
+
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public GameMap getGameMap() {
+        return gameMap;
     }
 }
