@@ -2,6 +2,9 @@ package application.controller;
 
 import application.State;
 import application.SubState;
+import application.controller.subcontroller.DieController;
+import application.controller.subcontroller.PauseMenuController;
+import application.controller.subcontroller.SubController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -93,8 +95,14 @@ public class MainController implements Initializable {
                 filepath = "PauseMenu";
                 subController = new PauseMenuController();
                 break;
-                default:
-                    return;
+
+            case DIE:
+                filepath = "Die";
+                subController = new DieController();
+                break;
+
+            default:
+                return;
 
         }
 

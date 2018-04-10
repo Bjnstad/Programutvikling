@@ -1,13 +1,11 @@
 package HAC.character;
 
-import javafx.scene.image.Image;
-
 public class Player extends Character {
     /**
      * Player in the game
      */
     public Player() {
-        super(new CharacterAvatar("player_animations_walking", 64), 2, 2);
+        super(new CharacterAvatar("player_animations_walking", 64), 1, 1);
     }
 
     public boolean willCollide(Enemy enemy) {

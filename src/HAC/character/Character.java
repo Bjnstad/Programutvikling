@@ -37,7 +37,9 @@ public abstract class Character {
      */
     public void setPosX(double posX) {
         double speed = posX - this.posX;
-        if(speed < 1) {
+        if(speed == 0) return;
+
+        if(speed < 0) {
             animation.setWalkLeft();
         } else {
             animation.setWalkRight();
@@ -54,11 +56,15 @@ public abstract class Character {
      */
     public void setPosY(double posY) {
         double speed = posY - this.posY;
-        if(speed > 1) {
+        if(speed == 0) return;
+
+        if(speed < 0) {
             animation.setWalkingUp();
         } else {
             animation.setWalkingDown();
         }
+
+        System.out.println(speed);
         animation.startAnimation();
         animation.updateAnimation();
 

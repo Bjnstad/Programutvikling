@@ -29,21 +29,6 @@ public class GameController implements Controller {
     @Override
     public void initiate() {
         game = new HAC(createSimpleMap(), graphics, mainController.getWidth(), mainController.getHeight());
-        game.setDevMode(false);
-
-
-        // TODO: #1 Move to own controller class
-        graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
-                new EventHandler<MouseEvent>(){
-                    /**
-                     *
-                     * @param event allows us to access the properties of ActionEvent.
-                     */
-                    @Override
-                    public void handle(MouseEvent event) {
-                        game.shoot(event.getX(), event.getY());
-                    }
-                });
     }
 
      /**

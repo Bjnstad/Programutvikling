@@ -1,10 +1,13 @@
-package application.controller;
+package application.controller.subcontroller;
 
 
+import application.controller.Controller;
+import application.controller.GameController;
+import application.controller.subcontroller.SubController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class PauseMenuController implements SubController{
+public class PauseMenuController implements SubController {
 
     GameController gameController;
 
