@@ -5,6 +5,7 @@ import HAC.sprite.Sprite;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.State;
+import application.SubState;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -50,8 +51,27 @@ public class GameController implements Controller {
      */
     @Override
     public void onClose() {
+        save();
+    }
+
+
+    public void save() {
 
     }
+
+    public void resume() {
+        mainController.toMainView();
+        game.play();
+    }
+
+    public void exit() {
+        mainController.setState(State.MAIN_MENU);
+    }
+
+    public void load() {
+
+    }
+
 
     /**
      * Return EventHandler to add support for user input
@@ -77,10 +97,11 @@ public class GameController implements Controller {
                     game.move(-speed, 0);
                     break;
 
-
                 case ESCAPE:
-                    mainController.setState(State.MAIN_MENU);
+                    game.pause();
+                    mainController.addSubState(SubState.PAUSE_MENU);
                     break;
+
             }
         });
     }

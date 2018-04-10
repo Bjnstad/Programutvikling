@@ -50,8 +50,16 @@ public class HAC {
         if(timeline == null) initTimeline();
 
         gameMap.render(camera); // Render the gameboard to the screen.
-        isRunning = true;
         timeline.play(); // Start timeline
+        isRunning = true;
+    }
+
+    /**
+     * Pauses the game
+     */
+    public void pause() {
+        timeline.pause();
+        isRunning = false;
     }
 
     /**
@@ -116,9 +124,6 @@ public class HAC {
         System.out.println("YOU DIED!");
     }
 
-
-
-
     /**
      * Loads new map
      * @param gameMap map to load
@@ -128,9 +133,6 @@ public class HAC {
         this.gameMap = gameMap;
         gameMap.render(camera);
     }
-
-
-
 
     /**
      *
@@ -176,4 +178,7 @@ public class HAC {
         // camera.setPlayerPosition(x, y);
     }
 
+    public boolean isRunning() {
+        return isRunning;
+    }
 }

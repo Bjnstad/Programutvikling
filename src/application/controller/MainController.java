@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.State;
+import application.SubState;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -75,6 +76,44 @@ public class MainController implements Initializable {
         if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
 
         controller.initiate(); // Call initiate for new controller
+    }
+
+    public void toMainView() {
+        if(mainView.getChildren().size() > 1) {
+            mainView.getChildren().remove(1, mainView.getChildren().size());
+        }
+    }
+
+    public void addSubState(SubState subState) {
+        SubController subController;
+
+        String filepath = ""; // Path of the current file
+        switch (subState) {
+            case PAUSE_MENU:
+                filepath = "PauseMenu";
+                subController = new PauseMenuController();
+                break;
+                default:
+                    return;
+
+        }
+
+        FXMLLoader loader;
+        Pane pane;
+
+        try {
+            loader = new FXMLLoader(getClass().getResource("/application/layout/" + filepath + ".fxml"));
+            subController.setSubController(controller); // Set ref to main controller
+            loader.setController(subController); // Set controller to view
+            pane = loader.load();
+        } catch (IOException e) {
+            System.err.println("FXML file for " + filepath + " could not be found or is invalid.");
+            System.exit(1);
+            return;
+        }
+
+
+        mainView.getChildren().add(pane);
     }
 
     /**

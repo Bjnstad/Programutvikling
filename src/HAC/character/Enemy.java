@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Enemy extends Character {
 
-    private float speed = 3;
+    private float speed = 1;
 
 
     public Enemy(String spriteFileName, int sizeX, int sizeY, int posX, int posY) {
