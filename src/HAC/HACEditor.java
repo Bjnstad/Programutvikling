@@ -11,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Main class for game HAC
@@ -138,7 +139,12 @@ public class HACEditor {
     }
 
     public void openFile(File file) {
-        hacParser.parseFile(file);
+        ArrayList<GameObject> objects = hacParser.parseFile(file);
+        for (int i = 0; i < objects.size(); i++) {
+            setGameObject(objects.get(i));
+
+        }
+
 
     }
 

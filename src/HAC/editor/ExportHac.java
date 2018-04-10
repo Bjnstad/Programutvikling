@@ -1,11 +1,16 @@
 package HAC.editor;
 
 import HAC.world.GameObject;
+import javafx.embed.swing.SwingFXUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 /**
  * Created by henrytran1 on 06/03/2018.
@@ -16,18 +21,33 @@ public class ExportHac {
 
 
     public void addElement(GameObject gameObject){
+        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(gameObject.getAsset(), null), "png");
+        base64String = base64String.substring(0, base64String.length()-5);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("{" + System.getProperty("line.separator"));
-        sb.append("image_asset: " + gameObject.getAsset() +"," + System.getProperty("line.separator"));
-        sb.append("GameObject_SizeX: " + gameObject.getSizeX() +"," + System.getProperty("line.separator"));
-        sb.append("GameObject_SizeY: " + gameObject.getSizeY() +"," + System.getProperty("line.separator"));
-        sb.append("Position_X: " + gameObject.getPosX()+ "," + System.getProperty("line.separator"));
-        sb.append("Position_Y: " + gameObject.getPosY()+ "," + System.getProperty("line.separator"));
-        sb.append("}," + System.getProperty("line.separator"));
-
+        //sb.append("image_asset: " + gameObject.getAsset() +"," + System.getProperty("line.separator"));
+        sb.append(base64String + "&");
+        sb.append(gameObject.getSizeX() +"&");
+        sb.append(gameObject.getSizeY() +"&");
+        sb.append(gameObject.getPosX()+ "&");
+        sb.append(gameObject.getPosY()+ "&#");
 
         elements.add(sb.toString());
+    }
+
+    private String encodeImageToString(BufferedImage image, String type) {
+        String imageString = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        try {
+            ImageIO.write(image, type, bos);
+            byte[] imageBytes = bos.toByteArray();
+            imageString = Base64.getEncoder().encodeToString(imageBytes);
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return imageString;
     }
 
     public void createFile(){
