@@ -1,5 +1,6 @@
 package application.controller;
 
+import HAC.world.GameMap;
 import application.State;
 import application.SubState;
 import application.controller.subcontroller.ChooseMapController;
@@ -25,6 +26,7 @@ public class MainController implements Initializable {
     @FXML
     AnchorPane mainView;
     private Controller controller; // Current controller
+    private GameMap gameMap; // The current gamemap to play
 
     /**
      * Initialize location and resources to the game
@@ -54,7 +56,7 @@ public class MainController implements Initializable {
                 break;
             case GAME:
                 filepath = "Game";
-                controller = new GameController();
+                controller = new GameController(gameMap);
                 break;
         }
 
@@ -79,6 +81,10 @@ public class MainController implements Initializable {
         if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
 
         controller.initiate(); // Call initiate for new controller
+    }
+
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 
     public void toMainView() {

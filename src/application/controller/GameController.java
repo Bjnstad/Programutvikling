@@ -23,12 +23,17 @@ public class GameController implements Controller {
     private MainController mainController; // Parent controller
     private HAC game; // Instance of game
 
+    public GameController(GameMap gameMap) {
+        GameMap gm = gameMap;
+        if(gameMap == null) gm = createSimpleMap();
+        game = new HAC(gm, graphics, mainController.getWidth(), mainController.getHeight());
+    }
+
     /**
      * On start of state.
      */
     @Override
     public void initiate() {
-        game = new HAC(createSimpleMap(), graphics, mainController.getWidth(), mainController.getHeight());
     }
 
      /**
