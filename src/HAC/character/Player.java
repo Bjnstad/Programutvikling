@@ -2,14 +2,26 @@ package HAC.character;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class represents the player in the game.
+ * Player extends from character.
+ * @author ceciliethoresen
+ */
 public class Player extends Character {
     /**
-     * Player in the game
+     * This method contains the player in the game.
+     * It extends its characteristics from character, and it´ coordinates.
+     * @author ceciliethoresen
      */
     public Player() {
         super(new CharacterAvatar("player_animations_walking", 64), 2, 2);
     }
 
+    /**
+     * This is a boolean method for the enemy if it collides with the avatar.
+     * @param enemy contains the position to the enemy-character
+     * @return the position to enemy in height and width.
+     */
     public boolean willCollide(Enemy enemy) {
         double a = enemy.getPosX() - enemy.getSizeX();
         double b = enemy.getPosX() + enemy.getSizeX();

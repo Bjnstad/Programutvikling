@@ -11,7 +11,9 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
- * Filehandler
+ * This class represents the FileHandler.
+ * The FileHandler can either write to a specified file, or it can write to a rotating set of files.
+ * @author ceciliethoresen
  */
 public class FileHandler {
     private final Image IMAGE_RUBY  = new Image("https://upload.wikimedia.org/wikipedia/commons/f/f1/Ruby_logo_64x64.png");
@@ -20,7 +22,7 @@ public class FileHandler {
     private final Image IMAGE_TWITTER = new Image("http://files.softicons.com/download/social-media-icons/fresh-social-media-icons-by-creative-nerds/png/64x64/twitter-bird.png");
 
     /**
-     * A list of the images
+     * This method contains a array list of the images.
      */
     private Image[] listOfImages = {IMAGE_RUBY, IMAGE_APPLE, IMAGE_VISTA, IMAGE_TWITTER};
 
@@ -28,13 +30,13 @@ public class FileHandler {
             "gif", "png", "bmp", "jpg"
     };
 
-    // File representing the folder that you select using a FileChooser
-    static final File dir = new File("assets");
+    static final File dir = new File("assets"); // File representing the folder that you select using a FileChooser.
 
-    // filter to identify images based on their extensions
-    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
+
+    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() { // filter to identify images based on their extensions
 
         /**
+         *
          *
          * @param dir
          * @param name

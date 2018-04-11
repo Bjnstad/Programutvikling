@@ -6,7 +6,11 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-
+/**
+ * This class represents gamemap.
+ * Gamemap contains of a count of objects that is available.
+ * @author ceciliethoresen
+ */
 public class GameMap {
     private GameObject[] gameObjects;
     private int width;
@@ -15,9 +19,10 @@ public class GameMap {
 
     /**
      * Gamemap represent how many object there is available to put on the map, ... one sprite slot?? //TODO is one x and y.
-     * @param width size of the gameboard
-     * @param height
-     * @param background
+     * @param width size of the gameboard.
+     * @param height size of the gameboard.
+     * @param background size of the gameboard.
+     * @author ceciliethoresen
      */
     public GameMap(int width, int height, Sprite background) {
         if(width < 0) width = 0;
@@ -26,8 +31,7 @@ public class GameMap {
         this.height = height;
 
         this.gameObjects = new GameObject[1];
-        // Import background
-        this.background = new Image[3][3];
+        this.background = new Image[3][3]; // Import background
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 this.background[i][j] = SwingFXUtils.toFXImage(background.getSprite(i, j), null);
@@ -35,6 +39,15 @@ public class GameMap {
         }
     }
 
+    /**
+     *
+     * @param camera
+     * @param startX
+     * @param startY
+     * @param endX
+     * @param endY
+     * @author ceciliethoresen
+     */
     public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
         for (int x = startX; x <= endX; x++) {
             for (int y = startY; y <= endY; y++) {
@@ -59,10 +72,11 @@ public class GameMap {
     }
 
     /**
-     * If gameobjects collides
-     * @param posX position to x
-     * @param posY position to y
-     * @return .....
+     * This method contains if gameobjects collides with each other.
+     * @param posX position to x.
+     * @param posY position to y.
+     * @return false if not the statement is true.
+     * @author ceciliethoresen
      */
     public boolean willCollide(int posX, int posY) {
         if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
@@ -70,12 +84,11 @@ public class GameMap {
         return false;
     }
 
-
     /**
-     * Add @GameObject to the board,
-     * @param gameObject
-     *
+     * Here we add gameObject into the gameboard.
+     * @param gameObject states the position in height and width.
      * @return if added returns true, false if coordinates is taken or
+     * @author ceciliethoresen
      */
     public boolean addGameObject(GameObject gameObject) {
         int posX = gameObject.getPosX();
@@ -96,12 +109,10 @@ public class GameMap {
         return true;
     }
 
-
-
     /**
-     * Gets the gameobject
-     * @param x the width to x in the game
-     * @param y the height  to y in the game
+     * This method gets the gameObject.
+     * @param x the width to x in the game.
+     * @param y the height  to y in the game.
      * @return ....
      */
     public GameObject getGameObject(int x, int y) {
@@ -112,21 +123,22 @@ public class GameMap {
                 if(y >= gameObject.getPosY() && y < gameObject.getPosY() + gameObject.getSizeY()) return gameObject;
             }
         }
-
         return null;
     }
 
     /**
-     * Gets the width
-     * @return
+     * This method gets the width of gameMap.
+     * @return the width of gameMap.
+     * @author ceciliethoresen
      */
     public int  getWidth() {
         return width;
     }
 
     /**
-     * Gets the height
-     * @return the length of game
+     * This method gets the height to gameMap.
+     * @return the length of gameMap.
+     * @author ceciliethoresen
      */
     public int getHeight() {
         return height;
@@ -135,6 +147,7 @@ public class GameMap {
     /**
      *
      * @param camera
+     * @author
      */
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
@@ -155,6 +168,12 @@ public class GameMap {
         }
     }
 
+    /**
+     * Drawing objects.
+     * This class provides a basic capability for creating objects with draw.
+     * @param gameObject is a object in the game.
+     * @param camera
+     */
     public void drawObject(GameObject gameObject, Camera camera){
         GraphicsContext gc = camera.getGraphicsContext();
 

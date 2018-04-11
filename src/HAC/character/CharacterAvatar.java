@@ -6,7 +6,7 @@ import HAC.sprite.SpriteAnimation;
 import java.awt.image.BufferedImage;
 
 /**
- * Description of Avatar in the game
+ * This class describes the character in the game.
  */
 public class CharacterAvatar {
     private SpriteAnimation walkingUp;
@@ -18,9 +18,10 @@ public class CharacterAvatar {
     private SpriteAnimation animation;
 
     /**
-     * Avatar size
-     * @param fileName
-     * @param size
+     * This method gives us the size to Avatar.
+     * @param fileName of the file we can save.
+     * @param size The size to the Avatar.
+     * @author Cecilie Thoresen
      */
     public CharacterAvatar(String fileName, int size){
         sprite = new Sprite(fileName, size);
@@ -39,57 +40,62 @@ public class CharacterAvatar {
     }
 
     /**
-     * Avatar start
+     * In this method the Avatar start.
+     * @author Cecilie Thoresen
      */
     public void startAnimation() {
         animation.start();
     }
 
     /**
-     * Update avatar
+     * Here the avatar updates in the game,
      */
     public void updateAnimation(){
         animation.update();
     }
 
     /**
-     *
-     * @return animation
+     * In this method we use Sprite to get the animation in the board game.
+     * @return Then it returns the animation to the game.
+     * @author Henry Tran
      */
     public SpriteAnimation getAnimation() {
         return animation;
     }
 
     /**
-     * Sets the walking up to the avatar
+     * Sets the walking up to the avatar.
+     * @author Axel Bjørnstad
      */
     public void setWalkingUp() {
         animation = this.walkingUp;
     }
 
     /**
-     * Sets the walking down to the avatar
+     * Sets the walking down to the avatar.
+     * @author Henry Tran
      */
     public void setWalkingDown() {
         animation = this.walkingDown;
     }
 
     /**
-     * Sets the walking left to the avatar
+     * Sets the walking left to the avatar.
+     * @author Cecilie Thoresen
      */
     public void setWalkLeft() {
         animation = this.walkLeft;
     }
 
     /**
-     * Sets the walking right to the avatar
+     * Sets the walking right to the avatar.
      */
     public void setWalkRight() {
         animation = this.walkRight;
     }
 
     /**
-     * Sets the standing to the avatar
+     * Sets the standing to the avatar.
      */
     public void setStanding() {
         animation = this.standing;

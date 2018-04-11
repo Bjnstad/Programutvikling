@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * This class represents the frames of the animation in the game.
+ * @author ceciliethoresen
+ */
 public class Animation {
     private int frameCount;
     private int frameDelay;
@@ -12,12 +16,15 @@ public class Animation {
     private int totalFrames;
 
     private boolean stopped;
-    private ArrayList<Frame> frames = new ArrayList<Frame>();    // Arraylist of frames
+    private ArrayList<Frame> frames = new ArrayList<Frame>(); // Arraylist of frames.
 
     /**
-     * Animation...
-     * @param frames
-     * @param frameDelay
+     * This method contains the frame of the Animation.
+     * @param frames includes that the moves to the animation has to be inside the criteria in the for-loop.
+     *               Animation starts in a end(0), and then moves to another end.
+     *               But not longer then the length of the frame.
+     * @param frameDelay As long as the criteria in the for-loop is true, then it adds a frame.
+     * @author ceciliethoresen
      */
     public Animation(BufferedImage[] frames, int frameDelay) {
         this.frameDelay = frameDelay;
@@ -35,7 +42,8 @@ public class Animation {
     }
 
     /**
-     * Start the animation/game
+     * This method starts the animation in the game.
+     * @author cecilie thoresen
      */
     public void start() {
         if (!stopped) {
@@ -50,7 +58,8 @@ public class Animation {
     }
 
     /**
-     * Stop the animation/game
+     * This method stops the animation in the game.
+     * @author ceciliethoresen
      */
     public void stop() {
         if (frames.size() == 0) {
@@ -61,19 +70,20 @@ public class Animation {
     }
 
     /**
-     * Restart the game
+     * This method restart the animation in the game.
+     * @author ceciliethoresen
      */
     public void restart() {
         if (frames.size() == 0) {
             return;
         }
-
         stopped = false;
         currentFrame = 0;
     }
 
     /**
-     * Reset the game
+     * This method reset the animation in the game.
+     * @author ceciliethoresen
      */
     public void reset() {
         this.stopped = true;
@@ -82,7 +92,7 @@ public class Animation {
     }
 
     /**
-     * Adds the frame of the game
+     * Here we add a frame to the gameboard.
      * @param frame
      * @param duration
      */

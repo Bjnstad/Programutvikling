@@ -3,6 +3,10 @@ package HAC.sprite;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * This class represents the animations we get from sprite.
+ * @author ceciliethoresen
+ */
 public class SpriteAnimation {
     private int frameCount;
     private double frameDelay;
@@ -13,16 +17,16 @@ public class SpriteAnimation {
     private int animationDirection;
 
     /**
-     * The spriteanimation to the game
+     * This method uploads the sprite animation to the game.
      * @param spriteFrames
      * @param frameDelay
+     * @author ceciliethoresen
      */
     public SpriteAnimation(BufferedImage[] spriteFrames, double frameDelay){
         this.stopped = true;
         this.frameDelay = frameDelay;
 
-        //Loops through spriteFrames array, and adds SpriteFrame to ArrayList.
-        for (int i = 0; i < spriteFrames.length; i++) {
+        for (int i = 0; i < spriteFrames.length; i++) { //Loops through spriteFrames array, and adds SpriteFrame to ArrayList.
             addSpriteFrame(spriteFrames[i], frameDelay);
         }
 
@@ -34,7 +38,8 @@ public class SpriteAnimation {
     }
 
     /**
-     * Starts the spriteanimation
+     * This method starts the spriteanimation.
+     * @author ceciliethoresen
      */
     public void start(){
         if (!stopped){
@@ -47,26 +52,28 @@ public class SpriteAnimation {
     }
 
     /**
-     * Adds the sprite frame
-     * @param frame
-     * @param duration
+     * Here we adds the sprite frame.
+     * @param frame from BufferedImage that describes an image with an accessible buffer of image data.
+     * @param duration is a time-based amount of time of the frame in the game.
+     * @author ceciliethoresen
      */
     private void addSpriteFrame(BufferedImage frame, double duration){
         spriteFrames.add(new SpriteFrame(frame, duration));
     }
 
     /**
-     * Gets the sprite bufferedimage
+     * This method gets the sprite bufferedImage.
      * @return spriteframes
+     * @author ceciliethoresen
      */
     public BufferedImage getSprite(){
         return spriteFrames.get(currentFrame).getSpriteFrame();
     }
 
     /**
-     * Update the spriteanimation
+     * Here we update the spriteanimation
+     * @author ceciliethoresen
      */
-
     public void update(){
         if(!stopped){
             frameCount++;

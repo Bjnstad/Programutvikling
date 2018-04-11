@@ -10,27 +10,37 @@ import java.io.FilenameFilter;
 import java.util.HashMap;
 
 /**
- * Created by henrytran1 on 20/02/2018.
+ * This class contains a list of images.
+ * @author ceciliethoresen
  */
 public class ImageList {
 
 
     private HashMap<String, Image> resourceMap;
 
+    /**
+     *
+     *
+     * @author ceciliethoresen
+     */
     public ImageList() {
         this.resourceMap = new HashMap<>();
     }
 
-    // File representing the folder that you select using a FileChooser
-    static final File dir = new File("assets/gameobjects");
+    static final File dir = new File("assets/gameobjects"); // File representing the folder that you select using a FileChooser
 
     static final String[] EXTENSIONS = new String[]{
             "gif", "png", "bmp", "jpg"
     };
 
-    // filter to identify images based on their extensions
-    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
+    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() { // filter to identify images based on their extensions
 
+        /**
+         *
+         * @param dir
+         * @param name
+         * @return
+         */
         @Override
         public boolean accept(final File dir, final String name) {
             for (final String ext : EXTENSIONS) {

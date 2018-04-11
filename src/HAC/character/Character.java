@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 
 /**
- * Character in the game
+ * This class represents the position to the character in the game.
  */
-
 public abstract class Character {
 
     private double posX = 0;
@@ -20,10 +19,10 @@ public abstract class Character {
     private int sizeY;
 
     /**
-     * Character in the game
-     * @param avatar
-     * @param sizeX
-     * @param sizeY
+     * This method represents the character, and it´s size in the game.
+     * @param avatar is the character.
+     * @param sizeX this is the size to x in width.
+     * @param sizeY this is the size to y in height.
      */
     public Character(CharacterAvatar avatar, int sizeX, int sizeY) {
         this.animation = avatar;
@@ -32,8 +31,9 @@ public abstract class Character {
     }
 
     /**
-     * Sets position of x
-     * @param posX
+     * Sets position to the character in the "width" in the game board.
+     * If the speed is less then 1, then the character walk left, if not it walks right.
+     * @param posX This is the position to the character in width.
      */
     public void setPosX(double posX) {
         double speed = posX - this.posX;
@@ -49,8 +49,9 @@ public abstract class Character {
     }
 
     /**
-     * Sets position of y
-     * @param posY
+     * Sets position to the character in the "height" in the game board.
+     * If the speed to the character is bigger then 1, then it walks up, if not it walks down.
+     * @param posY This is the position to the character in height.
      */
     public void setPosY(double posY) {
         double speed = posY - this.posY;
@@ -67,10 +68,12 @@ public abstract class Character {
 
 
     /**
-     * Adds position of x
-     * @param speed
+     * In this method we add the position to the character in the width(position x).
+     * If the speed to the character is less then 0, then it walks left.
+     * If not, it walks right.
+     * @param speed this is the speed to the character walking right or left.
+     * @author Cecilie Thoresen
      */
-
     public void addPosX(double speed) {
         if(speed < 0) {
             animation.setWalkLeft();
@@ -84,8 +87,11 @@ public abstract class Character {
     }
 
     /**
-     * Adds position of y
-     * @param speed
+     * In this method we add the position to the character in the height(position y).
+     * If the speed the the character is less then 0, then it walks up.
+     * If not, then it walks down.
+     * @param speed this is the speed to the character walking up or down.
+     * @author Cecilie Thoresen
      */
     public void addPosY(double speed) {
         if(speed < 0) {
@@ -100,40 +106,43 @@ public abstract class Character {
     }
 
     /**
-     * Gets position of x
-     * @return position to x
+     * In this method we gets the position to the character walking right or left.
+     * @return Then it returns the position to the character. (width)
+     * @author Cecilie Thoresen
      */
     public double getPosX() {
         return this.posX;
     }
 
     /**
-     * Gets position of y
-     * @return position of y
+     * In this method we gets the position to the character walking up or down.
+     * @return Then it returns the position to the character.(height)
+     * @author Cecilie Thoresen
      */
     public double getPosY() {
         return this.posY;
     }
 
     /**
-     * Gets the size to x
-     * @return the size to x
+     * In this method we gets the size to the character.(width)
+     * @return Then the method returns(gives) us the size to the character.
      */
     public int getSizeX() {
         return sizeX;
     }
 
     /**
-     * Gets the size of y
-     * @return the size to y
+     * In this method we gets the size to the character.(height)
+     * @return Then the method returns(gives) us the size to the character.
      */
     public int getSizeY() {
         return sizeY;
     }
 
     /**
-     *
-     * @param camera
+     * This method draws the animations on the game board, that we gets from sprite.
+     * @param camera We get graphicscontext from camera, and that makes it possible for us to draw in canvas.
+     * @author Cecilie Thoresen
      */
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
