@@ -32,11 +32,11 @@ public class CharacterAvatar {
         BufferedImage[] walkingDownAnimation = {sprite.getSprite(0, 2), sprite.getSprite(1, 2), sprite.getSprite(2,2),sprite.getSprite(3,2), sprite.getSprite(4,2), sprite.getSprite(5,2), sprite.getSprite(6,2), sprite.getSprite(7,2), sprite.getSprite(8,2)};
         BufferedImage[] standingAnimation = {sprite.getSprite(3, 0)};
 
-        walkingUp = new SpriteAnimation(walkingUpAnimation, 0.5);
-        walkingDown = new SpriteAnimation(walkingDownAnimation, 0.5);
-        walkLeft = new SpriteAnimation(walkingLeftAnimation, 0.5);
-        walkRight = new SpriteAnimation(walkingRightAnimation, 0.5);
-        animation = standing = new SpriteAnimation(standingAnimation, 0.5);
+        walkingUp = new SpriteAnimation(walkingUpAnimation, 2);
+        walkingDown = new SpriteAnimation(walkingDownAnimation, 2);
+        walkLeft = new SpriteAnimation(walkingLeftAnimation, 2);
+        walkRight = new SpriteAnimation(walkingRightAnimation, 2);
+        animation = standing = new SpriteAnimation(standingAnimation, 2);
     }
 
     /**

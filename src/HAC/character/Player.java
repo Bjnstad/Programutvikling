@@ -1,5 +1,6 @@
 package HAC.character;
 
+
 import javafx.scene.image.Image;
 
 /**
@@ -7,6 +8,7 @@ import javafx.scene.image.Image;
  * Player extends from character.
  * @author ceciliethoresen
  */
+
 public class Player extends Character {
     /**
      * This method contains the player in the game.
@@ -14,7 +16,7 @@ public class Player extends Character {
      * @author ceciliethoresen
      */
     public Player() {
-        super(new CharacterAvatar("player_animations_walking", 64), 2, 2);
+        super(new CharacterAvatar("player_animations_walking", 64), 1, 1);
     }
 
     /**

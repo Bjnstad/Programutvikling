@@ -1,6 +1,12 @@
 package application.controller;
 
+import HAC.world.GameMap;
 import application.State;
+import application.SubState;
+import application.controller.subcontroller.ChooseMapController;
+import application.controller.subcontroller.DieController;
+import application.controller.subcontroller.PauseMenuController;
+import application.controller.subcontroller.SubController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +26,7 @@ public class MainController implements Initializable {
     @FXML
     AnchorPane mainView;
     private Controller controller; // Current controller
+    private GameMap gameMap; // The current gamemap to play
 
     /**
      * Initialize location and resources to the game
@@ -50,7 +56,7 @@ public class MainController implements Initializable {
                 break;
             case GAME:
                 filepath = "Game";
-                controller = new GameController();
+                controller = new GameController(gameMap);
                 break;
         }
 
@@ -75,6 +81,61 @@ public class MainController implements Initializable {
         if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
 
         controller.initiate(); // Call initiate for new controller
+    }
+
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    public void toMainView() {
+        if(mainView.getChildren().size() > 1) {
+            mainView.getChildren().remove(1, mainView.getChildren().size());
+        }
+    }
+
+    public void addSubState(SubState subState) {
+        SubController subController;
+
+        String filepath = ""; // Path of the current file
+        switch (subState) {
+            case PAUSE_MENU:
+                filepath = "PauseMenu";
+                subController = new PauseMenuController();
+                break;
+
+            case DIE:
+                filepath = "Die";
+                subController = new DieController();
+                break;
+
+            case CHOOSE_MAP:
+                filepath = "ChooseMap";
+                subController = new ChooseMapController();
+                break;
+
+            default:
+                return;
+
+        }
+
+        FXMLLoader loader;
+        Pane pane;
+
+        try {
+            loader = new FXMLLoader(getClass().getResource("/application/layout/" + filepath + ".fxml"));
+            subController.setSubController(controller); // Set ref to main controller
+            loader.setController(subController); // Set controller to view
+            pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("FXML file for " + filepath + " could not be found or is invalid.");
+            System.exit(1);
+            return;
+        }
+
+
+        mainView.getChildren().add(pane);
+        subController.init();
     }
 
     /**

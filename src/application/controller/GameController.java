@@ -5,6 +5,7 @@ import HAC.sprite.Sprite;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.State;
+import application.SubState;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -22,27 +23,30 @@ public class GameController implements Controller {
     private MainController mainController; // Parent controller
     private HAC game; // Instance of game
 
+    public GameController(GameMap gameMap) {
+        GameMap gm = gameMap;
+       // if(gameMap == null) gm = createSimpleMap();
+        game = new HAC(gm, new Canvas(), 0, 0);
+    }
+
     /**
      * On start of state.
      */
     @Override
     public void initiate() {
-        game = new HAC(createSimpleMap(), graphics, mainController.getWidth(), mainController.getHeight());
-        game.setDevMode(false);
+        game.getCamera().setWidth(mainController.getWidth());
+        game.getCamera().setHeight(mainController.getHeight());
+        game.getCamera().setCanvas(graphics);
+        game.getCamera().calcOffset();
+
+        game.getPlayer().setPosX(game.getCamera().getPlayerX());
+        game.getPlayer().setPosY(game.getCamera().getPlayerY());
 
 
-        // TODO: #1 Move to own controller class
-        graphics.addEventHandler(MouseEvent.MOUSE_PRESSED,
-                new EventHandler<MouseEvent>(){
-                    /**
-                     *
-                     * @param event allows us to access the properties of ActionEvent.
-                     */
-                    @Override
-                    public void handle(MouseEvent event) {
-                        game.shoot(event.getX(), event.getY());
-                    }
-                });
+        System.out.println(game.getGameMap().getGameObjects().length);
+
+
+        game.play();
     }
 
      /**
@@ -50,8 +54,27 @@ public class GameController implements Controller {
      */
     @Override
     public void onClose() {
+        save();
+    }
+
+
+    public void save() {
 
     }
+
+    public void resume() {
+        mainController.toMainView();
+        game.play();
+    }
+
+    public void exit() {
+        mainController.setState(State.MAIN_MENU);
+    }
+
+    public void load() {
+
+    }
+
 
     /**
      * Return EventHandler to add support for user input
@@ -77,10 +100,11 @@ public class GameController implements Controller {
                     game.move(-speed, 0);
                     break;
 
-
                 case ESCAPE:
-                    mainController.setState(State.MAIN_MENU);
+                    game.pause();
+                    mainController.addSubState(SubState.PAUSE_MENU);
                     break;
+
             }
         });
     }

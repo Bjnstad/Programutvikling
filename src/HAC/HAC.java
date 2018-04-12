@@ -40,7 +40,7 @@ public class HAC {
         player.setPosY(camera.getPlayerY());
         this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
 
-        play(); // Initate game
+        //play(); // Initate game
     }
 
     /**
@@ -50,36 +50,31 @@ public class HAC {
         if(timeline == null) initTimeline();
 
         gameMap.render(camera); // Render the gameboard to the screen.
-        isRunning = true;
         timeline.play(); // Start timeline
+        isRunning = true;
     }
 
     /**
-     * Initiate timeline
+     * Pauses the game
      */
-    private void initTimeline() {
-        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
-        timeline = new Timeline();
-        timeline.getKeyFrames().add(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
+    public void pause() {
+        timeline.pause();
+        isRunning = false;
     }
+
 
     /**
      *
      */
     private void render() {
-        if(devMode) {
-            camera.renderPlayerMarker(player);
-            camera.renderPlayerInfo(player);
-        } else {
-            for(Enemy enemy : enemies) {
-                if(player.willCollide(enemy)) die();
-                enemy.calculateMove(player);
-                gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
-                enemy.render(camera);
-            }
-            player.render(camera);
+        for(Enemy enemy : enemies) {
+            if(player.willCollide(enemy)) die();
+            enemy.calculateMove(player);
+            gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
+            enemy.render(camera);
         }
+
+        player.render(camera);
     }
 
     /**
@@ -116,9 +111,6 @@ public class HAC {
         System.out.println("YOU DIED!");
     }
 
-
-
-
     /**
      * Loads new map
      * @param gameMap map to load
@@ -129,37 +121,6 @@ public class HAC {
         gameMap.render(camera);
     }
 
-
-
-
-    /**
-     *
-     * @param endX
-     * @param endY
-     */
-    public void shoot(double endX, double endY) {
-        //player.animation.startShoot();
-        player.animation.startAnimation();
-        player.animation.updateAnimation();
-        //player.shoot(camera.getPlayerPosition(player.getSizeX(), true) + player.getSizeX()/2 ,camera.getPlayerPosition(player.getSizeY(), false) + player.getSizeY()/2, endX / camera.getScale(), endY /camera.getScale());
-    }
-
-    /**
-     * Sets the devmode
-     * @param devMode
-     */
-    public void setDevMode(boolean devMode) {
-        this.devMode = devMode;
-    }
-
-    /**
-     * Sets the grid of the game
-     * @param grid
-     */
-    public void setGrid(boolean grid) {
-        //gameMap.setGrid(grid);
-    }
-
     /**
      * resize the game
      */
@@ -168,7 +129,7 @@ public class HAC {
     }
 
     /**
-     * Sets the okayer position
+     * Sets the player position
      * @param x position
      * @param y position
      */
@@ -176,4 +137,35 @@ public class HAC {
         // camera.setPlayerPosition(x, y);
     }
 
+
+    /**
+     * Initiate timeline
+     */
+    private void initTimeline() {
+        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    /**
+     * Returns the running state of the game
+     * @return
+     */
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public GameMap getGameMap() {
+        return gameMap;
+    }
 }

@@ -86,6 +86,20 @@ public class Camera {
         canvas.setTranslateY(translateY);
     }
 
+
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+    }
+
+
     private double offsetX; // Offset X padding to make HAC view squared
     private double offsetY; // Offset Y padding to make HAC view squared
     private double scale; // Multiplier for correctly display gameboard and sizes

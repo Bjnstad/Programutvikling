@@ -21,4 +21,5 @@ public class HacFile extends GameObject{
     public HacFile(Image image, int sizeX, int sizeY, int posX, int posY) {
         super(image, posX, posY, sizeX, sizeY);
     }
+
 }

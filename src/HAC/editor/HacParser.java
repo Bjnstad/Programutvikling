@@ -1,12 +1,18 @@
 package HAC.editor;
 
+import HAC.sprite.Sprite;
+import HAC.world.GameMap;
+import HAC.world.GameObject;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-
+import sun.misc.BASE64Decoder;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+
+
 
 /**
  * This class content
@@ -14,23 +20,6 @@ import java.util.regex.Pattern;
  * @author ceciliethoresen
  */
 public class HacParser {
-    private ArrayList<HacFile> hacContent = new ArrayList<>();
-
-    /**
-     * This method adds a object.
-     * @param image in the game.
-     * @param sizeX The size of image in width.
-     * @param sizeY The size of image in height.
-     * @param posX The position of image in width.
-     * @param posY The position og image in height.
-     * @author ceciliethoresen
-     */
-    public void addObject(Image image, int sizeX, int sizeY, int posX, int posY){
-        HacFile hf = new HacFile(image,sizeX,sizeY,posX,posY);
-
-        hacContent.add(hf);
-
-    }
 
     /**
      * This method helps us to parse a file.
@@ -39,38 +28,35 @@ public class HacParser {
      * @param file .......
      * @author ceciliethoresen
      */
-    public void parseFile(File file){
-
-        String pattern = ":([^,]*),";
-
-        Pattern r = Pattern.compile(pattern);  // Create a Pattern object
+    public GameMap parseFile(File file){
+        GameMap map = new GameMap(20, 20, new Sprite("background", 32));;
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));
-            String readLine = ":";
-            System.out.println("Reading file using Buffered Reader");
-            int count = -1;
-            String[] strArr = new String[5];
-            while ((readLine = b.readLine()) != null) {
-                Matcher m = r.matcher(readLine);
-                if (m.find() && count < 5) {
-                    strArr[count++] = m.group(1);
-                }else if(count == 5){
-                    //hacContent.add(addObject(strArr[0], Integer.valueOf(strArr[1]), Integer.valueOf(strArr[2]),Integer.valueOf(strArr[3]), Integer.valueOf(strArr[4])));
-                    //addObject(strArr[0], Integer.valueOf(strArr[1]), Integer.valueOf(strArr[2]),Integer.valueOf(strArr[3]), Integer.valueOf(strArr[4]));
-                    System.out.println(Arrays.toString(strArr));
 
-                    count = 0;
-                }
-                else {
-                    count = 0;
-                    System.out.println("NO MATCH");
-                }
+
+            String[] obj = b.readLine().split("#");
+            BASE64Decoder decoder = new BASE64Decoder();
+            byte[] imageByte;
+
+            for (int i = 0; i <obj.length ; i++) {
+                System.out.println("THE NUMBER IS " + i);
+
+                String[] objContent = obj[i].split("&");
+                imageByte = decoder.decodeBuffer(objContent[0]);
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+                BufferedImage image = ImageIO.read(bis);
+                bis.close();
+
+                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
+
+                System.out.println(map.addGameObject(hf));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return map;
     }
 }

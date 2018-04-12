@@ -3,7 +3,6 @@ package application.controller;
 import HAC.sprite.Sprite;
 import HAC.HACEditor;
 import application.State;
-import HAC.filehandler.FileHandler;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import application.eventhandler.EditorHandler;
@@ -29,10 +28,9 @@ import java.io.File;
 public class EditorController implements Controller {
 
     private MainController mainController;
-    private FileHandler fileHandler;
     private ImageList imageList;
     private HACEditor map;
-    final FileChooser fileChooser = new FileChooser();
+    private FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
 
     @FXML
@@ -68,7 +66,7 @@ public class EditorController implements Controller {
      */
     @Override
     public void initiate () {
-        FileHandler fileHandler = new FileHandler();
+        //FileHandler fileHandler = new FileHandler();
 
         imageList = new ImageList();
 
@@ -199,8 +197,11 @@ public class EditorController implements Controller {
      */
     @FXML
     private void Import(ActionEvent event){
-        System.out.println("hei");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mHac files", "*.mhac");
+
+        fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
+
         if (file != null) {
             map.openFile(file);
         }
