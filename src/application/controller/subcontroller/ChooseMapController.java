@@ -1,10 +1,8 @@
 package application.controller.subcontroller;
 
-import HAC.editor.HacParser;
-import HAC.sprite.Sprite;
+import HAC.filehandler.HacParser;
 import HAC.world.GameMap;
 import application.controller.Controller;
-import application.controller.GameController;
 import application.controller.MainMenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

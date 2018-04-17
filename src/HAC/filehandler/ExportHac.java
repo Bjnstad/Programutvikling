@@ -1,4 +1,4 @@
-package HAC.editor;
+package HAC.filehandler;
 
 import HAC.world.GameObject;
 import javafx.embed.swing.SwingFXUtils;
@@ -17,7 +17,6 @@ import java.util.Base64;
  * @author henrytran
  */
 public class ExportHac {
-    private HacFile hacFile;
     private ArrayList<String> elements = new ArrayList<>();
 
     /**
@@ -40,13 +39,14 @@ public class ExportHac {
         elements.add(sb.toString());
     }
 
+
     /**
      *
      * @param image
      * @param type
      * @return string of the image
      */
-    private String encodeImageToString(BufferedImage image, String type) {
+    public String encodeImageToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 

@@ -2,8 +2,8 @@ package HAC;
 
 import HAC.character.Enemy;
 import HAC.character.Player;
-import HAC.editor.ExportHac;
-import HAC.editor.HacParser;
+import HAC.filehandler.ExportHac;
+import HAC.filehandler.HacParser;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
 import javafx.animation.Timeline;
@@ -11,7 +11,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Main class for game HAC

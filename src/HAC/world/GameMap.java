@@ -201,4 +201,8 @@ public class GameMap {
     public GameObject[] getGameObjects() {
         return gameObjects;
     }
+
+    public Image[][] getBackground() {
+        return background;
+    }
 }

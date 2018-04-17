@@ -194,4 +194,12 @@ public class HAC {
     public GameMap getGameMap() {
         return gameMap;
     }
+
+    public Enemy[] getEnemies() {
+        return enemies;
+    }
+
+    public Timeline getTimeline() {
+        return timeline;
+    }
 }

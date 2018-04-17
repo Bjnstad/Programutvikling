@@ -23,6 +23,7 @@ public class Enemy extends Character {
         super(new CharacterAvatar(spriteFileName, 64), sizeX, sizeY);
         super.setPosX(posX);
         super.setPosY(posY);
+
     }
 
     /**
@@ -35,4 +36,7 @@ public class Enemy extends Character {
         addPosY(speed * Math.cos(angle) / 100);
         addPosX(speed * Math.sin(angle) / 100);
     }
+
+
+
 }

@@ -1,4 +1,4 @@
-package HAC.editor;
+package HAC.filehandler;
 
 import HAC.sprite.Sprite;
 import HAC.world.GameMap;

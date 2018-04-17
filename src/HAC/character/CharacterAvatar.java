@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
  * @author ceciliethoresen
  */
 public class CharacterAvatar {
+    private String spriteFileName;
     private SpriteAnimation walkingUp;
     private SpriteAnimation walkingDown;
     private SpriteAnimation walkLeft;
@@ -25,6 +26,7 @@ public class CharacterAvatar {
      * @author ceciliethoresen
      */
     public CharacterAvatar(String fileName, int size){
+        this.spriteFileName = fileName;
         sprite = new Sprite(fileName, size);
 
         BufferedImage[] walkingLeftAnimation = {sprite.getSprite(0, 1), sprite.getSprite(1, 1), sprite.getSprite(2,1),sprite.getSprite(3,1), sprite.getSprite(4,1), sprite.getSprite(5,1), sprite.getSprite(6,1), sprite.getSprite(7,1), sprite.getSprite(8,1)};
@@ -105,4 +107,7 @@ public class CharacterAvatar {
         animation = this.standing;
     }
 
+    public String getSpriteFileName() {
+        return spriteFileName;
+    }
 }

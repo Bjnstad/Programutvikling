@@ -19,6 +19,7 @@ public abstract class Character {
     private int sizeX;
     private int sizeY;
 
+
     /**
      * This method represents the character, and it´s size.
      * @param avatar is the character.
@@ -31,6 +32,9 @@ public abstract class Character {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
     }
+
+
+
 
     /**
      * Sets position to the character in width in gameboard.
@@ -156,5 +160,9 @@ public abstract class Character {
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
         gc.drawImage(SwingFXUtils.toFXImage(animation.getAnimation().getSprite(), null), posX*camera.getScale(), posY*camera.getScale(), sizeX * camera.getScale(), sizeY * camera.getScale());
+    }
+
+    public String getSpriteFileName() {
+        return animation.getSpriteFileName();
     }
 }

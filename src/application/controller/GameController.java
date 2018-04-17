@@ -1,6 +1,8 @@
 package application.controller;
 
 import HAC.HAC;
+import HAC.filehandler.ExportGame;
+import HAC.filehandler.Save;
 import HAC.sprite.Sprite;
 import HAC.world.GameMap;
 import HAC.world.GameObject;
@@ -62,6 +64,9 @@ public class GameController implements Controller {
 
 
     public void save() {
+        //Save save = new Save(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getTimeline(), game.getPlayer());
+        ExportGame save = new ExportGame(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getPlayer());
+
 
     }
 
