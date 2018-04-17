@@ -19,8 +19,7 @@ public class ImageList {
     private HashMap<String, Image> resourceMap;
 
     /**
-     *
-     *
+     * This is our imageList.
      * @author ceciliethoresen
      */
     public ImageList() {
@@ -52,6 +51,11 @@ public class ImageList {
         }
     };
 
+    /**
+     * Lists the cells to get all assets.
+     * @return list of cells
+     * @author ceciliethoresen
+     */
     public ListCell<String> getAllAssets() {
         //File folder = new File("assets");
         //if(folder == null) return null;
@@ -80,10 +84,13 @@ public class ImageList {
                 }
             }
         });
-
     }
 
 
+    /**
+     * Observable list to get all names.
+     * @return names?
+     */
     public ObservableList<String> getAllNames() {
         ObservableList<String> res = FXCollections.observableArrayList();
 
@@ -99,6 +106,12 @@ public class ImageList {
         return res;
     }
 
+    /**
+     * Gets the file extension from file.
+     * @param file in game.
+     * @return a string of the file.
+     * @author
+     */
     private String getFileExtension(File file) {
         String name = file.getName();
         try {
@@ -108,6 +121,11 @@ public class ImageList {
         }
     }
 
+    /**
+     * Gets resource
+     * @param name of the file.
+     * @return map resource
+     */
     public Image getResource(String name)
     {
         return resourceMap.get(name);

@@ -5,14 +5,13 @@ import javafx.scene.image.Image;
 
 /**
  * This class represents the player in the game.
- * Player extends from character.
+ * Player extends the qualities from character.
  * @author ceciliethoresen
  */
-
 public class Player extends Character {
     /**
      * This method contains the player in the game.
-     * It extends its characteristics from character, and it´ coordinates.
+     * It extends its characteristics from character, and it´s coordinates.
      * @author ceciliethoresen
      */
     public Player() {

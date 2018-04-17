@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 
 /**
- * This class represents the position to the character in the game.
+ * This class contains the position and size to the character in the game.
+ * @author ceciliethoresen
  */
 public abstract class Character {
 
@@ -19,10 +20,11 @@ public abstract class Character {
     private int sizeY;
 
     /**
-     * This method represents the character, and it´s size in the game.
+     * This method represents the character, and it´s size.
      * @param avatar is the character.
      * @param sizeX this is the size to x in width.
      * @param sizeY this is the size to y in height.
+     * @author ceciliethoresen
      */
     public Character(CharacterAvatar avatar, int sizeX, int sizeY) {
         this.animation = avatar;
@@ -31,9 +33,10 @@ public abstract class Character {
     }
 
     /**
-     * Sets position to the character in the "width" in the game board.
+     * Sets position to the character in width in gameboard.
      * If the speed is less then 1, then the character walk left, if not it walks right.
      * @param posX This is the position to the character in width.
+     * @author ceciliethoresen
      */
     public void setPosX(double posX) {
         double speed = posX - this.posX;
@@ -51,9 +54,10 @@ public abstract class Character {
     }
 
     /**
-     * Sets position to the character in the "height" in the game board.
-     * If the speed to the character is bigger then 1, then it walks up, if not it walks down.
+     * Sets position to the character in height in gameboard.
+     * If the speed to the character is faster then 1, then it walks up, if not it walks down.
      * @param posY This is the position to the character in height.
+     * @author ceciliethoresen
      */
     public void setPosY(double posY) {
         double speed = posY - this.posY;
@@ -74,11 +78,11 @@ public abstract class Character {
 
 
     /**
-     * In this method we add the position to the character in the width(position x).
+     * In this method we add the position to the character in width.
      * If the speed to the character is less then 0, then it walks left.
      * If not, it walks right.
      * @param speed this is the speed to the character walking right or left.
-     * @author Cecilie Thoresen
+     * @author ceciliethoresen
      */
     public void addPosX(double speed) {
         if(speed < 0) {
@@ -93,11 +97,10 @@ public abstract class Character {
     }
 
     /**
-     * In this method we add the position to the character in the height(position y).
-     * If the speed the the character is less then 0, then it walks up.
-     * If not, then it walks down.
+     * In this method we add the position to the character in height.
+     * If the speed the the character is less then 0, then it walks up, if not, it walks down.
      * @param speed this is the speed to the character walking up or down.
-     * @author Cecilie Thoresen
+     * @author ceciliethoresen
      */
     public void addPosY(double speed) {
         if(speed < 0) {
@@ -112,7 +115,7 @@ public abstract class Character {
     }
 
     /**
-     * In this method we gets the position to the character walking right or left.
+     * Gets the position to the character walking right or left.
      * @return Then it returns the position to the character. (width)
      * @author Cecilie Thoresen
      */
@@ -121,7 +124,7 @@ public abstract class Character {
     }
 
     /**
-     * In this method we gets the position to the character walking up or down.
+     * Gets the position to the character walking up or down.
      * @return Then it returns the position to the character.(height)
      * @author Cecilie Thoresen
      */
@@ -130,7 +133,7 @@ public abstract class Character {
     }
 
     /**
-     * In this method we gets the size to the character.(width)
+     * Gets the size to the character.(width)
      * @return Then the method returns(gives) us the size to the character.
      */
     public int getSizeX() {
@@ -138,7 +141,7 @@ public abstract class Character {
     }
 
     /**
-     * In this method we gets the size to the character.(height)
+     * Gets the size to the character.(height)
      * @return Then the method returns(gives) us the size to the character.
      */
     public int getSizeY() {

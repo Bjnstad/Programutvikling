@@ -3,14 +3,15 @@ package HAC.character;
 import javafx.scene.image.Image;
 
 /**
- * In this class Enemy extends the qualities from chracter
+ * In this class Enemy extends the qualities from character.
+ * @author ceciliethoresen
  */
 public class Enemy extends Character {
 
     private float speed = 1;
 
     /**
-     * This method represents the enemy in the game.
+     * This method represents position, size and qualities to the enemy in the game.
      * @param spriteFileName is the name of the file that can be downloaded.
      * @param sizeX is the size of the enemy in width(x).
      * @param sizeY is the size of the enemy in height(y).

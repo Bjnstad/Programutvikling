@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
- * This class represents gamemap.
+ * This class represents the game map.
  * Gamemap contains of a count of objects, width, height and the background we get from sprite.
  * @author ceciliethoresen
  */
@@ -18,10 +18,10 @@ public class GameMap {
     private Image[][] background;
 
     /**
-     * Gamemap represent how many object there is available to put on the map, ... one sprite slot?? //TODO is one x and y.
+     * Game map represent how many object there is available to put on the map.
      * @param width size of the gameboard.
      * @param height size of the gameboard.
-     * @param background size of the gameboard.
+     * @param background we gets from sprite.
      * @author ceciliethoresen
      */
     public GameMap(int width, int height, Sprite background) {
@@ -40,12 +40,12 @@ public class GameMap {
     }
 
     /**
-     *
-     * @param camera
-     * @param startX
-     * @param startY
-     * @param endX
-     * @param endY
+     * This method contains the visual on the bord, and states how far camera goes vertical and horizontal.
+     * @param camera shows us the visual on the board
+     * @param startX horizontal
+     * @param startY vertical
+     * @param endX horizontal
+     * @param endY vertical
      * @author ceciliethoresen
      */
     public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
@@ -56,6 +56,13 @@ public class GameMap {
         }
     }
 
+    /**
+     * Gets the background-block from sprite and makes it visual on the board.
+     * @param camera shows us the visual on the board.
+     * @param x is the background in width.
+     * @param y is the background in height.
+     * @author ceciliethoresen
+     */
     private void renderBlock(Camera camera, int x, int y) {
         GraphicsContext gc = camera.getGraphicsContext();
         Double size = camera.getScale();
@@ -72,7 +79,7 @@ public class GameMap {
     }
 
     /**
-     * This method contains if gameobjects collides with each other.
+     * This method contains if game objects collides with each other.
      * @param posX position to x.
      * @param posY position to y.
      * @return false if not the statement is true.
@@ -99,9 +106,6 @@ public class GameMap {
                 //if (willCollide(x, y)) return false;
             }
         }
-
-
-
 
         GameObject[] result = new GameObject[gameObjects.length +1];
         for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
@@ -135,7 +139,7 @@ public class GameMap {
 
     /**
      * This method gets the width of gameMap.
-     * @return the width of gameMap.
+     * @return the width to gameMap.
      * @author ceciliethoresen
      */
     public int  getWidth() {
@@ -144,7 +148,7 @@ public class GameMap {
 
     /**
      * This method gets the height to gameMap.
-     * @return the length of gameMap.
+     * @return the length to gameMap.
      * @author ceciliethoresen
      */
     public int getHeight() {
@@ -152,9 +156,9 @@ public class GameMap {
     }
 
     /**
-     *
-     * @param camera
-     * @author
+     * This method contains the visual, and sets the height and width on canvas.
+     * @param camera shows us the visual on the gameboard.
+     * @author ceciliethoresen
      */
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
@@ -176,10 +180,11 @@ public class GameMap {
     }
 
     /**
-     * Drawing objects.
+     * This method draws the objects.
      * This class provides a basic capability for creating objects with draw.
      * @param gameObject is a object in the game.
-     * @param camera
+     * @param camera shows us the visual on gameboard.
+     * @author ceciliethoresen
      */
     public void drawObject(GameObject gameObject, Camera camera){
         GraphicsContext gc = camera.getGraphicsContext();
@@ -188,7 +193,11 @@ public class GameMap {
 
     }
 
-
+    /**
+     * Gets the size and position to gameobjects.
+     * @return size and position to gameobjects.
+     * @author ceciliethoresen
+     */
     public GameObject[] getGameObjects() {
         return gameObjects;
     }

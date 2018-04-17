@@ -21,6 +21,7 @@ public class EditorHandler{
     /**
      * Gets the event handler when a key is pressed
      * @param event allows us to access the properties of KeyEvent.
+     * @author henrytran1
      */
     public void getEventHandler(KeyEvent event) {
         double speed = 6;

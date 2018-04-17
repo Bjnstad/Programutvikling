@@ -9,7 +9,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.util.Duration;
 
 /**
- * Main class for game HAC
+ * This class represents Main class for game HAC, and contains gamemap, camera, enemies, timeline and player.
+ * @author ceciliethoresen
  */
 public class HAC {
     private final static double FPS = 60;
@@ -24,9 +25,10 @@ public class HAC {
 
 
     /**
-     * ....
-     * @param gameMap
-     * @param canvas
+     * This method contains gamemap´s width and height on canvas and states that gamemap and JavaFX cannot be null.
+     * @param gameMap has the position to gameobjects.
+     * @param canvas is the visual on the gameboard.
+     * @author ceciliethoresen
      */
     public HAC(GameMap gameMap, Canvas canvas, double width, double height) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
@@ -45,6 +47,7 @@ public class HAC {
 
     /**
      * Starting gameloop running accordingly to FPS
+     * @author
      */
     public void play() {
         if(timeline == null) initTimeline();
@@ -56,6 +59,7 @@ public class HAC {
 
     /**
      * Pauses the game
+     * @author
      */
     public void pause() {
         timeline.pause();
@@ -64,7 +68,8 @@ public class HAC {
 
 
     /**
-     *
+     * Here we state that if the player-character collides with enemy-character, then player will die.
+     * @author ceciliethoresen
      */
     private void render() {
         for(Enemy enemy : enemies) {
@@ -78,10 +83,11 @@ public class HAC {
     }
 
     /**
-     *
-     * @param x
-     * @param y
-     * @return
+     * This method makes the character move vertical or horizontal.
+     * @param x is horizontal.
+     * @param y is vertical.
+     * @return the position to character.
+     * @author ceciliethoresen
      */
     public boolean move(double x, double y) {
         if (!isRunning) return false;
@@ -104,6 +110,7 @@ public class HAC {
 
     /**
      * Called when character dies.
+     * @author
      */
     private void die() {
         timeline.stop();
@@ -112,8 +119,9 @@ public class HAC {
     }
 
     /**
-     * Loads new map
-     * @param gameMap map to load
+     * This method loads new map.
+     * @param gameMap map to load.
+     * @author ceciliethoresen
      */
     private void loadMap(GameMap gameMap) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
@@ -122,16 +130,18 @@ public class HAC {
     }
 
     /**
-     * resize the game
+     * Here we resize the game.
+     * @author ceciliethoresen
      */
     public void resize() {
         camera.calcOffset();
     }
 
     /**
-     * Sets the player position
-     * @param x position
-     * @param y position
+     * Sets the player position on gameboard.
+     * @param x position width.
+     * @param y position height.
+     * @author ceciliethoresen
      */
     public void setPlayerPostion(int x, int y) {
         // camera.setPlayerPosition(x, y);
@@ -139,7 +149,8 @@ public class HAC {
 
 
     /**
-     * Initiate timeline
+     * This method initiate a timeline.
+     * @author
      */
     private void initTimeline() {
         KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
@@ -149,22 +160,37 @@ public class HAC {
     }
 
     /**
-     * Returns the running state of the game
-     * @return
+     * Shows us the state when we run the game.
+     * @return the running state of the game.
+     * @author ceciliethoresen
      */
     public boolean isRunning() {
         return isRunning;
     }
 
-
+    /**
+     * Gets the camera to gameboard.
+     * @return the visual that camera shows us.
+     * @author ceciliethoresen
+     */
     public Camera getCamera() {
         return camera;
     }
 
+    /**
+     * Gets the player.
+     * @return the visual of player to gameboard.
+     * @author ceciliethoresen
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Gets the gamemap.
+     * @return the visual of gamemap.
+     * @author ceciliethoresen
+     */
     public GameMap getGameMap() {
         return gameMap;
     }

@@ -6,7 +6,8 @@ import HAC.sprite.SpriteAnimation;
 import java.awt.image.BufferedImage;
 
 /**
- * This class describes the character in the game.
+ * This class describes the different states to character in the game.
+ * @author ceciliethoresen
  */
 public class CharacterAvatar {
     private SpriteAnimation walkingUp;
@@ -18,10 +19,10 @@ public class CharacterAvatar {
     private SpriteAnimation animation;
 
     /**
-     * This method gives us the size to Avatar.
+     * This method gives us the size and position to Avatar.
      * @param fileName of the file we can save.
      * @param size The size to the Avatar.
-     * @author Cecilie Thoresen
+     * @author ceciliethoresen
      */
     public CharacterAvatar(String fileName, int size){
         sprite = new Sprite(fileName, size);
@@ -40,7 +41,7 @@ public class CharacterAvatar {
     }
 
     /**
-     * In this method the Avatar start.
+     * This method starts the Avatar.
      * @author Cecilie Thoresen
      */
     public void startAnimation() {
@@ -48,7 +49,8 @@ public class CharacterAvatar {
     }
 
     /**
-     * Here the avatar updates in the game,
+     * Here it updates the avatar.
+     * @author ceciliethoresen
      */
     public void updateAnimation(){
         animation.update();
@@ -89,6 +91,7 @@ public class CharacterAvatar {
 
     /**
      * Sets the walking right to the avatar.
+     * @author ceciliethoresen
      */
     public void setWalkRight() {
         animation = this.walkRight;
@@ -96,6 +99,7 @@ public class CharacterAvatar {
 
     /**
      * Sets the standing to the avatar.
+     * @author ceciliethoresen
      */
     public void setStanding() {
         animation = this.standing;

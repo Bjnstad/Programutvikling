@@ -40,6 +40,12 @@ public class ExportHac {
         elements.add(sb.toString());
     }
 
+    /**
+     *
+     * @param image
+     * @param type
+     * @return string of the image
+     */
     private String encodeImageToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -55,6 +61,10 @@ public class ExportHac {
         return imageString;
     }
 
+    /**
+     * This method creates a file by stringBuilder.
+     * @author ceciliethoresen
+     */
     public void createFile(){
         StringBuilder sb = new StringBuilder(); // creates empty builder.
         for(String content : elements){
