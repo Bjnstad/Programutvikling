@@ -14,18 +14,24 @@ import javafx.scene.control.ListView;
 
 import java.io.File;
 
+/**
+ * This class contain
+ * @author ceciliethoresen
+ */
 public class ChooseMapController implements SubController {
 
     @FXML
     ListView maps;
 
-
-
-
     static final File dir = new File("assets/maps");
     private MainMenuController mainMenuController;
 
-
+    /**
+     *
+     * Gets all the names to the observable list.
+     * @return the
+     * @author ceciliethoresen
+     */
     private ObservableList<String> getAllNames() {
         if (!dir.isDirectory()) return null;
         ObservableList<String> res = FXCollections.observableArrayList();
@@ -40,6 +46,11 @@ public class ChooseMapController implements SubController {
         return res;
     }
 
+    /**
+     * Here we gets the file extension.
+     * @param file
+     * @return filename?
+     */
     private String getFileExtension(File file) {
         String name = file.getName();
         try {
@@ -50,19 +61,32 @@ public class ChooseMapController implements SubController {
     }
 
 
-
+    /**
+     * This method imports the map.
+     * @param event allows us to access the properties of the ActionEvent.
+     * @author ceciliethoresen
+     */
     @FXML
     public void importMap(ActionEvent event) {
     }
 
+    /**
+     *
+     * @param event allows us to access the properties of the ActionEvent.
+     * @author ceciliethoresen
+     */
     @FXML
     public void play(ActionEvent event) {
         HacParser hacParser = new HacParser();
         GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
         mainMenuController.loadMap(gameMap);
-
     }
 
+    /**
+     * Sets sub controller. //Hva gjør controller
+     * @param controller .......
+     * @author ceciliethoresen
+     */
     @Override
     public void setSubController(Controller controller) {
         if (controller == null) throw new NullPointerException("Controller cant be null");
@@ -74,6 +98,10 @@ public class ChooseMapController implements SubController {
         //maps.setItems(getAllNames());
     }
 
+    /**
+     * Here we get all names to the map.
+     * @author ceciliethoresen
+     */
     @Override
     public void init() {
         maps.setItems(getAllNames());

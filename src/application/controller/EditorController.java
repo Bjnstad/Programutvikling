@@ -46,6 +46,7 @@ public class EditorController implements Controller {
     /**
      * This method creates a new file.
      * @param event allows us to access the properties of ActionEvent.
+     * @author
      */
     @FXML
     public void newFile(ActionEvent event){
@@ -55,6 +56,7 @@ public class EditorController implements Controller {
     /**
      * This method sets the main controller.
      * @param mainController shows what on the screen of the game.
+     * @author
      */
     @Override
     public void setMainController (MainController mainController) {
@@ -63,6 +65,7 @@ public class EditorController implements Controller {
 
     /**
      * Initiates fileHandler.
+     * @author
      */
     @Override
     public void initiate () {
