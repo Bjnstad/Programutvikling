@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 
 /**
  * This class represents gamemap.
- * Gamemap contains of a count of objects that is available.
+ * Gamemap contains of a count of objects, width, height and the background we get from sprite.
  * @author ceciliethoresen
  */
 public class GameMap {

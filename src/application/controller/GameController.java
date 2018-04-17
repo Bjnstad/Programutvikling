@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 
 /**
  * GameController implements Controller.
+ * @author
  */
 public class GameController implements Controller {
 
@@ -31,6 +32,7 @@ public class GameController implements Controller {
 
     /**
      * On start of state.
+     * @author
      */
     @Override
     public void initiate() {
@@ -51,6 +53,7 @@ public class GameController implements Controller {
 
      /**
      * On state close
+      * @author
      */
     @Override
     public void onClose() {
@@ -79,6 +82,7 @@ public class GameController implements Controller {
     /**
      * Return EventHandler to add support for user input
      * @return Eventhandler
+     * @author
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
@@ -112,6 +116,7 @@ public class GameController implements Controller {
     /**
      * Sets parent
      * @param mainController
+     * @author
      */
     @Override
     public void setMainController(MainController mainController) {
@@ -122,6 +127,7 @@ public class GameController implements Controller {
     /**
      * Creates a simple map for testing, should be replaced by map loader or randomized based on pref width/height
      * @return a simple map with some objects 100 x 100 in size
+     * @author
      */
     private GameMap createSimpleMap() {
         GameMap map = new GameMap(20, 20, new Sprite("background", 32));

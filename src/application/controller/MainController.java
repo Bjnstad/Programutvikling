@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controller implements Initializable
+ * @author
  */
 public class MainController implements Initializable {
 
@@ -29,9 +30,9 @@ public class MainController implements Initializable {
     private GameMap gameMap; // The current gamemap to play
 
     /**
-     * Initialize location and resources to the game
-     * @param location
-     * @param resources
+     * Initialize location and resources to the game.
+     * @param location to the game.
+     * @param resources to the game.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,7 +40,9 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Here we sets the state of application in main frame.
      * @param state what state of application should be shown in the main frame
+     * @author
      */
     public void setState(State state) {
         if(controller != null) controller.onClose(); // Call close for the previous controller.
@@ -83,16 +86,30 @@ public class MainController implements Initializable {
         controller.initiate(); // Call initiate for new controller
     }
 
+    /**
+     * Sets the game map.
+     * @param gameMap
+     * @author
+     */
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
+    /**
+     *
+     * @author
+     */
     public void toMainView() {
         if(mainView.getChildren().size() > 1) {
             mainView.getChildren().remove(1, mainView.getChildren().size());
         }
     }
 
+    /**
+     * This method adds the sub state in the game.
+     * @param subState is
+     * @author
+     */
     public void addSubState(SubState subState) {
         SubController subController;
 
