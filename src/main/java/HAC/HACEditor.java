@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/main/java/HAC/HACEditor.java
 package main.java.HAC;
 
 import main.java.HAC.character.Enemy;
@@ -6,12 +7,21 @@ import main.java.HAC.editor.ExportHac;
 import main.java.HAC.editor.HacParser;
 import main.java.HAC.world.GameMap;
 import main.java.HAC.world.GameObject;
+=======
+package HAC;
+
+import HAC.character.Enemy;
+import HAC.character.Player;
+import HAC.filehandler.ExportHac;
+import HAC.filehandler.HacParser;
+import HAC.world.GameMap;
+import HAC.world.GameObject;
+>>>>>>> ac770ac75d700e4e6fa8d7f05c3e9bea5c1a76ab:src/HAC/HACEditor.java
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Main class for game main.java.HAC

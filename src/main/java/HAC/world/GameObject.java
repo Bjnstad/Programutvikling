@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
- * This class defines the gameObject.
+ * This class defines the gameObject and contains the size and position.
  * @author ceciliethoresen
  */
 public class GameObject {
@@ -17,7 +17,7 @@ public class GameObject {
     private Image image;
 
     /**
-     * Position and size to gameObject.
+     * Visual, position and size to gameObject.
      * @param image represents the gameObject.
      * @param posY  position to gameObject in height.
      * @param posX position to gameObject in width.

@@ -1,9 +1,16 @@
 package main.java.controller.subcontroller;
 
+<<<<<<< HEAD:src/main/java/controller/subcontroller/ChooseMapController.java
 import main.java.HAC.editor.HacParser;
 import main.java.HAC.world.GameMap;
 import main.java.controller.Controller;
 import main.java.controller.MainMenuController;
+=======
+import HAC.filehandler.HacParser;
+import HAC.world.GameMap;
+import application.controller.Controller;
+import application.controller.MainMenuController;
+>>>>>>> ac770ac75d700e4e6fa8d7f05c3e9bea5c1a76ab:src/application/controller/subcontroller/ChooseMapController.java
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

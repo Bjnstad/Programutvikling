@@ -3,14 +3,15 @@ package main.java.HAC.character;
 import javafx.scene.image.Image;
 
 /**
- * In this class Enemy extends the qualities from chracter
+ * In this class Enemy extends the qualities from character.
+ * @author ceciliethoresen
  */
 public class Enemy extends Character {
 
     private float speed = 1;
 
     /**
-     * This method represents the enemy in the game.
+     * This method represents position, size and qualities to the enemy in the game.
      * @param spriteFileName is the name of the file that can be downloaded.
      * @param sizeX is the size of the enemy in width(x).
      * @param sizeY is the size of the enemy in height(y).
@@ -22,6 +23,7 @@ public class Enemy extends Character {
         super(new CharacterAvatar(spriteFileName, 64), sizeX, sizeY);
         super.setPosX(posX);
         super.setPosY(posY);
+
     }
 
     /**
@@ -34,4 +36,7 @@ public class Enemy extends Character {
         addPosY(speed * Math.cos(angle) / 100);
         addPosX(speed * Math.sin(angle) / 100);
     }
+
+
+
 }

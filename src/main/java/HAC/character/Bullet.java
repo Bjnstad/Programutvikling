@@ -1,7 +1,8 @@
 package main.java.HAC.character;
 
 /**
- * The bullet that is used to shoot in the game.
+ * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
+ * @author ceciliethoresen
  */
 public class Bullet {
     private final double speed = 7;
@@ -11,11 +12,11 @@ public class Bullet {
     private boolean visible;
 
     /**
-     * The coordinates to the bullets.
-     * @param startX coordinate of the cell
-     * @param startY coordinate of the cell
-     * @param endX coordinate of the cell
-     * @param endY coordinate of the cell
+     * The coordinates to the bullets from start to end, vertical and horizontal.
+     * @param startX coordinate of the cell horizontal.
+     * @param startY coordinate of the cell vertical.
+     * @param endX coordinate of the cell horizontal.
+     * @param endY coordinate of the cell vertical.
      */
     public Bullet(double startX, double startY, double endX, double endY){
         x = startX;
@@ -29,7 +30,8 @@ public class Bullet {
     }
 
     /**
-     * Updates the game
+     * This method updates the game.
+     * @author ceciliethoresen
      */
     public void update(){
         x += velocityX;
@@ -42,7 +44,8 @@ public class Bullet {
 
     /**
      * Gets the state of x.
-     * @return the state to x.
+     * @return the state to x in width.
+     * @author ceciliethoresen
      */
     public double getX() {
         return x;
@@ -50,7 +53,8 @@ public class Bullet {
 
     /**
      * Sets the state of x.
-     * @param x
+     * @param x is the state horizontal.
+     * @author ceciliethoresen
      */
     public void setX(int x) {
         this.x = x;
@@ -58,7 +62,8 @@ public class Bullet {
 
     /**
      * Gets the state of y.
-     * @return y
+     * @return the state to y in height.
+     * @author ceciliethoresen
      */
     public double getY() {
         return y;
@@ -66,39 +71,44 @@ public class Bullet {
 
     /**
      * Sets the state of y.
-     * @param y
+     * @param y is the state vertical.
+     * @author ceciliethoresen
      */
     public void setY(int y) {
         this.y = y;
     }
 
     /**
-     * Gets the state of speed
-     * @return speed
+     * Gets the state of speed.
+     * @return speed.
+     * @author ceciliethoresen
      */
     public double getSpeedX() {
         return speedX;
     }
 
     /**
-     * Sets the state of speed
-     * @param speedX
+     * Sets the state of speed.
+     * @param speedX vertical.
+     * @author ceciliethoresen
      */
     public void setSpeedX(int speedX) {
         this.speedX = speedX;
     }
 
     /**
-     * ..
-     * @return visible
+     * Makes the bullets visible.
+     * @return visibility of the bullets in the game.
+     * @author ceciliethoresen
      */
     public boolean isVisible() {
         return visible;
     }
 
     /**
-     * Sets the state to visible
+     * Sets the state to visible.
      * @param visible
+     * @author ceciliethoresen
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
