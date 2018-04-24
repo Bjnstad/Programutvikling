@@ -5,7 +5,6 @@ import main.java.HAC.character.Player;
 import main.java.HAC.world.GameMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.canvas.Canvas;
 import javafx.util.Duration;
 
 /**
@@ -27,15 +26,12 @@ public class HAC {
     /**
      * This method contains gamemap´s width and height on canvas and states that gamemap and JavaFX cannot be null.
      * @param gameMap has the position to gameobjects.
-     * @param canvas is the visual on the gameboard.
-     * @author ceciliethoresen
      */
-    public HAC(GameMap gameMap, Canvas canvas, double width, double height) {
+    public HAC(GameMap gameMap) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
-        if(canvas == null) throw new NullPointerException("JavaFx canvas cannot be null");
 
         this.gameMap = gameMap;
-        this.camera = new Camera(canvas, height, width);
+        this.camera = new Camera();
 
         this.player = new Player();
         player.setPosX(camera.getPlayerX());
@@ -57,7 +53,6 @@ public class HAC {
 
     /**
      * Starting gameloop running accordingly to FPS
-     * @author
      */
     public void play() {
         if(timeline == null) initTimeline();
@@ -69,7 +64,6 @@ public class HAC {
 
     /**
      * Pauses the game
-     * @author
      */
     public void pause() {
         timeline.pause();
@@ -79,7 +73,6 @@ public class HAC {
 
     /**
      * Here we state that if the player-character collides with enemy-character, then player will die.
-     * @author ceciliethoresen
      */
     private void render() {
         for(Enemy enemy : enemies) {
@@ -97,7 +90,6 @@ public class HAC {
      * @param x is horizontal.
      * @param y is vertical.
      * @return the position to character.
-     * @author ceciliethoresen
      */
     public boolean move(double x, double y) {
         if (!isRunning) return false;
@@ -120,7 +112,6 @@ public class HAC {
 
     /**
      * Called when character dies.
-     * @author
      */
     private void die() {
         timeline.stop();
@@ -129,38 +120,7 @@ public class HAC {
     }
 
     /**
-     * This method loads new map.
-     * @param gameMap map to load.
-     * @author ceciliethoresen
-     */
-    private void loadMap(GameMap gameMap) {
-        if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
-        this.gameMap = gameMap;
-        gameMap.render(camera);
-    }
-
-    /**
-     * Here we resize the game.
-     * @author ceciliethoresen
-     */
-    public void resize() {
-        camera.calcOffset();
-    }
-
-    /**
-     * Sets the player position on gameboard.
-     * @param x position width.
-     * @param y position height.
-     * @author ceciliethoresen
-     */
-    public void setPlayerPostion(int x, int y) {
-        // camera.setPlayerPosition(x, y);
-    }
-
-
-    /**
      * This method initiate a timeline.
-     * @author
      */
     private void initTimeline() {
         KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
@@ -207,9 +167,5 @@ public class HAC {
 
     public Enemy[] getEnemies() {
         return enemies;
-    }
-
-    public Timeline getTimeline() {
-        return timeline;
     }
 }
