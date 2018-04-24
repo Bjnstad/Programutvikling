@@ -36,13 +36,15 @@ public class Camera {
      * @author
      */
     public void calcOffset() {
-        width < height ? 
-        if(width < height) {
-            scale = width / zoom;
-        } else {
-            scale = height / zoom;
-        }
+        scale = width < height ? width / zoom : height / zoom;
     }
+
+
+
+
+
+
+
 
     /**
      * This method gets the Canvas vertical.
