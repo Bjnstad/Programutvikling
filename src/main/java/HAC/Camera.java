@@ -6,11 +6,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
- * Camera is used to calculate differences between gameboard and the real canvas.
+ * Camera is used to calculate differences between game content and the real pixel values for canvas.
  * @author
  */
 public class Camera {
-
     private int zoom = 20; // How many frames to show
 
     private Canvas canvas;
@@ -37,12 +36,11 @@ public class Camera {
      * @author
      */
     public void calcOffset() {
+        width < height ? 
         if(width < height) {
             scale = width / zoom;
-            //offsetY = (height - width) /2;
         } else {
             scale = height / zoom;
-            //offsetX = (width - height) /2;
         }
     }
 

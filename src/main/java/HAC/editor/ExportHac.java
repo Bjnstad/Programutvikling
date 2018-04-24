@@ -40,7 +40,7 @@ public class ExportHac {
         elements.add(sb.toString());
     }
 
-    private String encodeImageToString(BufferedImage image, String type) {
+    public String encodeImageToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 

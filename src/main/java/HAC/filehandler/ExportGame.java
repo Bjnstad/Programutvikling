@@ -1,21 +1,17 @@
-package HAC.filehandler;
+package main.java.HAC.filehandler;
 
-import HAC.Camera;
-import HAC.character.Enemy;
-import HAC.character.Player;
-import HAC.world.GameMap;
-import HAC.world.GameObject;
-import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
+import main.java.HAC.Camera;
+import main.java.HAC.character.Enemy;
+import main.java.HAC.character.Player;
+import main.java.HAC.editor.ExportHac;
+import main.java.HAC.world.GameMap;
+import main.java.HAC.world.GameObject;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 
 /**
  * Created by henrytran1 on 17/04/2018.

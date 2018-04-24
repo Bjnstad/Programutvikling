@@ -9,23 +9,19 @@ import javafx.scene.canvas.Canvas;
 import javafx.util.Duration;
 
 /**
-<<<<<<< HEAD:src/main/java/HAC/HAC.java
- * Main class for game main.java.HAC
-=======
  * This class represents Main class for game HAC, and contains gamemap, camera, enemies, timeline and player.
  * @author ceciliethoresen
->>>>>>> ac770ac75d700e4e6fa8d7f05c3e9bea5c1a76ab:src/HAC/HAC.java
  */
 public class HAC {
     private final static double FPS = 60;
 
     private GameMap gameMap;
     private Camera camera;
+    private boolean isRunning = false;
+
     private Enemy[] enemies = new Enemy[1];
     private Timeline timeline;
     private Player player;
-    private boolean devMode = false;
-    private boolean isRunning = false;
 
 
     /**
@@ -44,10 +40,20 @@ public class HAC {
         this.player = new Player();
         player.setPosX(camera.getPlayerX());
         player.setPosY(camera.getPlayerY());
-        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
 
-        //play(); // Initate game
+
+
+        // TODO: Create random enemy spawning with highscore and levels system
+        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
     }
+
+
+
+
+
+
+
+
 
     /**
      * Starting gameloop running accordingly to FPS
