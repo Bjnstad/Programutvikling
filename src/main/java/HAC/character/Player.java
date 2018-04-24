@@ -24,13 +24,13 @@ public class Player extends Character {
      * @return the position to enemy in height and width.
      */
     public boolean willCollide(Enemy enemy) {
-        double a = enemy.getPosX() - enemy.getSizeX();
-        double b = enemy.getPosX() + enemy.getSizeX();
+        double a = enemy.getPosX() - enemy.getSizeX()/2;
+        double b = enemy.getPosX() + enemy.getSizeX()/2;
         double c = getPosX();
         boolean xval = b > a ? c > a && c < b : c > b && c < a;
 
-        a = enemy.getPosY() - enemy.getSizeY();
-        b = enemy.getPosY() + enemy.getSizeY();
+        a = enemy.getPosY() - enemy.getSizeY()/2;
+        b = enemy.getPosY() + enemy.getSizeY()/2;
         c = getPosY();
         boolean yval = b > a ? c > a && c < b : c > b && c < a;
 

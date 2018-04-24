@@ -39,7 +39,7 @@ public class HACEditor {
 
         this.gameMap = gameMap;
         this.canvas = canvas;
-        this.camera = new Camera(canvas, 500, 500);
+        this.camera = new Camera();
 
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
@@ -94,13 +94,6 @@ public class HACEditor {
      */
     public void setGrid(boolean grid) {
         //gameMap.setGrid(grid);
-    }
-
-    /**
-     * resize the game
-     */
-    public void resize() {
-        camera.calcOffset();
     }
 
     /**
