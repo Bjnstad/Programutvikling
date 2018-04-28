@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 /**
  * This class represents the game map.
  * Gamemap contains of a count of objects, width, height and the background we get from sprite.
- * @author ceciliethoresen
+ * @author
  */
 public class GameMap {
     private GameObject[] gameObjects;
@@ -22,7 +22,6 @@ public class GameMap {
      * @param width size of the gameboard.
      * @param height size of the gameboard.
      * @param background we gets from sprite.
-     * @author ceciliethoresen
      */
     public GameMap(int width, int height, Sprite background) {
         if(width < 0) width = 0;
@@ -42,11 +41,10 @@ public class GameMap {
     /**
      * This method contains the visual on the bord, and states how far camera goes vertical and horizontal.
      * @param camera shows us the visual on the board
-     * @param startX horizontal
+     * @param startX
      * @param startY vertical
      * @param endX horizontal
      * @param endY vertical
-     * @author ceciliethoresen
      */
     public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
         for (int x = startX; x <= endX; x++) {
@@ -61,7 +59,6 @@ public class GameMap {
      * @param camera shows us the visual on the board.
      * @param x is the background in width.
      * @param y is the background in height.
-     * @author ceciliethoresen
      */
     private void renderBlock(Camera camera, int x, int y) {
         GraphicsContext gc = camera.getGraphicsContext();
@@ -83,7 +80,6 @@ public class GameMap {
      * @param posX position to x.
      * @param posY position to y.
      * @return false if not the statement is true.
-     * @author ceciliethoresen
      */
     public boolean willCollide(int posX, int posY) {
         if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
@@ -95,7 +91,6 @@ public class GameMap {
      * Here we add gameObject into the gameboard.
      * @param gameObject states the position in height and width.
      * @return if added returns true, false if coordinates is taken or
-     * @author ceciliethoresen
      */
     public boolean addGameObject(GameObject gameObject) {
         int posX = gameObject.getPosX();
@@ -140,7 +135,6 @@ public class GameMap {
     /**
      * This method gets the width of gameMap.
      * @return the width to gameMap.
-     * @author ceciliethoresen
      */
     public int  getWidth() {
         return width;
@@ -149,7 +143,6 @@ public class GameMap {
     /**
      * This method gets the height to gameMap.
      * @return the length to gameMap.
-     * @author ceciliethoresen
      */
     public int getHeight() {
         return height;
@@ -158,7 +151,6 @@ public class GameMap {
     /**
      * This method contains the visual, and sets the height and width on canvas.
      * @param camera shows us the visual on the gameboard.
-     * @author ceciliethoresen
      */
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
