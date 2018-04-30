@@ -7,12 +7,13 @@ import org.junit.Test;
 
 /**
  * Created by henrytran1 on 19/02/2018.
+ *
  */
 class EditorControllerTest {
     private MainController mainController;
 
     /**
-     * Sets the main controller
+     * Sets the main controller.
      */
     @Test
     void setMainController() {
@@ -21,7 +22,7 @@ class EditorControllerTest {
     }
 
     /**
-     * ....
+     *
      */
     @Test
     void initiate() {

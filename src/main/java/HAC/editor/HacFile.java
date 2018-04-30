@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 /**
  * In this class the file extends the properties from GameObject.
- * @author ceciliethoresen
+ * @author
  */
 public class HacFile extends GameObject{
 

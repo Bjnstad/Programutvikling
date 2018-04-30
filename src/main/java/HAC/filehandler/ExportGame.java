@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 /**
  * Created by henrytran1 on 17/04/2018.
+ * Game extends Hac
  */
 public class ExportGame extends ExportHac {
     private ArrayList<String> mapList = new ArrayList<>();
@@ -28,13 +29,19 @@ public class ExportGame extends ExportHac {
     private StringBuilder sb = new StringBuilder();
 
 
+    /**
+     * Exports the game.
+     * Contains gameMap, camera, enemies and player.
+     * @param gameMap
+     * @param camera
+     * @param enemies
+     * @param player
+     */
     public ExportGame(GameMap gameMap, Camera camera, Enemy[] enemies, Player player) {
         this.gameMap = gameMap;
         this.camera = camera;
         this.enemies = enemies;
         this.player = player;
-
-
 
         saveMap();
         saveCamera();
@@ -44,6 +51,9 @@ public class ExportGame extends ExportHac {
 
     }
 
+    /**
+     * Saves the map.
+     */
     public void saveMap() {
         GameObject[] object = gameMap.getGameObjects();
         for (int i = 0; i <object.length; i++) {
@@ -63,12 +73,18 @@ public class ExportGame extends ExportHac {
     }
 
 
+    /**
+     * Saves the camera.
+     */
     public void saveCamera(){
         sb.append(camera.getTranslateX());
         sb.append(camera.getTranslateY());
 
     }
 
+    /**
+     * Saves enemies.
+     */
     public void saveEnemies(){
         for (int i = 0; i < enemies.length; i++) {
             sb.append(enemies[i].getSpriteFileName());
@@ -81,6 +97,9 @@ public class ExportGame extends ExportHac {
 
     }
 
+    /**
+     * Saves player.
+     */
     public void savePlayer(){
         sb.append(player.getSpriteFileName());
         sb.append(player.getSizeX());
@@ -88,9 +107,10 @@ public class ExportGame extends ExportHac {
 
     }
 
-
-
-
+    /**
+     * Adds element.
+     * @param gameMap
+     */
     public void addElement(GameMap gameMap){
         System.out.println(gameMap.getGameObjects());
 
@@ -103,6 +123,9 @@ public class ExportGame extends ExportHac {
 
     }
 
+    /**
+     * Exports a file.
+     */
     public void exportFile(){
         String content = sb.toString();
         //File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
@@ -123,10 +146,5 @@ public class ExportGame extends ExportHac {
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
 }

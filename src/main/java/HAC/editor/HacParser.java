@@ -12,12 +12,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-
-
 /**
  * This class content
  *
- * @author ceciliethoresen
+ * @author
  */
 public class HacParser {
 
@@ -25,8 +23,7 @@ public class HacParser {
      * This method helps us to parse a file.
      * ... kommer mer
      * ...
-     * @param file .......
-     * @author ceciliethoresen
+     * @param file ......
      */
     public GameMap parseFile(File file){
         GameMap map = new GameMap(20, 20, new Sprite("background", 32));;

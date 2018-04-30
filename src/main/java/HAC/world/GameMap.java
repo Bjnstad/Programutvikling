@@ -38,7 +38,7 @@ public class GameMap {
 
     /**
      * Allocate background sprites from storage to memory.
-     * @param background
+     * @param background in the game.
      */
     private void loadBackground(Sprite background) {
         this.background = new Image[3][3];
@@ -50,7 +50,7 @@ public class GameMap {
     }
 
     /**
-     * This method contains the visual on the bord, and states how far camera goes vertical and horizontal.
+     * This method contains the visual on the board, and states how far camera goes vertical and horizontal.
      * @param camera shows us the visual on the board
      * @param startX
      * @param startY vertical
@@ -75,6 +75,12 @@ public class GameMap {
         camera.getGraphicsContext().drawImage(getAppropriateImage(x, y), x, y, camera.getScale(), camera.getScale());
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     private Image getAppropriateImage(int x, int y) {
         if(x == 0 && y == 0) return background[0][0]; // TOP LEFT
         if(y == 0 && x > 0 && x < width) return background[1][0]; // TOP
@@ -85,6 +91,7 @@ public class GameMap {
         if(x == 0 && y == height) return background[0][2]; //BOTTOM LEFT
         if(x == 0 && y > 0 && y < height) return background[0][1]; // LEFT
         if(x > 0 && x < width && y > 0 && y < height) return background[1][1]; // Center
+
     }
 
     /**
@@ -100,7 +107,7 @@ public class GameMap {
     }
 
     /**
-     * Here we add gameObject into the gameboard.
+     * Adds gameObject into the gameboard.
      * @param gameObject states the position in height and width.
      * @return if added returns true, false if coordinates is taken or
      */
@@ -145,7 +152,7 @@ public class GameMap {
     }
 
     /**
-     * This method gets the width of gameMap.
+     * Gets the width of gameMap.
      * @return the width to gameMap.
      */
     public int  getWidth() {
@@ -153,7 +160,7 @@ public class GameMap {
     }
 
     /**
-     * This method gets the height to gameMap.
+     * Gets the height to gameMap.
      * @return the length to gameMap.
      */
     public int getHeight() {
@@ -161,7 +168,7 @@ public class GameMap {
     }
 
     /**
-     * This method contains the visual, and sets the height and width on canvas.
+     * Contains the visual, and sets the height and width on canvas.
      * @param camera shows us the visual on the gameboard.
      */
     public void render(Camera camera) {
@@ -184,8 +191,8 @@ public class GameMap {
     }
 
     /**
-     * This method draws the objects.
-     * This class provides a basic capability for creating objects with draw.
+     * Draws the objects.
+     * Provides a basic capability for creating objects with draw.
      * @param gameObject is a object in the game.
      * @param camera shows us the visual on gameboard.
      */

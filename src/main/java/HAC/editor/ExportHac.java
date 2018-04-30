@@ -23,7 +23,6 @@ public class ExportHac {
     /**
      * This method adds a element to the game.
      * @param gameObject is the element that is being added to the game.
-     * @author ceciliethoresen
      */
     public void addElement(GameObject gameObject){
         String base64String = encodeImageToString(SwingFXUtils.fromFXImage(gameObject.getAsset(), null), "png");
@@ -40,6 +39,12 @@ public class ExportHac {
         elements.add(sb.toString());
     }
 
+    /**
+     * This method encodes a image to a string.
+     * @param image from bufferedImage
+     * @param type is a string.
+     * @return a string of image.
+     */
     public String encodeImageToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -55,6 +60,9 @@ public class ExportHac {
         return imageString;
     }
 
+    /**
+     * Creates a file from stringBuilder.
+     */
     public void createFile(){
         StringBuilder sb = new StringBuilder(); // creates empty builder.
         for(String content : elements){
@@ -79,5 +87,4 @@ public class ExportHac {
             e.printStackTrace();
         }
     }
-
 }
