@@ -22,6 +22,11 @@ public class GameController implements Controller {
     private MainController mainController; // Parent controller
     private HAC game; // Instance of game
 
+    /**
+     * This method controls gameMap.
+     * If there´s nothing in gameMap, then it creates a simple map.
+     * @param gameMap is the map in the game.
+     */
     public GameController(GameMap gameMap) {
         GameMap gm = gameMap;
        // if(gameMap == null) gm = createSimpleMap();
@@ -29,8 +34,7 @@ public class GameController implements Controller {
     }
 
     /**
-     * On start of state.
-     * @author
+     * Initiate on start of state.
      */
     @Override
     public void initiate() {
@@ -48,8 +52,7 @@ public class GameController implements Controller {
     }
 
      /**
-     * On state close
-      * @author
+     * On state close.
      */
     @Override
     public void onClose() {
@@ -57,31 +60,40 @@ public class GameController implements Controller {
     }
 
 
+    /**
+     * Save the game.
+     */
     public void save() {
         //Save save = new Save(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getTimeline(), game.getPlayer());
         ExportGame save = new ExportGame(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getPlayer());
 
-
     }
 
+    /**
+     * Continue the game.
+     */
     public void resume() {
         mainController.toMainView();
         game.play();
     }
 
+    /**
+     * Exit the game.
+     */
     public void exit() {
         mainController.setState(State.MAIN_MENU);
     }
 
+    /**
+     * Load the game.
+     */
     public void load() {
 
     }
 
-
     /**
-     * Return EventHandler to add support for user input
-     * @return Eventhandler
-     * @author
+     * Gets the EventHandler.
+     * @return Eventhandler to add support for user input.
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
@@ -113,9 +125,8 @@ public class GameController implements Controller {
     }
 
     /**
-     * Sets parent
-     * @param mainController
-     * @author
+     * Sets mainController(parent).
+     * @param mainController controls all the action.
      */
     @Override
     public void setMainController(MainController mainController) {
@@ -124,9 +135,8 @@ public class GameController implements Controller {
 
 
     /**
-     * Creates a simple map for testing, should be replaced by map loader or randomized based on pref width/height
-     * @return a simple map with some objects 100 x 100 in size
-     * @author
+     * Creates a simple map for testing, should be replaced by map loader or randomized based on pref width/height.
+     * @return a simple map with some objects 100 x 100 in size.
      */
     private GameMap createSimpleMap() {
         GameMap map = new GameMap(20, 20, new Sprite("background", 32));

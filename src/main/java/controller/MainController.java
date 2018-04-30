@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Controller implements Initializable
+ * MainController implements Initializable
  * @author
  */
 public class MainController implements Initializable {
@@ -29,8 +29,8 @@ public class MainController implements Initializable {
 
     /**
      * Initialize location and resources to the game.
-     * @param location to the game.
-     * @param resources to the game.
+     * @param location in the game.
+     * @param resources in the game.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,9 +38,8 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Here we sets the state of application in main frame.
-     * @param state what state of application should be shown in the main frame
-     * @author
+     * Here we sets the state of application in mainframe.
+     * @param state what state of application should be shown in the main frame.
      */
     public void setState(State state) {
         if(controller != null) controller.onClose(); // Call close for the previous controller.
@@ -86,16 +85,14 @@ public class MainController implements Initializable {
 
     /**
      * Sets the game map.
-     * @param gameMap
-     * @author
+     * @param gameMap is a simple map for testing.
      */
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
     /**
-     *
-     * @author
+     * A method that shows MainView.
      */
     public void toMainView() {
         if(mainView.getChildren().size() > 1) {
@@ -104,9 +101,8 @@ public class MainController implements Initializable {
     }
 
     /**
-     * This method adds the sub state in the game.
+     * This method adds the SubState in the game.
      * @param subState is
-     * @author
      */
     public void addSubState(SubState subState) {
         SubController subController;
@@ -153,7 +149,6 @@ public class MainController implements Initializable {
             return;
         }
 
-
         mainView.getChildren().add(pane);
         subController.init();
     }
@@ -168,7 +163,7 @@ public class MainController implements Initializable {
 
     /**
      * In this method it gets the height to the gameboard.
-     * @return the height of the window in pixels
+     * @return the height of the window in pixels.
      */
     public double getHeight() {
         return mainView.getHeight();

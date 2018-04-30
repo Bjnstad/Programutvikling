@@ -7,16 +7,16 @@ import javafx.fxml.FXML;
 import java.awt.event.ActionEvent;
 
 /**
- * This class .....
+ * This class simulates rolling a die of controller.
+ * @author
  */
 public class DieController implements SubController {
 
     GameController gameController;
 
     /**
-     * Sets the sub controller.
-     * @param controller ??
-     * @author ceciliethoresen
+     * Sets the subController.
+     * @param controller can´ be null.
      */
     @Override
     public void setSubController(Controller controller) {
@@ -26,12 +26,10 @@ public class DieController implements SubController {
     }
 
     /**
-     * init??
-     * @author
+     * Initialization done in constructor.
      */
     @Override
     public void init() {
-
     }
 
     /**
@@ -44,7 +42,7 @@ public class DieController implements SubController {
     }
 
     /**
-     *
+     * This method terminates the currently running program.
      * @param event allows us to access the properties of the ActionEvent.
      */
     @FXML

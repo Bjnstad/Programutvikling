@@ -5,7 +5,7 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * Interface that represents the controller of the game.
- * @author ceciliethoresen
+ * @author
  */
 public interface Controller {
     State state = null; //There is differents states in the game.
