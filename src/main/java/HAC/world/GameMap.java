@@ -7,12 +7,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
- * This class represents the game map.
- * Gamemap contains of a count of objects, width, height and the background we get from sprite.
+ * GameMap handles all of properties for the board, width, height, static objects and background, does not include player and enemies.
+ * Currently this board only support static board size.
  * @author Axel Bjørnstad - S315322
  */
 public class GameMap {
-    private GameObject[] gameObjects;
+    private GameObject[] gameObjects; // Static objects
     private int width;
     private int height;
     private Image[][] background;
@@ -24,8 +24,8 @@ public class GameMap {
      * @param background we gets from sprite.
      */
     public GameMap(int width, int height, Sprite background) {
-        if(width < 0) throw new IllegalStateException("Width need to be above 0");
-        if(height < 0) throw new IllegalStateException("Height need to be above 0");
+        if(width < 0) throw new IllegalStateException("Width should be above 0");
+        if(height < 0) throw new IllegalStateException("Height should to be above 0");
 
         this.width = width;
         this.height = height;
@@ -45,6 +45,38 @@ public class GameMap {
         }
     }
 
+
+    /**
+     * Here we add gameObject into the gameboard.
+     * @param gameObject states the position in height and width.
+     * @return if added returns true, false if coordinates is taken or
+     */
+    public boolean addGameObject(GameObject gameObject) {
+        if(gameObject == null) throw new NullPointerException("GameObject cannot be null");
+        if(gameObject.getPosX() > 0 ||gameObject.getPosX() < width) return false;
+        if(gameObject.getPosY() > 0 ||gameObject.getPosY() < height) return false;
+        if (willCollide(gameObject.getPosX(), gameObject.getPosY())) return false;
+
+        GameObject[] result = new GameObject[gameObjects.length +1];
+        for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
+
+        int i = gameObjects.length < 1 ? 0 : gameObjects.length +1;
+        result[i] = gameObject;
+
+        gameObjects = result;
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+    // TODO: Move this to an own render class?
     /**
      * This method contains the visual on the bord, and states how far camera goes vertical and horizontal.
      * @param camera shows us the visual on the board
@@ -68,7 +100,7 @@ public class GameMap {
      * @param y is the background in height.
      */
     private void renderBlock(Camera camera, int x, int y) {
-        camera.getGraphicsContext().drawImage(getAppropriateImage(x, y), x, y, camera.getScale(), camera.getScale());
+        camera.getGraphicsContext().drawImage(getAppropriateImage(x, y), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
     }
 
     private Image getAppropriateImage(int x, int y) {
@@ -81,6 +113,7 @@ public class GameMap {
         if(x == 0 && y == height) return background[0][2]; //BOTTOM LEFT
         if(x == 0 && y > 0 && y < height) return background[0][1]; // LEFT
         if(x > 0 && x < width && y > 0 && y < height) return background[1][1]; // Center
+        return null;
     }
 
     /**
@@ -93,34 +126,6 @@ public class GameMap {
         if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
         if(getGameObject(posX, posY) != null) return true;
         return false;
-    }
-
-    /**
-     * Here we add gameObject into the gameboard.
-     * @param gameObject states the position in height and width.
-     * @return if added returns true, false if coordinates is taken or
-     */
-    public boolean addGameObject(GameObject gameObject) {
-        int posX = gameObject.getPosX();
-        int posY = gameObject.getPosY();
-
-        for (int x = posX; x < posX + gameObject.getSizeX(); x++) {
-            for (int y = posY; y < posY + gameObject.getSizeY(); y++) {
-                if (willCollide(x, y)) return false;
-            }
-        }
-
-        GameObject[] result = new GameObject[gameObjects.length +1];
-        for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
-
-        int re = gameObjects.length -1;
-        if(re < 0) re = 0;
-        // Copy in old objects
-
-        result[re] = gameObject;
-
-        gameObjects = result;
-        return true;
     }
 
     /**

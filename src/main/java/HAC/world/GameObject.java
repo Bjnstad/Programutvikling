@@ -13,7 +13,6 @@ public class GameObject {
     private int posX;
     private int posY;
 
-    private Color color; //TODO: Change to image
     private Image image;
 
     /**

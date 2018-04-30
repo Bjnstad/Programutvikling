@@ -39,7 +39,6 @@ public class HAC {
         generateEnemies(10);
     }
 
-
     /**
      *  Generates given number of enemies with random location.
      *  @param numberOfEnemies how many enemies to create.
