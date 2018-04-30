@@ -76,10 +76,10 @@ public class GameMap {
     }
 
     /**
-     *
-     * @param x
-     * @param y
-     * @return
+     * Gets appropriate image.
+     * @param x horizontal.
+     * @param y vertical.
+     * @return a image.
      */
     private Image getAppropriateImage(int x, int y) {
         if(x == 0 && y == 0) return background[0][0]; // TOP LEFT
@@ -95,7 +95,7 @@ public class GameMap {
     }
 
     /**
-     * This method contains if game objects collides with each other.
+     * Contains if game objects collides with each other.
      * @param posX position to x.
      * @param posY position to y.
      * @return false if not the statement is true.
@@ -138,7 +138,7 @@ public class GameMap {
      * This method gets the gameObject.
      * @param x the width to x in the game.
      * @param y the height  to y in the game.
-     * @return ....
+     * @return null.
      */
     public GameObject getGameObject(int x, int y) {
         if (x < 0 || x < width) return null;
@@ -155,7 +155,7 @@ public class GameMap {
      * Gets the width of gameMap.
      * @return the width to gameMap.
      */
-    public int  getWidth() {
+    public int getWidth() {
         return width;
     }
 

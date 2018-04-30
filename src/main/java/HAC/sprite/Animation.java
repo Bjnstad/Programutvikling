@@ -87,9 +87,10 @@ public class Animation {
     }
 
     /**
-     * Here we add a frame to the gameboard.
-     * @param frame
-     * @param duration
+     * Adds a frame to the gameboard.
+     * @param frame in the game.
+     * @param duration has to be less or equal 0.
+     *                 If else, it prints out invalid duration.
      */
     private void addFrame(BufferedImage frame, int duration) {
         if (duration <= 0) {
@@ -102,15 +103,15 @@ public class Animation {
     }
 
     /**
-     * Buffered image to the game
-     * @return frames of the game
+     * Gets buffered image to the game from sprite.
+     * @return frames of the game.
      */
     public BufferedImage getSprite() {
         return frames.get(currentFrame).getFrame();
     }
 
     /**
-     * Update the game
+     * Updates the game.
      */
     public void update() {
         if (!stopped) {

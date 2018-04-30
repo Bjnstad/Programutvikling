@@ -14,6 +14,7 @@ import java.io.File;
 
 /**
  * Main class for game main.java.HAC
+ * @author
  */
 public class HACEditor {
     private final static double FPS = 60;
@@ -69,7 +70,7 @@ public class HACEditor {
     }
 
     /**
-     *
+     * Starts shoot
      * @param endX
      * @param endY
      */
@@ -117,6 +118,11 @@ public class HACEditor {
         render();
     }
 
+    /**
+     * Sets gameObject.
+     * @param gameObject
+     * @return
+     */
     public boolean setGameObject(GameObject gameObject) {
         gameMap.addGameObject(gameObject);
         exportHac.addElement(gameObject);
@@ -125,11 +131,18 @@ public class HACEditor {
         return true;
     }
 
+    /**
+     * Saves a file.
+     */
     public void saveFile() {
         exportHac.createFile();
 
     }
 
+    /**
+     * Opens file.
+     * @param file 
+     */
     public void openFile(File file) {
         gameMap = hacParser.parseFile(file);
         this.render();

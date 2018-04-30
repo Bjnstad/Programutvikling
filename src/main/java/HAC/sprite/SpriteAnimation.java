@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * This class represents the animations we get from sprite.
- * @author ceciliethoresen
+ * @author
  */
 public class SpriteAnimation {
     private int frameCount;
@@ -17,10 +17,9 @@ public class SpriteAnimation {
     private int animationDirection;
 
     /**
-     * This method uploads the sprite animation to the game.
-     * @param spriteFrames
+     * Uploads the sprite animation to the game.
+     * @param spriteFrames from bufferedImage that describes an image with an accessible buffer of image data.
      * @param frameDelay
-     * @author ceciliethoresen
      */
     public SpriteAnimation(BufferedImage[] spriteFrames, double frameDelay){
         this.stopped = true;
@@ -38,8 +37,7 @@ public class SpriteAnimation {
     }
 
     /**
-     * This method starts the spriteanimation.
-     * @author ceciliethoresen
+     * Starts the spriteAnimation.
      */
     public void start(){
         if (!stopped){
@@ -52,27 +50,24 @@ public class SpriteAnimation {
     }
 
     /**
-     * Here we adds the sprite frame.
+     * Adds the spriteFrame.
      * @param frame from BufferedImage that describes an image with an accessible buffer of image data.
      * @param duration is a time-based amount of time of the frame in the game.
-     * @author ceciliethoresen
      */
     private void addSpriteFrame(BufferedImage frame, double duration){
         spriteFrames.add(new SpriteFrame(frame, duration));
     }
 
     /**
-     * This method gets the sprite bufferedImage.
-     * @return spriteframes
-     * @author ceciliethoresen
+     * Gets the sprite from bufferedImage.
+     * @return frames from sprite.
      */
     public BufferedImage getSprite(){
         return spriteFrames.get(currentFrame).getSpriteFrame();
     }
 
     /**
-     * Here we update the spriteanimation
-     * @author ceciliethoresen
+     * Updates the spriteAnimation.
      */
     public void update(){
         if(!stopped){
