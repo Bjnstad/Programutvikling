@@ -64,8 +64,6 @@ public class ExportGame extends ExportHac {
 
 
     public void saveCamera(){
-        sb.append(camera.getWidth());
-        sb.append(camera.getHeight());
         sb.append(camera.getTranslateX());
         sb.append(camera.getTranslateY());
 

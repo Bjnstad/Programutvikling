@@ -7,6 +7,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 /**
  * This class represents Main class for game HAC, and contains gamemap, camera, enemies, timeline and player.
  * @author ceciliethoresen
@@ -18,7 +20,7 @@ public class HAC {
     private Camera camera;
     private boolean isRunning = false;
 
-    private Enemy[] enemies = new Enemy[1];
+    private Enemy[] enemies;
     private Timeline timeline;
     private Player player;
 
@@ -32,24 +34,23 @@ public class HAC {
 
         this.gameMap = gameMap;
         this.camera = new Camera();
-
         this.player = new Player();
-        player.setPosX(camera.getPlayerX());
-        player.setPosY(camera.getPlayerY());
 
-
-
-        // TODO: Create random enemy spawning with highscore and levels system
-        this.enemies[0] = new Enemy("BODY_skeleton", 2,2,5,5);
+        generateEnemies(10);
     }
 
 
-
-
-
-
-
-
+    /**
+     *  Generates given number of enemies with random location.
+     *  @param numberOfEnemies how many enemies to create.
+     */
+    private void generateEnemies(int numberOfEnemies) {
+        enemies = new Enemy[numberOfEnemies];
+        Random rand = new Random();
+        for (int i = 0; i < numberOfEnemies; i++) {
+            this.enemies[i] = new Enemy("BODY_skeleton", 2,2,rand.nextInt(20),rand.nextInt(20));
+        }
+    }
 
     /**
      * Starting gameloop running accordingly to FPS
@@ -75,10 +76,15 @@ public class HAC {
      * Here we state that if the player-character collides with enemy-character, then player will die.
      */
     private void render() {
+        // Check for player collision and re-render map at enemy position.
         for(Enemy enemy : enemies) {
             if(player.willCollide(enemy)) die();
             enemy.calculateMove(player);
             gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
+        }
+
+        // Render enemies
+        for (Enemy enemy : enemies) {
             enemy.render(camera);
         }
 
