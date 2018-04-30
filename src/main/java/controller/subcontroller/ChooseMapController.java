@@ -14,7 +14,7 @@ import java.io.File;
 
 /**
  * This class contain
- * @author ceciliethoresen
+ * @author
  */
 public class ChooseMapController implements SubController {
 
@@ -25,10 +25,8 @@ public class ChooseMapController implements SubController {
     private MainMenuController mainMenuController;
 
     /**
-     *
      * Gets all the names to the observable list.
-     * @return the
-     * @author ceciliethoresen
+     * @return res?
      */
     private ObservableList<String> getAllNames() {
         if (!dir.isDirectory()) return null;
@@ -46,8 +44,8 @@ public class ChooseMapController implements SubController {
 
     /**
      * Here we gets the file extension.
-     * @param file
-     * @return filename?
+     * @param file name.
+     * @return the name of the file.
      */
     private String getFileExtension(File file) {
         String name = file.getName();
@@ -61,17 +59,16 @@ public class ChooseMapController implements SubController {
 
     /**
      * This method imports the map.
-     * @param event allows us to access the properties of the ActionEvent.
-     * @author ceciliethoresen
+     * @param event allows us to access the properties of ActionEvent.
      */
     @FXML
     public void importMap(ActionEvent event) {
     }
 
     /**
-     *
-     * @param event allows us to access the properties of the ActionEvent.
-     * @author ceciliethoresen
+     * This method parses a file in the game.
+     * It is the parser who identifies the error.
+     * @param event allows us to access the properties of ActionEvent.
      */
     @FXML
     public void play(ActionEvent event) {
@@ -81,9 +78,8 @@ public class ChooseMapController implements SubController {
     }
 
     /**
-     * Sets sub controller. //Hva gjør controller
-     * @param controller .......
-     * @author ceciliethoresen
+     * Sets sub controller
+     * @param controller can´t be null.
      */
     @Override
     public void setSubController(Controller controller) {
@@ -97,8 +93,7 @@ public class ChooseMapController implements SubController {
     }
 
     /**
-     * Here we get all names to the map.
-     * @author ceciliethoresen
+     * Here we sets the items and get all names to the map.
      */
     @Override
     public void init() {

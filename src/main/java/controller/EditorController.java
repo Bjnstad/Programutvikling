@@ -21,7 +21,8 @@ import javafx.stage.Stage;
 import java.io.File;
 
 /**
- * Implements the editor controller to controller
+ * Implements the EditorController to Controller.
+ * @author
  */
 public class EditorController implements Controller {
 
@@ -43,8 +44,7 @@ public class EditorController implements Controller {
 
     /**
      * This method creates a new file.
-     * @param event allows us to access the properties of ActionEvent.
-     * @author
+     * @param event allows us to access the properties of ActionEvent
      */
     @FXML
     public void newFile(ActionEvent event){
@@ -52,9 +52,8 @@ public class EditorController implements Controller {
     }
 
     /**
-     * This method sets the main controller.
+     * This method sets the mainController.
      * @param mainController shows what on the screen of the game.
-     * @author
      */
     @Override
     public void setMainController (MainController mainController) {
@@ -62,8 +61,7 @@ public class EditorController implements Controller {
     }
 
     /**
-     * Initiates fileHandler.
-     * @author
+     * Initiates imageList (fileHandler)
      */
     @Override
     public void initiate () {
@@ -98,8 +96,8 @@ public class EditorController implements Controller {
         listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             /**
-             *
-             * @param mouseEvent
+             * This method handles an action of mouseEvent.
+             * @param mouseEvent is an event which indicates that a mouse action occurred in a component.
              */
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -136,6 +134,11 @@ public class EditorController implements Controller {
                 primaryStage.show();
 
                 submit.setOnAction(new EventHandler<ActionEvent>() {
+                    /**
+                     * This method handles som type of action.
+                     * This event type is widely used to represent a variety of things
+                     * @param e is a type of ActionEvent, it allows you to access the properties of ActionEvent.
+                     */
                     @Override public void handle(ActionEvent e) {
                         int inputX = Integer.parseInt(inputSizeX.getText());
                         int inputY = Integer.parseInt(inputSizeY.getText());
@@ -209,7 +212,7 @@ public class EditorController implements Controller {
     }
 
     /**
-     *
+     * Is being used to decorate a method that is being called when a session is closing.
      */
     @Override
     public void onClose () {
@@ -218,7 +221,7 @@ public class EditorController implements Controller {
 
     /**
      * This method gets the event handler.
-     * @return the current event
+     * @return the current event.
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {

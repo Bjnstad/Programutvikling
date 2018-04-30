@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 
 /**
  * This class represents the possibility to press pause in the game.
- * @author ceciliethoresen
+ * @author
  */
 public class PauseMenuController implements SubController {
 
@@ -16,8 +16,7 @@ public class PauseMenuController implements SubController {
 
     /**
      * Sets the sub controller.
-     * @param controller
-     * @author ceciliethoresen
+     * @param controller can´ be null.
      */
     @Override
     public void setSubController(Controller controller) {
@@ -27,8 +26,7 @@ public class PauseMenuController implements SubController {
     }
 
     /**
-     * init??
-     * @author ceciliethoresen
+     * Initialization done in constructor.
      */
     @Override
     public void init() {
@@ -38,7 +36,6 @@ public class PauseMenuController implements SubController {
     /**
      * To continue the game.
      * @param event allows us to access the properties of the ActionEvent.
-     * @author ceciliethoresen
      */
     @FXML
     public void resume(javafx.event.ActionEvent event) {
@@ -48,7 +45,6 @@ public class PauseMenuController implements SubController {
     /**
      * Makes it possible to save (a file) the game?
      * @param event allows us to access the properties of the ActionEvent.
-     * @author ceciliethoresen
      */
     @FXML
     public void save(ActionEvent event) {
@@ -58,7 +54,6 @@ public class PauseMenuController implements SubController {
     /**
      * Loads the game.
      * @param event allows us to access the properties of the ActionEvent.
-     * @author ceciliethoresen
      */
     @FXML
     public void load(ActionEvent event) {
@@ -66,9 +61,8 @@ public class PauseMenuController implements SubController {
     }
 
     /**
-     * To exit the game.
+     * This method terminates the currently running program.
      * @param event allows us to access the properties of the ActionEvent.
-     * @author ceciliethoresen
      */
     @FXML
     public void exit(ActionEvent event) {

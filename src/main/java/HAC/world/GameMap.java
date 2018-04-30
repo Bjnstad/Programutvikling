@@ -34,7 +34,7 @@ public class GameMap {
 
     /**
      * Allocate background sprites from storage to memory.
-     * @param background
+     * @param background Sprite with 3x3 sprite setup
      */
     private void loadBackground(Sprite background) {
         this.background = new Image[3][3];
@@ -44,7 +44,6 @@ public class GameMap {
             }
         }
     }
-
 
     /**
      * Here we add gameObject into the gameboard.
@@ -58,7 +57,7 @@ public class GameMap {
         if (willCollide(gameObject.getPosX(), gameObject.getPosY())) return false;
 
         GameObject[] result = new GameObject[gameObjects.length +1];
-        for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
+        System.arraycopy(gameObjects, 0, result, 0, gameObjects.length);
 
         int i = gameObjects.length < 1 ? 0 : gameObjects.length +1;
         result[i] = gameObject;
@@ -124,8 +123,7 @@ public class GameMap {
      */
     public boolean willCollide(int posX, int posY) {
         if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
-        if(getGameObject(posX, posY) != null) return true;
-        return false;
+        return getGameObject(posX, posY) != null;
     }
 
     /**
@@ -134,7 +132,7 @@ public class GameMap {
      * @param y the height  to y in the game.
      * @return ....
      */
-    public GameObject getGameObject(int x, int y) {
+    private GameObject getGameObject(int x, int y) {
         if (x < 0 || x < width) return null;
         if (y < 0 || y < height) return null;
         for (GameObject gameObject : gameObjects) {
