@@ -146,7 +146,7 @@ public class HACEditor {
     public void openFile(File file) {
         gameMap = hacParser.parseFile(file);
         this.render();
-        
+
 
     }
 

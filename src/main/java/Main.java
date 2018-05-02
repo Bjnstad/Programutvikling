@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
 /**
- * In this class we create a JavaFX GUI program.
+ * This class creates a JavaFX GUI program.
  * We use FXML loader to download it in FXML that describes GUI.
  * @author
  */
