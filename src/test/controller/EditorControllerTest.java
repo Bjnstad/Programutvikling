@@ -2,9 +2,7 @@ package test.controller;
 
 import main.java.controller.EditorController;
 import main.java.controller.MainController;
-
 import org.junit.jupiter.api.Test;
-
 
 
 /**

@@ -61,6 +61,7 @@ public class HACEditor {
         gameMap.render(camera);
 
 
+
     }
 
     /**
@@ -112,6 +113,11 @@ public class HACEditor {
     }
 
 
+    /**
+     * Gets the camera to gameboard.
+     * @return the visual that camera shows us.
+     * @author ceciliethoresen
+     */
     public Camera getCamera() {
         return camera;
     }

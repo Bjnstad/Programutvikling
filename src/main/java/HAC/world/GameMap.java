@@ -12,7 +12,8 @@ import javafx.scene.image.Image;
  * @author Axel Bjørnstad - S315322
  */
 public class GameMap {
-    private GameObject[] gameObjects; // Static objects
+
+    private GameObject[] gameObjects = new GameObject[1];
     private int width;
     private int height;
     private Image[][] background;
@@ -47,27 +48,6 @@ public class GameMap {
         }
     }
 
-    /**
-     * Here we add gameObject into the gameboard.
-     *
-     * @param gameObject states the position in height and width.
-     * @return if added returns true, false if coordinates is taken or
-     */
-    public boolean addGameObject(GameObject gameObject) {
-        if (gameObject == null) throw new NullPointerException("GameObject cannot be null");
-        if (gameObject.getPosX() > 0 || gameObject.getPosX() < width) return false;
-        if (gameObject.getPosY() > 0 || gameObject.getPosY() < height) return false;
-        if (willCollide(gameObject.getPosX(), gameObject.getPosY())) return false;
-
-        GameObject[] result = new GameObject[gameObjects.length + 1];
-        System.arraycopy(gameObjects, 0, result, 0, gameObjects.length);
-
-        int i = gameObjects.length < 1 ? 0 : gameObjects.length + 1;
-        result[i] = gameObject;
-
-        gameObjects = result;
-        return true;
-    }
 
 
     // TODO: Move this to an own render class?
@@ -101,15 +81,17 @@ public class GameMap {
     }
 
     private Image getAppropriateImage(int x, int y) {
-        if (x == 0 && y == 0) return background[0][0]; // TOP LEFT
-        if (y == 0 && x > 0 && x < width) return background[1][0]; // TOP
-        if (x == width && y == 0) return background[2][0];// TOP RIGHT
-        if (y > 0 && y < height && x == width) return background[2][1]; // Right
-        if (x == width && y == height) return background[2][2]; // BOTTOM RIGHT
-        if (x > 0 && x < width && y == height) return (background[1][2]); // BOTTOM
-        if (x == 0 && y == height) return background[0][2]; //BOTTOM LEFT
-        if (x == 0 && y > 0 && y < height) return background[0][1]; // LEFT
-        if (x > 0 && x < width && y > 0 && y < height) return background[1][1]; // Center
+
+        if(x == 0 && y == 0) return background[0][0]; // TOP LEFT
+        if(y == 0 && x > 0 && x < width) return background[1][0]; // TOP
+        if(x == width && y == 0) return background[2][0];// TOP RIGHT
+        if(y > 0 && y < height && x == width) return background[2][1]; // Right
+        if(x == width && y == height) return background[2][2]; // BOTTOM RIGHT
+        if(x > 0 && x < width && y == height) return (background[1][2]); // BOTTOM
+        if(x == 0 && y == height) return background[0][2]; //BOTTOM LEFT
+        if(x == 0 && y > 0 && y < height) return background[0][1]; // LEFT
+        if(x > 0 && x < width && y > 0 && y < height) return background[1][1]; // Center
+
         return null;
     }
 
@@ -121,8 +103,39 @@ public class GameMap {
      * @return false if not the statement is true.
      */
     public boolean willCollide(int posX, int posY) {
-        if (posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
-        return getGameObject(posX, posY) != null;
+
+        if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
+        if(getGameObject(posX, posY) != null) return true;
+        return false;
+    }
+
+    /**
+     * Here we add gameObject into the gameboard.
+     * @param gameObject states the position in height and width.
+     * @return if added returns true, false if coordinates is taken or
+     */
+    public boolean addGameObject(GameObject gameObject) {
+        int posX = gameObject.getPosX();
+        int posY = gameObject.getPosY();
+
+        for (int x = posX; x < posX + gameObject.getSizeX(); x++) {
+            for (int y = posY; y < posY + gameObject.getSizeY(); y++) {
+                if (willCollide(x, y)) return false;
+            }
+        }
+
+        GameObject[] result = new GameObject[gameObjects.length+1];
+        for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
+
+        int re = gameObjects.length -1;
+        if(re < 0) re = 0;
+        // Copy in old objects
+
+        result[re] = gameObject;
+
+        gameObjects = result;
+        return true;
+
     }
 
     /**
