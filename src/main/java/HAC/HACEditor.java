@@ -41,6 +41,9 @@ public class HACEditor {
         this.canvas = canvas;
         this.camera = new Camera();
 
+        //@TODO:FJERN DENNE LINJEN
+        camera.setCanvas(canvas);
+
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
         this.render();
@@ -53,6 +56,7 @@ public class HACEditor {
      */
     public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         gameMap.render(camera); // Render map and objects with offset
 
     }
@@ -106,6 +110,15 @@ public class HACEditor {
     }
 
     /**
+     * Gets the camera to gameboard.
+     * @return the visual that camera shows us.
+     * @author ceciliethoresen
+     */
+    public Camera getCamera() {
+        return camera;
+    }
+
+    /**
      * Loads new map
      * @param gameMap map to load
      */
@@ -133,7 +146,6 @@ public class HACEditor {
     public void openFile(File file) {
         gameMap = hacParser.parseFile(file);
         this.render();
-
 
 
     }

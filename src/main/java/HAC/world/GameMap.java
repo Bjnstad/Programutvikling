@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
  * @author Axel Bjørnstad - S315322
  */
 public class GameMap {
-    private GameObject[] gameObjects;
+    private GameObject[] gameObjects = new GameObject[1];
     private int width;
     private int height;
     private Image[][] background;
@@ -81,6 +81,8 @@ public class GameMap {
         if(x == 0 && y == height) return background[0][2]; //BOTTOM LEFT
         if(x == 0 && y > 0 && y < height) return background[0][1]; // LEFT
         if(x > 0 && x < width && y > 0 && y < height) return background[1][1]; // Center
+
+        return null;
     }
 
     /**
@@ -110,7 +112,7 @@ public class GameMap {
             }
         }
 
-        GameObject[] result = new GameObject[gameObjects.length +1];
+        GameObject[] result = new GameObject[gameObjects.length+1];
         for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
 
         int re = gameObjects.length -1;

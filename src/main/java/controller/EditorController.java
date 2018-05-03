@@ -77,10 +77,10 @@ public class EditorController implements Controller {
 
 
         map = new HACEditor(new GameMap(25,25, new Sprite("background", 32)), graphics);
+        //map.getCamera().setCanvas(graphics);
 
 
         editorHandler = new EditorHandler(mainController, map);
-
 
         /*
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -199,7 +199,6 @@ public class EditorController implements Controller {
     @FXML
     private void Import(ActionEvent event){
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mHac files", "*.mhac");
-
         fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
 

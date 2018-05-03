@@ -34,31 +34,41 @@ public class ExportGame extends ExportHac {
         this.enemies = enemies;
         this.player = player;
 
-
-
         saveMap();
-        saveCamera();
-        saveEnemies();
-        savePlayer();
+       // saveCamera();
+       // saveEnemies();
+       // savePlayer();
         exportFile();
 
     }
 
     public void saveMap() {
         GameObject[] object = gameMap.getGameObjects();
+        int count = 0;
         for (int i = 0; i <object.length; i++) {
             if(object[i] == null) continue;
+            count++;
             sb.append(object[i].getSizeY());
+            sb.append(',');
             sb.append(object[i].getSizeX());
+            sb.append(',');
             sb.append(object[i].getPosX());
+            sb.append(',');
             sb.append(object[i].getPosY());
+            sb.append(',');
             sb.append(object[i].getSizeY());
-            sb.append('$');
-            String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
-            sb.append(base64String);
+            sb.append(',');
+            //String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
+            //sb.append(base64String);
+            sb.append("BILDESTRENG");
+            sb.append(',');
+
         }
         sb.append(gameMap.getHeight());
+        sb.append(',');
         sb.append(gameMap.getWidth());
+        sb.append(',');
+        sb.append(object.length);
 
     }
 
@@ -70,15 +80,20 @@ public class ExportGame extends ExportHac {
     }
 
     public void saveEnemies(){
+        int count = 0;
         for (int i = 0; i < enemies.length; i++) {
             sb.append(enemies[i].getSpriteFileName());
+            sb.append(',');
             sb.append(enemies[i].getSizeX());
+            sb.append(',');
             sb.append(enemies[i].getSizeY());
+            sb.append(',');
             sb.append(enemies[i].getPosX());
+            sb.append(',');
             sb.append(enemies[i].getPosY());
-
+            sb.append(',');
+            count++;
         }
-
     }
 
     public void savePlayer(){
@@ -88,24 +103,17 @@ public class ExportGame extends ExportHac {
 
     }
 
-
-
-
     public void addElement(GameMap gameMap){
         System.out.println(gameMap.getGameObjects());
 
-
         gameMap.getBackground();
-
         mapList.add(String.valueOf(gameMap.getWidth()));
         mapList.add(String.valueOf(gameMap.getHeight()));
-
 
     }
 
     public void exportFile(){
         String content = sb.toString();
-        //File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
         File file = new File("assets/maps/newMap.txt");
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
