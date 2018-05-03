@@ -20,7 +20,6 @@ class HACTest {
     void setUp() {
         map = new GameMap(20, 20, new Sprite("background", 32));
         game = new HAC(map);
-        game.play();
 
 
     }
@@ -55,6 +54,8 @@ class HACTest {
 
     @Test
     void getCamera() {
+
+        assertNotNull(game.getCamera());
 
     }
 

@@ -13,13 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Created by henrytran1 on 03/05/2018.
  */
 class PlayerTest {
-    public Player player;
+    private Player player;
+    private Enemy enemy;
 
 
-    @Test
-    void willCollide() {
-
-    }
 
 
     /**
@@ -40,6 +37,14 @@ class PlayerTest {
     public void tearDown() {
         player = null;
 
+    }
+
+    @Test
+    void willCollide() {
+        enemy = new Enemy("BODY_skeleton", 2,2,2,2);
+        player.setPosX(2);
+        player.setPosY(2);
+        assertEquals(true, player.willCollide(enemy));
     }
 
 

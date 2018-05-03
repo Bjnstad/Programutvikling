@@ -1,6 +1,5 @@
 package main.java.HAC.filehandler;
 
-import javafx.embed.swing.SwingFXUtils;
 import main.java.HAC.Camera;
 import main.java.HAC.character.Enemy;
 import main.java.HAC.character.Player;
