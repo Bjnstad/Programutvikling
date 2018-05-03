@@ -6,13 +6,12 @@ import main.java.HAC.world.GameMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-
 import java.util.Random;
 
 /**
  * This class represents Main class for game HAC.
  * Contains gamemap, camera, enemies, timeline and player.
- * @author
+ * This class represents Main class for game HAC, and contains gamemap, camera, enemies, timeline and player.
  */
 public class HAC {
     private final static double FPS = 60;

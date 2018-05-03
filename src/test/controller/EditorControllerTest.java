@@ -2,7 +2,9 @@ package test.controller;
 
 import main.java.controller.EditorController;
 import main.java.controller.MainController;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
 
 
 /**
@@ -19,6 +21,7 @@ class EditorControllerTest {
     void setMainController() {
         EditorController editorController = new EditorController();
         editorController.setMainController(mainController);
+
     }
 
     /**
@@ -26,6 +29,8 @@ class EditorControllerTest {
      */
     @Test
     void initiate() {
+
+
     }
 
     /**
@@ -33,6 +38,8 @@ class EditorControllerTest {
      */
     @Test
     void render() {
+
+
     }
 
     /**
@@ -40,6 +47,8 @@ class EditorControllerTest {
      */
     @Test
     void onClose() {
+
+
     }
 
     /**
@@ -47,5 +56,7 @@ class EditorControllerTest {
      */
     @Test
     void getEventHandler() {
+
+
     }
 }

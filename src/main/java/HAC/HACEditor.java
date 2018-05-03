@@ -42,6 +42,9 @@ public class HACEditor {
         this.canvas = canvas;
         this.camera = new Camera();
 
+        //@TODO:FJERN DENNE LINJEN
+        camera.setCanvas(canvas);
+
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
         this.render();
@@ -54,7 +57,9 @@ public class HACEditor {
      */
     public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         gameMap.render(camera);
+
 
     }
 
@@ -106,9 +111,14 @@ public class HACEditor {
         // camera.setPlayerPosition(x, y);
     }
 
+
+    public Camera getCamera() {
+        return camera;
+    }
+
     /**
-     * Loads new map.
-     * @param gameMap map to load.
+     * Loads new map
+     * @param gameMap map to load
      */
     private void loadMap(GameMap gameMap) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");

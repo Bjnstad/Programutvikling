@@ -1,6 +1,3 @@
-package test;
-
-
 import main.java.HAC.Camera;
 import javafx.scene.canvas.Canvas;
 import org.junit.Assert;

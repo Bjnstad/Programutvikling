@@ -1,39 +1,41 @@
-package main.java.HAC.editor;
+package main.java.HAC.filehandler;
 
+import javafx.embed.swing.SwingFXUtils;
 import main.java.HAC.sprite.Sprite;
 import main.java.HAC.world.GameMap;
 import main.java.HAC.world.GameObject;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 import sun.misc.BASE64Decoder;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
-
 
 /**
- * This class content
- *
- * @author
+ * Created by henrytran1 on 02/05/2018.
  */
-public class HacParser {
+public class ImportGame {
 
-    /**
-     * This method helps us to parse a file.
-     * ... kommer mer
-     * ...
-     * @param file ......
-     */
-    public GameMap parseFile(File file){
-        GameMap map = new GameMap(20, 20, new Sprite("background", 32));
-
+    public void parseFile(File file){
+        GameMap map = new GameMap(20, 20, new Sprite("background", 32));;
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));
+            String str = b.readLine().toString();
+            String[] obj = str.split(",");
+            for (int i = 0; i <= Integer.valueOf(obj[8]); i++) {
+
+                System.out.println(obj[i]);
+                System.out.println(System.lineSeparator());
+            }
+
+            /*for (int i = 0; i <= Integer.valueOf(obj[8]) ; i++) {
+                System.out.println(obj[i]);
+                System.out.println(System.lineSeparator());
+            }*/
 
 
-            String[] obj = b.readLine().split("#");
+
+/*            String[] obj = b.readLine().split("#");
             BASE64Decoder decoder = new BASE64Decoder();
             byte[] imageByte;
 
@@ -49,12 +51,12 @@ public class HacParser {
                 GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
 
                 System.out.println(map.addGameObject(hf));
-            }
+            }*/
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return map;
+       // return map;
     }
 }

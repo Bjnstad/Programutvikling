@@ -2,6 +2,7 @@ package main.java.controller;
 
 import main.java.HAC.filehandler.ExportGame;
 import main.java.HAC.HAC;
+import main.java.HAC.filehandler.ImportGame;
 import main.java.HAC.sprite.Sprite;
 import main.java.HAC.world.GameMap;
 import main.java.HAC.world.GameObject;
@@ -9,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+
+import java.io.File;
 
 /**
  * GameController implements Controller.
@@ -88,6 +91,9 @@ public class GameController implements Controller {
      * Load the game.
      */
     public void load() {
+        ImportGame importGame = new ImportGame();
+        File file = new File("assets/maps/newMap.txt");
+        importGame.parseFile(file);
 
     }
 
