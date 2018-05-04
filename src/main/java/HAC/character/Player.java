@@ -6,13 +6,12 @@ import javafx.scene.image.Image;
 /**
  * This class represents the player in the game.
  * Player extends the qualities from character.
- * @author ceciliethoresen
+ * @author
  */
 public class Player extends Character {
     /**
      * This method contains the player in the game.
      * It extends its characteristics from character, and it´s coordinates.
-     * @author ceciliethoresen
      */
     public Player() {
         super(new CharacterAvatar("player_animations_walking", 64), 1, 1);

@@ -4,25 +4,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * This class contains inputhandler that implements keylistener.
+ * This class contains inputHandler that implements KeyListener.
  * What happens when a key is either typed, pressed or released.
- * @author ceciliethoresen
+ * @author
  */
 public class InputHandler implements KeyListener {
 
     /**
-     * In this method when a key is typed
-     * @param e
-     * @author ceciliethoresen
+     * When a key is typed.
+     * @param e allows you to access the properties of KeyEvent.
      */
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
     /**
-     * When we press a key the method gets a key code from e?
-     * @param e
-     * @author ceciliethoresen
+     * When a key is pressed.
+     * @param e allows you to access the properties of KeyEvent.
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -30,9 +28,8 @@ public class InputHandler implements KeyListener {
     }
 
     /**
-     * In this method when a key is releasedm then ......
-     * @param e
-     * @author ceciliethoresen
+     * When a key is released.
+     * @param e allows you to access the properties of KeyEvent.
      */
     @Override
     public void keyReleased(KeyEvent e) {

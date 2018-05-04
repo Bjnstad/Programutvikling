@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * This class describes the different states to character in the game.
- * @author ceciliethoresen
+ * @author
  */
 public class CharacterAvatar {
     private String spriteFileName;
@@ -23,7 +23,6 @@ public class CharacterAvatar {
      * This method gives us the size and position to Avatar.
      * @param fileName of the file we can save.
      * @param size The size to the Avatar.
-     * @author ceciliethoresen
      */
     public CharacterAvatar(String fileName, int size){
         this.spriteFileName = fileName;
@@ -44,15 +43,13 @@ public class CharacterAvatar {
 
     /**
      * This method starts the Avatar.
-     * @author Cecilie Thoresen
      */
     public void startAnimation() {
         animation.start();
     }
 
     /**
-     * Here it updates the avatar.
-     * @author ceciliethoresen
+     * Updates the avatar.
      */
     public void updateAnimation(){
         animation.update();
@@ -61,7 +58,6 @@ public class CharacterAvatar {
     /**
      * In this method we use Sprite to get the animation in the board game.
      * @return Then it returns the animation to the game.
-     * @author Henry Tran
      */
     public SpriteAnimation getAnimation() {
         return animation;
@@ -69,7 +65,6 @@ public class CharacterAvatar {
 
     /**
      * Sets the walking up to the avatar.
-     * @author Axel Bjørnstad
      */
     public void setWalkingUp() {
         animation = this.walkingUp;
@@ -77,7 +72,6 @@ public class CharacterAvatar {
 
     /**
      * Sets the walking down to the avatar.
-     * @author Henry Tran
      */
     public void setWalkingDown() {
         animation = this.walkingDown;
@@ -85,7 +79,6 @@ public class CharacterAvatar {
 
     /**
      * Sets the walking left to the avatar.
-     * @author Cecilie Thoresen
      */
     public void setWalkLeft() {
         animation = this.walkLeft;
@@ -93,7 +86,6 @@ public class CharacterAvatar {
 
     /**
      * Sets the walking right to the avatar.
-     * @author ceciliethoresen
      */
     public void setWalkRight() {
         animation = this.walkRight;
@@ -101,12 +93,15 @@ public class CharacterAvatar {
 
     /**
      * Sets the standing to the avatar.
-     * @author ceciliethoresen
      */
     public void setStanding() {
         animation = this.standing;
     }
 
+    /**
+     * Gets the filename from sprite.
+     * @return the name to the file.
+     */
     public String getSpriteFileName() {
         return spriteFileName;
     }

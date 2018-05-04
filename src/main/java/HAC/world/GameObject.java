@@ -4,8 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
- * This class defines the gameObject and contains the size and position.
- * @author ceciliethoresen
+ * This class defines the gameObject.
+ * Contains the size and position to gameObject.
+ * @author
  */
 public class GameObject {
     private int sizeX;
@@ -22,7 +23,6 @@ public class GameObject {
      * @param posX position to gameObject in width.
      * @param sizeX size to gameObject in width.
      * @param sizeY size to gameObject in height.
-     * @author ceciliethoresen
      */
     public GameObject(Image image, int posY, int posX, int sizeX, int sizeY) {
         this.image = image;
@@ -33,36 +33,32 @@ public class GameObject {
     }
 
     /**
-     * This method gets the size in width to gameObject.
+     * Gets the size in width to gameObject.
      * @return the current size in width to the object.
-     * @author ceciliethoresen
      */
     public int getSizeX() {
         return this.sizeX;
     }
 
     /**
-     * This method gets the size in height to gameObject.
+     * Gets the size in height to gameObject.
      * @return the current size in height to the object.
-     * @author ceciliethoresen
      */
     public int getSizeY() {
         return this.sizeY;
     }
 
     /**
-     * This method gets the position in width to gameObject.
+     * Gets the position in width to gameObject.
      * @return the current position in width to the object.
-     * @author ceciliethoresen
      */
     public int getPosX() {
         return this.posX;
     }
 
     /**
-     * This method gets the position in height to gameObject.
+     * Gets the position in height to gameObject.
      * @return the current position in height to the object.
-     * @author ceciliethoresen
      */
     public int getPosY() {
         return this.posY;
@@ -70,7 +66,7 @@ public class GameObject {
 
     /**
      * TODO: change to image
-     * Here we get the asset.
+     * Gets the asset.
      * @return color.
      */
     public Image getAsset() {

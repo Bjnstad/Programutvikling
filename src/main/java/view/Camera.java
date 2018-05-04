@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Camera is used to calculate differences between game content and the real pixel values for canvas.
- * @author Axel Bjørnstad - S315322
+ * @author Axel Bjørnstad
  */
 public class Camera {
 
@@ -35,7 +35,7 @@ public class Camera {
 
 
     /**
-     * This method gets the Canvas vertical.
+     * Gets the Canvas vertical.
      * @return the current view of Canvas(height).
      */
     public double getTranslateX() {
@@ -43,7 +43,7 @@ public class Camera {
     }
 
     /**
-       * Here we get the Canvas horizontal.
+     * Gets the Canvas horizontal.
      * @return the current view of Canvas(width).
      */
     public double getTranslateY() {
@@ -59,7 +59,7 @@ public class Camera {
     }
 
     /**
-     * This method is moving the canvas up or to the side with x and y.
+     * Moves the canvas up or down, or to the side with x and y.
      * @param x moving canvas left or right.
      * @param y moving canvas up or down.
      */
@@ -71,7 +71,7 @@ public class Camera {
     }
 
     /**
-     * Here we set player position to tiles.
+     * Sets player position to tiles.
      * @param x is the position horizontal.
      * @param y is the position vertical.
      */
@@ -86,16 +86,15 @@ public class Camera {
     }
 
     /**
-     * This method gets the player of x(horizontal).
+     * Gets the player of x(horizontal).
      * @return the position to player.
-     * @author ceciliethoresen
      */
     public double getPlayerX() {
         return (double) zoom / 2 - translateX/scale;
     }
 
     /**
-     * This method gets the player of y(vertical).
+     * Gets the player of y(vertical).
      * @return the position to player.
      */
     public double getPlayerY() {
@@ -103,7 +102,7 @@ public class Camera {
     }
 
     /**
-     * Here we gets the center of the screen(x-coordinate).
+     * Gets the center of the screen(x-coordinate).
      * @return Returns the X coordinate for center of the screen in real pixels.
      */
     public double getCenterX() {
@@ -111,7 +110,7 @@ public class Camera {
     }
 
     /**
-     * Here we gets the center of the screen(y-coordinate).
+     * Gets the center of the screen(y-coordinate).
      * @return Returns the Y coordinate for center of the screen in real pixels.
      */
     public double getCenterY() {
@@ -122,7 +121,6 @@ public class Camera {
      * Scale up the given gameboard relative values to according pixels on screen.
      * @param x is the position horizontal.
      * @return the position to x.
-     * @author ceciliethoresen
      */
     public double scaleX(double x) {
         return x * scale;
@@ -132,7 +130,6 @@ public class Camera {
      * Scale up the given gameboard relative values to according pixels on screen.
      * @param y is the position vertical.
      * @return the position to y.
-     * @author ceciliethoresen
      */
     public double scaleY(double y) {
 
@@ -140,9 +137,8 @@ public class Camera {
     }
 
     /**
-     * This method gets the scale either up or out.
+     * Gets the scale either up or out.
      * @return the current scale to the board.
-     * @author ceciliethoresen
      */
     public double getScale() {
         return scale;

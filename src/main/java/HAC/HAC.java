@@ -11,6 +11,8 @@ import main.java.view.Camera;
 import java.util.Random;
 
 /**
+ * This class represents Main class for game HAC.
+ * Contains gamemap, camera, enemies, timeline and player.
  * This class represents Main class for game HAC, and contains gamemap, camera, enemies, timeline and player.
  * @author Axel Bjørnstad - S315322
  */
@@ -27,8 +29,9 @@ public class HAC {
 
 
     /**
-     * This method contains gamemap´s width and height on canvas and states that gamemap and JavaFX cannot be null.
-     * @param gameMap has the position to gameobjects.
+     * Contains gamemap´s width and height on canvas.
+     * States that gamemap and JavaFX cannot be null.
+     * @param gameMap has the position to gameObjects.
      */
     public HAC(GameMap gameMap) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
@@ -54,7 +57,7 @@ public class HAC {
     }
 
     /**
-     * Starting gameloop running accordingly to FPS
+     * Starting gameloop running accordingly to FPS.
      */
     public void play() {
         if(timeline == null) initTimeline();
@@ -65,7 +68,7 @@ public class HAC {
     }
 
     /**
-     * Pauses the game
+     * Pauses the game.
      */
     public void pause() {
         timeline.pause();
@@ -74,7 +77,7 @@ public class HAC {
 
 
     /**
-     * Here we state that if the player-character collides with enemy-character, then player will die.
+     * States that if the player-character collides with enemy-character, then player will die.
      */
     private void render() {
         // Check for player collision and re-render map at enemy position.
@@ -93,7 +96,7 @@ public class HAC {
     }
 
     /**
-     * This method makes the character move vertical or horizontal.
+     * Makes the character move vertical or horizontal.
      * @param x is horizontal.
      * @param y is vertical.
      * @return the position to character.
@@ -137,9 +140,8 @@ public class HAC {
     }
 
     /**
-     * Shows us the state when we run the game.
+     * Shows the state when we run the game.
      * @return the running state of the game.
-     * @author ceciliethoresen
      */
     public boolean isRunning() {
         return isRunning;
@@ -148,7 +150,6 @@ public class HAC {
     /**
      * Gets the camera to gameboard.
      * @return the visual that camera shows us.
-     * @author ceciliethoresen
      */
     public Camera getCamera() {
         return camera;
@@ -157,21 +158,23 @@ public class HAC {
     /**
      * Gets the player.
      * @return the visual of player to gameboard.
-     * @author ceciliethoresen
      */
     public Player getPlayer() {
         return player;
     }
 
     /**
-     * Gets the gamemap.
-     * @return the visual of gamemap.
-     * @author ceciliethoresen
+     * Gets the gameMap.
+     * @return the visual of gameMap.
      */
     public GameMap getGameMap() {
         return gameMap;
     }
 
+    /**
+     * Gets the enemies.
+     * @return the visual of enemies.
+     */
     public Enemy[] getEnemies() {
         return enemies;
     }

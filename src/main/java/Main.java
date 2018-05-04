@@ -7,17 +7,16 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
 /**
- * In this class we create a JavaFX GUI program.
+ * This class creates a JavaFX GUI program.
  * We use FXML loader to download it in FXML that describes GUI.
- * @author ceciliethoresen
+ * @author
  */
 public class Main extends Application {
 
 	/**
-	 * This method implements the visible objects in the game.
+	 * Implements the visible objects in the game.
 	 * @param primaryStage is the frame of the gameboard.
 	 * @throws Exception telling the compiler that a exception may be thrown in this method.
-	 * @author
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -32,9 +31,8 @@ public class Main extends Application {
 	}
 
 	/**
-	 * This method makes it possible to launch it to terminal.
+	 * Makes it possible to launch it to terminal.
 	 * @param args makes it possible to run our program with a statement, then args will contain the statement.
-	 * @author
 	 */
 	public static void main(String[] args) {
 		launch(args);

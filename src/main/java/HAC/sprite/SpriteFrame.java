@@ -3,8 +3,9 @@ package main.java.HAC.sprite;
 import java.awt.image.BufferedImage;
 
 /**
- * This class represents the spriteframe.
- * @author ceciliethoresen
+ * This class represents the frame from sprite.
+ * Contains image and the duration.
+ * @author
  */
 public class SpriteFrame {
 
@@ -12,10 +13,9 @@ public class SpriteFrame {
     private double duration;
 
     /**
-     * This method insert the Spriteframe to the game.
+     * This method insert the SpriteFrame to the game.
      * @param spriteFrame is the frame we can upload from sprite.
      * @param duration is a time-based amount of time of the frame in the game.
-     * @author ceciliethoresen
      */
     public SpriteFrame(BufferedImage spriteFrame, double duration){
         this.spriteFrame = spriteFrame;
@@ -23,9 +23,8 @@ public class SpriteFrame {
     }
 
     /**
-     * Here we gets the frame from sprite.
-     * @return the current spriteframe to the gameboard.
-     * @author ceciliethoresen
+     * Gets the frame from sprite.
+     * @return the current spriteFrame to the game.
      */
     public BufferedImage getSpriteFrame(){
         return spriteFrame;

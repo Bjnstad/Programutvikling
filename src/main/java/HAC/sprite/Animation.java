@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * This class represents the frames of the animation in the game.
- * @author ceciliethoresen
+ * @author
  */
 public class Animation {
     private int frameCount;
@@ -24,7 +24,6 @@ public class Animation {
      *               Animation starts in a end(0), and then moves to another end.
      *               But not longer then the length of the frame.
      * @param frameDelay As long as the criteria in the for-loop is true, then it adds a frame.
-     * @author ceciliethoresen
      */
     public Animation(BufferedImage[] frames, int frameDelay) {
         this.frameDelay = frameDelay;
@@ -43,7 +42,6 @@ public class Animation {
 
     /**
      * This method starts the animation in the game.
-     * @author cecilie thoresen
      */
     public void start() {
         if (!stopped) {
@@ -59,7 +57,6 @@ public class Animation {
 
     /**
      * This method stops the animation in the game.
-     * @author ceciliethoresen
      */
     public void stop() {
         if (frames.size() == 0) {
@@ -71,7 +68,6 @@ public class Animation {
 
     /**
      * This method restart the animation in the game.
-     * @author ceciliethoresen
      */
     public void restart() {
         if (frames.size() == 0) {
@@ -83,7 +79,6 @@ public class Animation {
 
     /**
      * This method reset the animation in the game.
-     * @author ceciliethoresen
      */
     public void reset() {
         this.stopped = true;
@@ -92,9 +87,10 @@ public class Animation {
     }
 
     /**
-     * Here we add a frame to the gameboard.
-     * @param frame
-     * @param duration
+     * Adds a frame to the gameboard.
+     * @param frame in the game.
+     * @param duration has to be less or equal 0.
+     *                 If else, it prints out invalid duration.
      */
     private void addFrame(BufferedImage frame, int duration) {
         if (duration <= 0) {
@@ -107,15 +103,15 @@ public class Animation {
     }
 
     /**
-     * Buffered image to the game
-     * @return frames of the game
+     * Gets buffered image to the game from sprite.
+     * @return frames of the game.
      */
     public BufferedImage getSprite() {
         return frames.get(currentFrame).getFrame();
     }
 
     /**
-     * Update the game
+     * Updates the game.
      */
     public void update() {
         if (!stopped) {

@@ -2,7 +2,7 @@ package main.java.HAC.character;
 
 /**
  * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
- * @author ceciliethoresen
+ * @author
  */
 public class Bullet {
     private final double speed = 7;
@@ -30,8 +30,7 @@ public class Bullet {
     }
 
     /**
-     * This method updates the game.
-     * @author ceciliethoresen
+     * Updates the game.
      */
     public void update(){
         x += velocityX;
@@ -45,7 +44,6 @@ public class Bullet {
     /**
      * Gets the state of x.
      * @return the state to x in width.
-     * @author ceciliethoresen
      */
     public double getX() {
         return x;
@@ -54,7 +52,6 @@ public class Bullet {
     /**
      * Sets the state of x.
      * @param x is the state horizontal.
-     * @author ceciliethoresen
      */
     public void setX(int x) {
         this.x = x;
@@ -63,7 +60,6 @@ public class Bullet {
     /**
      * Gets the state of y.
      * @return the state to y in height.
-     * @author ceciliethoresen
      */
     public double getY() {
         return y;
@@ -72,7 +68,6 @@ public class Bullet {
     /**
      * Sets the state of y.
      * @param y is the state vertical.
-     * @author ceciliethoresen
      */
     public void setY(int y) {
         this.y = y;
@@ -81,7 +76,6 @@ public class Bullet {
     /**
      * Gets the state of speed.
      * @return speed.
-     * @author ceciliethoresen
      */
     public double getSpeedX() {
         return speedX;
@@ -90,7 +84,6 @@ public class Bullet {
     /**
      * Sets the state of speed.
      * @param speedX vertical.
-     * @author ceciliethoresen
      */
     public void setSpeedX(int speedX) {
         this.speedX = speedX;
@@ -99,7 +92,6 @@ public class Bullet {
     /**
      * Makes the bullets visible.
      * @return visibility of the bullets in the game.
-     * @author ceciliethoresen
      */
     public boolean isVisible() {
         return visible;
@@ -108,7 +100,6 @@ public class Bullet {
     /**
      * Sets the state to visible.
      * @param visible
-     * @author ceciliethoresen
      */
     public void setVisible(boolean visible) {
         this.visible = visible;

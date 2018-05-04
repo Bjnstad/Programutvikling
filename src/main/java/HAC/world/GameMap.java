@@ -12,20 +12,22 @@ import javafx.scene.image.Image;
  * @author Axel Bjørnstad - S315322
  */
 public class GameMap {
-    private GameObject[] gameObjects; // Static objects
+
+    private GameObject[] gameObjects = new GameObject[1];
     private int width;
     private int height;
     private Image[][] background;
 
     /**
      * Game map represent how many object there is available to put on the map.
-     * @param width size of the gameboard.
-     * @param height size of the gameboard.
+     *
+     * @param width      size of the gameboard.
+     * @param height     size of the gameboard.
      * @param background we gets from sprite.
      */
     public GameMap(int width, int height, Sprite background) {
-        if(width < 0) throw new IllegalStateException("Width should be above 0");
-        if(height < 0) throw new IllegalStateException("Height should to be above 0");
+        if (width < 0) throw new IllegalStateException("Width should be above 0");
+        if (height < 0) throw new IllegalStateException("Height should to be above 0");
 
         this.width = width;
         this.height = height;
@@ -34,6 +36,7 @@ public class GameMap {
 
     /**
      * Allocate background sprites from storage to memory.
+     *
      * @param background Sprite with 3x3 sprite setup
      */
     private void loadBackground(Sprite background) {
@@ -45,44 +48,18 @@ public class GameMap {
         }
     }
 
-    /**
-     * Here we add gameObject into the gameboard.
-     * @param gameObject states the position in height and width.
-     * @return if added returns true, false if coordinates is taken or
-     */
-    public boolean addGameObject(GameObject gameObject) {
-        if(gameObject == null) throw new NullPointerException("GameObject cannot be null");
-        if(gameObject.getPosX() > 0 ||gameObject.getPosX() < width) return false;
-        if(gameObject.getPosY() > 0 ||gameObject.getPosY() < height) return false;
-        if (willCollide(gameObject.getPosX(), gameObject.getPosY())) return false;
-
-        GameObject[] result = new GameObject[gameObjects.length +1];
-        System.arraycopy(gameObjects, 0, result, 0, gameObjects.length);
-
-        int i = gameObjects.length < 1 ? 0 : gameObjects.length +1;
-        result[i] = gameObject;
-
-        gameObjects = result;
-        return true;
-    }
-
-
-
-
-
-
-
-
 
 
     // TODO: Move this to an own render class?
+
     /**
      * This method contains the visual on the bord, and states how far camera goes vertical and horizontal.
+     *
      * @param camera shows us the visual on the board
      * @param startX horizontal
      * @param startY vertical
-     * @param endX horizontal
-     * @param endY vertical
+     * @param endX   horizontal
+     * @param endY   vertical
      */
     public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
         for (int x = startX; x <= endX; x++) {
@@ -94,15 +71,17 @@ public class GameMap {
 
     /**
      * Gets the background-block from sprite and makes it visual on the board.
+     *
      * @param camera shows us the visual on the board.
-     * @param x is the background in width.
-     * @param y is the background in height.
+     * @param x      is the background in width.
+     * @param y      is the background in height.
      */
     private void renderBlock(Camera camera, int x, int y) {
         camera.getGraphicsContext().drawImage(getAppropriateImage(x, y), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
     }
 
     private Image getAppropriateImage(int x, int y) {
+
         if(x == 0 && y == 0) return background[0][0]; // TOP LEFT
         if(y == 0 && x > 0 && x < width) return background[1][0]; // TOP
         if(x == width && y == 0) return background[2][0];// TOP RIGHT
@@ -112,22 +91,56 @@ public class GameMap {
         if(x == 0 && y == height) return background[0][2]; //BOTTOM LEFT
         if(x == 0 && y > 0 && y < height) return background[0][1]; // LEFT
         if(x > 0 && x < width && y > 0 && y < height) return background[1][1]; // Center
+
         return null;
     }
 
     /**
      * This method contains if game objects collides with each other.
+     *
      * @param posX position to x.
      * @param posY position to y.
      * @return false if not the statement is true.
      */
     public boolean willCollide(int posX, int posY) {
+
         if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
-        return getGameObject(posX, posY) != null;
+        if(getGameObject(posX, posY) != null) return true;
+        return false;
+    }
+
+    /**
+     * Here we add gameObject into the gameboard.
+     * @param gameObject states the position in height and width.
+     * @return if added returns true, false if coordinates is taken or
+     */
+    public boolean addGameObject(GameObject gameObject) {
+        int posX = gameObject.getPosX();
+        int posY = gameObject.getPosY();
+
+        for (int x = posX; x < posX + gameObject.getSizeX(); x++) {
+            for (int y = posY; y < posY + gameObject.getSizeY(); y++) {
+                if (willCollide(x, y)) return false;
+            }
+        }
+
+        GameObject[] result = new GameObject[gameObjects.length+1];
+        for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
+
+        int re = gameObjects.length -1;
+        if(re < 0) re = 0;
+        // Copy in old objects
+
+        result[re] = gameObject;
+
+        gameObjects = result;
+        return true;
+
     }
 
     /**
      * This method gets the gameObject.
+     *
      * @param x the width to x in the game.
      * @param y the height  to y in the game.
      * @return ....
@@ -136,8 +149,8 @@ public class GameMap {
         if (x < 0 || x < width) return null;
         if (y < 0 || y < height) return null;
         for (GameObject gameObject : gameObjects) {
-            if(x >= gameObject.getPosX() && x < gameObject.getPosX() + gameObject.getSizeX()) { // Check x coordinates
-                if(y >= gameObject.getPosY() && y < gameObject.getPosY() + gameObject.getSizeY()) return gameObject;
+            if (x >= gameObject.getPosX() && x < gameObject.getPosX() + gameObject.getSizeX()) { // Check x coordinates
+                if (y >= gameObject.getPosY() && y < gameObject.getPosY() + gameObject.getSizeY()) return gameObject;
             }
         }
         return null;
@@ -145,14 +158,16 @@ public class GameMap {
 
     /**
      * This method gets the width of gameMap.
+     *
      * @return the width to gameMap.
      */
-    public int  getWidth() {
+    public int getWidth() {
         return width;
     }
 
     /**
      * This method gets the height to gameMap.
+     *
      * @return the length to gameMap.
      */
     public int getHeight() {
@@ -161,44 +176,49 @@ public class GameMap {
 
     /**
      * This method contains the visual, and sets the height and width on canvas.
+     *
      * @param camera shows us the visual on the gameboard.
      */
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
 
-        gc.getCanvas().setHeight((height +1) * camera.getScale());
-        gc.getCanvas().setWidth((width +1) * camera.getScale());
+        gc.getCanvas().setHeight((height + 1) * camera.getScale());
+        gc.getCanvas().setWidth((width + 1) * camera.getScale());
 
         // Render map color
-        for(int y = 0; y <=  height; y++) {
-            for(int x = 0; x <=  width; x++) {
+        for (int y = 0; y <= height; y++) {
+            for (int x = 0; x <= width; x++) {
                 renderBlock(camera, x, y);
             }
         }
 
         for (GameObject gameObject : gameObjects) {
             System.out.println("REDNER");
-            if(gameObject != null) gc.drawImage(gameObject.getAsset(), gameObject.getPosX() * camera.getScale(), gameObject.getPosY() * camera.getScale(), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+            if (gameObject != null)
+                gc.drawImage(gameObject.getAsset(), gameObject.getPosX() * camera.getScale(), gameObject.getPosY() * camera.getScale(), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
         }
     }
 
     /**
      * This method draws the objects.
      * This class provides a basic capability for creating objects with draw.
+     *
      * @param gameObject is a object in the game.
-     * @param camera shows us the visual on gameboard.
+     * @param camera     shows us the visual on gameboard.
      */
-    public void drawObject(GameObject gameObject, Camera camera){
+    public void drawObject(GameObject gameObject, Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
 
-        gc.drawImage(gameObject.getAsset(),camera.scaleX(gameObject.getPosX()), camera.scaleY(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+        gc.drawImage(gameObject.getAsset(), camera.scaleX(gameObject.getPosX()), camera.scaleY(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
 
     }
 
     /**
      * Gets the size and position to gameobjects.
+     *
      * @return size and position to gameobjects.
-a     */
+     * a
+     */
     public GameObject[] getGameObjects() {
         return gameObjects;
     }

@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * In this class Enemy extends the qualities from character.
- * @author ceciliethoresen
+ * @author
  */
 public class Enemy extends Character {
 
@@ -17,7 +17,6 @@ public class Enemy extends Character {
      * @param sizeY is the size of the enemy in height(y).
      * @param posX is the position to the enemy in width(x).
      * @param posY is the position to the enemy in heigth(y).
-     * @author ceciliethoresen
      */
     public Enemy(String spriteFileName, int sizeX, int sizeY, int posX, int posY) {
         super(new CharacterAvatar(spriteFileName, 64), sizeX, sizeY);
@@ -29,7 +28,6 @@ public class Enemy extends Character {
     /**
      * This method calculates the movement to the player.
      * @param player is the animation in the game.
-     * @author ceciliethoresen
      */
     public void calculateMove(Player player) {
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());

@@ -2,11 +2,18 @@ package main.java.controller;
 
 import main.java.HAC.filehandler.ExportGame;
 import main.java.HAC.HAC;
+<<<<<<< HEAD
+=======
+import main.java.HAC.filehandler.ImportGame;
+import main.java.HAC.sprite.Sprite;
+>>>>>>> 4b3f4ee976c79d15a9f5c7724b6984d46684f0c2
 import main.java.HAC.world.GameMap;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+
+import java.io.File;
 
 /**
  * GameController is linking javafx to main gamelogic
@@ -47,6 +54,44 @@ public class GameController extends HAC implements Controller {
         save();
     }
 
+<<<<<<< HEAD
+=======
+
+    /**
+     * Save the game.
+     */
+    public void save() {
+        //Save save = new Save(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getTimeline(), game.getPlayer());
+        ExportGame save = new ExportGame(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getPlayer());
+
+    }
+
+    /**
+     * Continue the game.
+     */
+    public void resume() {
+        mainController.toMainView();
+        game.play();
+    }
+
+    /**
+     * Exit the game.
+     */
+    public void exit() {
+        mainController.setState(State.MAIN_MENU);
+    }
+
+    /**
+     * Load the game.
+     */
+    public void load() {
+        ImportGame importGame = new ImportGame();
+        File file = new File("assets/maps/newMap.txt");
+        importGame.parseFile(file);
+
+    }
+
+>>>>>>> 4b3f4ee976c79d15a9f5c7724b6984d46684f0c2
     /**
      * Gets the EventHandler.
      * @return EventHandler to add support for user input.

@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 /**
  * This class contains a list of images.
- * @author ceciliethoresen
+ * @author
  */
 public class ImageList {
 
@@ -19,8 +19,7 @@ public class ImageList {
     private HashMap<String, Image> resourceMap;
 
     /**
-     * This is our imageList.
-     * @author ceciliethoresen
+     * This method contains the imageList.
      */
     public ImageList() {
         this.resourceMap = new HashMap<>();
@@ -54,7 +53,6 @@ public class ImageList {
     /**
      * Lists the cells to get all assets.
      * @return list of cells
-     * @author ceciliethoresen
      */
     public ListCell<String> getAllAssets() {
         //File folder = new File("assets");
@@ -89,7 +87,7 @@ public class ImageList {
 
     /**
      * Observable list to get all names.
-     * @return names?
+     * @return names? res?
      */
     public ObservableList<String> getAllNames() {
         ObservableList<String> res = FXCollections.observableArrayList();
@@ -110,7 +108,6 @@ public class ImageList {
      * Gets the file extension from file.
      * @param file in game.
      * @return a string of the file.
-     * @author
      */
     private String getFileExtension(File file) {
         String name = file.getName();
@@ -122,7 +119,7 @@ public class ImageList {
     }
 
     /**
-     * Gets resource
+     * Gets resource to image.
      * @param name of the file.
      * @return map resource
      */

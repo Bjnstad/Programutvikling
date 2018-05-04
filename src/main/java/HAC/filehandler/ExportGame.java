@@ -1,7 +1,11 @@
 package main.java.HAC.filehandler;
 
+<<<<<<< HEAD
 import javafx.embed.swing.SwingFXUtils;
 import main.java.view.Camera;
+=======
+import main.java.HAC.Camera;
+>>>>>>> 4b3f4ee976c79d15a9f5c7724b6984d46684f0c2
 import main.java.HAC.character.Enemy;
 import main.java.HAC.character.Player;
 import main.java.HAC.editor.ExportHac;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 
 /**
  * Created by henrytran1 on 17/04/2018.
+ * Game extends Hac
  */
 public class ExportGame extends ExportHac {
     private ArrayList<String> mapList = new ArrayList<>();
@@ -28,59 +33,94 @@ public class ExportGame extends ExportHac {
     private StringBuilder sb = new StringBuilder();
 
 
+    /**
+     * Exports the game.
+     * Contains gameMap, camera, enemies and player.
+     * @param gameMap
+     * @param camera
+     * @param enemies
+     * @param player
+     */
     public ExportGame(GameMap gameMap, Camera camera, Enemy[] enemies, Player player) {
         this.gameMap = gameMap;
         this.camera = camera;
         this.enemies = enemies;
         this.player = player;
 
-
-
         saveMap();
-        saveCamera();
-        saveEnemies();
-        savePlayer();
+       // saveCamera();
+       // saveEnemies();
+       // savePlayer();
         exportFile();
 
     }
 
+    /**
+     * Saves the map.
+     */
     public void saveMap() {
         GameObject[] object = gameMap.getGameObjects();
+        int count = 0;
         for (int i = 0; i <object.length; i++) {
             if(object[i] == null) continue;
+            count++;
             sb.append(object[i].getSizeY());
+            sb.append(',');
             sb.append(object[i].getSizeX());
+            sb.append(',');
             sb.append(object[i].getPosX());
+            sb.append(',');
             sb.append(object[i].getPosY());
+            sb.append(',');
             sb.append(object[i].getSizeY());
-            sb.append('$');
-            String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
-            sb.append(base64String);
+            sb.append(',');
+            //String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
+            //sb.append(base64String);
+            sb.append("BILDESTRENG");
+            sb.append(',');
+
         }
         sb.append(gameMap.getHeight());
+        sb.append(',');
         sb.append(gameMap.getWidth());
+        sb.append(',');
+        sb.append(object.length);
 
     }
 
 
+    /**
+     * Saves the camera.
+     */
     public void saveCamera(){
         sb.append(camera.getTranslateX());
         sb.append(camera.getTranslateY());
 
     }
 
+    /**
+     * Saves enemies.
+     */
     public void saveEnemies(){
+        int count = 0;
         for (int i = 0; i < enemies.length; i++) {
             sb.append(enemies[i].getSpriteFileName());
+            sb.append(',');
             sb.append(enemies[i].getSizeX());
+            sb.append(',');
             sb.append(enemies[i].getSizeY());
+            sb.append(',');
             sb.append(enemies[i].getPosX());
+            sb.append(',');
             sb.append(enemies[i].getPosY());
-
+            sb.append(',');
+            count++;
         }
-
     }
 
+    /**
+     * Saves player.
+     */
     public void savePlayer(){
         sb.append(player.getSpriteFileName());
         sb.append(player.getSizeX());
@@ -90,22 +130,24 @@ public class ExportGame extends ExportHac {
 
 
 
-
+    /**
+     * Adds element.
+     * @param gameMap
+     */
     public void addElement(GameMap gameMap){
         System.out.println(gameMap.getGameObjects());
 
-
         gameMap.getBackground();
-
         mapList.add(String.valueOf(gameMap.getWidth()));
         mapList.add(String.valueOf(gameMap.getHeight()));
 
-
     }
 
+    /**
+     * Exports a file.
+     */
     public void exportFile(){
         String content = sb.toString();
-        //File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
         File file = new File("assets/maps/newMap.txt");
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
@@ -123,10 +165,5 @@ public class ExportGame extends ExportHac {
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
 }

@@ -17,13 +17,11 @@ import java.util.Base64;
  * @author henrytran
  */
 public class ExportHac {
-    private HacFile hacFile;
     private ArrayList<String> elements = new ArrayList<>();
 
     /**
      * This method adds a element to the game.
      * @param gameObject is the element that is being added to the game.
-     * @author ceciliethoresen
      */
     public void addElement(GameObject gameObject){
         String base64String = encodeImageToString(SwingFXUtils.fromFXImage(gameObject.getAsset(), null), "png");
@@ -40,6 +38,12 @@ public class ExportHac {
         elements.add(sb.toString());
     }
 
+    /**
+     * This method encodes a image to a string.
+     * @param image from bufferedImage
+     * @param type is a string.
+     * @return a string of image.
+     */
     public String encodeImageToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -55,13 +59,15 @@ public class ExportHac {
         return imageString;
     }
 
+    /**
+     * Creates a file from stringBuilder.
+     */
     public void createFile(){
         StringBuilder sb = new StringBuilder(); // creates empty builder.
         for(String content : elements){
             sb.append(content); // adds elements to the builder.
         }
         String content = sb.toString();
-        //File file = new File("/Users/henrytran1/Documents/Github/Programutvikling/newFile.txt");
         File file = new File("assets/maps/newMap.mhac");
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
@@ -79,5 +85,4 @@ public class ExportHac {
             e.printStackTrace();
         }
     }
-
 }

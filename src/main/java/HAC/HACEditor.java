@@ -15,6 +15,7 @@ import java.io.File;
 
 /**
  * Main class for game main.java.HAC
+ * @author
  */
 public class HACEditor {
     private final static double FPS = 60;
@@ -30,9 +31,9 @@ public class HACEditor {
     private ExportHac exportHac;
 
     /**
-     * ....
-     * @param gameMap
-     * @param canvas
+     * Editor to HAC that inserts gameMap and canvas.
+     * @param gameMap of the game cannot be null.
+     * @param canvas JavaFx cannot be null.
      */
     public HACEditor(GameMap gameMap, Canvas canvas) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
@@ -42,6 +43,9 @@ public class HACEditor {
         this.canvas = canvas;
         this.camera = new Camera();
 
+        //@TODO:FJERN DENNE LINJEN
+        camera.setCanvas(canvas);
+
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();
         this.render();
@@ -50,19 +54,22 @@ public class HACEditor {
 
 
     /**
-     *
+     * Render map and objects with offset.
      */
     public void render() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gameMap.render(camera); // Render map and objects with offset
+
+        gameMap.render(camera);
+
+
 
     }
 
     /**
-     *
-     * @param x
-     * @param y
-     * @return
+     * Moves the camera.
+     * @param x left or right.
+     * @param y up or down.
+     * @return the position on gameboard.
      */
     public boolean move(double x, double y) {
         camera.translate(x,y);
@@ -70,9 +77,9 @@ public class HACEditor {
     }
 
     /**
-     *
-     * @param endX
-     * @param endY
+     * Starts shoot
+     * @param endX left or right.
+     * @param endY up or down.
      */
     public void shoot(double endX, double endY) {
         //player.animation.startShoot();
@@ -91,19 +98,29 @@ public class HACEditor {
 
     /**
      * Sets the grid of the game
-     * @param grid
+     * @param grid is being called with gameMap.
      */
     public void setGrid(boolean grid) {
         //gameMap.setGrid(grid);
     }
 
     /**
-     * Sets the okayer position
-     * @param x position
-     * @param y position
+     * Sets the player position.
+     * @param x position horizontal when calling camera.
+     * @param y position vertical when calling camera.
      */
     public void setPlayerPostion(int x, int y) {
         // camera.setPlayerPosition(x, y);
+    }
+
+
+    /**
+     * Gets the camera to gameboard.
+     * @return the visual that camera shows us.
+     * @author ceciliethoresen
+     */
+    public Camera getCamera() {
+        return camera;
     }
 
     /**
@@ -118,6 +135,11 @@ public class HACEditor {
         render();
     }
 
+    /**
+     * Sets gameObject.
+     * @param gameObject object int the game.
+     * @return draws current gameObject to gameMap.
+     */
     public boolean setGameObject(GameObject gameObject) {
         gameMap.addGameObject(gameObject);
         exportHac.addElement(gameObject);
@@ -126,15 +148,21 @@ public class HACEditor {
         return true;
     }
 
+    /**
+     * Saves a file.
+     */
     public void saveFile() {
         exportHac.createFile();
 
     }
 
+    /**
+     * Opens file.
+     * @param file implements a selected file to gameMap.
+     */
     public void openFile(File file) {
         gameMap = hacParser.parseFile(file);
         this.render();
-
 
 
     }

@@ -28,10 +28,10 @@ public class Sprite {
     }
 
     /**
-     * This method loads the sprite to us, and makes it available to get animation from.
+     * Loads the sprite.
+     * Makes it available to get animation from.
      * @param file that we can upload and get from the Sprite.
      * @return sprite that we get from BufferedImage and describes an image with an accessible buffer of image data.
-     * @author ceciliethoresen
      */
     public BufferedImage loadSprite(String file){
         BufferedImage sprite = null;
@@ -46,11 +46,10 @@ public class Sprite {
     }
 
     /**
-     * Here we gets the sprite and declaring it in height and width.
+     * Gets the sprite and declaring it in height and width.
      * @param gridX is the width in the grid.
      * @param gridY is the heigth in the grid.
-     * @return spritesheet that gets the Subimage with sizes in the grid of the gameboard.
-     * @author ceciliethoresen
+     * @return spritesheet that gets the subImage with sizes in the grid of the gameboard.
      */
     public BufferedImage getSprite(int gridX, int gridY){
         if(spriteSheet == null){

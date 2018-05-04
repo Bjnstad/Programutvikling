@@ -31,8 +31,8 @@ public class MainMenuController implements Controller {
     }
 
     /**
-     *
-     * @return
+     * Gets EventHandler.
+     * @return null
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
@@ -41,7 +41,7 @@ public class MainMenuController implements Controller {
 
 
     /**
-     * This method sets the main controller of the game.
+     * Sets main controller of the game.
      * @param mainController shows what on the screen of the game.
      */
     public void setMainController(MainController mainController) {
@@ -56,8 +56,8 @@ public class MainMenuController implements Controller {
     Button hightscore;
 
     /**
-     *
-     * @param event
+     * Controls editor
+     * @param event allows us to access the properties of ActionEvent
      */
     @FXML
     public void editor(ActionEvent event) {
@@ -65,8 +65,8 @@ public class MainMenuController implements Controller {
     }
 
     /**
-     *
-     * @param event
+     * Controls the game to play.
+     * @param event allows us to access the properties of ActionEvent.
      */
     @FXML
     public void play(ActionEvent event) {
@@ -75,8 +75,8 @@ public class MainMenuController implements Controller {
 
 
     /**
-     *
-     * @param gameMap
+     * Loads the map.
+     * @param gameMap shows us map of game.
      */
     public void loadMap(GameMap gameMap) {
         mainController.setGameMap(gameMap);
