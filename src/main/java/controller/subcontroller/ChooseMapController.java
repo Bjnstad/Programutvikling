@@ -1,14 +1,15 @@
 package main.java.controller.subcontroller;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import main.java.HAC.editor.HacParser;
-import main.java.HAC.world.GameMap;
 import main.java.controller.Controller;
 import main.java.controller.MainMenuController;
+import main.java.model.filehandler.HacParser;
+import main.java.model.world.GameMap;
 
 import java.io.File;
 
@@ -83,13 +84,7 @@ public class ChooseMapController implements SubController {
      */
     @Override
     public void setSubController(Controller controller) {
-        if (controller == null) throw new NullPointerException("Controller cant be null");
-        if (!(controller instanceof MainMenuController))
-            throw new IllegalStateException("Unexpected class, should be MainMenuController");
-        this.mainMenuController = (MainMenuController) controller; // Cast to MainMenuController.
-
-        System.out.println(maps);
-        //maps.setItems(getAllNames());
+        mainMenuController = (MainMenuController)controller;
     }
 
     /**

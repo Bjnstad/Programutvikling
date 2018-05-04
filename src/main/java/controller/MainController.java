@@ -1,6 +1,6 @@
 package main.java.controller;
 
-import main.java.HAC.world.GameMap;
+import main.java.model.world.GameMap;
 import main.java.controller.subcontroller.ChooseMapController;
 import main.java.controller.subcontroller.DieController;
 import main.java.controller.subcontroller.PauseMenuController;

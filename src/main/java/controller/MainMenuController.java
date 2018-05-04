@@ -1,6 +1,6 @@
 package main.java.controller;
 
-import main.java.HAC.world.GameMap;
+import main.java.model.world.GameMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

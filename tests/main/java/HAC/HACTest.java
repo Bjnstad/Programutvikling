@@ -1,7 +1,8 @@
 package main.java.HAC;
 
-import main.java.HAC.sprite.Sprite;
-import main.java.HAC.world.GameMap;
+import main.java.controller.HAC;
+import main.java.model.Sprite;
+import main.java.model.world.GameMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
