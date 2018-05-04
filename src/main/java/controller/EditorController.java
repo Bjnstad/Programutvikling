@@ -1,9 +1,8 @@
 package main.java.controller;
 
-import main.java.HAC.sprite.Sprite;
-import main.java.HAC.HACEditor;
-import main.java.HAC.world.GameMap;
-import main.java.HAC.world.GameObject;
+import main.java.model.Sprite;
+import main.java.model.world.GameMap;
+import main.java.model.world.GameObject;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import main.java.HAC.editor.*;
+import main.java.model.editor.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;

@@ -1,26 +1,13 @@
-<<<<<<< HEAD:src/main/java/controller/GameController.java
 package main.java.controller;
 
-import main.java.HAC.HAC;
-import main.java.HAC.sprite.Sprite;
-import main.java.HAC.world.GameMap;
-import main.java.HAC.world.GameObject;
-=======
-package application.controller;
 
-import HAC.HAC;
-import HAC.filehandler.ExportGame;
-import HAC.filehandler.Save;
-import HAC.sprite.Sprite;
-import HAC.world.GameMap;
-import HAC.world.GameObject;
-import application.State;
-import application.SubState;
->>>>>>> ac770ac75d700e4e6fa8d7f05c3e9bea5c1a76ab:src/application/controller/GameController.java
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import main.java.model.Sprite;
+import main.java.model.world.GameMap;
+import main.java.model.world.GameObject;
 
 /**
  * GameController implements Controller.
@@ -73,7 +60,7 @@ public class GameController implements Controller {
 
     public void save() {
         //Save save = new Save(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getTimeline(), game.getPlayer());
-        ExportGame save = new ExportGame(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getPlayer());
+        //ExportGame save = new ExportGame(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getPlayer());
 
 
     }
