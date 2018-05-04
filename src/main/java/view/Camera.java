@@ -1,4 +1,4 @@
-package main.java.HAC;
+package main.java.view;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -63,7 +63,7 @@ public class Camera {
      * @param x moving canvas left or right.
      * @param y moving canvas up or down.
      */
-     void translate(double x, double y) {
+     public void translate(double x, double y) {
         translateX += x;
         translateY += y;
         canvas.setTranslateX(translateX);

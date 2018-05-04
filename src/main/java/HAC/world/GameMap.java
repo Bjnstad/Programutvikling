@@ -1,6 +1,6 @@
 package main.java.HAC.world;
 
-import main.java.HAC.Camera;
+import main.java.view.Camera;
 import main.java.HAC.sprite.Sprite;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;

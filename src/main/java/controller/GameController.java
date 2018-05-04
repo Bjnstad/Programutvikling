@@ -2,35 +2,30 @@ package main.java.controller;
 
 import main.java.HAC.filehandler.ExportGame;
 import main.java.HAC.HAC;
-import main.java.HAC.sprite.Sprite;
 import main.java.HAC.world.GameMap;
-import main.java.HAC.world.GameObject;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 
 /**
- * GameController implements Controller.
- * @author
+ * GameController is linking javafx to main gamelogic
+ * @author Axel Bjørnstad - S315322
  */
-public class GameController implements Controller {
+public class GameController extends HAC implements Controller {
 
     @FXML
-    Canvas graphics;
+    private Canvas graphics;
 
     private MainController mainController; // Parent controller
-    private HAC game; // Instance of game
 
     /**
      * This method controls gameMap.
      * If there´s nothing in gameMap, then it creates a simple map.
      * @param gameMap is the map in the game.
      */
-    public GameController(GameMap gameMap) {
-        GameMap gm = gameMap;
-       // if(gameMap == null) gm = createSimpleMap();
-        game = new HAC(gm);
+    GameController(GameMap gameMap) {
+        super(gameMap);
     }
 
     /**
@@ -38,17 +33,9 @@ public class GameController implements Controller {
      */
     @Override
     public void initiate() {
-        game.getCamera().setDimension(mainController.getWidth(), mainController.getHeight());
-        game.getCamera().setCanvas(graphics);
-
-        game.getPlayer().setPosX(game.getCamera().getPlayerX());
-        game.getPlayer().setPosY(game.getCamera().getPlayerY());
-
-
-        System.out.println(game.getGameMap().getGameObjects().length);
-
-
-        game.play();
+        getCamera().setDimension(mainController.getWidth(), mainController.getHeight());
+        getCamera().setCanvas(graphics);
+        play();
     }
 
      /**
@@ -56,44 +43,13 @@ public class GameController implements Controller {
      */
     @Override
     public void onClose() {
+        // TODO: autosave?
         save();
-    }
-
-
-    /**
-     * Save the game.
-     */
-    public void save() {
-        //Save save = new Save(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getTimeline(), game.getPlayer());
-        ExportGame save = new ExportGame(game.getGameMap(),game.getCamera(),game.getEnemies(), game.getPlayer());
-
-    }
-
-    /**
-     * Continue the game.
-     */
-    public void resume() {
-        mainController.toMainView();
-        game.play();
-    }
-
-    /**
-     * Exit the game.
-     */
-    public void exit() {
-        mainController.setState(State.MAIN_MENU);
-    }
-
-    /**
-     * Load the game.
-     */
-    public void load() {
-
     }
 
     /**
      * Gets the EventHandler.
-     * @return Eventhandler to add support for user input.
+     * @return EventHandler to add support for user input.
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
@@ -103,20 +59,20 @@ public class GameController implements Controller {
         return (event -> {
             switch (event.getCode()) {
                 case W:
-                    System.out.println(game.move(0, speed));
+                    move(0, speed);
                     break;
                 case A:
-                    game.move(speed, 0);
+                    move(speed, 0);
                     break;
                 case S:
-                    game.move(0, -speed);
+                    move(0, -speed);
                     break;
                 case D:
-                    game.move(-speed, 0);
+                    move(-speed, 0);
                     break;
 
                 case ESCAPE:
-                    game.pause();
+                    pause();
                     mainController.addSubState(SubState.PAUSE_MENU);
                     break;
 
@@ -133,16 +89,33 @@ public class GameController implements Controller {
         this.mainController = mainController;
     }
 
+    /**
+     * Save the game.
+     */
+    public void save() {
+        ExportGame save = new ExportGame(getGameMap(),getCamera(), getEnemies(), getPlayer());
+    }
 
     /**
-     * Creates a simple map for testing, should be replaced by map loader or randomized based on pref width/height.
-     * @return a simple map with some objects 100 x 100 in size.
+     * Continue the game.
      */
-    private GameMap createSimpleMap() {
-        GameMap map = new GameMap(20, 20, new Sprite("background", 32));
-
-        map.addGameObject(new GameObject(null, 7,5, 2, 2));
-        map.addGameObject(new GameObject(null, 12, 12,5, 5));
-        return map;
+    public void resume() {
+        mainController.toMainView();
+        play();
     }
+
+    /**
+     * Exit the game.
+     */
+    public void exit() {
+        mainController.setState(State.MAIN_MENU);
+    }
+
+    /**
+     * Load the game.
+     */
+    public void load() {
+
+    }
+
 }

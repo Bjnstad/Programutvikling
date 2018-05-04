@@ -6,12 +6,13 @@ import main.java.HAC.world.GameMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import main.java.view.Camera;
 
 import java.util.Random;
 
 /**
  * This class represents Main class for game HAC, and contains gamemap, camera, enemies, timeline and player.
- * @author ceciliethoresen
+ * @author Axel Bjørnstad - S315322
  */
 public class HAC {
     private final static double FPS = 60;
@@ -20,8 +21,8 @@ public class HAC {
     private Camera camera;
     private boolean isRunning = false;
 
-    private Enemy[] enemies;
     private Timeline timeline;
+    private Enemy[] enemies;
     private Player player;
 
 
@@ -36,6 +37,7 @@ public class HAC {
         this.camera = new Camera();
         this.player = new Player();
 
+        // TODO: Link with highscore algoritm
         generateEnemies(10);
     }
 

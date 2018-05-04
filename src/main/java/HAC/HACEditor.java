@@ -9,6 +9,7 @@ import main.java.HAC.editor.ExportHac;
 import main.java.HAC.editor.HacParser;
 import main.java.HAC.world.GameMap;
 import main.java.HAC.world.GameObject;
+import main.java.view.Camera;
 
 import java.io.File;
 

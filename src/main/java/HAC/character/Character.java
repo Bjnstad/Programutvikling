@@ -1,10 +1,8 @@
 package main.java.HAC.character;
 
-import main.java.HAC.Camera;
-import main.java.HAC.sprite.SpriteAnimation;
+import main.java.view.Camera;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
-import java.util.ArrayList;
 
 
 /**

@@ -1,9 +1,6 @@
 package test;
 
 
-import main.java.HAC.Camera;
-import javafx.scene.canvas.Canvas;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;

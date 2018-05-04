@@ -18,12 +18,13 @@ import java.util.ResourceBundle;
 
 /**
  * MainController implements Initializable
- * @author
+ * @author Axel Bjørnstad - S315322
  */
 public class MainController implements Initializable {
 
     @FXML
     AnchorPane mainView;
+
     private Controller controller; // Current controller
     private GameMap gameMap; // The current gamemap to play
 
@@ -60,6 +61,16 @@ public class MainController implements Initializable {
                 break;
         }
 
+        mainView.getChildren().clear(); // Clear old view
+        mainView.getChildren().add(loadPane(filepath)); // Change anchorpane to view
+
+        Scene scene = mainView.getScene();
+        if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
+
+        controller.initiate(); // Call initiate for new controller
+    }
+
+    private Pane loadPane(String filepath) {
         FXMLLoader loader;
         Pane pane;
 
@@ -71,16 +82,10 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             System.err.println("FXML file for " + filepath + " could not be found.");
             System.exit(1);
-            return;
+            return null;
         }
 
-        mainView.getChildren().clear(); // Clear old view
-        mainView.getChildren().add(pane); // Change anchorpane to view
-
-        Scene scene = mainView.getScene();
-        if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
-
-        controller.initiate(); // Call initiate for new controller
+        return pane;
     }
 
     /**
