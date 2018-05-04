@@ -1,6 +1,6 @@
 package main.java.model.filehandler;
 
-import main.java.model.Sprite;
+import main.java.model.SpriteSheet;
 import main.java.model.world.GameMap;
 
 import java.io.*;
@@ -11,7 +11,7 @@ import java.io.*;
 public class ImportGame {
 
     public void parseFile(File file){
-        GameMap map = new GameMap(20, 20, new Sprite("background", 32));;
+        GameMap map = new GameMap(20, 20, new SpriteSheet("background", 32));;
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));

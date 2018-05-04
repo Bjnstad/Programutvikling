@@ -1,7 +1,7 @@
 package main.java.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
-import main.java.model.Sprite;
+import main.java.model.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.world.GameObject;
 import sun.misc.BASE64Decoder;
@@ -24,7 +24,7 @@ public class HacParser {
      * @param file ......
      */
     public GameMap parseFile(File file){
-        GameMap map = new GameMap(20, 20, new Sprite("background", 32));
+        GameMap map = new GameMap(20, 20, new SpriteSheet("background", 32));
 
         try {
 

@@ -4,7 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.java.model.Camera;
-import main.java.model.Sprite;
+import main.java.model.SpriteSheet;
 
 /**
 <<<<<<< HEAD:src/main/java/HAC/world/GameMap.java
@@ -30,7 +30,7 @@ public class GameMap {
      * @param height     size of the gameboard.
      * @param background we gets from sprite.
      */
-    public GameMap(int width, int height, Sprite background) {
+    public GameMap(int width, int height, SpriteSheet background) {
         if (width < 0) throw new IllegalStateException("Width should be above 0");
         if (height < 0) throw new IllegalStateException("Height should to be above 0");
 
@@ -44,7 +44,7 @@ public class GameMap {
      *
      * @param background Sprite with 3x3 sprite setup
      */
-    private void loadBackground(Sprite background) {
+    private void loadBackground(SpriteSheet background) {
         this.background = new Image[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -79,7 +79,7 @@ public class GameMap {
      * @param y      is the background in height.
      */
     private void renderBlock(Camera camera, int x, int y) {
-        camera.getGraphicsContext().drawImage(getAppropriateImage(x, y), camera.scaleX(x), camera.scaleY(y), camera.getScale(), camera.getScale());
+        camera.getGraphicsContext().drawImage(getAppropriateImage(x, y), camera.scale(x), camera.scale(y), camera.getScale(), camera.getScale());
     }
 
     private Image getAppropriateImage(int x, int y) {
@@ -208,7 +208,7 @@ public class GameMap {
     public void drawObject(GameObject gameObject, Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
 
-        gc.drawImage(gameObject.getAsset(), camera.scaleX(gameObject.getPosX()), camera.scaleY(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+        gc.drawImage(gameObject.getAsset(), camera.scale(gameObject.getPosX()), camera.scale(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
 
     }
 

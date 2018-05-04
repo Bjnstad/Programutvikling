@@ -35,12 +35,7 @@ public abstract class Character extends Avatar {
     public void setPosX(double posX) {
         double speed = posX - this.posX;
         if(speed == 0) return;
-
-        if(speed < 0) {
-            setDirection(Direction.LEFT);
-        } else {
-            setDirection(Direction.RIGHT);
-        }
+        setDirection(speed < 0 ? Direction.LEFT : Direction.RIGHT);
 
         this.posX = posX;
         move();
@@ -55,12 +50,7 @@ public abstract class Character extends Avatar {
         double speed = posY - this.posY;
         if(speed == 0) return;
 
-        if(speed < 0) {
-            setDirection(Direction.UP);
-        } else {
-            setDirection(Direction.DOWN);
-        }
-
+        setDirection(speed < 0 ? Direction.UP : Direction.DOWN);
         this.posY = posY;
         move();
     }
@@ -73,12 +63,7 @@ public abstract class Character extends Avatar {
      * @param speed this is the speed to the character walking right or left.
      */
     public void addPosX(double speed) {
-        if(speed < 0) {
-            setDirection(Direction.LEFT);
-        } else {
-            setDirection(Direction.RIGHT);
-        }
-
+        setDirection(speed < 0 ? Direction.LEFT : Direction.RIGHT);
         this.posX += speed;
         move();
     }
@@ -89,12 +74,7 @@ public abstract class Character extends Avatar {
      * @param speed this is the speed to the character walking up or down.
      */
     public void addPosY(double speed) {
-        if(speed < 0) {
-            setDirection(Direction.UP);
-        } else {
-            setDirection(Direction.DOWN);
-        }
-
+        setDirection(speed < 0 ? Direction.UP : Direction.DOWN);
         this.posY += speed;
         move();
     }

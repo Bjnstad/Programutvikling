@@ -3,9 +3,11 @@ package main.java.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+// TODO: Idea: Render all object to screen
+
 /**
  * Camera is used to calculate differences between game content and the real pixel values for canvas.
- * @author Axel Bjørnstad
+ * @author Axel Bjørnstad - s315322
  */
 public class Camera {
 
@@ -18,10 +20,9 @@ public class Camera {
     /**
      * Sets width and height of the window, then calculates scale to make game content relate to real on screen pixels values.
      * @param width width of game screen window.
-     * @param height hegiht of game screen window.
      */
-    public void setDimension(double width, double height) {
-        scale = width < height ? width / zoom : height / zoom;
+    public void setDimension(double width) {
+        scale = width / zoom;
     }
 
     /**
@@ -32,7 +33,6 @@ public class Camera {
         if(canvas == null) throw new NullPointerException("Canvas cannot be null.");
         this.canvas = canvas;
     }
-
 
     /**
      * Gets the Canvas vertical.
@@ -76,8 +76,8 @@ public class Camera {
      * @param y is the position vertical.
      */
     public void setPlayerPosition(int x, int y) {
-        scaleX(x);
-        scaleY(y);
+        scale(x);
+        scale(x);
         //double cx = (((double)x + .5) - (double) zoom /2) * scale;
         //double cy = (((double)y + .5) - (double) zoom /2) * scale;
 
@@ -119,21 +119,11 @@ public class Camera {
 
     /**
      * Scale up the given gameboard relative values to according pixels on screen.
-     * @param x is the position horizontal.
+     * @param value is the position horizontal.
      * @return the position to x.
      */
-    public double scaleX(double x) {
-        return x * scale;
-    }
-
-    /**
-     * Scale up the given gameboard relative values to according pixels on screen.
-     * @param y is the position vertical.
-     * @return the position to y.
-     */
-    public double scaleY(double y) {
-
-        return y * scale;
+    public double scale(double value) {
+        return value * scale;
     }
 
     /**

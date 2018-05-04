@@ -2,7 +2,7 @@ package main.java.model.character;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import main.java.model.Sprite;
+import main.java.model.SpriteSheet;
 
 /**
  * This class describes the different states to character in the game.
@@ -26,7 +26,7 @@ public class Avatar {
      * @author ceciliethoresen
      */
     public Avatar(String fileName, int size){
-        Sprite sprite = new Sprite(fileName, size);
+        SpriteSheet sprite = new SpriteSheet(fileName, size);
         loadAssets(sprite);
 
         interval = 0;
@@ -44,18 +44,18 @@ public class Avatar {
         this.direction = direction;
     }
 
-    private void loadAssets(Sprite sprite) {
-        up = loadRow(0, sprite);
-        left = loadRow(1, sprite);
-        down = loadRow(2, sprite);
-        right = loadRow(3, sprite);
+    private void loadAssets(SpriteSheet spriteSheet) {
+        up = loadRow(0, spriteSheet);
+        left = loadRow(1, spriteSheet);
+        down = loadRow(2, spriteSheet);
+        right = loadRow(3, spriteSheet);
     }
 
-    private Image[] loadRow(int row, Sprite sprite) {
+    private Image[] loadRow(int row, SpriteSheet spriteSheet) {
         try {
             Image[] result = new Image[EXPECTED_ANIMATIONS];
             for (int i = 0; i < EXPECTED_ANIMATIONS; i++) {
-                result[i] = SwingFXUtils.toFXImage(sprite.getSprite(i, row), null);
+                result[i] = SwingFXUtils.toFXImage(spriteSheet.getSprite(i, row), null);
             }
 
             return result;

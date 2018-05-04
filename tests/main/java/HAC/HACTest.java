@@ -1,7 +1,7 @@
 package main.java.HAC;
 
-import main.java.controller.HAC;
-import main.java.model.Sprite;
+import main.java.controller.GameController;
+import main.java.model.SpriteSheet;
 import main.java.model.world.GameMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
  * Created by henrytran1 on 03/05/2018.
  */
 class HACTest {
-    private HAC game;
+    private GameController game;
     private GameMap map;
 
 
     @BeforeEach
     void setUp() {
-        map = new GameMap(20, 20, new Sprite("background", 32));
-        game = new HAC(map);
+        map = new GameMap(20, 20, new SpriteSheet("background", 64));
+        game = new GameController(map);
 
 
     }

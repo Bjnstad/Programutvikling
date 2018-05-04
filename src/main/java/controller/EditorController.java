@@ -1,6 +1,6 @@
 package main.java.controller;
 
-import main.java.model.Sprite;
+import main.java.model.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.world.GameObject;
 import javafx.event.EventHandler;
@@ -73,7 +73,7 @@ public class EditorController implements Controller {
         listView.setCellFactory(param -> imageList.getAllAssets());
 
 
-        map = new HACEditor(new GameMap(25,25, new Sprite("background", 32)), graphics);
+        map = new HACEditor(new GameMap(25,25, new SpriteSheet("background", 32)), graphics);
         //map.getCamera().setCanvas(graphics);
 
 
