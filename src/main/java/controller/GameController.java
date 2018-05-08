@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Point3D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
@@ -57,8 +58,13 @@ public class GameController implements Controller {
      */
     @Override
     public void initiate() {
+
+        graphics.setRotationAxis(new Point3D(2,2,100));
+
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.player = new Player();
+
+
 
         generateEnemies(10);
         play();
