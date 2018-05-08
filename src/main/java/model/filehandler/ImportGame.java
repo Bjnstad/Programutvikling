@@ -11,39 +11,31 @@ public class ImportGame {
 
     public void parseFile(File file){
         GameMap map = new GameMap(20, 20, new SpriteSheet("background", 32));;
+
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));
             String str = b.readLine().toString();
-            String[] obj = str.split(",");
-            for (int i = 0; i <= Integer.valueOf(obj[8]); i++) {
 
+            String[] obj = str.split("@");
+            String[] objArr = obj[1].split("§");
+            String[] mapSize = obj[2].split("&");
+            String[] camera = mapSize[2].split("#");
+            String[] enemies = mapSize[2].split("/");
+            String[] player = enemies[2].split("!");
+
+            String[] enemyArray = enemies[1].split("§");
+
+            for (int i = 0; i <objArr.length ; i++) {
+                System.out.println(objArr[i]);
             }
+            System.out.println(camera[1]);
+            System.out.println(mapSize[1]);
 
-            /*for (int i = 0; i <= Integer.valueOf(obj[8]) ; i++) {
-                System.out.println(obj[i]);
-                System.out.println(System.lineSeparator());
-            }*/
-
-
-
-/*            String[] obj = b.readLine().split("#");
-            BASE64Decoder decoder = new BASE64Decoder();
-            byte[] imageByte;
-
-            for (int i = 0; i <obj.length ; i++) {
-                System.out.println("THE NUMBER IS " + i);
-
-                String[] objContent = obj[i].split("&");
-                imageByte = decoder.decodeBuffer(objContent[0]);
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
-                BufferedImage image = ImageIO.read(bis);
-                bis.close();
-
-                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
-
-                System.out.println(map.addGameObject(hf));
-            }*/
+            for (int i = 0; i <enemyArray.length ; i++) {
+                System.out.println(enemyArray[i]);
+            }
+            System.out.println(player[1]);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

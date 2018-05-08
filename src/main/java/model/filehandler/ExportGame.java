@@ -42,9 +42,9 @@ public class ExportGame extends ExportHac {
         this.player = player;
 
         saveMap();
-       // saveCamera();
-       // saveEnemies();
-       // savePlayer();
+        saveCamera();
+        saveEnemies();
+        savePlayer();
         exportFile();
 
     }
@@ -55,6 +55,7 @@ public class ExportGame extends ExportHac {
     public void saveMap() {
         GameObject[] object = gameMap.getGameObjects();
         int count = 0;
+        sb.append("@");
         for (int i = 0; i <object.length; i++) {
             if(object[i] == null) continue;
             count++;
@@ -71,15 +72,14 @@ public class ExportGame extends ExportHac {
             //String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
             //sb.append(base64String);
             sb.append("BILDESTRENG");
-            sb.append(',');
-
+            sb.append("§");
         }
+        sb.append("@");
+        sb.append('&');
         sb.append(gameMap.getHeight());
         sb.append(',');
         sb.append(gameMap.getWidth());
-        sb.append(',');
-        sb.append(object.length);
-
+        sb.append('&');
     }
 
 
@@ -87,19 +87,21 @@ public class ExportGame extends ExportHac {
      * Saves the camera.
      */
     public void saveCamera(){
+        sb.append("#");
         sb.append(camera.getTranslateX());
+        sb.append(",");
         sb.append(camera.getTranslateY());
-
+        sb.append("#");
     }
 
     /**
      * Saves enemies.
      */
     public void saveEnemies(){
-        int count = 0;
+        sb.append("/");
         for (int i = 0; i < enemies.length; i++) {
             //sb.append(enemies[i].getSpriteFileName());
-            sb.append(',');
+            //sb.append(',');
             sb.append(enemies[i].getSizeX());
             sb.append(',');
             sb.append(enemies[i].getSizeY());
@@ -107,9 +109,10 @@ public class ExportGame extends ExportHac {
             sb.append(enemies[i].getPosX());
             sb.append(',');
             sb.append(enemies[i].getPosY());
-            sb.append(',');
-            count++;
+            sb.append("§");
         }
+
+        sb.append("/");
     }
 
     /**
@@ -117,8 +120,15 @@ public class ExportGame extends ExportHac {
      */
     public void savePlayer(){
         //sb.append(player.getSpriteFileName());
+        sb.append("!");
+        sb.append(player.getPosY());
+        sb.append(',');
+        sb.append(player.getPosX());
+        sb.append(',');
         sb.append(player.getSizeX());
+        sb.append(',');
         sb.append(player.getSizeY());
+        sb.append("!");
 
     }
 
