@@ -18,7 +18,7 @@ import main.java.model.SpriteSheet;
  */
 public class GameMap {
 
-    private GameObject[] gameObjects = new GameObject[1];
+    private GameObject[] gameObjects;
     private int width;
     private int height;
     private Image[][] background;
@@ -223,5 +223,23 @@ public class GameMap {
 
     public Image[][] getBackground() {
         return background;
+    }
+
+
+    /**
+     * Creates json object of gamemap
+     * @return json format
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("[");
+//        for (int i  = 0; i < ; i++) {
+
+  //      }
+        result.append("]");
+
+
+        return result.toString();
     }
 }

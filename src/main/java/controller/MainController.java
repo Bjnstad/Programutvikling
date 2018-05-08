@@ -1,10 +1,7 @@
 package main.java.controller;
 
+import main.java.controller.subcontroller.*;
 import main.java.model.world.GameMap;
-import main.java.controller.subcontroller.ChooseMapController;
-import main.java.controller.subcontroller.DieController;
-import main.java.controller.subcontroller.PauseMenuController;
-import main.java.controller.subcontroller.SubController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -127,6 +124,11 @@ public class MainController implements Initializable {
             case CHOOSE_MAP:
                 filepath = "ChooseMap";
                 subController = new ChooseMapController();
+                break;
+
+            case LOAD_MAP:
+                filepath = "LoadGame";
+                subController = new LoadGameController();
                 break;
 
             default:

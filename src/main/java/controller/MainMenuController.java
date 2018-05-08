@@ -69,8 +69,12 @@ public class MainMenuController implements Controller {
      * @param event allows us to access the properties of ActionEvent.
      */
     @FXML
-    public void play(ActionEvent event) {
+    public void newGame(ActionEvent event) {
         mainController.addSubState(SubState.CHOOSE_MAP);
+    }
+
+    public void loadGame(ActionEvent event) {
+        mainController.addSubState(SubState.LOAD_MAP);
     }
 
 

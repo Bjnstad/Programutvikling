@@ -5,7 +5,8 @@ import javafx.scene.image.Image;
 import main.java.model.SpriteSheet;
 
 /**
- * This class describes the different states to character in the game.
+ * // TODO: Enemies moves to fast, better interval increment
+ * This class handles animation for a character find what sprite to return respectly.
  * @author Axel Bjørnstad - s315322
  */
 public class Avatar {
@@ -80,5 +81,9 @@ public class Avatar {
         }
 
         return null;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

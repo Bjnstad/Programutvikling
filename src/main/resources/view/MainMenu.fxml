@@ -15,22 +15,31 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#play" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Play" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button mnemonicParsing="false" onAction="#newGame" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="New Game" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="22.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" onAction="#editor" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Editor" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#loadGame" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Load  Game" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font size="22.0" />
-               </font></Button>
-            <Button fx:id="options" mnemonicParsing="false" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Options" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#editor" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Editor" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
                <font>
                   <Font size="22.0" />
-               </font></Button>
-            <Button fx:id="hightscore" mnemonicParsing="false" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Highscore" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
+               </font>
+            </Button>
+            <Button fx:id="options" mnemonicParsing="false" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Options" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
                <font>
                   <Font size="22.0" />
-               </font></Button>
+               </font>
+            </Button>
+            <Button fx:id="hightscore" mnemonicParsing="false" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Highscore" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <Label alignment="CENTER" layoutX="133.0" layoutY="93.0" style="-fx-text-alignment: center;" text="main.java.HAC " textAlignment="CENTER" textFill="#464242" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
