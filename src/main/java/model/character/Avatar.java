@@ -2,7 +2,7 @@ package main.java.model.character;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import main.java.model.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 
 /**
  * // TODO: Enemies moves to fast, better interval increment

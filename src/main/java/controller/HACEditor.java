@@ -23,9 +23,6 @@ public class HACEditor {
     private GameMap gameMap;
     private Canvas canvas;
     private Camera camera;
-    private Enemy[] enemies = new Enemy[1];
-    private Timeline timeline;
-    private Player player;
     private boolean devMode = false;
     private HacParser hacParser;
     private ExportHac exportHac;
@@ -41,10 +38,9 @@ public class HACEditor {
 
         this.gameMap = gameMap;
         this.canvas = canvas;
-        this.camera = new Camera();
 
-        //@TODO:FJERN DENNE LINJEN
-        camera.setCanvas(canvas);
+        // TODO: CANNOT HAVE STATIC VALUE
+        this.camera = new Camera(800, canvas);
 
         this.hacParser = new HacParser();
         this.exportHac = new ExportHac();

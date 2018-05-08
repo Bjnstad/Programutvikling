@@ -117,6 +117,6 @@ public abstract class Character extends Avatar {
      */
     public void render(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
-        gc.drawImage(getSprite(), posX*camera.getScale(), posY*camera.getScale(), sizeX * camera.getScale(), sizeY * camera.getScale());
+        gc.drawImage(getSprite(), camera.scale(posX),  camera.scale(posY),  camera.getScale() * sizeX, camera.getScale() * sizeY) ;
     }
 }

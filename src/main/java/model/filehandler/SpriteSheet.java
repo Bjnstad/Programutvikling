@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.model.filehandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

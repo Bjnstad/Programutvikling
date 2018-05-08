@@ -46,12 +46,6 @@ public class GameController implements Controller {
     public GameController(GameMap gameMap) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
         this.gameMap = gameMap;
-
-        this.camera = new Camera();
-        this.player = new Player();
-
-        // TODO: Link with highscore algoritm
-        generateEnemies(10);
     }
 
     /**
@@ -59,8 +53,10 @@ public class GameController implements Controller {
      */
     @Override
     public void initiate() {
-        camera.setDimension(mainController.getWidth());
-        camera.setCanvas(graphics);
+        this.camera = new Camera(mainController.getWidth(), graphics);
+        this.player = new Player();
+
+        generateEnemies(10);
         play();
     }
 
@@ -218,7 +214,7 @@ public class GameController implements Controller {
         camera.translate(x, y);
         player.setPosX(camera.getPlayerX());
         player.setPosY(camera.getPlayerY());
-        gameMap.renderArea(camera, rx -3, ry -3,  rx +2, ry +2);
+        gameMap.renderArea(camera, rx -3, ry -3,  rx +3, ry +3);
 
         return true;
     }
@@ -230,7 +226,7 @@ public class GameController implements Controller {
     private void die() {
         timeline.stop();
         isRunning = false;
-        System.out.println("YOU DIED!");
+        mainController.addSubState(SubState.DIE);
     }
 
     /**

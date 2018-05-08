@@ -17,6 +17,11 @@ public class Camera {
     private double translateY; // Movement offset
     private double scale; // Multiplier for correctly display gameboard and sizes
 
+    public Camera(double dimension, Canvas canvas) {
+        this.canvas = canvas;
+        setDimension(dimension);
+    }
+
     /**
      * Sets width and height of the window, then calculates scale to make game content relate to real on screen pixels values.
      * @param width width of game screen window.

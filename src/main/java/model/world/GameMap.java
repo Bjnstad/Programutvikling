@@ -4,7 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.java.model.Camera;
-import main.java.model.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 
 /**
 <<<<<<< HEAD:src/main/java/HAC/world/GameMap.java

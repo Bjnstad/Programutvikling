@@ -1,6 +1,6 @@
 package main.java.controller;
 
-import main.java.model.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.world.GameObject;
 import javafx.event.EventHandler;

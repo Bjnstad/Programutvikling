@@ -1,6 +1,5 @@
 package main.java.model.filehandler;
 
-import main.java.model.SpriteSheet;
 import main.java.model.world.GameMap;
 
 import java.io.*;

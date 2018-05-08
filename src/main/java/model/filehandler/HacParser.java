@@ -1,7 +1,6 @@
 package main.java.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
-import main.java.model.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.world.GameObject;
 import sun.misc.BASE64Decoder;
