@@ -126,14 +126,16 @@ public class GameMap {
             }
         }
 
-        GameObject[] result = new GameObject[gameObjects.length+1];
-        for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
+        GameObject[] result;
 
-        int re = gameObjects.length -1;
-        if(re < 0) re = 0;
-        // Copy in old objects
-
-        result[re] = gameObject;
+        if(gameObjects != null) {
+            result = new GameObject[gameObjects.length+1];
+            for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
+            result[gameObjects.length] = gameObject;
+        } else {
+            result = new GameObject[1];
+            result[0] = gameObject;
+        }
 
         gameObjects = result;
         return true;
