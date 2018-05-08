@@ -7,13 +7,8 @@ import main.java.model.Camera;
 import main.java.model.filehandler.SpriteSheet;
 
 /**
-<<<<<<< HEAD:src/main/java/HAC/world/GameMap.java
  * GameMap handles all of properties for the board, width, height, static objects and background, does not include player and enemies.
  * Currently this board only support static board size.
-=======
- * This class represents the game map.
- * Gamemap contains of a count of objects, width, height and the background we get from sprite.
->>>>>>> dev:src/main/java/model/world/GameMap.java
  * @author Axel Bjørnstad - S315322
  */
 public class GameMap {
