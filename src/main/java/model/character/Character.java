@@ -5,7 +5,7 @@ import main.java.model.Camera;
 
 /**
  * This class contains the position and size to the character in the game.
- * @author
+ * @author Axel Bjørnstad - s315322
  */
 public abstract class Character extends Avatar {
 

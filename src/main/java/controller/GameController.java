@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
@@ -33,6 +34,7 @@ public class GameController implements Controller {
     private Enemy[] enemies;
     private Player player;
 
+    private int currentLevel;
 
     @FXML
     private Canvas graphics;
@@ -46,6 +48,8 @@ public class GameController implements Controller {
     public GameController(GameMap gameMap) {
         if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
         this.gameMap = gameMap;
+
+        currentLevel = 1;
     }
 
     /**
@@ -101,20 +105,20 @@ public class GameController implements Controller {
     public EventHandler<KeyEvent> getEventHandler() {
 
         // TODO: add acceleration in own controller class
-        double speed = 10;
+        double speed = 1;
         return (event -> {
             switch (event.getCode()) {
                 case W:
                     move(0, speed);
                     break;
                 case A:
-                    move(speed, 0);
+                    move(-speed, 0);
                     break;
                 case S:
                     move(0, -speed);
                     break;
                 case D:
-                    move(-speed, 0);
+                    move(speed, 0);
                     break;
 
                 case ESCAPE:
@@ -192,6 +196,9 @@ public class GameController implements Controller {
         }
 
         player.render(camera);
+
+        GraphicsContext gc = camera.getGraphicsContext();
+        //gc.fillText("Level: " + currentLevel, camera.fixedX(20), camera.fixedY(20));
     }
 
     /**
@@ -201,17 +208,24 @@ public class GameController implements Controller {
      * @return the position to character.
      */
     public boolean move(double x, double y) {
-        if (!isRunning) return false;
+        if(!isRunning) return false; // Dont move if game not running
 
-        int rx = (int)(camera.getPlayerX() + x/camera.getScale() - 1.5 * Math.signum(x));
-        int ry = (int)(camera.getPlayerY() + x/camera.getScale() - 1.5 * Math.signum(y));
-        if(gameMap.willCollide(rx, ry)) return false;
+        int rX = (int) (player.getPosX() + x);
+        int rY = (int) (player.getPosY() - y);
+        if(gameMap.willCollide(rX, rY)) return false;
 
-        camera.translate(x, y);
-        player.setPosX(camera.getPlayerX());
-        player.setPosY(camera.getPlayerY());
-        gameMap.renderArea(camera, rx -3, ry -3,  rx +3, ry +3);
+        double translateX = 0;
+        double translateY = 0;
+        if(rX >= ((Math.signum(x) == -1) ? -1 : 0) + camera.getZoom()/2) translateX -= camera.scale(x);
+        if(rY >= ((Math.signum(y) == -1) ? 0 : -1) + camera.getZoom()/2) translateY += camera.scale(y);
+        if(gameMap.getWidth() - camera.getZoom()/2 < rX) translateX = 0;
+        if(gameMap.getHeight() - camera.getZoom()/2 < rY) translateY = 0;
+        camera.translate(translateX, translateY);
 
+        player.addPosX(x);
+        player.addPosY(-y);
+
+        gameMap.renderArea(camera, rX - player.getSizeX(), rY - player.getSizeY(),  rX +  player.getSizeX(), rY + player.getSizeY());
         return true;
     }
 

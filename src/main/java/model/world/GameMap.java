@@ -9,7 +9,7 @@ import main.java.model.filehandler.SpriteSheet;
 /**
  * GameMap handles all of properties for the board, width, height, static objects and background, does not include player and enemies.
  * Currently this board only support static board size.
- * @author Axel Bjørnstad - S315322
+ * @author Axel Bjørnstad - s315322
  */
 public class GameMap {
 
@@ -100,7 +100,6 @@ public class GameMap {
      * @return false if not the statement is true.
      */
     public boolean willCollide(int posX, int posY) {
-
         if(posX <= -1 || posY <= -1 || posX >= width || posY >= height) return true;
         if(getGameObject(posX, posY) != null) return true;
         return false;

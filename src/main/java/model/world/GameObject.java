@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 /**
  * This class defines the gameObject.
  * Contains the size and position to gameObject.
- * @author
+ * @author Axel Bjørnstad - s315322
  */
 public class GameObject {
     private int sizeX;

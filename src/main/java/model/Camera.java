@@ -90,6 +90,14 @@ public class Camera {
         //setPOY(-cy);
     }
 
+    public double fixedX(double pixel) {
+        return pixel - translateX * 10000;
+    }
+
+    public double fixedY(double pixel) {
+        return pixel - translateY * 10000;
+    }
+
     /**
      * Gets the player of x(horizontal).
      * @return the position to player.
@@ -137,5 +145,9 @@ public class Camera {
      */
     public double getScale() {
         return scale;
+    }
+
+    public int getZoom() {
+        return this.zoom;
     }
 }
