@@ -11,7 +11,7 @@ import main.java.model.Camera;
 public class Enemy extends Character {
 
     private float speed = 1;
-    private float health = 100;
+    private double threshold= 0.5;
 
     /**
      * This method represents position, size and qualities to the enemy in the game.
@@ -31,6 +31,14 @@ public class Enemy extends Character {
         this.speed = speed;
     }
 
+    public void setThreshold(double threshold) {
+        this.threshold = threshold;
+    }
+
+    public void hit(double strength) {
+        health -= strength * threshold;
+    }
+
     /**
      * This method calculates the movement to the player.
      * @param player is the animation in the game.
@@ -40,6 +48,7 @@ public class Enemy extends Character {
         addPos(speed * Math.sin(angle) / 100, speed * Math.cos(angle) / 100);
 
     }
+
 
     @Override
     public void renderHealth(Camera camera) {

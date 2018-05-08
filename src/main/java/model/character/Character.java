@@ -9,6 +9,7 @@ import main.java.model.Camera;
  */
 public abstract class Character extends Avatar {
 
+    protected float health = 100;
     private double posX = 0;
     private double posY = 0;
     private int sizeX;
