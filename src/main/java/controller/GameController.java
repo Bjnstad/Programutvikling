@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
+import main.java.model.character.Bullet;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.filehandler.ExportGame;
@@ -220,6 +221,15 @@ public class GameController implements Controller {
         }
         player.render(camera);
 
+
+        for (int i = 0; i < player.getBullets().size(); i++) {
+            Bullet b = player.getBullets().get(i);
+
+            for(Enemy enemy : enemies) {
+                if (enemy.willCollide(b)) enemy.hit(20);
+                player.getBullets().remove(b);
+            }
+        }
 
         /*
         GraphicsContext gc = camera.getGraphicsContext();

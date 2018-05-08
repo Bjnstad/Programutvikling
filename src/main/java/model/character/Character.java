@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.java.model.Camera;
 
+import java.sql.BatchUpdateException;
 import java.util.ArrayList;
 
 /**
@@ -133,6 +134,26 @@ public abstract class Character extends Avatar {
 
         a = character.getPosY() - character.getSizeY()/2;
         b = character.getPosY() + character.getSizeY()/2;
+        c = getPosY();
+        boolean yval = b > a ? c > a && c < b : c > b && c < a;
+
+        return xval && yval;
+
+    }
+
+    /**
+     * This checks if this character crashes with other character.
+     * @param bullet target to check against.
+     * @return the position to enemy in height and width.
+     */
+    public boolean willCollide(Bullet bullet) {
+        double a = bullet.getX() - 10/2;
+        double b = bullet.getX() + 10/2;
+        double c = getPosX();
+        boolean xval = b > a ? c > a && c < b : c > b && c < a;
+
+        a = bullet.getY() - 5/2;
+        b = bullet.getY() + 5/2;
         c = getPosY();
         boolean yval = b > a ? c > a && c < b : c > b && c < a;
 

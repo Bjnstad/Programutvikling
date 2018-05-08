@@ -37,6 +37,10 @@ public class Enemy extends Character {
 
     public void hit(double strength) {
         health -= strength * threshold;
+        if(health < 1){
+            setPosX(-10);
+            setPosY(-10);
+        }
     }
 
     /**
