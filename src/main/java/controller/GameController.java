@@ -4,14 +4,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Point3D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
-import main.java.model.character.Bullet;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.filehandler.ExportGame;
@@ -223,8 +220,15 @@ public class GameController implements Controller {
         }
         player.render(camera);
 
+
+        /*
         GraphicsContext gc = camera.getGraphicsContext();
-        //gc.fillText("Level: " + currentLevel, camera.fixedX(20), camera.fixedY(20));
+        gameMap.renderArea(camera, 1,1,3,1);
+
+        gc.setFill(Color.WHITE);
+        gc.setFont(Font.font("helvetica", 32));
+        gc.fillText("Level: " + currentLevel, camera.fixedX(1), camera.fixedY(1));
+        */
     }
 
     /**

@@ -91,11 +91,11 @@ public class Camera {
     }
 
     public double fixedX(double pixel) {
-        return pixel - translateX * 10000;
+        return pixel*scale - translateX;
     }
 
     public double fixedY(double pixel) {
-        return pixel - translateY * 10000;
+        return pixel*scale - translateY;
     }
 
     /**

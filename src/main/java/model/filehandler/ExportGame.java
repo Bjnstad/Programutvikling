@@ -69,21 +69,24 @@ public class ExportGame extends ExportHac {
         }
 
         sb.append("@");
-        for (int i = 0; i <object.length; i++) {
-            if(object[i] == null) continue;
-            sb.append(object[i].getSizeY());
-            sb.append(',');
-            sb.append(object[i].getSizeX());
-            sb.append(',');
-            sb.append(object[i].getPosX());
-            sb.append(',');
-            sb.append(object[i].getPosY());
-            sb.append(',');
-            sb.append(object[i].getSizeY());
-            sb.append(',');
-            String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
-            sb.append(base64String);
-            sb.append('§');
+        if(object != null) {
+            for (int i = 0; i < object.length; i++) {
+                if (object[i] == null) continue;
+                sb.append(object[i].getSizeY());
+                sb.append(',');
+                sb.append(object[i].getSizeX());
+                sb.append(',');
+                sb.append(object[i].getPosX());
+                sb.append(',');
+                sb.append(object[i].getPosY());
+                sb.append(',');
+                sb.append(object[i].getSizeY());
+                sb.append(',');
+                //String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
+                //sb.append(base64String);
+                sb.append("BILDESTRENG");
+                sb.append("§");
+            }
         }
         sb.append('@');
         sb.append('&');
