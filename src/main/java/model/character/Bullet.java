@@ -5,7 +5,7 @@ package main.java.model.character;
  * @author
  */
 public class Bullet {
-    private final double speed = 7;
+    private final double speed = 10;
     private double velocityX, velocityY;
 
     private double x, y, speedX;

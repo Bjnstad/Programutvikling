@@ -50,8 +50,11 @@ public class Enemy extends Character {
     }
 
 
+    /**
+     * Render health
+     */
     @Override
-    public void renderHealth(Camera camera) {
+    public void renderOptional(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
 
         // Draw bar

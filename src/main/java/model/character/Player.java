@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author
  */
 public class Player extends Character {
-    private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
     /**
      * This method contains the player in the game.
@@ -38,14 +38,15 @@ public class Player extends Character {
         bullets.add(bullet);
     }
 
-    public void renderBullet(Camera camera) {
 
+    // Render bullets
+    public void renderOptional(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
-        ArrayList projectiles = bullets;
-        for (int i = 0; i < projectiles.size(); i++) {
-            Bullet b = (Bullet) bullets.get(i);
+        for (int i = 0; i < bullets.size(); i++) {
+            Bullet b =  bullets.get(i);
+            b.update();
             gc.setFill(Color.YELLOW);
-            gc.fillRect(b.getX(), b.getY(), 10, 5);
+            gc.fillRect(camera.scale(b.getX()), camera.scale(b.getY()), 10, 5);
         }
 
     }

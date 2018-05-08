@@ -145,7 +145,7 @@ public class GameController implements Controller {
             double rx = (event.getX() + camera.getTranslateX()) / camera.getScale();
             double ry = (event.getY() + camera.getTranslateY()) / camera.getScale();
 
-            player.shoot(rx ,ry);
+            player.shoot(rx, ry);
         });
 
 
@@ -220,10 +220,8 @@ public class GameController implements Controller {
         // Render enemies
         for (Enemy enemy : enemies) {
             enemy.render(camera);
-            enemy.renderHealth(camera);
         }
         player.render(camera);
-        player.renderHealth(camera);
 
         GraphicsContext gc = camera.getGraphicsContext();
         //gc.fillText("Level: " + currentLevel, camera.fixedX(20), camera.fixedY(20));

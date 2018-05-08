@@ -114,9 +114,9 @@ public abstract class Character extends Avatar {
      * @param camera We get graphicscontext from camera, and that makes it possible for us to draw in canvas.
      */
     public void render(Camera camera) {
-
         GraphicsContext gc = camera.getGraphicsContext();
         gc.drawImage(getSprite(), camera.scale(posX),  camera.scale(posY),  camera.getScale() * sizeX, camera.getScale() * sizeY) ;
+        renderOptional(camera);
     }
 
 
@@ -140,7 +140,7 @@ public abstract class Character extends Avatar {
 
     }
 
-    public void renderHealth(Camera camera) {
+    public void renderOptional(Camera camera) {
 
     }
 }
