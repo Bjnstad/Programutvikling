@@ -46,7 +46,6 @@ public class Enemy extends Character {
     public void calculateMove(Player player) {
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
         addPos(speed * Math.sin(angle) / 100, speed * Math.cos(angle) / 100);
-
     }
 
 
