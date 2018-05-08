@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import javafx.scene.input.MouseEvent;
 import main.java.model.world.GameMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,6 +37,11 @@ public class MainMenuController implements Controller {
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
+        return null;
+    }
+
+    @Override
+    public EventHandler<MouseEvent> getMouseEventHandler() {
         return null;
     }
 

@@ -19,6 +19,7 @@ public class Avatar {
     private Image[] right;
     private Direction direction;
     private int interval;
+    private String fileName;
 
     /**
      * This method gives us the size and position to Avatar.
@@ -29,6 +30,7 @@ public class Avatar {
     public Avatar(String fileName, int size){
         SpriteSheet sprite = new SpriteSheet(fileName, size);
         loadAssets(sprite);
+        this.fileName = fileName;
 
         direction = Direction.DOWN; // Starting direction for character
         interval = 0;
@@ -81,6 +83,10 @@ public class Avatar {
         }
 
         return null;
+    }
+
+    public String getSpriteFileName(){
+        return fileName;
     }
 
     public Direction getDirection() {

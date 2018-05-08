@@ -64,7 +64,10 @@ public class MainController implements Initializable {
         mainView.getChildren().add(loadPane(filepath)); // Change anchorpane to view
 
         Scene scene = mainView.getScene();
-        if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
+        if(scene != null){
+            scene.setOnKeyPressed(controller.getEventHandler());
+            scene.setOnMouseClicked(controller.getMouseEventHandler());
+        }
 
         controller.initiate(); // Call initiate for new controller
     }

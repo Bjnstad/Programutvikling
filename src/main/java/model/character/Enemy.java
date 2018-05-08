@@ -21,7 +21,7 @@ public class Enemy extends Character {
      * @param posX is the position to the enemy in width(x).
      * @param posY is the position to the enemy in heigth(y).
      */
-    public Enemy(String spriteFileName, int sizeX, int sizeY, int posX, int posY) {
+    public Enemy(String spriteFileName, int sizeX, int sizeY, double posX, double posY) {
         super(spriteFileName, sizeX, sizeY);
         super.setPosX(posX);
         super.setPosY(posY);

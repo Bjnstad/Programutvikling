@@ -2,6 +2,7 @@ package main.java.controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Interface that represents the controller of the game.
@@ -22,6 +23,7 @@ public interface Controller {
 
     //TODO: need rework
     EventHandler<KeyEvent> getEventHandler();
+    EventHandler<MouseEvent> getMouseEventHandler();
 
     /**
      * This method sets the main controller of the game.

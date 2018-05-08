@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import main.java.controller.Controller;
 import main.java.controller.MainMenuController;
 import main.java.model.filehandler.HacParser;
+import main.java.model.filehandler.ImportGame;
 import main.java.model.world.GameMap;
 
 
@@ -41,7 +42,7 @@ public class LoadGameController implements SubController {
         ObservableList<String> res = FXCollections.observableArrayList();
 
         for (final File f : dir.listFiles()) {
-            if(getFileExtension(f).equals("       ")) {
+            if(getFileExtension(f).equals("txt")) {
                 res.add(f.getName());
             }
         }
@@ -70,6 +71,9 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void importMap(ActionEvent event) {
+        File file = new File("assets/maps/newMap.txt");
+        ImportGame ig =  new ImportGame(file);
+
     }
 
     /**
@@ -79,9 +83,9 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        HacParser hacParser = new HacParser();
-        GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString()));
-        mainMenuController.loadMap(gameMap);
+        File file = new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString());
+        ImportGame ig =  new ImportGame(file);
+        mainMenuController.loadMap(ig.getMap());
     }
 
     /**

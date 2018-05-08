@@ -8,8 +8,10 @@ import javafx.geometry.Point3D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
+import main.java.model.character.Bullet;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.filehandler.ExportGame;
@@ -17,6 +19,7 @@ import main.java.model.filehandler.ImportGame;
 import main.java.model.world.GameMap;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -95,9 +98,13 @@ public class GameController implements Controller {
      * Load the game.
      */
     public void load() {
-        ImportGame importGame = new ImportGame();
         File file = new File("assets/maps/newMap.txt");
-        importGame.parseFile(file);
+        ImportGame ig =  new ImportGame(file);
+
+        gameMap = ig.getMap();
+        player = ig.getPlayer();
+        enemies = ig.getEnemies();
+
     }
 
     /**
@@ -123,7 +130,6 @@ public class GameController implements Controller {
                 case D:
                     move(speed, 0);
                     break;
-
                 case ESCAPE:
                     pause();
                     mainController.addSubState(SubState.PAUSE_MENU);
@@ -132,6 +138,21 @@ public class GameController implements Controller {
             }
         });
     }
+
+    public EventHandler<MouseEvent> getMouseEventHandler(){
+
+        return (event -> {
+            double rx = (event.getX() + camera.getTranslateX()) / camera.getScale();
+            double ry = (event.getY() + camera.getTranslateY()) / camera.getScale();
+
+            player.shoot(rx ,ry);
+        });
+
+
+
+    }
+
+
 
     /**
      * Sets mainController(parent).
@@ -163,6 +184,7 @@ public class GameController implements Controller {
         }
     }
 
+
     /**
      * Starting gameloop running accordingly to FPS.
      */
@@ -183,10 +205,11 @@ public class GameController implements Controller {
     }
 
 
-    /**
-     * States that if the player-character collides with enemy-character, then player will die.
-     */
+
     private void render() {
+        /**
+         * States that if the player-character collides with enemy-character, then player will die.
+         */
         // Check for player collision and re-render map at enemy position.
         for(Enemy enemy : enemies) {
             if(player.willCollide(enemy)) die();
@@ -199,7 +222,6 @@ public class GameController implements Controller {
             enemy.render(camera);
             enemy.renderHealth(camera);
         }
-
         player.render(camera);
         player.renderHealth(camera);
 

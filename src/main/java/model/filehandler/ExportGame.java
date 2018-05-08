@@ -1,5 +1,6 @@
 package main.java.model.filehandler;
 
+import javafx.embed.swing.SwingFXUtils;
 import main.java.model.Camera;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
@@ -54,11 +55,22 @@ public class ExportGame extends ExportHac {
      */
     public void saveMap() {
         GameObject[] object = gameMap.getGameObjects();
-        int count = 0;
+        if(object == null){
+            sb.append("@!");
+            sb.append('@');
+            sb.append('&');
+            sb.append(gameMap.getBackgroundFileName());
+            sb.append(',');
+            sb.append(gameMap.getHeight());
+            sb.append(',');
+            sb.append(gameMap.getWidth());
+            sb.append('&');
+            return;
+        }
+
         sb.append("@");
         for (int i = 0; i <object.length; i++) {
             if(object[i] == null) continue;
-            count++;
             sb.append(object[i].getSizeY());
             sb.append(',');
             sb.append(object[i].getSizeX());
@@ -69,13 +81,14 @@ public class ExportGame extends ExportHac {
             sb.append(',');
             sb.append(object[i].getSizeY());
             sb.append(',');
-            //String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
-            //sb.append(base64String);
-            sb.append("BILDESTRENG");
-            sb.append("§");
+            String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
+            sb.append(base64String);
+            sb.append('§');
         }
-        sb.append("@");
+        sb.append('@');
         sb.append('&');
+        sb.append(gameMap.getBackgroundFileName());
+        sb.append(',');
         sb.append(gameMap.getHeight());
         sb.append(',');
         sb.append(gameMap.getWidth());
@@ -100,8 +113,8 @@ public class ExportGame extends ExportHac {
     public void saveEnemies(){
         sb.append("/");
         for (int i = 0; i < enemies.length; i++) {
-            //sb.append(enemies[i].getSpriteFileName());
-            //sb.append(',');
+            sb.append(enemies[i].getSpriteFileName());
+            sb.append(',');
             sb.append(enemies[i].getSizeX());
             sb.append(',');
             sb.append(enemies[i].getSizeY());
@@ -119,8 +132,9 @@ public class ExportGame extends ExportHac {
      * Saves player.
      */
     public void savePlayer(){
-        //sb.append(player.getSpriteFileName());
         sb.append("!");
+        sb.append(player.getSpriteFileName());
+        sb.append(',');
         sb.append(player.getPosY());
         sb.append(',');
         sb.append(player.getPosX());

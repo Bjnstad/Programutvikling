@@ -17,6 +17,8 @@ public class GameMap {
     private int width;
     private int height;
     private Image[][] background;
+    private String backgroundFileName;
+
 
     /**
      * Game map represent how many object there is available to put on the map.
@@ -31,6 +33,7 @@ public class GameMap {
 
         this.width = width;
         this.height = height;
+        this.backgroundFileName = background.getFilename();
         loadBackground(background);
     }
 
@@ -224,6 +227,10 @@ public class GameMap {
         return background;
     }
 
+    public String getBackgroundFileName(){
+        return backgroundFileName;
+    }
+
 
     /**
      * Creates json object of gamemap
@@ -233,9 +240,7 @@ public class GameMap {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("[");
-//        for (int i  = 0; i < ; i++) {
 
-  //      }
         result.append("]");
 
 

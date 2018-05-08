@@ -225,4 +225,9 @@ public class EditorController implements Controller {
             editorHandler.getEventHandler(event);
         });
     }
+
+    @Override
+    public EventHandler<MouseEvent> getMouseEventHandler() {
+        return null;
+    }
 }

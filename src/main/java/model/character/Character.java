@@ -1,7 +1,10 @@
 package main.java.model.character;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import main.java.model.Camera;
+
+import java.util.ArrayList;
 
 /**
  * This class contains the position and size to the character in the game.
@@ -111,6 +114,7 @@ public abstract class Character extends Avatar {
      * @param camera We get graphicscontext from camera, and that makes it possible for us to draw in canvas.
      */
     public void render(Camera camera) {
+
         GraphicsContext gc = camera.getGraphicsContext();
         gc.drawImage(getSprite(), camera.scale(posX),  camera.scale(posY),  camera.getScale() * sizeX, camera.getScale() * sizeY) ;
     }
