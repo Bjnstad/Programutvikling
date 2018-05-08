@@ -134,4 +134,8 @@ public abstract class Character extends Avatar {
         return xval && yval;
 
     }
+
+    public void renderHealth(Camera camera) {
+
+    }
 }

@@ -100,7 +100,7 @@ public class GameMap {
      * @return false if not the statement is true.
      */
     public boolean willCollide(int posX, int posY) {
-        if(posX <= -1 || posY <= -1 || posX >= width +1|| posY >= height +1) return true;
+        if(posX < 1 || posY < 1 || posX > width || posY > height) return true;
         if(getGameObject(posX, posY) != null) return true;
         return false;
     }

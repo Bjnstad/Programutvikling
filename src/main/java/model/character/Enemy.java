@@ -1,5 +1,9 @@
 package main.java.model.character;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import main.java.model.Camera;
+
 /**
  * In this class Enemy extends the qualities from character.
  * @author
@@ -7,6 +11,7 @@ package main.java.model.character;
 public class Enemy extends Character {
 
     private float speed = 1;
+    private float health = 100;
 
     /**
      * This method represents position, size and qualities to the enemy in the game.
@@ -36,6 +41,17 @@ public class Enemy extends Character {
 
     }
 
+    @Override
+    public void renderHealth(Camera camera) {
+        GraphicsContext gc = camera.getGraphicsContext();
 
+        // Draw bar
+        gc.setFill(Color.BLACK);
+        gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,getSizeX()*camera.getScale(), camera.getScale()/5 * getSizeY());
 
+        // Draw health
+        gc.setFill(Color.GREEN);
+        gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,getSizeX()*camera.getScale() - (100 - health)  * camera.getScale() / 100, camera.getScale()/5 * getSizeY());
+
+    }
 }

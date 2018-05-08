@@ -58,9 +58,6 @@ public class GameController implements Controller {
      */
     @Override
     public void initiate() {
-
-        graphics.setRotationAxis(new Point3D(2,2,100));
-
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.player = new Player();
 
@@ -162,7 +159,7 @@ public class GameController implements Controller {
         Random rand = new Random();
         for (int i = 0; i < numberOfEnemies; i++) {
             this.enemies[i] = new Enemy("BODY_skeleton", 1,1,rand.nextInt(20),rand.nextInt(20));
-            this.enemies[i].setSpeed(1 + rand.nextInt(6));
+            this.enemies[i].setSpeed(1 + rand.nextInt(4));
         }
     }
 
@@ -200,9 +197,11 @@ public class GameController implements Controller {
         // Render enemies
         for (Enemy enemy : enemies) {
             enemy.render(camera);
+            enemy.renderHealth(camera);
         }
 
         player.render(camera);
+        player.renderHealth(camera);
 
         GraphicsContext gc = camera.getGraphicsContext();
         //gc.fillText("Level: " + currentLevel, camera.fixedX(20), camera.fixedY(20));

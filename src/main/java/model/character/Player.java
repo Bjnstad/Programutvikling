@@ -13,5 +13,7 @@ public class Player extends Character {
      */
     public Player() {
         super("player_animations_walking", 1, 1);
+        setPosX(1);
+        setPosY(1);
     }
 }
