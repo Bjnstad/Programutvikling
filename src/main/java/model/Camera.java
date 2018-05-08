@@ -11,7 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Camera {
 
-    private int zoom = 20; // How many frames to show
+    private int zoom = 12; // How many frames to show
     private Canvas canvas;
     private double translateX; // Movement offset
     private double translateY; // Movement offset

@@ -30,6 +30,7 @@ public class Avatar {
         SpriteSheet sprite = new SpriteSheet(fileName, size);
         loadAssets(sprite);
 
+        direction = Direction.DOWN; // Starting direction for character
         interval = 0;
     }
 

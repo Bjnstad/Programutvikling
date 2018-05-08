@@ -1,7 +1,6 @@
 package main.java.model.world;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 /**
  * This class defines the gameObject.

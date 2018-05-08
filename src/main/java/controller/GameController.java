@@ -91,7 +91,6 @@ public class GameController implements Controller {
         ImportGame importGame = new ImportGame();
         File file = new File("assets/maps/newMap.txt");
         importGame.parseFile(file);
-
     }
 
     /**
