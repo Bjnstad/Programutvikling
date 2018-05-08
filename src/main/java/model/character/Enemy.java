@@ -20,7 +20,10 @@ public class Enemy extends Character {
         super(spriteFileName, sizeX, sizeY);
         super.setPosX(posX);
         super.setPosY(posY);
+    }
 
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     /**
@@ -29,8 +32,8 @@ public class Enemy extends Character {
      */
     public void calculateMove(Player player) {
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
-        addPosY(speed * Math.cos(angle) / 100);
-        addPosX(speed * Math.sin(angle) / 100);
+        addPos(speed * Math.sin(angle) / 100, speed * Math.cos(angle) / 100);
+
     }
 
 

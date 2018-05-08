@@ -59,22 +59,17 @@ public abstract class Character extends Avatar {
      * In this method we add the position to the character in width.
      * If the speed to the character is less then 0, then it walks left.
      * If not, it walks right.
-     * @param speed this is the speed to the character walking right or left.
+     //* @param speed this is the speed to the character walking right or left.
      */
-    public void addPosX(double speed) {
-        setDirection(speed < 0 ? Direction.LEFT : Direction.RIGHT);
-        this.posX += speed;
-        move();
-    }
+    public void addPos(double x, double y) {
+        if(Math.abs(x) > Math.abs(y)) {
+            setDirection(x < 0 ? Direction.LEFT : Direction.RIGHT);
+        } else {
+            setDirection(y < 0 ? Direction.UP : Direction.DOWN);
+        }
 
-    /**
-     * In this method we add the position to the character in height.
-     * If the speed the the character is less then 0, then it walks up, if not, it walks down.
-     * @param speed this is the speed to the character walking up or down.
-     */
-    public void addPosY(double speed) {
-        setDirection(speed < 0 ? Direction.UP : Direction.DOWN);
-        this.posY += speed;
+        this.posX += x;
+        this.posY += y;
         move();
     }
 

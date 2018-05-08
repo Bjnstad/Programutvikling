@@ -17,16 +17,16 @@ public class SpriteSheet {
     private BufferedImage spriteSheet;
     private String filename;
 
-    private int bits = 64;
+    private int bits = 128;
     private int multiplier;
 
     /**
      * //TODO: SKRIV OM
-     * In this method we insert Sprite to the game, we base our sprites on 64-bit spriteSheet, any sizes over 64 will be redjected as of now, lower bits will be multiplied to 64
+     * In this method we insert Sprite to the game, we base our sprites on 128-bit spriteSheet, any sizes over 128 will be redjected as of now, lower bits will be multiplied to 128
      * @param filename filename for spritesheet that should be fetched from.
      */
     public SpriteSheet(String filename, int bits){
-        if(bits > 64 || bits < 8) throw new IllegalStateException("This game does not support anything bigger than 64 bit, lowest possible is 8 bit images.");
+        if(bits > this.bits || bits < 8) throw new IllegalStateException("This game does not support anything bigger than 128 bit, lowest possible is 8 bit images.");
 
         this.filename = filename;
         this.multiplier = this.bits / bits;

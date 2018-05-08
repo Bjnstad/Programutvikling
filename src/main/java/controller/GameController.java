@@ -105,7 +105,7 @@ public class GameController implements Controller {
     public EventHandler<KeyEvent> getEventHandler() {
 
         // TODO: add acceleration in own controller class
-        double speed = 1;
+        double speed = 0.4;
         return (event -> {
             switch (event.getCode()) {
                 case W:
@@ -156,6 +156,7 @@ public class GameController implements Controller {
         Random rand = new Random();
         for (int i = 0; i < numberOfEnemies; i++) {
             this.enemies[i] = new Enemy("BODY_skeleton", 1,1,rand.nextInt(20),rand.nextInt(20));
+            this.enemies[i].setSpeed(1 + rand.nextInt(6));
         }
     }
 
@@ -222,8 +223,7 @@ public class GameController implements Controller {
         if(gameMap.getHeight() - camera.getZoom()/2 < rY) translateY = 0;
         camera.translate(translateX, translateY);
 
-        player.addPosX(x);
-        player.addPosY(-y);
+        player.addPos(x, -y);
 
         gameMap.renderArea(camera, rX - player.getSizeX(), rY - player.getSizeY(),  rX +  player.getSizeX(), rY + player.getSizeY());
         return true;

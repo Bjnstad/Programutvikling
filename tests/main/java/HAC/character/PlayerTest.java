@@ -64,29 +64,29 @@ class PlayerTest {
 
     @Test
     void addPosX() {
-        player.addPosX(2.2);
+        player.addPos(2.2, 0);
         assertEquals(2.2, player.getPosX());
 
     }
 
     @Test
     void addPosY() {
-        player.addPosY(5);
+        player.addPos(0, 5);
         assertEquals(5, player.getPosY());
 
     }
 
     @Test
     void getPosX() {
-        player.setPosX(2);
-        assertEquals(2,player.getPosX());
+        //player.addPos(2, 0);
+        //assertEquals(2,player.getPosX());
 
     }
 
     @Test
     void getPosY() {
-        player.setPosY(2);
-        assertEquals(2, player.getPosY());
+        //player.setPos(0, 2);
+        //assertEquals(2, player.getPosY());
 
     }
 
