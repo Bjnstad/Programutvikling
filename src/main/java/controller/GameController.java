@@ -205,9 +205,6 @@ public class GameController implements Controller {
 
         int rx = (int)(camera.getPlayerX() + x/camera.getScale() - 1.5 * Math.signum(x));
         int ry = (int)(camera.getPlayerY() + x/camera.getScale() - 1.5 * Math.signum(y));
-        System.out.println("------");
-        System.out.println(rx);
-        System.out.println(ry);
         if(gameMap.willCollide(rx, ry)) return false;
 
         camera.translate(x, y);

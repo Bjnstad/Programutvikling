@@ -33,8 +33,7 @@ public class ChooseMapController implements SubController {
         if (!dir.isDirectory()) return null;
         ObservableList<String> res = FXCollections.observableArrayList();
 
-            for (final File f : dir.listFiles()) {
-                System.out.println();
+        for (final File f : dir.listFiles()) {
             if(getFileExtension(f).equals("mhac")) {
                 res.add(f.getName());
             }

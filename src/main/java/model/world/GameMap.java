@@ -190,8 +190,11 @@ public class GameMap {
             }
         }
 
-        for (GameObject gameObject : gameObjects) {
-            if (gameObject != null) gc.drawImage(gameObject.getAsset(), gameObject.getPosX() * camera.getScale(), gameObject.getPosY() * camera.getScale(), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+        if(gameObjects != null) {
+            for (GameObject gameObject : gameObjects) {
+                if (gameObject != null)
+                    gc.drawImage(gameObject.getAsset(), gameObject.getPosX() * camera.getScale(), gameObject.getPosY() * camera.getScale(), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+            }
         }
     }
 

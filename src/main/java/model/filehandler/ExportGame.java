@@ -128,13 +128,10 @@ public class ExportGame extends ExportHac {
      * Adds element.
      * @param gameMap
      */
-    public void addElement(GameMap gameMap){
-        System.out.println(gameMap.getGameObjects());
-
+    public void addElement(GameMap gameMap) {
         gameMap.getBackground();
         mapList.add(String.valueOf(gameMap.getWidth()));
         mapList.add(String.valueOf(gameMap.getHeight()));
-
     }
 
     /**
@@ -154,7 +151,6 @@ public class ExportGame extends ExportHac {
             outputStream.write(contentInBytes);
             outputStream.flush();
             outputStream.close();
-            System.out.println("done");
         } catch (IOException e) {
             e.printStackTrace();
         }

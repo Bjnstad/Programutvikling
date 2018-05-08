@@ -18,8 +18,6 @@ public class ImportGame {
             String[] obj = str.split(",");
             for (int i = 0; i <= Integer.valueOf(obj[8]); i++) {
 
-                System.out.println(obj[i]);
-                System.out.println(System.lineSeparator());
             }
 
             /*for (int i = 0; i <= Integer.valueOf(obj[8]) ; i++) {

@@ -41,7 +41,6 @@ public class LoadGameController implements SubController {
         ObservableList<String> res = FXCollections.observableArrayList();
 
         for (final File f : dir.listFiles()) {
-            System.out.println();
             if(getFileExtension(f).equals("       ")) {
                 res.add(f.getName());
             }

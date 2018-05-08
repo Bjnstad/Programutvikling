@@ -79,8 +79,7 @@ public class MainController implements Initializable {
             loader.setController(controller); // Set controller to view
             pane = loader.load();
         } catch (IOException e) {
-            System.err.println("FXML file for " + filepath + " could not be found.");
-            System.exit(1);
+            System.exit(-1);
             return null;
         }
 

@@ -63,7 +63,6 @@ public class Avatar {
             return result;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error loading character image.");
         }
         System.exit(-1);
         return null;

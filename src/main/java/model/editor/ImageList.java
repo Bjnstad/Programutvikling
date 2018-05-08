@@ -93,10 +93,7 @@ public class ImageList {
         ObservableList<String> res = FXCollections.observableArrayList();
 
         if (dir.isDirectory()) for (final File f : dir.listFiles(IMAGE_FILTER)) {
-            System.out.println(getFileExtension(f));
-
             if(getFileExtension(f).equals("png")) {
-                System.out.println(f.getName());
                 res.add(f.getName());
             }
         }

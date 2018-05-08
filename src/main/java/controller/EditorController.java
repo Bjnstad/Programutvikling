@@ -151,7 +151,6 @@ public class EditorController implements Controller {
                         map.setGameObject(object);
 
 
-                        System.out.println(object.getAsset());
 
 
                       /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
@@ -191,7 +190,6 @@ public class EditorController implements Controller {
     @FXML
     private void save(ActionEvent event){
         map.saveFile();
-        System.out.println("Saved");
     }
 
     /**

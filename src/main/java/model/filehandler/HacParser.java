@@ -35,8 +35,6 @@ public class HacParser {
             byte[] imageByte;
 
             for (int i = 0; i <obj.length ; i++) {
-                System.out.println("THE NUMBER IS " + i);
-
                 String[] objContent = obj[i].split("&");
                 imageByte = decoder.decodeBuffer(objContent[0]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
@@ -44,8 +42,6 @@ public class HacParser {
                 bis.close();
 
                 GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
-
-                System.out.println(map.addGameObject(hf));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
