@@ -25,7 +25,7 @@ class PlayerTest {
      */
     @BeforeEach
     public void setUp() {
-        player = new Player();
+        player = new Player("player_animations_walking", 1,1,1,1);
 
     }
 

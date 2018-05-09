@@ -10,10 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
 import main.java.model.filehandler.ExportGame;
-import main.java.model.filehandler.ImportGame;
 import main.java.model.world.World;
 
-import java.io.File;
 
 /**
  * GameController is linking javafx to main game logic

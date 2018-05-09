@@ -55,6 +55,14 @@ public class Camera {
         return translateY;
     }
 
+    public void setTranslateX(double translateX) {
+        this.translateX = translateX;
+    }
+
+    public void setTranslateY(double translateY) {
+        this.translateY = translateY;
+    }
+
     /**
      * This method is used to draw into Canvas.
      * @return the current canvas.

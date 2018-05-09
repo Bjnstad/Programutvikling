@@ -83,9 +83,10 @@ public class ChooseMapController implements SubController {
 
         World w = new World();
 
-        w.setPlayer(new Player());
+        w.setPlayer(new Player("player_animations_walking", 1, 1, 1, 1));
         w.setGameMap(gameMap);
         w.setEnemies(new Enemy[0]);
+
 
 
         // TODO: CREATE NEW WORLD

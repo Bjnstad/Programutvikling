@@ -19,10 +19,11 @@ public class Player extends Character {
      * This method contains the player in the game.
      * It extends its characteristics from character, and it´s coordinates.
      */
-    public Player() {
-        super("player_animations_walking", 1, 1);
-        setPosX(1);
-        setPosY(1);
+    public Player(String spriteName, int sizeX, int sizeY, double posX, double posY) {
+        //super("player_animations_walking", 1, 1);
+        super(spriteName, sizeX, sizeY);
+        setPosX(posX);
+        setPosY(posY);
     }
 
     public ArrayList<Bullet> getBullets() {
