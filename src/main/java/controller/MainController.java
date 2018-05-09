@@ -114,6 +114,7 @@ public class MainController implements Initializable {
 
             case CHOOSE_MAP:
                 filepath = "ChooseMap";
+                setState(State.GAME);
                 subController = new ChooseMapController();
                 break;
 

@@ -6,22 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.controller.*;
-import main.java.model.filehandler.HacParser;
 import main.java.model.filehandler.ImportGame;
-import main.java.model.world.GameMap;
-
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import main.java.controller.Controller;
 import main.java.controller.MainMenuController;
-import main.java.model.filehandler.HacParser;
-import main.java.model.world.GameMap;
+import main.java.model.world.World;
 
-import java.io.File;
 import java.io.File;
 
 public class LoadGameController implements SubController {
@@ -30,7 +19,6 @@ public class LoadGameController implements SubController {
     ListView games;
 
     static final File dir = new File("assets/savegame");
-    private MainMenuController mainMenuController;
     private GameController gameController;
 
     /**
@@ -85,7 +73,14 @@ public class LoadGameController implements SubController {
     public void play(ActionEvent event) {
         File file = new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString());
         ImportGame ig =  new ImportGame(file);
-        mainMenuController.loadMap(ig.getMap());
+
+        World world = new World();
+
+        world.setEnemies(ig.getEnemies());
+        world.setPlayer(ig.getPlayer());
+        world.setGameMap(ig.getMap());
+
+        gameController.setWorld(world);
     }
 
     /**
@@ -94,7 +89,7 @@ public class LoadGameController implements SubController {
      */
     @Override
     public void setSubController(Controller controller) {
-        mainMenuController = (MainMenuController)controller;
+        gameController = (GameController) controller;
     }
 
     /**

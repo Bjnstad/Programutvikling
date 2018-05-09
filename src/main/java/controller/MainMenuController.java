@@ -11,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 /**
  * MainMenu Controller implements Controller.
  */
+
+// TODO: CLEAN
 public class MainMenuController implements Controller {
 
     private MainController mainController = null;
@@ -87,10 +89,11 @@ public class MainMenuController implements Controller {
     /**
      * Loads the map.
      * @param gameMap shows us map of game.
+     * @deprecated
      */
     public void loadMap(GameMap gameMap) {
-        mainController.setGameMap(gameMap);
-        mainController.setState(State.GAME);
+        //mainController.setGameMap(gameMap);
+        ///mainController.setState(State.GAME);
     }
 
 

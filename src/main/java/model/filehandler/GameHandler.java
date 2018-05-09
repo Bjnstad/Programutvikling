@@ -14,7 +14,7 @@ public class GameHandler {
 
         String result = "";
 
-        result += game.getGameMap().toString();
+        //result += game.getGameMap().toString();
 
         return true;
     }
