@@ -5,7 +5,7 @@ package main.java.model.character;
  * @author
  */
 public class Bullet {
-    private final double speed = 10;
+    private final double speed = .000000000000000000000000000000001;
     private double velocityX, velocityY;
 
     private double x, y, speedX;
@@ -18,15 +18,19 @@ public class Bullet {
      * @param endX coordinate of the cell horizontal.
      * @param endY coordinate of the cell vertical.
      */
-    public Bullet(double startX, double startY, double endX, double endY){
-        x = startX;
-        y = startY;
+    public Bullet(double scale, double startX, double startY, double endX, double endY){
+        x = startX/scale;
+        y = startY/scale;
 
-        speedX = 7;
+        speedX = speed;
         visible = true;
         double angle = Math.atan2(endX - startX, endY - startY);
         velocityY = (speed) * Math.cos(angle) / 100;
         velocityX = (speed) * Math.sin(angle) / 100;
+
+        System.out.println("------");
+        System.out.println(velocityX);
+        System.out.println(velocityY);
     }
 
     /**
@@ -36,7 +40,7 @@ public class Bullet {
         x += velocityX;
         y += velocityY;
         //@TODO: fine tune constraint x and y
-        if (x > 800 || x < -300 ) {
+        if (x > 8000 || x < -300 ) {
             visible = false;
         }
     }

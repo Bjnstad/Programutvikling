@@ -140,10 +140,15 @@ public class GameController implements Controller {
     public EventHandler<MouseEvent> getMouseEventHandler(){
 
         return (event -> {
-            double rx = (event.getX() + camera.getTranslateX()) / camera.getScale();
-            double ry = (event.getY() + camera.getTranslateY()) / camera.getScale();
+            double rx = (event.getX());
+            double ry = (event.getY());
 
-            player.shoot(rx, ry);
+            double mX = rx - camera.getTranslateX();
+            double mY = ry - camera.getTranslateY();
+            double pX = (player.getPosX() + (double)player.getSizeX()/2)* camera.getScale();
+            double pY = (player.getPosY() + (double)player.getSizeY()/2)* camera.getScale();
+
+            player.shoot(camera.getScale(), pX, pY, mX, mY);
         });
 
 

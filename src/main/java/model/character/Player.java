@@ -33,8 +33,8 @@ public class Player extends Character {
         this.bullets = bullets;
     }
 
-    public void shoot(double endX, double endY){
-        Bullet bullet = new Bullet(getPosX(), getPosY(), endX, endY);
+    public void shoot(double scale, double startX, double startY, double endX, double endY){
+        Bullet bullet = new Bullet(scale, getPosX(), getPosY(), endX, endY);
         bullets.add(bullet);
     }
 
