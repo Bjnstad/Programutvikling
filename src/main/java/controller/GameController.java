@@ -33,7 +33,6 @@ public class GameController implements Controller {
     private Timeline timeline;
     private Enemy[] enemies;
     private Player player;
-
     private int currentLevel;
 
     @FXML

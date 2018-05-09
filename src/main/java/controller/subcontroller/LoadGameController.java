@@ -5,8 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import main.java.controller.Controller;
-import main.java.controller.MainMenuController;
+import main.java.controller.*;
 import main.java.model.filehandler.HacParser;
 import main.java.model.filehandler.ImportGame;
 import main.java.model.world.GameMap;
@@ -32,6 +31,7 @@ public class LoadGameController implements SubController {
 
     static final File dir = new File("assets/savegame");
     private MainMenuController mainMenuController;
+    private GameController gameController;
 
     /**
      * Gets all the names to the observable list.

@@ -53,7 +53,6 @@ public class MainController implements Initializable {
                 break;
             case GAME:
                 filepath = "Game";
-
                 // TODO: Move map loader to subcontroller handler
                 controller = new GameController(gameMap);
                 break;
