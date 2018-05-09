@@ -47,10 +47,7 @@ public class GameController implements Controller {
      * If there´s nothing in gameMap, then it creates a simple map.
      * @param gameMap is the map in the game.
      */
-    public GameController(GameMap gameMap) {
-        if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
-        this.gameMap = gameMap;
-
+    public GameController() {
         currentLevel = 1;
     }
 
@@ -60,12 +57,6 @@ public class GameController implements Controller {
     @Override
     public void initiate() {
         this.camera = new Camera(mainController.getWidth(), graphics);
-        this.player = new Player();
-
-
-
-        generateEnemies(10);
-        play();
     }
 
      /**
@@ -207,6 +198,9 @@ public class GameController implements Controller {
         isRunning = false;
     }
 
+    public void setWorld(World world) {
+        this.world = world;
+    }
 
 
     private void render() {

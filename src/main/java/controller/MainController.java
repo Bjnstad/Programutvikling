@@ -23,7 +23,6 @@ public class MainController implements Initializable {
     AnchorPane mainView;
 
     private Controller controller; // Current controller
-    private GameMap gameMap; // The current gamemap to play
 
     /**
      * Initialize location and resources to the game.
@@ -54,9 +53,7 @@ public class MainController implements Initializable {
                 break;
             case GAME:
                 filepath = "Game";
-
-                // TODO: Move map loader to subcontroller handler
-                controller = new GameController(gameMap);
+                controller = new GameController();
                 break;
         }
 
@@ -87,14 +84,6 @@ public class MainController implements Initializable {
         }
 
         return pane;
-    }
-
-    /**
-     * Sets the game map.
-     * @param gameMap is a simple map for testing.
-     */
-    public void setGameMap(GameMap gameMap) {
-        this.gameMap = gameMap;
     }
 
     /**
@@ -132,6 +121,7 @@ public class MainController implements Initializable {
 
             case LOAD_MAP:
                 filepath = "LoadGame";
+                setState(State.GAME);
                 subController = new LoadGameController();
                 break;
 
