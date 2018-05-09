@@ -1,5 +1,10 @@
 package main.java.model.character;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import main.java.model.filehandler.SpriteSheet;
+
+
 /**
  * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
  * @author
