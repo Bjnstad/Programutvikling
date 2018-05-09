@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -65,7 +64,6 @@ public class MainController implements Initializable {
             scene.setOnKeyPressed(controller.getEventHandler());
             scene.setOnMouseClicked(controller.getMouseEventHandler());
         }
-
         controller.initiate(); // Call initiate for new controller
     }
 

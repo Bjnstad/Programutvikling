@@ -45,6 +45,8 @@ public class Player extends Character {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet b =  bullets.get(i);
             b.update();
+            //gc.drawImage(getSprite(), camera.scale(posX),  camera.scale(posY),  camera.getScale() * sizeX, camera.getScale() * sizeY) ;
+
             gc.setFill(Color.YELLOW);
             gc.fillRect(camera.scale(b.getX()), camera.scale(b.getY()), 10, 5);
         }

@@ -15,9 +15,7 @@ import main.java.model.character.Player;
 import main.java.model.filehandler.ExportGame;
 import main.java.model.filehandler.ImportGame;
 import main.java.model.world.GameMap;
-
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -35,7 +33,6 @@ public class GameController implements Controller {
     private Timeline timeline;
     private Enemy[] enemies;
     private Player player;
-
     private int currentLevel;
 
     @FXML
@@ -131,11 +128,9 @@ public class GameController implements Controller {
     public EventHandler<MouseEvent> getMouseEventHandler(){
 
         return (event -> {
-            double rx = (event.getX());
-            double ry = (event.getY());
 
-            double mX = rx - camera.getTranslateX();
-            double mY = ry - camera.getTranslateY();
+            double mX = event.getX() - camera.getTranslateX();
+            double mY = event.getY() - camera.getTranslateY();
             double pX = (player.getPosX() + (double)player.getSizeX()/2)* camera.getScale();
             double pY = (player.getPosY() + (double)player.getSizeY()/2)* camera.getScale();
 
