@@ -37,10 +37,6 @@ public class Enemy extends Character {
 
     public void hit(double strength) {
         health -= strength * threshold;
-        if(health < 1){
-            setPosX(-10);
-            setPosY(-10);
-        }
     }
 
     /**
@@ -68,5 +64,10 @@ public class Enemy extends Character {
         gc.setFill(Color.GREEN);
         gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,getSizeX()*camera.getScale() - (100 - health)  * camera.getScale() / 100, camera.getScale()/5 * getSizeY());
 
+    }
+
+
+    public boolean isDead() {
+        return health < 0;
     }
 }

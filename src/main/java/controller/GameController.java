@@ -282,10 +282,48 @@ public class GameController implements Controller {
      * This method initiate a timeline.
      */
     private void initTimeline() {
-        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
+        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> gameloop());
         timeline = new Timeline();
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    private void gameloop() {
+        if(enemies.length == 0) {
+            currentLevel++;
+            generateEnemies((int)(10 * currentLevel * 0.25));
+        }
+
+        checkDeath();
+        render();
+    }
+
+    private void checkDeath() {
+        for (int i = 0; i < enemies.length; i++) {
+            if(enemies[i].isDead()) {
+                removeEnemy(i);
+                return;
+            }
+        }
+    }
+
+    private void removeEnemy(int i) {
+        if(enemies.length == 1) {
+            enemies = new Enemy[0];
+            return;
+        }
+
+        Enemy[] res = new Enemy[enemies.length - 1];
+        int k = 0;
+        for (int j = k = 0; k < enemies.length; j++, k++) {
+            if(k == i) {
+                j--;
+                continue;
+            }
+            res[j] = enemies[k];
+        }
+
+        this.enemies = res;
     }
 
     /**
