@@ -209,9 +209,7 @@ public class GameMap {
      */
     public void drawObject(GameObject gameObject, Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
-
         gc.drawImage(gameObject.getAsset(), camera.scale(gameObject.getPosX()), camera.scale(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
-
     }
 
     /**
@@ -243,21 +241,5 @@ public class GameMap {
 
     public String getBackgroundFileName(){
         return backgroundFileName;
-    }
-
-
-    /**
-     * Creates json object of gamemap
-     * @return json format
-     */
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("[");
-
-        result.append("]");
-
-
-        return result.toString();
     }
 }

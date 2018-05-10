@@ -27,15 +27,12 @@ public class World {
         for(Enemy enemy : enemies) {
             if(enemy == null)return; // TODO: ADD REMOVE
             //if(player.willCollide(enemy)) die(); TODO: ADD DIE BACK TO MAIN CONTROLLER
-            enemy.calculateMove(player);
-            gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
+            if(moveEnemy(enemy)) {
+                gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
+                enemy.render(camera);
+            }
         }
 
-        // Render enemies
-        for (Enemy enemy : enemies) {
-
-            enemy.render(camera);
-        }
         player.render(camera);
 
 
@@ -162,6 +159,21 @@ public class World {
         this.enemies = res;
     }
 
+    /**
+     * This method calculates the movement to the player.
+     * @param enemy is the animation in the game. TODO: makes no sense
+     *               // TODO: change name
+     */
+    public boolean moveEnemy(Enemy enemy) {
+        double angle = Math.atan2(player.getPosX() - enemy.getPosX(), player.getPosY() - enemy.getPosY());
+        double rx = enemy.getSpeed() * Math.sin(angle) / 100;
+        double ry = enemy.getSpeed() * Math.cos(angle) / 100;
+
+        if(gameMap.willCollide((int)(enemy.getPosX() + rx), (int)((enemy.getPosY() + ry)))) return false;
+
+        enemy.addPos(rx, ry);
+        return true;
+    }
 
     /**
      * Gets the player.

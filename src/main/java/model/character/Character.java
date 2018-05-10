@@ -161,7 +161,5 @@ public abstract class Character extends Avatar {
 
     }
 
-    public void renderOptional(Camera camera) {
-
-    }
+    public abstract void renderOptional(Camera camera);
 }

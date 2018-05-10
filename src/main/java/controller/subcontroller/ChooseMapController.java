@@ -1,6 +1,5 @@
 package main.java.controller.subcontroller;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.controller.Controller;
 import main.java.controller.GameController;
-import main.java.controller.MainMenuController;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.filehandler.HacParser;
@@ -79,7 +77,7 @@ public class ChooseMapController implements SubController {
         HacParser hacParser = new HacParser();
         GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
-        /** BAD CODE */
+        /** TODO: BAD CODE */
 
         World w = new World();
 

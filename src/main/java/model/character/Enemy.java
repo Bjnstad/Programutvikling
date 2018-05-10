@@ -40,16 +40,6 @@ public class Enemy extends Character {
     }
 
     /**
-     * This method calculates the movement to the player.
-     * @param player is the animation in the game.
-     */
-    public void calculateMove(Player player) {
-        double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
-        addPos(speed * Math.sin(angle) / 100, speed * Math.cos(angle) / 100);
-    }
-
-
-    /**
      * Render health
      */
     @Override
@@ -69,5 +59,9 @@ public class Enemy extends Character {
 
     public boolean isDead() {
         return health < 0;
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }
