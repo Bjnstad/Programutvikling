@@ -146,8 +146,9 @@ public class GameMap {
      * @param y the height  to y in the game.
      */
     private GameObject getGameObject(int x, int y) {
-        if (x < 0 || x < width) return null;
-        if (y < 0 || y < height) return null;
+        if (x < 0 || x > width) return null;
+        if (y < 0 || y > height) return null;
+        if (gameObjects == null) return null;
         for (GameObject gameObject : gameObjects) {
             if (x >= gameObject.getPosX() && x < gameObject.getPosX() + gameObject.getSizeX()) { // Check x coordinates
                 if (y >= gameObject.getPosY() && y < gameObject.getPosY() + gameObject.getSizeY()) return gameObject;
