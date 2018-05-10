@@ -169,6 +169,7 @@ public class EditorController implements Controller {
                         GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), 1, 1, inputX, inputY);
                         gameObject = object;
                         //map.setGameObject(object);
+                        primaryStage.close();
 
 
 
