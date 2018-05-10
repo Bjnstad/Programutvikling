@@ -41,7 +41,12 @@ public class HacParser {
                 BufferedImage image = ImageIO.read(bis);
                 bis.close();
 
-                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
+                int posY = Integer.valueOf(objContent[4]);
+                int posX = Integer.valueOf(objContent[3]);
+                int sizeX = Integer.valueOf(objContent[1]);
+                int sizeY = Integer.valueOf(objContent[2]);
+                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY);
+                map.addGameObject(hf);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

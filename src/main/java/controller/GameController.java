@@ -31,12 +31,6 @@ public class GameController implements Controller {
     @FXML
     private Canvas graphics;
 
-
-
-
-
-
-
     /**
      * Initiate on start of state.
      */

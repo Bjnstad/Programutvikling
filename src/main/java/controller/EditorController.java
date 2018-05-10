@@ -1,6 +1,8 @@
 package main.java.controller;
 
-import main.java.model.filehandler.SpriteSheet;
+import main.java.model.Camera;
+import main.java.model.editor.ExportHac;
+import main.java.model.filehandler.*;
 import main.java.model.world.GameMap;
 import main.java.model.world.GameObject;
 import javafx.event.EventHandler;
@@ -17,6 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.model.world.World;
+
 import java.io.File;
 
 /**
@@ -27,9 +31,15 @@ public class EditorController implements Controller {
 
     private MainController mainController;
     private ImageList imageList;
+    private World world;
     private HACEditor map;
+    private Camera camera;
+    private boolean isRunning = false;
     private FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
+    private GameObject gameObject;
+    private ExportHac exportHac;
+
 
     @FXML
     Canvas graphics;
@@ -64,8 +74,12 @@ public class EditorController implements Controller {
      */
     @Override
     public void initiate () {
-        //FileHandler fileHandler = new FileHandler();
-
+        this.camera = new Camera(mainController.getWidth(), graphics);
+        this.exportHac = new ExportHac();
+        GameMap gameMap = new GameMap(9,10, new SpriteSheet("background", 32));
+        this.world = new World();
+        world.setGameMap(gameMap);
+        gameMap.render(camera);
         imageList = new ImageList();
 
         listView.setItems(imageList.getAllNames());
@@ -73,11 +87,12 @@ public class EditorController implements Controller {
         listView.setCellFactory(param -> imageList.getAllAssets());
 
 
-        map = new HACEditor(new GameMap(25,25, new SpriteSheet("background", 32)), graphics);
+   //     map = new HACEditor(new GameMap(20,20, new SpriteSheet("background", 32)), graphics);
+        //world = new World();
         //map.getCamera().setCanvas(graphics);
 
 
-        editorHandler = new EditorHandler(mainController, map);
+//        editorHandler = new EditorHandler(mainController, map);
 
         /*
         graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -98,6 +113,8 @@ public class EditorController implements Controller {
              * This method handles an action of mouseEvent.
              * @param mouseEvent is an event which indicates that a mouse action occurred in a component.
              */
+
+
             @Override
             public void handle(MouseEvent mouseEvent) {
 
@@ -126,7 +143,9 @@ public class EditorController implements Controller {
 
                 Label posY = new Label("Pos Y:");
                 TextField inputPosY = new TextField ();
-                VBox Vertikalboks = new VBox(sizeX, inputSizeX, sizeY, inputSizeY,posX, inputPosX, posY, inputPosY);
+
+                CheckBox checkBox = new CheckBox("Collision?");
+                VBox Vertikalboks = new VBox(sizeX, inputSizeX, sizeY, inputSizeY,checkBox);
 
                 root.setLeft(Vertikalboks);
                 root.setCenter(submit);
@@ -142,13 +161,15 @@ public class EditorController implements Controller {
                         int inputX = Integer.parseInt(inputSizeX.getText());
                         int inputY = Integer.parseInt(inputSizeY.getText());
 
-                        int posX = Integer.parseInt(inputPosX.getText());
-                        int posY = Integer.parseInt(inputPosY.getText());
+                        //int posX = Integer.parseInt(inputPosX.getText());
+                        //int posY = Integer.parseInt(inputPosY.getText());
                         listView.getSelectionModel().getSelectedItems();
 
 
-                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), posX, posY, inputX, inputY);
-                        map.setGameObject(object);
+                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), 1, 1, inputX, inputY);
+                        gameObject = object;
+                        //map.setGameObject(object);
+
 
 
 
@@ -164,8 +185,8 @@ public class EditorController implements Controller {
                                 System.out.println((int)event.getY());
 
                             }
-                        }));
-*/
+                        }));*/
+
 
 
                     }
@@ -189,7 +210,10 @@ public class EditorController implements Controller {
      */
     @FXML
     private void save(ActionEvent event){
-        map.saveFile();
+        //map.saveFile();
+        exportHac.createFile();
+
+
     }
 
     /**
@@ -222,12 +246,18 @@ public class EditorController implements Controller {
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
         return (event -> {
-            editorHandler.getEventHandler(event);
+            //editorHandler.getEventHandler(event);
         });
     }
 
-    @Override
-    public EventHandler<MouseEvent> getMouseEventHandler() {
-        return null;
+    public EventHandler<MouseEvent> getMouseEventHandler(){
+        return (event -> {
+            exportHac.addElement(gameObject);
+            gameObject.setPosX((int)(event.getX()/camera.getScale()));
+            gameObject.setPosY((int)(event.getY()/camera.getScale()));
+            System.out.println(world.getGameMap().addGameObject(gameObject));
+            world.getGameMap().drawObject(gameObject, camera);
+            System.out.println("added object: " + gameObject.getSizeY() + "at: " + event.getX()/camera.getScale());
+        });
     }
 }

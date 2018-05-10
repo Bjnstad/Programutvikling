@@ -1,5 +1,8 @@
 package main.java.model.world;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import main.java.model.Camera;
 import main.java.model.character.Bullet;
 import main.java.model.character.Enemy;
@@ -30,6 +33,7 @@ public class World {
 
         // Render enemies
         for (Enemy enemy : enemies) {
+
             enemy.render(camera);
         }
         player.render(camera);
@@ -45,6 +49,7 @@ public class World {
         }
 
         drawStats(camera);
+        gameMap.drawAllObjects(camera);
     }
 
 
@@ -62,14 +67,14 @@ public class World {
 
 
     public void drawStats(Camera camera) {
-        /*
-        GraphicsContext gc = camera.getGraphicsContext();
+
+        /*GraphicsContext gc = camera.getGraphicsContext();
         gameMap.renderArea(camera, 1,1,3,1);
 
         gc.setFill(Color.WHITE);
         gc.setFont(Font.font("helvetica", 32));
-        gc.fillText("Level: " + currentLevel, camera.fixedX(1), camera.fixedY(1));
-        */
+        gc.fillText("Level: " + currentLevel, camera.fixedX(1), camera.fixedY(1));*/
+
     }
 
 
@@ -77,6 +82,9 @@ public class World {
         double pX = (player.getPosX() + (double)player.getSizeX()/2)* camera.getScale();
         double pY = (player.getPosY() + (double)player.getSizeY()/2)* camera.getScale();
 
+        System.out.println("Playet GetPosX: " + player.getPosX());
+        System.out.println("Player posX: " + pX);
+        System.out.println("Player posY: " + pY);
         player.shoot(camera.getScale(), pX, pY, endX, endY);
     }
 
@@ -94,12 +102,12 @@ public class World {
         }
 
         for (int i = 0; i < enemies.length; i++) {
-            /*
+
             if(enemies[i].isDead()) {
                 removeEnemy(i);
                 return;
             }
-            */
+
         }
     }
 

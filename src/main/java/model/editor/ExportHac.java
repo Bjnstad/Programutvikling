@@ -69,6 +69,7 @@ public class ExportHac {
         }
         String content = sb.toString();
         File file = new File("assets/maps/newMap.mhac");
+        System.out.println("CREATED FILE");
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
             if(!file.exists()){

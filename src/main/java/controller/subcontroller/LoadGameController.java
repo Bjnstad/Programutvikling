@@ -81,6 +81,7 @@ public class LoadGameController implements SubController {
         world.setEnemies(ig.getEnemies());
         world.setPlayer(ig.getPlayer());
         world.setGameMap(ig.getMap());
+        //world.getGameMap().addGameObject();
         gameController.getCamera().setTranslateX(ig.getTranslateX());
         gameController.getCamera().setTranslateY(ig.getTranslateY());
         gameController.setWorld(world);

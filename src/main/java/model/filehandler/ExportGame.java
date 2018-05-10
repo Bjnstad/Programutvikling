@@ -80,10 +80,8 @@ public class ExportGame extends ExportHac {
                 sb.append(',');
                 sb.append(object[i].getPosY());
                 sb.append(',');
-                sb.append(object[i].getSizeY());
-                sb.append(',');
-                //String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
-                //sb.append(base64String);
+                String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
+                sb.append(base64String);
                 sb.append("BILDESTRENG");
                 sb.append("§");
             }

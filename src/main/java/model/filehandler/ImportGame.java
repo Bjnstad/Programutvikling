@@ -1,10 +1,14 @@
 package main.java.model.filehandler;
 
+import javafx.embed.swing.SwingFXUtils;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.world.GameMap;
 import main.java.model.world.GameObject;
+import sun.misc.BASE64Decoder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
@@ -16,6 +20,7 @@ public class ImportGame {
     private Player player;
     private double translateX;
     private double translateY;
+
 
     public ImportGame(File file) {
         parseFile(file);
@@ -52,9 +57,26 @@ public class ImportGame {
 
 
             for (int i = 0; i <objArr.length ; i++) {
-                System.out.println(objArr[i]);
-                for (int j = 0; j < 6; j++) {
-                    //GameObject object = new GameObject()
+                String[] objectValues = objArr[i].split(",");
+                for (int j = 0; j < objectValues.length; j++) {
+                    int sizeY = Integer.valueOf(objectValues[0]);
+                    int sizeX = Integer.valueOf(objectValues[1]);
+                    int posX = Integer.valueOf(objectValues[2]);
+                    int posY = Integer.valueOf(objectValues[3]);
+
+                    System.out.println("Size Y: " + objectValues[0]);
+                    System.out.println("Size X: " + objectValues[1]);
+                    System.out.println("Pos X: " +objectValues[2]);
+                    System.out.println("Pos Y: " +objectValues[3]);
+                    BASE64Decoder decoder = new BASE64Decoder();
+                    byte[] imageByte = decoder.decodeBuffer(objectValues[4]);
+                    ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+                    BufferedImage image = ImageIO.read(bis);
+                    bis.close();
+
+                    System.out.println(objectValues[4]);
+
+                    map.addGameObject(new GameObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY));
                 }
             }
 

@@ -10,7 +10,7 @@ import main.java.model.filehandler.SpriteSheet;
  * @author
  */
 public class Bullet {
-    private final double speed = .000000000000000000000000000000001;
+    private final double speed = 0.1;
     private double velocityX, velocityY;
 
     private double x, y, speedX;

@@ -35,7 +35,7 @@ public class Player extends Character {
     }
 
     public void shoot(double scale, double startX, double startY, double endX, double endY){
-        Bullet bullet = new Bullet(scale, getPosX(), getPosY(), endX, endY);
+        Bullet bullet = new Bullet(scale, startX, startY, endX, endY);
         bullets.add(bullet);
     }
 

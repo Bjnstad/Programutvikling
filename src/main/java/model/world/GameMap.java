@@ -215,6 +215,20 @@ public class GameMap {
     }
 
     /**
+     *
+     */
+    public void drawAllObjects(Camera camera) {
+        GraphicsContext gc = camera.getGraphicsContext();
+        if(gameObjects == null) return;
+        for (int i = 0; i < gameObjects.length ; i++) {
+            if(gameObjects[i] ==null)return;
+            gc.drawImage(gameObjects[i].getAsset(), camera.scale(gameObjects[i].getPosX()), camera.scale(gameObjects[i].getPosY()), gameObjects[i].getSizeX() * camera.getScale(), gameObjects[i].getSizeY() * camera.getScale());
+
+        }
+
+    }
+
+    /**
      * Gets the size and position to gameobjects.
      *
      * @return size and position to gameobjects.
