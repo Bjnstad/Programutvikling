@@ -20,10 +20,8 @@ public class GameMap {
     private Image[][] background;
     private String backgroundFileName;
 
-
     /**
      * Game map represent how many object there is available to put on the map.
-     *
      * @param width      size of the gameboard.
      * @param height     size of the gameboard.
      * @param background we gets from sprite.
@@ -41,7 +39,6 @@ public class GameMap {
 
     /**
      * Allocate background sprites from storage to memory.
-     *
      * @param background Sprite with 3x3 sprite setup
      */
     private void loadBackground(SpriteSheet background) {
@@ -52,8 +49,6 @@ public class GameMap {
             }
         }
     }
-
-
 
     // TODO: Move this to an own render class?
 
@@ -83,7 +78,6 @@ public class GameMap {
     }
 
     private Image getAppropriateImage(int x, int y) {
-
         if(x == 0 && y == 0) return background[0][0]; // TOP LEFT
         if(y == 0 && x > 0 && x < width) return background[1][0]; // TOP
         if(x == width && y == 0) return background[2][0];// TOP RIGHT

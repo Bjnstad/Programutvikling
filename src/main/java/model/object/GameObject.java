@@ -1,6 +1,5 @@
 package main.java.model.object;
 
-import main.java.model.character.Character;
 import main.java.model.object.sprite.Direction;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.sprite.Sprite;

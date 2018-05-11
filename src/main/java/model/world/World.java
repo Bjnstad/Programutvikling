@@ -6,11 +6,13 @@ import main.java.model.character.Bullet;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.object.GameObject;
+import main.java.model.render.CleanBoard;
+import main.java.model.render.RenderHandler;
 
 import java.util.Random;
 
 /**
- * World
+ * World contains everything shown on screen.
  * @author Axel Bjørnstad - s315322
  */
 public class World {
@@ -24,25 +26,53 @@ public class World {
     private int currentLevel;
 
     public void gameLogic() {
-        if(enemies.length == 0) levelUp(); // All enemies killed.
-        for (Enemy enemy : enemies) {
-            for(Bullet bullet : player.getBullets()) {
-                if(bullet.willCollide(enemy)) enemy.hit(20);
+        if (enemies.length == 0) levelUp(); // All enemies killed.
+        for (int i = 0; i < enemies.length; i++) {
+            enemies[i].hit(1);
+            for (Bullet bullet : player.getBullets()) {
+                if (bullet.willCollide(enemies[i])) enemies[i].hit(20);
                 bullet.update();
             }
-            moveEnemy(enemy); // Calculate new move for all enemies.
+            moveEnemy(enemies[i]); // Calculate new move for all enemies.
+
+            if(enemies[i].isDead()) removeEnemy(i);
         }
     }
 
 
+
     public void render(Camera camera) {
         // CLEAN
-        for(Bullet bullet : player.getBullets()) cleanObject(bullet, camera);
-        for(Enemy enemy : enemies) cleanObject(enemy, camera);
-        cleanObject(player, camera);
+        byte[][] board = new byte[camera.getZoom()][camera.getZoom()];
+        GameObject[] objects = new GameObject[1 + enemies.length + player.getBullets().size()];
+        objects[0] = player;
+        for (int i = 0; i < enemies.length; i++) objects[i] = enemies[i];
+        for (int i = 0; i < player.getBullets().size(); i++) objects[i] = player.getBullets().get(i);
+
+        int workers = objects.length / RenderHandler.THREAD_COUNT;
+        if(workers == 0) workers = 1;
+
+        RenderHandler rh = new RenderHandler();
+        for (GameObject object : objects) {
+        }
+
+        for (int i = 0; i < objects.length; i += workers) {
+            GameObject[] to = new GameObject[workers];
+            for (int j = i; j < workers; j++) {
+                to[j] = objects[i + j];
+            }
+            rh.addWorker(new CleanBoard(board, to, (int)(-camera.getTranslateX()/camera.getScale()), (int)(-camera.getTranslateY()/camera.getScale())));
+        }
+
+
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[0].length; x++) {
+                gameMap.renderArea(camera, x, y, x,y);
+            }
+        }
 
         // RENDER
-        for (Enemy enemy : enemies) {
+        for(Enemy enemy : enemies) {
             camera.render(enemy);
             enemy.renderOptional(camera);
         }
@@ -58,6 +88,10 @@ public class World {
     public void levelUp() {
         currentLevel++;
         generateEnemies((int)(10 * currentLevel * ENEMY_GENERATION_RATE));
+
+        System.out.println("----------");
+        System.out.println("LEVEL: " + currentLevel);
+        System.out.println("NUMBER OF ENEMIES: " + (int)(10 * currentLevel * ENEMY_GENERATION_RATE));
     }
 
     public boolean moveEnemy(Enemy enemy) {
@@ -173,23 +207,6 @@ public class World {
     }
 
 
-
-    public void checkDeath() {
-        if(enemies.length == 0) {
-            currentLevel++;
-            generateEnemies((int)(10 * currentLevel * 0.25));
-        }
-
-        for (int i = 0; i < enemies.length; i++) {
-
-            if(enemies[i].isDead()) {
-                removeEnemy(i);
-                return;
-            }
-
-        }
-    }
-
     // TODO: REWORK
     public boolean move(double x, double y, Camera camera) {
         int rX = (int) (player.getPosX() + x);
@@ -208,7 +225,4 @@ public class World {
 
         return true;
     }
-
-
-
 }
