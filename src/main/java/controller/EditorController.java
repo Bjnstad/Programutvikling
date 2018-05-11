@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import javafx.scene.image.Image;
 import main.java.model.Camera;
 import main.java.model.editor.ExportHac;
 import main.java.model.object.sprite.SpriteSheet;
@@ -164,11 +165,21 @@ public class EditorController implements Controller {
                         //int posX = Integer.parseInt(inputPosX.getText());
                         //int posY = Integer.parseInt(inputPosY.getText());
                         listView.getSelectionModel().getSelectedItems();
+                        String filename = String.valueOf(listView.getSelectionModel().getSelectedItems());
+                        String[] fileNameArr = filename.split("\\.");
+                        filename = fileNameArr[0].substring(1);
+                        Image image = imageList.getResource(listView.getSelectionModel().getSelectedItem().toString());
 
 
-                        //MapObject object = new MapObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), 1, 1, inputX, inputY);
-                        //logimapObject = object;
-                        //map.setGameObject(object);
+
+
+                        System.out.println(listView.getSelectionModel().getSelectedItems());
+                        SpriteSheet spriteSheet = new SpriteSheet(filename, 64, 1, false );
+                        MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
+                        mapObject = object;
+                        map.setGameObject(object);
+
+
                         primaryStage.close();
 
 
