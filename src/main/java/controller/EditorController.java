@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import main.java.model.world.World;
 
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Implements the EditorController to Controller.
@@ -83,9 +84,9 @@ public class EditorController implements Controller {
         gameMap.render(camera);
         imageList = new ImageList();
 
-        listView.setItems(imageList.getAllNames());
+        //listView.setItems(imageList.getAllNames());
 
-        listView.setCellFactory(param -> imageList.getAllAssets());
+  //      listView.setCellFactory(param -> imageList.getAllAssets());
 
 
    //     map = new HACEditor(new GameMap(20,20, new SpriteSheet("background", 32)), graphics);
@@ -241,6 +242,25 @@ public class EditorController implements Controller {
         if (file != null) {
             map.openFile(file);
         }
+    }
+
+    @FXML
+    private void ImportSprite(ActionEvent event){
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        if (file != null) {
+            EditorSpriteInput editorSpriteInput = new EditorSpriteInput();
+
+            Image image = new Image(file.toURI().toString());
+            Path path = file.toPath();
+            String[] fileNameA = String.valueOf(path.getFileName()).split("\\.");
+            String fileName = fileNameA[0];
+            System.out.println("Height: " + image.getHeight() + "Width: " + image.getWidth());
+            System.out.println("Bits: " + image.getWidth()/editorSpriteInput.getColumns());
+            editorSpriteInput.popUp(image, fileName, listView, imageList).show();
+
+        }
+
     }
 
     /**

@@ -84,6 +84,29 @@ public class ImageList {
         });
     }
 
+    public ListCell<String> setAssets(Image[] images, String fileName) {
+        //File folder = new File("assets");
+        //if(folder == null) return null;
+
+        return (new ListCell<String>() {
+            private ImageView imageView = new ImageView();
+            @Override
+            public void updateItem(String name, boolean empty) {
+                super.updateItem(name, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    for (Image img : images){
+                        imageView.setImage(img);
+                        // resourceMap.put(fileName, f);
+                    }
+                    setGraphic(imageView);
+                    }
+                }
+        });
+    }
+
 
     /**
      * Observable list to get all names.
