@@ -2,13 +2,14 @@ package main.java.model.character;
 
 
 import main.java.model.object.GameObject;
+import main.java.model.object.sprite.SpriteSheet;
 
 /**
  * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
  * @author
  */
 public class Bullet extends GameObject {
-    private final double speed = 0.1;
+    private final double speed = 10;
     private double velocityX, velocityY;
     private boolean visible;
 
@@ -20,7 +21,7 @@ public class Bullet extends GameObject {
      * @param endY coordinate of the cell vertical.
      */
     public Bullet(double scale, double startX, double startY, double endX, double endY){
-        super((int)(startX/scale), (int)(startY/scale), 1, 1, null);
+        super((int)(startX/scale), (int)(startY/scale), 1, 1, new SpriteSheet("arrow", 64, 9, true));
 
         visible = true;
         double angle = Math.atan2(endX - startX, endY - startY);

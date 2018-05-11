@@ -26,7 +26,10 @@ public class World {
     public void gameLogic() {
         if(enemies.length == 0) levelUp(); // All enemies killed.
         for (Enemy enemy : enemies) {
-            for(Bullet bullet : player.getBullets()) if(bullet.willCollide(enemy));
+            for(Bullet bullet : player.getBullets()) {
+                if(bullet.willCollide(enemy)) enemy.hit(20);
+                bullet.update();
+            }
             moveEnemy(enemy); // Calculate new move for all enemies.
         }
     }

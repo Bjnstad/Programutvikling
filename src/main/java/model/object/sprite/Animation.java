@@ -12,7 +12,7 @@ public abstract class Animation {
 
     public void increaseInterval() {
         interval ++;
-        if (interval > frames) interval = 0;
+        if (interval >= frames) interval = 0;
     }
 
     public abstract Image getImage();

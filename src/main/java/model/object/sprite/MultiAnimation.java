@@ -54,6 +54,7 @@ public class MultiAnimation extends Animation {
     }
 
     public void setDirection(Direction direction) {
+        increaseInterval();
         this.direction = direction;
     }
 
