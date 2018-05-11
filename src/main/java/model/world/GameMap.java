@@ -13,7 +13,7 @@ import main.java.model.filehandler.SpriteSheet;
  */
 public class GameMap {
 
-    private GameObject[] gameObjects;
+    private MapObject[] mapObjects;
     private int width;
     private int height;
     private Image[][] background;
@@ -109,32 +109,32 @@ public class GameMap {
     }
 
     /**
-     * Here we add gameObject into the gameboard.
-     * @param gameObject states the position in height and width.
+     * Here we add mapObject into the gameboard.
+     * @param mapObject states the position in height and width.
      * @return if added returns true, false if coordinates is taken or
      */
-    public boolean addGameObject(GameObject gameObject) {
-        int posX = gameObject.getPosX();
-        int posY = gameObject.getPosY();
+    public boolean addGameObject(MapObject mapObject) {
+        int posX = (int)mapObject.getPosX();
+        int posY = (int)mapObject.getPosY();
 
-        for (int x = posX; x < posX + gameObject.getSizeX(); x++) {
-            for (int y = posY; y < posY + gameObject.getSizeY(); y++) {
+        for (int x = posX; x < posX + mapObject.getSizeX(); x++) {
+            for (int y = posY; y < posY + mapObject.getSizeY(); y++) {
                 if (willCollide(x, y)) return false;
             }
         }
 
-        GameObject[] result;
+        MapObject[] result;
 
-        if(gameObjects != null) {
-            result = new GameObject[gameObjects.length+1];
-            for (int i = 0; i < gameObjects.length; i++) result[i] = gameObjects[i];
-            result[gameObjects.length] = gameObject;
+        if(mapObjects != null) {
+            result = new MapObject[mapObjects.length+1];
+            for (int i = 0; i < mapObjects.length; i++) result[i] = mapObjects[i];
+            result[mapObjects.length] = mapObject;
         } else {
-            result = new GameObject[1];
-            result[0] = gameObject;
+            result = new MapObject[1];
+            result[0] = mapObject;
         }
 
-        gameObjects = result;
+        mapObjects = result;
         return true;
 
     }
@@ -145,13 +145,13 @@ public class GameMap {
      * @param x the width to x in the game.
      * @param y the height  to y in the game.
      */
-    private GameObject getGameObject(int x, int y) {
+    private MapObject getGameObject(int x, int y) {
         if (x < 0 || x > width) return null;
         if (y < 0 || y > height) return null;
-        if (gameObjects == null) return null;
-        for (GameObject gameObject : gameObjects) {
-            if (x >= gameObject.getPosX() && x < gameObject.getPosX() + gameObject.getSizeX()) { // Check x coordinates
-                if (y >= gameObject.getPosY() && y < gameObject.getPosY() + gameObject.getSizeY()) return gameObject;
+        if (mapObjects == null) return null;
+        for (MapObject mapObject : mapObjects) {
+            if (x >= mapObject.getPosX() && x < mapObject.getPosX() + mapObject.getSizeX()) { // Check x coordinates
+                if (y >= mapObject.getPosY() && y < mapObject.getPosY() + mapObject.getSizeY()) return mapObject;
             }
         }
         return null;
@@ -193,10 +193,10 @@ public class GameMap {
             }
         }
 
-        if(gameObjects != null) {
-            for (GameObject gameObject : gameObjects) {
-                if (gameObject != null)
-                    gc.drawImage(gameObject.getAsset(), gameObject.getPosX() * camera.getScale(), gameObject.getPosY() * camera.getScale(), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+        if(mapObjects != null) {
+            for (MapObject mapObject : mapObjects) {
+                if (mapObject != null)
+                    gc.drawImage(mapObject.getAsset(), mapObject.getPosX() * camera.getScale(), mapObject.getPosY() * camera.getScale(), mapObject.getSizeX() * camera.getScale(), mapObject.getSizeY() * camera.getScale());
             }
         }
     }
@@ -205,12 +205,12 @@ public class GameMap {
      * This method draws the objects.
      * This class provides a basic capability for creating objects with draw.
      *
-     * @param gameObject is a object in the game.
+     * @param mapObject is a object in the game.
      * @param camera     shows us the visual on gameboard.
      */
-    public void drawObject(GameObject gameObject, Camera camera) {
+    public void drawObject(MapObject mapObject, Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
-        gc.drawImage(gameObject.getAsset(), camera.scale(gameObject.getPosX()), camera.scale(gameObject.getPosY()), gameObject.getSizeX() * camera.getScale(), gameObject.getSizeY() * camera.getScale());
+        gc.drawImage(mapObject.getAsset(), camera.scale(mapObject.getPosX()), camera.scale(mapObject.getPosY()), mapObject.getSizeX() * camera.getScale(), mapObject.getSizeY() * camera.getScale());
     }
 
     /**
@@ -218,10 +218,10 @@ public class GameMap {
      */
     public void drawAllObjects(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
-        if(gameObjects == null) return;
-        for (int i = 0; i < gameObjects.length ; i++) {
-            if(gameObjects[i] ==null)return;
-            gc.drawImage(gameObjects[i].getAsset(), camera.scale(gameObjects[i].getPosX()), camera.scale(gameObjects[i].getPosY()), gameObjects[i].getSizeX() * camera.getScale(), gameObjects[i].getSizeY() * camera.getScale());
+        if(mapObjects == null) return;
+        for (int i = 0; i < mapObjects.length ; i++) {
+            if(mapObjects[i] ==null)return;
+            gc.drawImage(mapObjects[i].getAsset(), camera.scale(mapObjects[i].getPosX()), camera.scale(mapObjects[i].getPosY()), mapObjects[i].getSizeX() * camera.getScale(), mapObjects[i].getSizeY() * camera.getScale());
 
         }
 
@@ -232,8 +232,8 @@ public class GameMap {
      *
      * @return size and position to gameobjects.
      */
-    public GameObject[] getGameObjects() {
-        return gameObjects;
+    public MapObject[] getMapObjects() {
+        return mapObjects;
     }
 
     public Image[][] getBackground() {

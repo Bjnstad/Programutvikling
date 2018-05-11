@@ -2,7 +2,7 @@ package main.java.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
+import main.java.model.world.MapObject;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -45,8 +45,8 @@ public class HacParser {
                 int posX = Integer.valueOf(objContent[3]);
                 int sizeX = Integer.valueOf(objContent[1]);
                 int sizeY = Integer.valueOf(objContent[2]);
-                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY);
-                map.addGameObject(hf);
+                //MapObject hf = new MapObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY);
+                //map.addGameObject(hf);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

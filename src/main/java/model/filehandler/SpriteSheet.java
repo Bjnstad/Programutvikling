@@ -19,19 +19,26 @@ public class SpriteSheet {
 
     private int bits = 128;
     private int multiplier;
+    private int frames;
+    private boolean directional;
 
     /**
      * //TODO: SKRIV OM
      * In this method we insert Sprite to the game, we base our sprites on 128-bit spriteSheet, any sizes over 128 will be redjected as of now, lower bits will be multiplied to 128
      * @param filename filename for spritesheet that should be fetched from.
      */
-    public SpriteSheet(String filename, int bits){
+    public SpriteSheet(String filename, int bits, int frames, boolean directional){
         if(bits > this.bits || bits < 8) throw new IllegalStateException("This game does not support anything bigger than 128 bit, lowest possible is 8 bit images.");
-
+        this.frames = frames;
+        this.directional = directional;
         this.filename = filename;
         this.multiplier = this.bits / bits;
 
         load();
+    }
+
+    public SpriteSheet(String filename, int bits) {
+        this(filename, bits, 1, false);
     }
 
     /**
@@ -75,5 +82,13 @@ public class SpriteSheet {
 
     public String getFilename() {
         return filename;
+    }
+
+    public int getFrames() {
+        return frames;
+    }
+
+    public boolean isDirectional() {
+        return directional;
     }
 }

@@ -1,7 +1,7 @@
 package main.java.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
-import main.java.model.world.GameObject;
+import main.java.model.world.MapObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,19 +21,19 @@ public class ExportHac {
 
     /**
      * This method adds a element to the game.
-     * @param gameObject is the element that is being added to the game.
+     * @param mapObject is the element that is being added to the game.
      * @author ceciliethoresen
      */
-    public void addElement(GameObject gameObject){
-        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(gameObject.getAsset(), null), "png");
+    public void addElement(MapObject mapObject){
+        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(mapObject.getAsset(), null), "png");
         base64String = base64String.substring(0, base64String.length()-5);
 
         StringBuilder sb = new StringBuilder();
         sb.append(base64String + "&");
-        sb.append(gameObject.getSizeX() +"&");
-        sb.append(gameObject.getSizeY() +"&");
-        sb.append(gameObject.getPosX()+ "&");
-        sb.append(gameObject.getPosY()+ "&#");
+        sb.append(mapObject.getSizeX() +"&");
+        sb.append(mapObject.getSizeY() +"&");
+        sb.append(mapObject.getPosX()+ "&");
+        sb.append(mapObject.getPosY()+ "&#");
 
 
         elements.add(sb.toString());

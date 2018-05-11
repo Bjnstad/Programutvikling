@@ -1,7 +1,6 @@
 package main.java.controller;
 
 import main.java.controller.subcontroller.*;
-import main.java.model.world.GameMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MainController implements Initializable
+ * MainController loads fxml views with respectively controller class. Set state will be the main // TODO: More javadoc
+ *
  * @author Axel Bjørnstad - S315322
  */
 public class MainController implements Initializable {
@@ -154,7 +154,6 @@ public class MainController implements Initializable {
     }
 
     /**
-     * In this method it gets the width to the gameboard.
      * @return the width of the window in pixels.
      */
     public double getWidth() {
@@ -162,7 +161,6 @@ public class MainController implements Initializable {
     }
 
     /**
-     * In this method it gets the height to the gameboard.
      * @return the height of the window in pixels.
      */
     public double getHeight() {

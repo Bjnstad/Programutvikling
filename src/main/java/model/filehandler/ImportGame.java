@@ -4,7 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
+import main.java.model.world.MapObject;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -76,7 +76,7 @@ public class ImportGame {
 
                     System.out.println(objectValues[4]);
 
-                    map.addGameObject(new GameObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY));
+                    //map.addGameObject(new MapObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY));
                 }
             }
 

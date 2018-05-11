@@ -5,7 +5,7 @@ import main.java.model.Camera;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
+import main.java.model.world.MapObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,7 +54,7 @@ public class ExportGame extends ExportHac {
      * Saves the map.
      */
     public void saveMap() {
-        GameObject[] object = gameMap.getGameObjects();
+        MapObject[] object = gameMap.getMapObjects();
         if(object == null){
             sb.append("@!");
             sb.append('@');

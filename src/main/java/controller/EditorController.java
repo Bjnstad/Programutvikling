@@ -4,7 +4,7 @@ import main.java.model.Camera;
 import main.java.model.editor.ExportHac;
 import main.java.model.filehandler.*;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
+import main.java.model.world.MapObject;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +37,7 @@ public class EditorController implements Controller {
     private boolean isRunning = false;
     private FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
-    private GameObject gameObject;
+    private MapObject mapObject;
     private ExportHac exportHac;
 
 
@@ -166,8 +166,8 @@ public class EditorController implements Controller {
                         listView.getSelectionModel().getSelectedItems();
 
 
-                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), 1, 1, inputX, inputY);
-                        gameObject = object;
+                        //MapObject object = new MapObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), 1, 1, inputX, inputY);
+                        //mapObject = object;
                         //map.setGameObject(object);
                         primaryStage.close();
 
@@ -178,7 +178,7 @@ public class EditorController implements Controller {
                       /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
+                                MapObject object = new MapObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
                                 System.out.println(object.getAsset());
 
                                 map.setGameObject(object, (int)event.getX(), (int)event.getY());
@@ -253,12 +253,12 @@ public class EditorController implements Controller {
 
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {
-            exportHac.addElement(gameObject);
-            gameObject.setPosX((int)(event.getX()/camera.getScale()));
-            gameObject.setPosY((int)(event.getY()/camera.getScale()));
-            System.out.println(world.getGameMap().addGameObject(gameObject));
-            world.getGameMap().drawObject(gameObject, camera);
-            System.out.println("added object: " + gameObject.getSizeY() + "at: " + event.getX()/camera.getScale());
+            exportHac.addElement(mapObject);
+            mapObject.setPosX((int)(event.getX()/camera.getScale()));
+            mapObject.setPosY((int)(event.getY()/camera.getScale()));
+            System.out.println(world.getGameMap().addGameObject(mapObject));
+            world.getGameMap().drawObject(mapObject, camera);
+            System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());
         });
     }
 }
