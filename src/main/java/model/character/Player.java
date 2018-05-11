@@ -49,7 +49,7 @@ public class Player extends Character {
             //gc.drawImage(getSprite(), camera.scale(posX),  camera.scale(posY),  camera.getScale() * sizeX, camera.getScale() * sizeY) ;
 
             gc.setFill(Color.YELLOW);
-            gc.fillRect(camera.scale(b.getX()), camera.scale(b.getY()), 10, 5);
+            gc.fillRect(camera.scale(b.getPosX()), camera.scale(b.getPosY()), 10, 5);
         }
 
     }

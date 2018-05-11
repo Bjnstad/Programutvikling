@@ -1,7 +1,7 @@
 package main.java.model.world;
 
 import javafx.scene.image.Image;
-import main.java.model.filehandler.SpriteSheet;
+import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.GameObject;
 
 /**

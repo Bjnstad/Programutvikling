@@ -1,4 +1,4 @@
-package main.java.model.sprite;
+package main.java.model.object.sprite;
 
 import javafx.scene.image.Image;
 

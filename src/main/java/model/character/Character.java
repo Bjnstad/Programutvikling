@@ -2,7 +2,7 @@ package main.java.model.character;
 
 import javafx.scene.canvas.GraphicsContext;
 import main.java.model.Camera;
-import main.java.model.filehandler.SpriteSheet;
+import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.GameObject;
 
 /**
@@ -36,45 +36,6 @@ public abstract class Character extends GameObject {
     }
 
 
-    /**
-     * This checks if this character crashes with other character.
-     * @param character target to check against.
-     * @return the position to enemy in height and width.
-     */
-    public boolean willCollide(Character character) {
-        double a = character.getPosX() - character.getSizeX()/2;
-        double b = character.getPosX() + character.getSizeX()/2;
-        double c = getPosX();
-        boolean xval = b > a ? c > a && c < b : c > b && c < a;
-
-        a = character.getPosY() - character.getSizeY()/2;
-        b = character.getPosY() + character.getSizeY()/2;
-        c = getPosY();
-        boolean yval = b > a ? c > a && c < b : c > b && c < a;
-
-        return xval && yval;
-
-    }
-
-    /**
-     * This checks if this character crashes with other character.
-     * @param bullet target to check against.
-     * @return the position to enemy in height and width.
-     */
-    public boolean willCollide(Bullet bullet) {
-        double a = bullet.getX() - 10/2;
-        double b = bullet.getX() + 10/2;
-        double c = getPosX();
-        boolean xval = b > a ? c > a && c < b : c > b && c < a;
-
-        a = bullet.getY() - 5/2;
-        b = bullet.getY() + 5/2;
-        c = getPosY();
-        boolean yval = b > a ? c > a && c < b : c > b && c < a;
-
-        return xval && yval;
-
-    }
 
     public abstract void renderOptional(Camera camera);
 }

@@ -1,8 +1,6 @@
-package main.java.model.sprite;
+package main.java.model.object.sprite;
 
 import javafx.scene.image.Image;
-import main.java.model.character.Direction;
-import main.java.model.filehandler.SpriteSheet;
 
 /**
  * // TODO: Enemies moves to fast, better interval increment
@@ -16,13 +14,17 @@ public class Sprite {
     private boolean directional;
 
     public Sprite(SpriteSheet spriteSheet) {
+        if(spriteSheet == null) {
+            directional = false;
+            return; // TODO: catch null?
+        }
         this.fileName = spriteSheet.getFilename();
         this.directional = spriteSheet.isDirectional();
         animation = directional ? new MultiAnimation(spriteSheet) : new SingleAnimation(spriteSheet);
     }
 
     public void setDirection(Direction direction) {
-        if(!directional) throw new IllegalStateException("Spirte is not directional, cannot set direction.");
+        if(!directional) return;
         MultiAnimation cAnimation = (MultiAnimation) animation; // Cast animation to MultiAnimation
         cAnimation.setDirection(direction);
     }
@@ -43,7 +45,7 @@ public class Sprite {
     }
 
     public Direction getDirection() {
-        if(!directional) throw new IllegalStateException("Spirte is not directional, cannot get direction.");
+        if(!directional) return null;
         MultiAnimation cAnimation = (MultiAnimation) animation; // Cast animation to MultiAnimation
         return cAnimation.getDirection();
     }

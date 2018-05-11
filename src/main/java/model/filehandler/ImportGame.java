@@ -1,10 +1,9 @@
 package main.java.model.filehandler;
 
-import javafx.embed.swing.SwingFXUtils;
 import main.java.model.character.Enemy;
 import main.java.model.character.Player;
+import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
-import main.java.model.world.MapObject;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;

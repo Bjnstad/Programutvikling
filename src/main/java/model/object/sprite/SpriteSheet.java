@@ -1,4 +1,4 @@
-package main.java.model.filehandler;
+package main.java.model.object.sprite;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

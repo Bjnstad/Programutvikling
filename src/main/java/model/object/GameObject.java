@@ -1,8 +1,9 @@
 package main.java.model.object;
 
-import main.java.model.character.Direction;
-import main.java.model.filehandler.SpriteSheet;
-import main.java.model.sprite.Sprite;
+import main.java.model.character.Character;
+import main.java.model.object.sprite.Direction;
+import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.object.sprite.Sprite;
 
 public class GameObject extends Sprite {
     private double posX;
@@ -78,5 +79,27 @@ public class GameObject extends Sprite {
 
     public int getSizeY() {
         return sizeY;
+    }
+
+
+
+    /**
+     * This checks if this character crashes with other character.
+     * @param object target to check against.
+     * @return the position to enemy in height and width.
+     */
+    public boolean willCollide(GameObject object) {
+        double a = object.getPosX() - object.getSizeX()/2;
+        double b = object.getPosX() + object.getSizeX()/2;
+        double c = getPosX();
+        boolean xval = b > a ? c > a && c < b : c > b && c < a;
+
+        a = object.getPosY() - object.getSizeY()/2;
+        b = object.getPosY() + object.getSizeY()/2;
+        c = getPosY();
+        boolean yval = b > a ? c > a && c < b : c > b && c < a;
+
+        return xval && yval;
+
     }
 }

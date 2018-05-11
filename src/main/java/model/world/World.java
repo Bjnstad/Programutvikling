@@ -23,7 +23,7 @@ public class World {
         // Check for player collision and re-render map at enemy position.
         for(Enemy enemy : enemies) {
             if(enemy == null)return; // TODO: ADD REMOVE
-            //if(player.willCollide(enemy)) die(); TODO: ADD DIE BACK TO MAIN CONTROLLER
+            if(player.willCollide(enemy)) ///die(); TODO: ADD DIE BACK TO MAIN CONTROLLER
             if(moveEnemy(enemy)) {
                 gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
                 enemy.render(camera);

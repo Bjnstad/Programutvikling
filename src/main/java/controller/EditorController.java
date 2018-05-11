@@ -2,7 +2,7 @@ package main.java.controller;
 
 import main.java.model.Camera;
 import main.java.model.editor.ExportHac;
-import main.java.model.filehandler.*;
+import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.world.MapObject;
 import javafx.event.EventHandler;
