@@ -2,6 +2,7 @@ package main.java.model;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import main.java.model.object.GameObject;
 
 // TODO: Idea: Render all object to screen
 
@@ -20,6 +21,12 @@ public class Camera {
     public Camera(double dimension, Canvas canvas) {
         this.canvas = canvas;
         setDimension(dimension);
+    }
+
+
+    public void render(GameObject object) {
+        GraphicsContext gc = getGraphicsContext();
+        gc.drawImage(object.getSprite(), scale(object.getPosX()), scale(object.getPosY()),scale * object.getSizeX(), scale * object.getSizeY()) ;
     }
 
     /**

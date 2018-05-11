@@ -117,7 +117,7 @@ public class GameController implements Controller {
 
 
     private void gameloop() {
-        world.checkDeath();
+        world.gameLogic();
         world.render(camera);
     }
 
@@ -159,6 +159,7 @@ public class GameController implements Controller {
     }
 
     public void setWorld(World world) {
+        world.setGameController(this);
         this.world = world;
 
         mainController.toMainView();
@@ -183,7 +184,7 @@ public class GameController implements Controller {
     /**
      * Called when character dies.
      */
-    private void die() {
+    public void die() {
         timeline.stop();
         isRunning = false;
         mainController.addSubState(SubState.DIE);

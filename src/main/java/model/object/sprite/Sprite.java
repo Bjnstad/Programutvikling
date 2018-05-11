@@ -29,14 +29,8 @@ public class Sprite {
         cAnimation.setDirection(direction);
     }
 
-    private void loadAssets(SpriteSheet spriteSheet, boolean directional) {
-        if(directional) {
-        } else {
-
-        }
-    }
-
     public Image getSprite() {
+        if(animation == null) return null;
         return animation.getImage();
     }
 

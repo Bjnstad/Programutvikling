@@ -4,6 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.java.model.Camera;
+import main.java.model.object.GameObject;
 import main.java.model.object.sprite.SpriteSheet;
 
 /**
@@ -34,6 +35,7 @@ public class GameMap {
         this.width = width;
         this.height = height;
         this.backgroundFileName = background.getFilename();
+        this.mapObjects = new MapObject[0];
         loadBackground(background);
     }
 
@@ -61,10 +63,10 @@ public class GameMap {
      * @param endX horizontal
      * @param endY vertical
      */
-    public void renderArea(Camera camera, int startX, int startY, int endX, int endY) {
-        for (int x = startX; x <= endX; x++) {
-            for (int y = startY; y <= endY; y++) {
-                renderBlock(camera, x, y);
+    public void renderArea(Camera camera, double startX, double startY, double endX, double endY) {
+        for (double x = startX; x <= endX; x++) {
+            for (double y = startY; y <= endY; y++) {
+                renderBlock(camera, (int)x, (int)y);
             }
         }
     }
@@ -96,19 +98,6 @@ public class GameMap {
     }
 
     /**
-     * This method contains if game objects collides with each other.
-     *
-     * @param posX position to x.
-     * @param posY position to y.
-     * @return false if not the statement is true.
-     */
-    public boolean willCollide(int posX, int posY) {
-        if(posX < 1 || posY < 1 || posX > width || posY > height) return true;
-        if(getGameObject(posX, posY) != null) return true;
-        return false;
-    }
-
-    /**
      * Here we add mapObject into the gameboard.
      * @param mapObject states the position in height and width.
      * @return if added returns true, false if coordinates is taken or
@@ -119,7 +108,7 @@ public class GameMap {
 
         for (int x = posX; x < posX + mapObject.getSizeX(); x++) {
             for (int y = posY; y < posY + mapObject.getSizeY(); y++) {
-                if (willCollide(x, y)) return false;
+                for (GameObject object : mapObjects)if (mapObject.willCollide(object, x, y)) return false;
             }
         }
 

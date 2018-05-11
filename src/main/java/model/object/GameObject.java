@@ -82,24 +82,27 @@ public class GameObject extends Sprite {
     }
 
 
+    public boolean willCollide(GameObject object) {
+        return willCollide(object, getPosX(), getPosY());
+    }
+
 
     /**
      * This checks if this character crashes with other character.
      * @param object target to check against.
      * @return the position to enemy in height and width.
      */
-    public boolean willCollide(GameObject object) {
-        double a = object.getPosX() - object.getSizeX()/2;
-        double b = object.getPosX() + object.getSizeX()/2;
-        double c = getPosX();
+    public boolean willCollide(GameObject object, double x, double y) {
+        double a = x - object.getSizeX()/2;
+        double b = x + object.getSizeX()/2;
+        double c = x;
         boolean xval = b > a ? c > a && c < b : c > b && c < a;
 
-        a = object.getPosY() - object.getSizeY()/2;
-        b = object.getPosY() + object.getSizeY()/2;
-        c = getPosY();
+        a = y - object.getSizeY()/2;
+        b = y + object.getSizeY()/2;
+        c = y;
         boolean yval = b > a ? c > a && c < b : c > b && c < a;
 
         return xval && yval;
-
     }
 }

@@ -23,19 +23,5 @@ public abstract class Character extends GameObject {
         super(0,0, sizeX, sizeY, new SpriteSheet(filename, 64, 9, true));
     }
 
-
-    /**
-     * TODO: own render class?
-     * This method draws the animations on the game board, that we gets from sprite.
-     * @param camera We get graphicscontext from camera, and that makes it possible for us to draw in canvas.
-     */
-    public void render(Camera camera) {
-        GraphicsContext gc = camera.getGraphicsContext();
-        gc.drawImage(getSprite(), camera.scale(getPosX()),  camera.scale(getPosY()),  camera.getScale() * getSizeX(), camera.getScale() * getSizeY()) ;
-        renderOptional(camera);
-    }
-
-
-
     public abstract void renderOptional(Camera camera);
 }

@@ -167,7 +167,7 @@ public class EditorController implements Controller {
 
 
                         //MapObject object = new MapObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), 1, 1, inputX, inputY);
-                        //mapObject = object;
+                        //logimapObject = object;
                         //map.setGameObject(object);
                         primaryStage.close();
 
