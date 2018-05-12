@@ -82,7 +82,7 @@ public class EditorController implements Controller {
     public void initiate () {
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.exportHac = new ExportHac();
-        GameMap gameMap = new GameMap(9, 10, new SpriteSheet("background", 32));
+        GameMap gameMap = new GameMap(20, 20, new SpriteSheet("background", 32));
         this.world = new World();
         world.setGameMap(gameMap);
         gameMap.render(camera);
@@ -108,7 +108,7 @@ public class EditorController implements Controller {
 
         //listView.setCellFactory(param -> imageList.getAllAssets());
         imageList.handleSpriteListView();
-        imageList.handleAssetsListView();
+        imageList.handleAssetsListView(graphics);
 
     }
 

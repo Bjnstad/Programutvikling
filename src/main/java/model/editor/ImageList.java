@@ -6,8 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -108,7 +110,7 @@ public class ImageList {
         });
     }
 
-    public void handleAssetsListView(){
+    public void handleAssetsListView(Canvas graphics){
         assetsListView.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             /**
@@ -173,8 +175,11 @@ public class ImageList {
 
                         System.out.println(imageItem.getBits());
                         SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), 1, false );
+                        spriteSheet.setStaticImage(imageItem.getX(), imageItem.getY());
                         MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
                         mapObject = object;
+                        graphics.setCursor(new ImageCursor(imageItem.getImage(), 16,16));
+
 
                         primaryStage.close();
 
