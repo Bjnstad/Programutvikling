@@ -2,12 +2,10 @@ package main.java.model.world;
 
 import main.java.controller.GameController;
 import main.java.model.Camera;
-import main.java.model.object.character.Bullet;
 import main.java.model.object.character.Enemy;
 import main.java.model.object.character.Player;
 import main.java.model.object.GameObject;
 import main.java.model.render.Actions;
-import main.java.model.render.EnemyGeneration;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -27,18 +25,14 @@ public class World {
     private int currentLevel;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-    public World() {
-
-        generateEnemies(2);
-    }
 
     public void gameloop() {
-        //Enemy[] enemies = getObjects(Enemy.class);
-        //if(enemies.length < 1) levelUp();
+        Enemy[] enemies = getObjects(Enemy.class);
+        if(enemies.length < 1) levelUp();
 
 
         Actions actions = new Actions();
-        int distribution = gameObjects.size() / Runtime.getRuntime().availableProcessors() * 2; // Times two for hyperthreading
+        int distribution = gameObjects.size() / Runtime.getRuntime().availableProcessors() * 2; // Times two for Hyperthreading
         if(distribution == 0) distribution = 1;
 
         for (int i = 0; i < gameObjects.size(); i += distribution) {

@@ -10,7 +10,6 @@ public class CheckObjects implements Runnable {
 
     private final int start;
     private final int end;
-    private byte[][] board;
     private ArrayList<GameObject> gameObjects;
     private final Actions actions;
     private final World world;
@@ -39,10 +38,10 @@ public class CheckObjects implements Runnable {
 
             // Render and clean if inside view of player
             Camera camera = world.getCamera();
-            double startX = camera.getTranslateX() / camera.getScale();
-            double startY = camera.getTranslateY() / camera.getScale();
-            double endX = (camera.getTranslateX() + camera.getDimension())  / camera.getScale();
-            double endY = (camera.getTranslateY() + camera.getDimension()) / camera.getScale();
+            double startX = -camera.getTranslateX() / camera.getScale();
+            double startY = -camera.getTranslateY() / camera.getScale();
+            double endX = (-camera.getTranslateX() + camera.getDimension())  / camera.getScale();
+            double endY = (-camera.getTranslateY() + camera.getDimension()) / camera.getScale();
 
 
             if(gameObject.getPosY() > startY && gameObject.getPosY() < endY) {

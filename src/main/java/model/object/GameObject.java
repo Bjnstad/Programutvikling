@@ -8,7 +8,6 @@ import main.java.model.render.Actions;
 import main.java.model.world.World;
 
 public abstract class GameObject extends Sprite {
-    private GameObjectType gameObjectType;
     private double posX;
     private double posY;
     private int sizeX;
