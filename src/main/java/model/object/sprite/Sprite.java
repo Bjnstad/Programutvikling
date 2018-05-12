@@ -36,7 +36,7 @@ public class Sprite {
     }
 
     public Image getSprite() {
-        if(sp)
+        if(staticImage != null) return staticImage;
         if(animation == null) return null;
         return animation.getImage();
     }
