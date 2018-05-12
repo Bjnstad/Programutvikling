@@ -62,6 +62,7 @@ public class MainController implements Initializable {
         Scene scene = mainView.getScene();
         if(scene != null){
             scene.setOnKeyPressed(controller.getEventHandler());
+            scene.setOnKeyReleased(controller.getOnRealeasedEventHandler());
             scene.setOnMouseClicked(controller.getMouseEventHandler());
         }
         controller.initiate(); // Call initiate for new controller

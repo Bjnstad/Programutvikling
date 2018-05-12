@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
@@ -84,9 +85,15 @@ public class GameController implements Controller {
         // TODO: add acceleration in own controller class
         double speed = 0.4;
         return (event -> {
+            /*if(event.getCode() == KeyCode.W)move(0, speed);
+            if(event.getCode() == KeyCode.A)move(-speed, 0);
+            if(event.getCode() == KeyCode.S)move(0, -speed);
+            if(event.getCode() == KeyCode.D)move(speed, 0);*/
+
             switch (event.getCode()) {
                 case W:
                     move(0, speed);
+                    System.out.println("pressed");
                     break;
                 case A:
                     move(-speed, 0);
@@ -105,6 +112,29 @@ public class GameController implements Controller {
             }
         });
     }
+
+    @Override
+    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+        return  (event ->{
+            switch (event.getCode()){
+                case W:
+                    move(0, 0);
+                    break;
+                case A:
+                    move(0, 0);
+                    break;
+                case S:
+                    move(0, 0);
+                    break;
+                case D:
+                    move(0, 0);
+                    break;
+            }
+
+        });
+
+    }
+
 
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {

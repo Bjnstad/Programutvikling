@@ -23,6 +23,7 @@ public interface Controller {
 
     //TODO: need rework
     EventHandler<KeyEvent> getEventHandler();
+    EventHandler<KeyEvent> getOnRealeasedEventHandler();
     EventHandler<MouseEvent> getMouseEventHandler();
 
     /**

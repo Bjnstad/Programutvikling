@@ -1,5 +1,6 @@
 package main.java.model.editor;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -10,9 +11,12 @@ public class ImageItem {
     private String fileName;
     private int x;
     private int y;
+    private Image image;
+    private int bits;
 
-    public ImageItem(ImageView imageView, String fileName, int x, int y) {
+    public ImageItem(ImageView imageView, Image image, String fileName, int x, int y) {
         this.imageView = imageView;
+        this.image = image;
         this.fileName = fileName;
         this.x = x;
         this.y = y;
@@ -24,6 +28,14 @@ public class ImageItem {
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public String getFileName() {
@@ -48,6 +60,14 @@ public class ImageItem {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getBits() {
+        return bits;
+    }
+
+    public void setBits(int bits) {
+        this.bits = bits;
     }
 }
 

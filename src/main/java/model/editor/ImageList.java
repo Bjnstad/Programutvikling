@@ -1,17 +1,31 @@
 package main.java.model.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.control.ListCell;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import main.java.model.object.MapObject;
 import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.world.GameMap;
+
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -23,13 +37,170 @@ public class ImageList {
 
     private HashMap<String, Image> resourceMap;
     private Image[] images;
+    private ObservableList<ImageItem> result = FXCollections.observableArrayList();
+    private ObservableList<ImageItem> spriteBottom = FXCollections.observableArrayList();
+    private ListView spriteListView;
+    private ListView assetsListView;
+    private MapObject mapObject;
 
     /**
      * This method contains the imageList.
      */
-    public ImageList() {
+    public ImageList(ListView spriteListView, ListView assetsListView) {
+        this.spriteListView = spriteListView;
+        this.assetsListView = assetsListView;
         this.resourceMap = new HashMap<>();
+        Label placeholder = new Label();
+        placeholder.setText("Please Import SpriteSheet!");
+        if(spriteListView.getItems().size() < 1){
+            spriteListView.setPlaceholder(placeholder);
+        }
+
+
     }
+
+    public void handleSpriteListView(){
+        spriteListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ImageItem imageItem = spriteBottom.get(spriteListView.getSelectionModel().getSelectedIndex());
+                System.out.println(imageItem.getFileName());
+
+                if(result.size() > 1){
+                    assetsListView.getItems().clear();
+                }
+                try {
+                    SpriteSheet test = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), imageItem.getX(), false);
+                    for (int y = 0, k = 0; y < imageItem.getY(); y++) {
+                        for (int x = 0; x < imageItem.getX(); x++, k++) {
+                            Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                            ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
+                            imageItemExtracted.setBits(imageItem.getBits());
+                            result.add(imageItemExtracted);
+                        }
+                    }
+                    assetsListView.setItems(result);
+                    assetsListView.setCellFactory(param -> new ListCell<ImageItem>() {
+                        @Override
+                        protected void updateItem(ImageItem item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty || item == null) {
+                                setText(null);
+                                setGraphic(null);
+                            } else {
+                                setGraphic(item.getImageView());
+                            }
+                        }
+                    });
+
+                }catch(Exception y){
+                    y.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText("Look, an Error Dialog");
+                    alert.setContentText("Ooops, there was an error!");
+
+                    alert.showAndWait();
+                }
+
+
+            }
+        });
+    }
+
+    public void handleAssetsListView(GameMap map, Canvas graphics){
+        assetsListView.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            /**
+             * This method handles an action of mouseEvent.
+             * @param mouseEvent is an event which indicates that a mouse action occurred in a component.
+             */
+
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                final Stage primaryStage = new Stage();
+                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                BorderPane root = new BorderPane();
+
+                primaryStage.setTitle("Add asset");
+                primaryStage.setScene(new Scene(root));
+
+                double height = 60;
+                double width = 70;
+
+                Button submit = new Button("Submit");
+
+                submit.setMinSize(3*width, height);
+
+                Label sizeX = new Label("Size X:");
+                TextField inputSizeX = new TextField ();
+
+                Label sizeY = new Label("Size Y:");
+                TextField inputSizeY = new TextField ();
+
+                Label posX = new Label("Pos X:");
+                TextField inputPosX = new TextField ();
+
+                Label posY = new Label("Pos Y:");
+                TextField inputPosY = new TextField ();
+
+                CheckBox checkBox = new CheckBox("Collision?");
+                VBox Vertikalboks = new VBox(sizeX, inputSizeX, sizeY, inputSizeY,checkBox);
+
+                root.setLeft(Vertikalboks);
+                root.setCenter(submit);
+                primaryStage.show();
+
+                submit.setOnAction(new EventHandler<ActionEvent>() {
+                    /**
+                     * This method handles som type of action.
+                     * This event type is widely used to represent a variety of things
+                     * @param e is a type of ActionEvent, it allows you to access the properties of ActionEvent.
+                     */
+                    @Override public void handle(ActionEvent e) {
+                        int inputX = Integer.parseInt(inputSizeX.getText());
+                        int inputY = Integer.parseInt(inputSizeY.getText());
+
+                        String filename = String.valueOf(assetsListView.getSelectionModel().getSelectedItems());
+                        String[] fileNameArr = filename.split("\\.");
+                        filename = fileNameArr[0].substring(1);
+                        ImageItem imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
+                        System.out.println(imageItem.getX());
+                        System.out.println(imageItem.getY());
+
+
+                        System.out.println(imageItem.getBits());
+                        SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), 1, false );
+                        MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
+                        mapObject = object;
+                        primaryStage.close();
+
+                      /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                mapObject.setPosX((int)event.getX());
+                                mapObject.setPosY((int)event.getY());
+                                map.addGameObject(object);
+
+                                System.out.println(object.getAsset());
+
+                                System.out.println((int)event.getX());
+                                System.out.println((int)event.getY());
+
+                            }
+                        }));
+
+*/
+
+                    }
+                });
+            }
+        });
+    }
+
+
 
     static final File dir = new File("assets/editorassets"); // File representing the folder that you select using a FileChooser
 
@@ -39,12 +210,6 @@ public class ImageList {
 
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() { // filter to identify images based on their extensions
 
-        /**
-         *
-         * @param dir
-         * @param name
-         * @return
-         */
         @Override
         public boolean accept(final File dir, final String name) {
             for (final String ext : EXTENSIONS) {
@@ -56,42 +221,45 @@ public class ImageList {
         }
     };
 
-    /**
-     * Lists the cells to get all assets.
-     * @return list of cells
-     */
-    public ListCell<String> getAllAssets() {
-        //File folder = new File("assets");
-        //if(folder == null) return null;
 
-        return (new ListCell<String>() {
-            private ImageView imageView = new ImageView();
-            @Override
-            public void updateItem(String name, boolean empty) {
-                super.updateItem(name, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    if (dir.isDirectory()){
-                        for (final File f : dir.listFiles(IMAGE_FILTER)){
-                            if (name.equals(f.getName())) {
-                                System.out.println(f.getName());
-                                Image image = new Image(f.toURI().toString());
-                                imageView.setImage(image);
 
-                                resourceMap.put(f.getName(), image);
-                                setText(f.getName());
-                            }
+    public ObservableList<ImageItem> openEditorSave(ObservableList<ImageItem> result){
+
+        for (int i = 0; i < dir.listFiles().length ; i++) {
+            File f = dir.listFiles()[i];
+            BufferedReader b = null;
+                try {
+                    b = new BufferedReader(new FileReader(f));
+                    String str = b.readLine().toString();
+                    String[] values = str.split("#");
+                    String fileName = values[0];
+                    int bits = Integer.parseInt(values[1]);
+                    int cols = Integer.parseInt(values[2]);
+                    int rows = Integer.parseInt(values[3]);
+                    BASE64Decoder decoder = new BASE64Decoder();
+                    byte[] imageByte = decoder.decodeBuffer(values[4]);
+                    ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+                    BufferedImage spriteImage = ImageIO.read(bis);
+
+
+                    SpriteSheet test = new SpriteSheet(fileName, bits, cols, false);
+                    for (int y = 0, k = 0; y < rows; y++) {
+                        for (int x = 0; x < cols; x++, k++) {
+                            Image img = SwingFXUtils.toFXImage(test.getSprite(x, y), null);
+                            result.add(new ImageItem(new ImageView(img), img ,fileName, x, y));
+                            //result.add(new ImageView(img));
                         }
-                        setGraphic(imageView);
                     }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+        return result;
     }
 
-    public ObservableList<ImageView> openEditorSave(ObservableList<ImageView> result){
+    public ObservableList<ImageItem> openSpriteEditorSave(ObservableList<ImageItem> result){
         for(File f : dir.listFiles()){
             BufferedReader b = null;
             try {
@@ -106,20 +274,14 @@ public class ImageList {
                 byte[] imageByte = decoder.decodeBuffer(values[4]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage spriteImage = ImageIO.read(bis);
-                System.out.println("Filnavn: " + values[0]);
-                System.out.println("Bits: " + values[1]);
-                System.out.println("Cols: " + values[2]);
-                System.out.println("Rows: " + values[3]);
-                System.out.println("Bilde: " + values[4]);
+                Image img = SwingFXUtils.toFXImage(spriteImage, null);
+                ImageView imageView = new ImageView(img);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
+                ImageItem imageItem = new ImageItem(imageView,img,fileName,cols,rows);
+                imageItem.setBits(bits);
+                result.add(imageItem);
 
-                SpriteSheet test = new SpriteSheet(fileName, bits, cols, false);
-
-                for (int y = 0, k = 0; y < rows; y++) {
-                    for (int x = 0; x < cols; x++, k++) {
-                        Image img = SwingFXUtils.toFXImage(test.getSprite(x, y), null);
-                        result.add(new ImageView(img));
-                    }
-                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -128,20 +290,11 @@ public class ImageList {
 
         }
 
-
-
         return result;
+
+
     }
 
-    public ObservableList<ImageItem> setImageItem(Image image, String filename, int x, int y) {
-        ObservableList<ImageItem> result = FXCollections.observableArrayList();
-
-        result.add(new ImageItem(new ImageView(image), filename, x, y));
-
-
-
-        return result;
-    }
     /**
      * Lists the cells to get all assets.
      * @return list of cells
@@ -168,51 +321,6 @@ public class ImageList {
         });
     }
 
-
-/*
-    public ListCell<String> setAssets(Image[] images, String fileName) {
-        //File folder = new File("assets");
-        //if(folder == null) return null;
-        return new ListCell<String>() {
-
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    //  super.updateItem(item, empty);
-                    if (item != null) {
-                        box.setSpacing(10) ;
-                        box.setPadding(new Insets(10, 10, 10, 10));
-                        Image img = null;
-                        Knjiga k = getTableView().getItems().get(getIndex());
-                        img = new Image(new File(k.getMainPage()).toURI().toString());
-
-                        imageview.setImage(img);
-                        imageview.setFitHeight(320.0);
-                        imageview.setFitWidth(200.0);
-
-                    }
-                    if(!box.getChildren().contains(imageview)) {
-                        box.getChildren().add(imageview);
-                        setGraphic(box);
-                    }
-                }
-
-
-            @Override
-            public void updateItem(String name, boolean empty) {
-                super.updateItem(name, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    for (int i = 0; i < images.length; i++) {
-                        imageView.setImage(images[i]);
-                        setText("Sprite: " + i);
-                    }
-                }
-                setGraphic(imageView);
-            }
-        });
-    }*/
 
     /**
      * Observable list to set all names.
@@ -282,6 +390,22 @@ public class ImageList {
 
     public void setImages(Image[] images) {
         this.images = images;
+    }
+
+    public ObservableList<ImageItem> getResult() {
+        return result;
+    }
+
+    public ObservableList<ImageItem> getSpriteBottom() {
+        return spriteBottom;
+    }
+
+    public MapObject getMapObject() {
+        return mapObject;
+    }
+
+    public void setMapObject(MapObject mapObject) {
+        this.mapObject = mapObject;
     }
 }
 
