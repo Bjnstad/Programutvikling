@@ -1,6 +1,5 @@
-package main.java.model.character;
+package main.java.model.object.character;
 
-import javafx.scene.canvas.GraphicsContext;
 import main.java.model.Camera;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.GameObject;
@@ -22,6 +21,4 @@ public abstract class Character extends GameObject {
     public Character(String filename, int sizeX, int sizeY) {
         super(0,0, sizeX, sizeY, new SpriteSheet(filename, 64, 9, true));
     }
-
-    public abstract void renderOptional(Camera camera);
 }

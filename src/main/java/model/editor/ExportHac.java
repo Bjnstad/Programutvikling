@@ -1,6 +1,6 @@
 package main.java.model.editor;
 
-import main.java.model.world.MapObject;
+import main.java.model.object.MapObject;
 import javafx.embed.swing.SwingFXUtils;
 
 import javax.imageio.ImageIO;

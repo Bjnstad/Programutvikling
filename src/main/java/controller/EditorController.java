@@ -4,7 +4,7 @@ import main.java.model.Camera;
 import main.java.model.editor.ExportHac;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
-import main.java.model.world.MapObject;
+import main.java.model.object.MapObject;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -256,8 +256,8 @@ public class EditorController implements Controller {
             exportHac.addElement(mapObject);
             mapObject.setPosX((int)(event.getX()/camera.getScale()));
             mapObject.setPosY((int)(event.getY()/camera.getScale()));
-            System.out.println(world.getGameMap().addGameObject(mapObject));
-            world.getGameMap().drawObject(mapObject, camera);
+           // System.out.println(world.getGameMap().addGameObject(mapObject));
+            //world.getGameMap().drawObject(mapObject, camera);
             System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());
         });
     }

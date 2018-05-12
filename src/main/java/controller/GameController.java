@@ -111,14 +111,14 @@ public class GameController implements Controller {
             if(!isRunning) return;
             double mX = event.getX() - camera.getTranslateX();
             double mY = event.getY() - camera.getTranslateY();
-            world.shoot(mX, mY, camera);
+            //world.shoot(mX, mY, camera);
         });
     }
 
 
     private void gameloop() {
-        world.gameLogic();
-        world.render(camera);
+        world.gameloop();
+        //world.g(camera);
     }
 
 
@@ -135,7 +135,7 @@ public class GameController implements Controller {
      * Save the game.
      */
     public void save() {
-        ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
+        //ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
     }
 
 

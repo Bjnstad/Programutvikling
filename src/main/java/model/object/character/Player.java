@@ -1,9 +1,12 @@
-package main.java.model.character;
+package main.java.model.object.character;
 
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.java.model.Camera;
+import main.java.model.object.GameObject;
+import main.java.model.render.Actions;
+import main.java.model.world.World;
 
 import java.util.ArrayList;
 
@@ -40,6 +43,16 @@ public class Player extends Character {
     }
 
 
+    @Override
+    public void onCollide(GameObject object, Actions actions) {
+
+    }
+
+    @Override
+    public void logic(World world) {
+
+    }
+
     // Render bullets
     public void renderOptional(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
@@ -53,4 +66,5 @@ public class Player extends Character {
         }
 
     }
+
 }

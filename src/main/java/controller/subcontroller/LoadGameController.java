@@ -6,11 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.controller.*;
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
 import main.java.model.filehandler.ImportGame;
 import main.java.controller.Controller;
-import main.java.controller.MainMenuController;
+import main.java.model.object.character.Enemy;
 import main.java.model.world.World;
 
 import java.io.File;
@@ -78,8 +76,8 @@ public class LoadGameController implements SubController {
 
         World world = new World();
 
-        world.setEnemies(ig.getEnemies());
-        world.setPlayer(ig.getPlayer());
+        for(Enemy enemy : ig.getEnemies()) world.addGameObject(enemy);
+        world.addGameObject(ig.getPlayer());
         world.setGameMap(ig.getMap());
         //world.getGameMap().addGameObject();
         gameController.getCamera().setTranslateX(ig.getTranslateX());

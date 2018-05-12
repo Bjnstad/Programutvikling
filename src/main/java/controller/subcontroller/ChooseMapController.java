@@ -7,8 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.controller.Controller;
 import main.java.controller.GameController;
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import main.java.model.filehandler.HacParser;
 import main.java.model.world.GameMap;
 import main.java.model.world.World;
@@ -81,9 +81,9 @@ public class ChooseMapController implements SubController {
 
         World w = new World();
 
-        w.setPlayer(new Player("player_animations_walking", 1, 1, 1, 1));
+        w.addGameObject(new Player("player_animations_walking", 1, 1, 4, 4));
         w.setGameMap(gameMap);
-        w.setEnemies(new Enemy[0]);
+       // w.setEnemies(new Enemy[0]);
 
 
 

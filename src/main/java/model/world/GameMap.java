@@ -4,7 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.java.model.Camera;
-import main.java.model.object.GameObject;
+import main.java.model.object.MapObject;
 import main.java.model.object.sprite.SpriteSheet;
 
 /**
@@ -13,8 +13,6 @@ import main.java.model.object.sprite.SpriteSheet;
  * @author Axel Bjørnstad - s315322
  */
 public class GameMap {
-
-    private MapObject[] mapObjects;
     private int width;
     private int height;
     private Image[][] background;
@@ -33,7 +31,6 @@ public class GameMap {
         this.width = width;
         this.height = height;
         this.backgroundFileName = background.getFilename();
-        this.mapObjects = new MapObject[0];
         loadBackground(background);
     }
 
@@ -92,55 +89,6 @@ public class GameMap {
     }
 
     /**
-     * Here we add mapObject into the gameboard.
-     * @param mapObject states the position in height and width.
-     * @return if added returns true, false if coordinates is taken or
-     */
-    public boolean addGameObject(MapObject mapObject) {
-        int posX = (int)mapObject.getPosX();
-        int posY = (int)mapObject.getPosY();
-
-        for (int x = posX; x < posX + mapObject.getSizeX(); x++) {
-            for (int y = posY; y < posY + mapObject.getSizeY(); y++) {
-                for (GameObject object : mapObjects)if (mapObject.willCollide(object, x, y)) return false;
-            }
-        }
-
-        MapObject[] result;
-
-        if(mapObjects != null) {
-            result = new MapObject[mapObjects.length+1];
-            for (int i = 0; i < mapObjects.length; i++) result[i] = mapObjects[i];
-            result[mapObjects.length] = mapObject;
-        } else {
-            result = new MapObject[1];
-            result[0] = mapObject;
-        }
-
-        mapObjects = result;
-        return true;
-
-    }
-
-    /**
-     * This method gets the gameObject.
-     *
-     * @param x the width to x in the game.
-     * @param y the height  to y in the game.
-     */
-    private MapObject getGameObject(int x, int y) {
-        if (x < 0 || x > width) return null;
-        if (y < 0 || y > height) return null;
-        if (mapObjects == null) return null;
-        for (MapObject mapObject : mapObjects) {
-            if (x >= mapObject.getPosX() && x < mapObject.getPosX() + mapObject.getSizeX()) { // Check x coordinates
-                if (y >= mapObject.getPosY() && y < mapObject.getPosY() + mapObject.getSizeY()) return mapObject;
-            }
-        }
-        return null;
-    }
-
-    /**
      * This method gets the width of gameMap.
      *
      * @return the width to gameMap.
@@ -175,13 +123,6 @@ public class GameMap {
                 renderBlock(camera, x, y);
             }
         }
-
-        if(mapObjects != null) {
-            for (MapObject mapObject : mapObjects) {
-                if (mapObject != null)
-                    gc.drawImage(mapObject.getAsset(), mapObject.getPosX() * camera.getScale(), mapObject.getPosY() * camera.getScale(), mapObject.getSizeX() * camera.getScale(), mapObject.getSizeY() * camera.getScale());
-            }
-        }
     }
 
     /**
@@ -194,29 +135,6 @@ public class GameMap {
     public void drawObject(MapObject mapObject, Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
         gc.drawImage(mapObject.getAsset(), camera.scale(mapObject.getPosX()), camera.scale(mapObject.getPosY()), mapObject.getSizeX() * camera.getScale(), mapObject.getSizeY() * camera.getScale());
-    }
-
-    /**
-     *
-     */
-    public void drawAllObjects(Camera camera) {
-        GraphicsContext gc = camera.getGraphicsContext();
-        if(mapObjects == null) return;
-        for (int i = 0; i < mapObjects.length ; i++) {
-            if(mapObjects[i] ==null)return;
-            gc.drawImage(mapObjects[i].getAsset(), camera.scale(mapObjects[i].getPosX()), camera.scale(mapObjects[i].getPosY()), mapObjects[i].getSizeX() * camera.getScale(), mapObjects[i].getSizeY() * camera.getScale());
-
-        }
-
-    }
-
-    /**
-     * Gets the size and position to gameobjects.
-     *
-     * @return size and position to gameobjects.
-     */
-    public MapObject[] getMapObjects() {
-        return mapObjects;
     }
 
     public Image[][] getBackground() {

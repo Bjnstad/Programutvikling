@@ -1,8 +1,11 @@
-package main.java.model.character;
+package main.java.model.object.character;
 
 
+import main.java.model.Camera;
 import main.java.model.object.GameObject;
 import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.render.Actions;
+import main.java.model.world.World;
 
 /**
  * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
@@ -59,5 +62,20 @@ public class Bullet extends GameObject {
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    @Override
+    public void onCollide(GameObject object, Actions actions) {
+
+    }
+
+    @Override
+    public void logic(World world) {
+
+    }
+
+    @Override
+    public void renderOptional(Camera camera) {
+
     }
 }

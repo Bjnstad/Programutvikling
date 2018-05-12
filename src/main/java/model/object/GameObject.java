@@ -1,10 +1,14 @@
 package main.java.model.object;
 
+import main.java.model.Camera;
 import main.java.model.object.sprite.Direction;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.sprite.Sprite;
+import main.java.model.render.Actions;
+import main.java.model.world.World;
 
-public class GameObject extends Sprite {
+public abstract class GameObject extends Sprite {
+    private GameObjectType gameObjectType;
     private double posX;
     private double posY;
     private int sizeX;
@@ -17,6 +21,49 @@ public class GameObject extends Sprite {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
     }
+
+
+
+    public abstract void onCollide(GameObject object, Actions actions);
+
+    public abstract void logic(World world);
+    public abstract void renderOptional(Camera camera);
+
+
+
+
+
+    public boolean willCollide(GameObject object) {
+        return willCollide(object, getPosX(), getPosY());
+    }
+
+
+
+
+    /**
+     * This checks if this character crashes with other character.
+     * @param object target to check against.
+     * @return the position to enemy in height and width.
+     */
+    public boolean willCollide(GameObject object, double x, double y) {
+        double a = x - object.getSizeX()/2;
+        double b = x + object.getSizeX()/2;
+        double c = x;
+        boolean xval = b > a ? c > a && c < b : c > b && c < a;
+
+        a = y - object.getSizeY()/2;
+        b = y + object.getSizeY()/2;
+        c = y;
+        boolean yval = b > a ? c > a && c < b : c > b && c < a;
+
+        return xval && yval;
+    }
+
+
+
+
+
+
 
 
     public double getPosX() {
@@ -72,36 +119,12 @@ public class GameObject extends Sprite {
     }
 
 
+
     public int getSizeX() {
         return sizeX;
     }
 
     public int getSizeY() {
         return sizeY;
-    }
-
-
-    public boolean willCollide(GameObject object) {
-        return willCollide(object, getPosX(), getPosY());
-    }
-
-
-    /**
-     * This checks if this character crashes with other character.
-     * @param object target to check against.
-     * @return the position to enemy in height and width.
-     */
-    public boolean willCollide(GameObject object, double x, double y) {
-        double a = x - object.getSizeX()/2;
-        double b = x + object.getSizeX()/2;
-        double c = x;
-        boolean xval = b > a ? c > a && c < b : c > b && c < a;
-
-        a = y - object.getSizeY()/2;
-        b = y + object.getSizeY()/2;
-        c = y;
-        boolean yval = b > a ? c > a && c < b : c > b && c < a;
-
-        return xval && yval;
     }
 }

@@ -2,10 +2,10 @@ package main.java.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
 import main.java.model.Camera;
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import main.java.model.world.GameMap;
-import main.java.model.world.MapObject;
+import main.java.model.object.MapObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,7 +54,8 @@ public class ExportGame extends ExportHac {
      * Saves the map.
      */
     public void saveMap() {
-        MapObject[] object = gameMap.getMapObjects();
+        /*
+        MapObject[] object = ;
         if(object == null){
             sb.append("@!");
             sb.append('@');
@@ -94,6 +95,7 @@ public class ExportGame extends ExportHac {
         sb.append(',');
         sb.append(gameMap.getWidth());
         sb.append('&');
+        */
     }
 
 

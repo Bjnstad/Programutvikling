@@ -1,7 +1,7 @@
 package main.java.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
-import main.java.model.world.MapObject;
+import main.java.model.object.MapObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

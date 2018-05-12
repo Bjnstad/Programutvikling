@@ -6,7 +6,7 @@ import main.java.model.Camera;
 import main.java.model.filehandler.ExportHac;
 import main.java.model.filehandler.HacParser;
 import main.java.model.world.GameMap;
-import main.java.model.world.MapObject;
+import main.java.model.object.MapObject;
 
 import java.io.File;
 
@@ -132,7 +132,7 @@ public class HACEditor {
      * @return draws current mapObject to gameMap.
      */
     public boolean setGameObject(MapObject mapObject) {
-        gameMap.addGameObject(mapObject);
+        //gameMap.addGameObject(mapObject);
         exportHac.addElement(mapObject);
 
         gameMap.drawObject(mapObject, camera);

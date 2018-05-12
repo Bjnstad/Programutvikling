@@ -1,8 +1,11 @@
-package main.java.model.world;
+package main.java.model.object;
 
 import javafx.scene.image.Image;
+import main.java.model.Camera;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.GameObject;
+import main.java.model.render.Actions;
+import main.java.model.world.World;
 
 /**
  * This class defines the gameObject.
@@ -30,6 +33,21 @@ public class MapObject extends GameObject {
      */
     public Image getAsset() {
         return this.image;
+    }
+
+    @Override
+    public void onCollide(GameObject object, Actions actions) {
+
+    }
+
+    @Override
+    public void logic(World world) {
+
+    }
+
+    @Override
+    public void renderOptional(Camera camera) {
+
     }
 }
 
