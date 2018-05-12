@@ -2,6 +2,8 @@ package main.java.model.object;
 
 import javafx.scene.image.Image;
 import main.java.model.Camera;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.GameObject;
 import main.java.model.render.Actions;
@@ -25,6 +27,8 @@ public class MapObject extends GameObject {
     public MapObject(SpriteSheet spritesheet, int posY, int posX, int sizeX, int sizeY) {
         super(posX, posY, sizeX, sizeY, spritesheet);
         this.image = image;
+
+
     }
 
     /**

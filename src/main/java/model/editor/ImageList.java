@@ -108,7 +108,7 @@ public class ImageList {
         });
     }
 
-    public void handleAssetsListView(GameMap map, Canvas graphics){
+    public void handleAssetsListView(){
         assetsListView.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             /**
@@ -175,6 +175,7 @@ public class ImageList {
                         SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), 1, false );
                         MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
                         mapObject = object;
+
                         primaryStage.close();
 
                       /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {

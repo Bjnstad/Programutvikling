@@ -108,7 +108,7 @@ public class EditorController implements Controller {
 
         //listView.setCellFactory(param -> imageList.getAllAssets());
         imageList.handleSpriteListView();
-        //imageList.handleAssetsListView(world.getGameMap(), graphics);
+        imageList.handleAssetsListView();
 
     }
 
@@ -201,6 +201,7 @@ public class EditorController implements Controller {
             if(imageList.getMapObject() == null) return;
             mapObject.setPosX((int)(event.getX()/camera.getScale()));
             mapObject.setPosY((int)(event.getY()/camera.getScale()));
+            camera.render(mapObject);
 
             //System.out.println(world.getGameMap().addGameObject(mapObject));
             //world.getGameMap().drawObject(mapObject, camera);
