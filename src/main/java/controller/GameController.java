@@ -154,6 +154,11 @@ public class GameController implements Controller {
     private void gameloop() {
         // TODO: MOVE TO CLASS
         double speed = 0.1;
+        if(up&&left) speed /= 2;
+        if(up&&right) speed /= 2;
+        if(down&&left) speed /= 2;
+        if(down&&right) speed /= 2;
+
         if (up) move(0, speed);
         if (down) move(0, -speed);
         if (left) move(-speed, 0);

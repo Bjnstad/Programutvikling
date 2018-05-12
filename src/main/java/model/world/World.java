@@ -18,7 +18,7 @@ import java.util.Random;
  * @author Axel Bjørnstad - s315322
  */
 public class World {
-    private final double ENEMY_GENERATION_RATE = 22.25;
+    private final double ENEMY_GENERATION_RATE = 2;
 
     private GameController gameController; // Parent
     private GameMap gameMap;
