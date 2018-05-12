@@ -27,6 +27,7 @@ import main.java.model.world.World;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  * Implements the EditorController to Controller.
@@ -40,11 +41,11 @@ public class EditorController implements Controller {
     private HACEditor map;
     private Camera camera;
     private boolean isRunning = false;
-    //private FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
     private MapObject mapObject;
     private ExportHac exportHac;
-    private ObservableList<ImageView> result = FXCollections.observableArrayList();
+    private ArrayList<String> fileNames = new ArrayList<>();
+
 
 
     @FXML
@@ -53,9 +54,8 @@ public class EditorController implements Controller {
     @FXML
     ListView listView;
 
-   // public EditorController() {
-   //     super(State.EDITOR);
-   // }
+    @FXML
+    ListView listViewBottom;
 
     /**
      * This method creates a new file.
@@ -82,136 +82,34 @@ public class EditorController implements Controller {
     public void initiate () {
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.exportHac = new ExportHac();
-        GameMap gameMap = new GameMap(9,10, new SpriteSheet("background", 32));
+        GameMap gameMap = new GameMap(9, 10, new SpriteSheet("background", 32));
         this.world = new World();
         world.setGameMap(gameMap);
         gameMap.render(camera);
-        imageList = new ImageList();
+        imageList = new ImageList(listViewBottom, listView);
 
-        listView.setItems(imageList.openEditorSave(result));
+        //listView.setItems(imageList.openEditorSave(imageList.getResult()));
+        listViewBottom.setItems(imageList.openSpriteEditorSave(imageList.getSpriteBottom()));
+        listViewBottom.setCellFactory(param -> new ListCell<ImageItem>() {
+            @Override
+            protected void updateItem(ImageItem item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setGraphic(item.getImageView());
+                }
+            }
+        });
 
 
         //listView.setItems(imageList.getAllNames());
 
         //listView.setCellFactory(param -> imageList.getAllAssets());
+        imageList.handleSpriteListView();
+        //imageList.handleAssetsListView(world.getGameMap(), graphics);
 
-
-   //     map = new HACEditor(new GameMap(20,20, new SpriteSheet("background", 32)), graphics);
-        //world = new World();
-        //map.getCamera().setCanvas(graphics);
-
-
-//        editorHandler = new EditorHandler(mainController, map);
-
-        /*
-        graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
-            /**
-             * This method makes the object move with a mouseclick.
-             * @param event allows us to access the properties of MouseEvent.
-
-            @Override
-            public void handle(MouseEvent event) {
-                map.move(event.getX(), event.getY());
-            }
-        });*/
-
-
-        listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            /**
-             * This method handles an action of mouseEvent.
-             * @param mouseEvent is an event which indicates that a mouse action occurred in a component.
-             */
-
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                final Stage primaryStage = new Stage();
-                primaryStage.initModality(Modality.APPLICATION_MODAL);
-                BorderPane root = new BorderPane();
-
-                primaryStage.setTitle("Add asset");
-                primaryStage.setScene(new Scene(root));
-
-                double height = 60;
-                double width = 70;
-
-                Button submit = new Button("Submit");
-
-                submit.setMinSize(3*width, height);
-
-                Label sizeX = new Label("Size X:");
-                TextField inputSizeX = new TextField ();
-
-                Label sizeY = new Label("Size Y:");
-                TextField inputSizeY = new TextField ();
-
-                Label posX = new Label("Pos X:");
-                TextField inputPosX = new TextField ();
-
-                Label posY = new Label("Pos Y:");
-                TextField inputPosY = new TextField ();
-
-                CheckBox checkBox = new CheckBox("Collision?");
-                VBox Vertikalboks = new VBox(sizeX, inputSizeX, sizeY, inputSizeY,checkBox);
-
-                root.setLeft(Vertikalboks);
-                root.setCenter(submit);
-                primaryStage.show();
-
-                submit.setOnAction(new EventHandler<ActionEvent>() {
-                    /**
-                     * This method handles som type of action.
-                     * This event type is widely used to represent a variety of things
-                     * @param e is a type of ActionEvent, it allows you to access the properties of ActionEvent.
-                     */
-                    @Override public void handle(ActionEvent e) {
-                        int inputX = Integer.parseInt(inputSizeX.getText());
-                        int inputY = Integer.parseInt(inputSizeY.getText());
-
-                        //int posX = Integer.parseInt(inputPosX.getText());
-                        //int posY = Integer.parseInt(inputPosY.getText());
-                        listView.getSelectionModel().getSelectedItems();
-                        String filename = String.valueOf(listView.getSelectionModel().getSelectedItems());
-                        String[] fileNameArr = filename.split("\\.");
-                        filename = fileNameArr[0].substring(1);
-                        //Image image = imageList.getResource(listView.getSelectionModel().getSelectedItem().toString());
-
-
-
-                        System.out.println(listView.getSelectionModel().getSelectedItems());
-                        //SpriteSheet spriteSheet = new SpriteSheet(filename, 64, 1, false );
-                        //MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
-                        //mapObject = object;
-                        //map.setGameObject(object);
-
-
-                        primaryStage.close();
-
-
-
-
-
-                      /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                MapObject object = new MapObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
-                                System.out.println(object.getAsset());
-
-                                map.setGameObject(object, (int)event.getX(), (int)event.getY());
-                                System.out.println((int)event.getX());
-                                System.out.println((int)event.getY());
-
-                            }
-                        }));*/
-
-
-
-                    }
-                });
-            }
-        });
     }
 
     /**
@@ -265,7 +163,7 @@ public class EditorController implements Controller {
             String fileName = fileNameA[0];
             System.out.println("Height: " + image.getHeight() + "Width: " + image.getWidth());
             System.out.println("Bits: " + image.getWidth()/editorSpriteInput.getColumns());
-            editorSpriteInput.popUp(image, fileName, listView, imageList, result).show();
+            editorSpriteInput.popUp(image, fileName, imageList, imageList.getResult()).show();
 
 
         }
@@ -291,16 +189,23 @@ public class EditorController implements Controller {
         });
     }
 
+    @Override
+    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+        return null;
+    }
+
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {
-            /*
-            exportHac.addElement(mapObject);
+            mapObject = imageList.getMapObject();
+            //exportHac.addElement(mapObject);
+            if(imageList.getMapObject() == null) return;
             mapObject.setPosX((int)(event.getX()/camera.getScale()));
             mapObject.setPosY((int)(event.getY()/camera.getScale()));
-           // System.out.println(world.getGameMap().addGameObject(mapObject));
+
+            //System.out.println(world.getGameMap().addGameObject(mapObject));
             //world.getGameMap().drawObject(mapObject, camera);
             System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());
-*/
+            System.out.println("CLICKED EDITORCONTROLLER");
         });
     }
 }

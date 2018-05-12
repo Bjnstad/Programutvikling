@@ -2,8 +2,6 @@ package main.java.model.editor;
 
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -14,8 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.model.object.sprite.SpriteSheet;
 
-import java.io.File;
-
 /**
  * Created by henrytran1 on 11/05/2018.
  */
@@ -25,19 +21,13 @@ public class EditorSpriteInput {
     private int bits;
 
 
-    public Stage popUp(Image image, String fileName, ListView listView, ImageList imageList, ObservableList<ImageView> result) {
+    public Stage popUp(Image image, String fileName, ImageList imageList, ObservableList<ImageItem> result) {
         final Stage primaryStage = new Stage();
         primaryStage.initModality(Modality.APPLICATION_MODAL);
         BorderPane root = new BorderPane();
 
         primaryStage.setTitle("Add asset");
         primaryStage.setScene(new Scene(root));
-
-        double height = 60;
-        double width = 70;
-
-
-        //submit.setMinSize(3*width, height);
 
         Label rowLabel = new Label("Rows:");
         TextField inputRow = new TextField ();
@@ -62,40 +52,21 @@ public class EditorSpriteInput {
                 for (int y = 0, k = 0; y < rows; y++) {
                     for (int x = 0; x < columns; x++, k++) {
                         Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
-                        /*imgArray[k] = img;
-
-                        if(listView.getItems().size() < 1){
-                            listView.setItems(imageList.setImageItem(img, fileName, x, y));
-
-                        }else{
-                            ImageItem imageItem = new ImageItem(new ImageView(img), fileName, x, y);
-                            listView.getItems().add(imageItem.getImageView());
-
-                        }*/
 
                     }
                 }
                 ExportHac exportHac = new ExportHac();
-                exportHac.saveSpriteInput(image, bits, columns, rows, fileName);
-                listView.setItems(imageList.openEditorSave(result));
-            }catch(Exception y){
+                exportHac.saveSpriteInput(image, bits, columns,rows, fileName);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
+                ImageItem imageItem = new ImageItem(imageView,image,fileName,columns,rows);
+                imageItem.setBits(bits);
+                imageList.getSpriteBottom().add(imageItem);
+                primaryStage.close();
+            }catch(Exception y) {
                 y.printStackTrace();
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText("Look, an Error Dialog");
-                alert.setContentText("Ooops, there was an error!");
-
-                alert.showAndWait();
             }
-
-
-
-            System.out.println("DET FUNKER");
-            System.out.println(Integer.parseInt(inputColumns.getText()));
-            System.out.println(bits);
-
-
         });
 
 
@@ -108,7 +79,6 @@ public class EditorSpriteInput {
         root.setCenter(imageView);
         return primaryStage;
     }
-
 
 
 

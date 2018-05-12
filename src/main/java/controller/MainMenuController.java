@@ -43,6 +43,11 @@ public class MainMenuController implements Controller {
     }
 
     @Override
+    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+        return null;
+    }
+
+    @Override
     public EventHandler<MouseEvent> getMouseEventHandler() {
         return null;
     }
