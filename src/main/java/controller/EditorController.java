@@ -1,6 +1,9 @@
 package main.java.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.java.model.Camera;
 import main.java.model.editor.ExportHac;
 import main.java.model.object.sprite.SpriteSheet;
@@ -37,10 +40,11 @@ public class EditorController implements Controller {
     private HACEditor map;
     private Camera camera;
     private boolean isRunning = false;
-    private FileChooser fileChooser = new FileChooser();
+    //private FileChooser fileChooser = new FileChooser();
     private EditorHandler editorHandler;
     private MapObject mapObject;
     private ExportHac exportHac;
+    private ObservableList<ImageView> result = FXCollections.observableArrayList();
 
 
     @FXML
@@ -84,9 +88,12 @@ public class EditorController implements Controller {
         gameMap.render(camera);
         imageList = new ImageList();
 
+        listView.setItems(imageList.openEditorSave(result));
+
+
         //listView.setItems(imageList.getAllNames());
 
-  //      listView.setCellFactory(param -> imageList.getAllAssets());
+        //listView.setCellFactory(param -> imageList.getAllAssets());
 
 
    //     map = new HACEditor(new GameMap(20,20, new SpriteSheet("background", 32)), graphics);
@@ -169,16 +176,15 @@ public class EditorController implements Controller {
                         String filename = String.valueOf(listView.getSelectionModel().getSelectedItems());
                         String[] fileNameArr = filename.split("\\.");
                         filename = fileNameArr[0].substring(1);
-                        Image image = imageList.getResource(listView.getSelectionModel().getSelectedItem().toString());
-
+                        //Image image = imageList.getResource(listView.getSelectionModel().getSelectedItem().toString());
 
 
 
                         System.out.println(listView.getSelectionModel().getSelectedItems());
-                        SpriteSheet spriteSheet = new SpriteSheet(filename, 64, 1, false );
-                        MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
-                        mapObject = object;
-                        map.setGameObject(object);
+                        //SpriteSheet spriteSheet = new SpriteSheet(filename, 64, 1, false );
+                        //MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
+                        //mapObject = object;
+                        //map.setGameObject(object);
 
 
                         primaryStage.close();
@@ -235,6 +241,7 @@ public class EditorController implements Controller {
      */
     @FXML
     private void Import(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mHac files", "*.mhac");
         fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
@@ -246,6 +253,7 @@ public class EditorController implements Controller {
 
     @FXML
     private void ImportSprite(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
 
         if (file != null) {
@@ -257,7 +265,8 @@ public class EditorController implements Controller {
             String fileName = fileNameA[0];
             System.out.println("Height: " + image.getHeight() + "Width: " + image.getWidth());
             System.out.println("Bits: " + image.getWidth()/editorSpriteInput.getColumns());
-            editorSpriteInput.popUp(image, fileName, listView, imageList).show();
+            editorSpriteInput.popUp(image, fileName, listView, imageList, result).show();
+
 
         }
 
@@ -284,12 +293,13 @@ public class EditorController implements Controller {
 
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {
+            /*
             exportHac.addElement(mapObject);
             mapObject.setPosX((int)(event.getX()/camera.getScale()));
             mapObject.setPosY((int)(event.getY()/camera.getScale()));
             System.out.println(world.getGameMap().addGameObject(mapObject));
             world.getGameMap().drawObject(mapObject, camera);
-            System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());
+            System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());*/
         });
     }
 }

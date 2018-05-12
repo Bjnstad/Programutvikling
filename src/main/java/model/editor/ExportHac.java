@@ -1,5 +1,6 @@
 package main.java.model.editor;
 
+import javafx.scene.image.Image;
 import main.java.model.world.MapObject;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -16,6 +17,8 @@ import java.util.Base64;
  * This class makes it possible to export a file.
  * @author henrytran
  */
+
+//@TODO: RESTRUCTURE METHODS!!
 public class ExportHac {
     private ArrayList<String> elements = new ArrayList<>();
 
@@ -36,6 +39,41 @@ public class ExportHac {
 
 
         elements.add(sb.toString());
+    }
+
+    public void saveSpriteInput(Image image, int bits, int cols, int rows, String fileName){
+        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(image, null), "png");
+        base64String = base64String.substring(0, base64String.length()-5);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(fileName);
+        sb.append("#");
+        sb.append(bits);
+        sb.append("#");
+        sb.append(cols);
+        sb.append("#");
+        sb.append(rows);
+        sb.append("#");
+        sb.append(base64String);
+
+        String content = sb.toString();
+        File file = new File("assets/editorassets/"+fileName+".ahac");
+        System.out.println("CREATED FILE");
+
+        try(FileOutputStream outputStream = new FileOutputStream(file)){
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            byte[] contentInBytes = content.getBytes();
+
+            outputStream.write(contentInBytes);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

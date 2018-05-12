@@ -1,5 +1,6 @@
 package main.java.model.editor;
 
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +26,7 @@ public class EditorSpriteInput {
     private int bits;
 
 
-    public Stage popUp(Image image, String fileName, ListView listView, ImageList imageList) {
+    public Stage popUp(Image image, String fileName, ListView listView, ImageList imageList, ObservableList<ImageView> result) {
         final Stage primaryStage = new Stage();
         primaryStage.initModality(Modality.APPLICATION_MODAL);
         BorderPane root = new BorderPane();
@@ -58,16 +59,26 @@ public class EditorSpriteInput {
 
             try {
                 SpriteSheet test = new SpriteSheet(fileName, bits, columns, false);
-
                 Image[] imgArray = new Image[rows * columns];
                 for (int y = 0, k = 0; y < rows; y++) {
                     for (int x = 0; x < columns; x++, k++) {
                         Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
-                        imgArray[k] = img;
+                        /*imgArray[k] = img;
+
+                        if(listView.getItems().size() < 1){
+                            listView.setItems(imageList.setImageItem(img, fileName, x, y));
+
+                        }else{
+                            ImageItem imageItem = new ImageItem(new ImageView(img), fileName, x, y);
+                            listView.getItems().add(imageItem.getImageView());
+
+                        }*/
+
                     }
                 }
-                listView.setCellFactory(param -> imageList.setAssets(imgArray, fileName));
-
+                ExportHac exportHac = new ExportHac();
+                exportHac.saveSpriteInput(image, bits, columns, rows, fileName);
+                listView.setItems(imageList.openEditorSave(result));
             }catch(Exception y){
                 y.printStackTrace();
 
@@ -99,6 +110,9 @@ public class EditorSpriteInput {
         return primaryStage;
     }
 
+
+
+
     public int getRow() {
         return rows;
     }
@@ -119,3 +133,4 @@ public class EditorSpriteInput {
         return bits;
     }
 }
+
