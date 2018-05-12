@@ -18,18 +18,22 @@ import java.util.Random;
  * @author Axel Bjørnstad - s315322
  */
 public class World {
-    private final double ENEMY_GENERATION_RATE = 2.25;
+    private final double ENEMY_GENERATION_RATE = 22.25;
 
     private GameController gameController; // Parent
     private GameMap gameMap;
     private int currentLevel;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
+    private boolean godmode = true;
 
 
     public void gameloop() {
         Enemy[] enemies = getObjects(Enemy.class);
         if(enemies.length < 1) levelUp();
 
+        if(godmode) {
+            for(Enemy enemy : enemies)enemy.hit(1);
+        }
 
         Actions actions = new Actions();
         int distribution = gameObjects.size() / Runtime.getRuntime().availableProcessors() * 2; // Times two for Hyperthreading
@@ -146,8 +150,8 @@ public class World {
     private void generateEnemies(int numberOfEnemies) {
         Random rand = new Random();
         for (int i = 0; i < numberOfEnemies; i++) {
-            //enemies[i] = new Enemy("BODY_skeleton", 1,1,rand.nextInt(20),rand.nextInt(20));
-            Enemy enemy = new Enemy("BODY_skeleton", 1,1,6, 5);
+            Enemy enemy = new Enemy("BODY_skeleton", 1,1,rand.nextInt(20),rand.nextInt(20));
+            //Enemy enemy = new Enemy("BODY_skeleton", 1,1,6, 5);
             enemy.setSpeed(1 + rand.nextInt(4));
             addGameObject(enemy);
         }

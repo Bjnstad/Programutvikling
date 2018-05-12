@@ -2,6 +2,7 @@ package main.java.model.render;
 
 import main.java.model.Camera;
 import main.java.model.object.GameObject;
+import main.java.model.object.character.Character;
 import main.java.model.world.World;
 
 import java.util.ArrayList;
@@ -29,6 +30,13 @@ public class CheckObjects implements Runnable {
         for (int i = start; i < end; i++) {
             GameObject gameObject = gameObjects.get(i);
             if(gameObject == null) continue;
+
+            if(gameObject instanceof Character) {
+                if((((Character) gameObject).isDead())) {
+                    actions.removeObject(gameObject);
+                    return;
+                }
+            }
 
             // Call object logic parts
             gameObject.logic(world);

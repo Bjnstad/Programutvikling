@@ -51,7 +51,6 @@ public class Sprite {
         return cAnimation.getDirection();
     }
 
-
     public boolean isDirectional() {
         return directional;
     }

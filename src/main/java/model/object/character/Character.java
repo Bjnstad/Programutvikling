@@ -12,6 +12,11 @@ public abstract class Character extends GameObject {
 
     protected float health = 100;
 
+    public boolean isDead() {
+        return health < 0;
+    }
+
+
     /**
      * This method represents the character, and it´s size.
      * @param filename assets file.

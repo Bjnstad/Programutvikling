@@ -14,7 +14,7 @@ import main.java.model.world.World;
 public class Enemy extends Character {
 
     private float speed = 1;
-    private double threshold= 0.5;
+    private double threshold= 0.1;
 
     /**
      * This method represents position, size and qualities to the enemy in the game.
@@ -75,6 +75,8 @@ public class Enemy extends Character {
 
     @Override
     public void logic(World world) {
+
+
         Player player = world.getPlayer();
 
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
