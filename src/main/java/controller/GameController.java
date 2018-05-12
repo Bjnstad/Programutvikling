@@ -29,6 +29,14 @@ public class GameController implements Controller {
 
     private Camera camera;
 
+
+    //TODO: MOVE TO NEW CLASS
+    private boolean up = false;
+    private boolean down = false;
+    private boolean right = false;
+    private boolean left = false;
+
+
     @FXML
     private Canvas graphics;
 
@@ -81,9 +89,7 @@ public class GameController implements Controller {
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
-
         // TODO: add acceleration in own controller class
-        double speed = 0.4;
         return (event -> {
             /*if(event.getCode() == KeyCode.W)move(0, speed);
             if(event.getCode() == KeyCode.A)move(-speed, 0);
@@ -92,17 +98,16 @@ public class GameController implements Controller {
 
             switch (event.getCode()) {
                 case W:
-                    move(0, speed);
-                    System.out.println("pressed");
+                    up = true;
                     break;
                 case A:
-                    move(-speed, 0);
+                    left = true;
                     break;
                 case S:
-                    move(0, -speed);
+                    down = true;
                     break;
                 case D:
-                    move(speed, 0);
+                    right = true;
                     break;
                 case ESCAPE:
                     pause();
@@ -118,16 +123,16 @@ public class GameController implements Controller {
         return  (event ->{
             switch (event.getCode()){
                 case W:
-                    move(0, 0);
+                    up = false;
                     break;
                 case A:
-                    move(0, 0);
+                    left = false;
                     break;
                 case S:
-                    move(0, 0);
+                    down = false;
                     break;
                 case D:
-                    move(0, 0);
+                    right = false;
                     break;
             }
 
@@ -147,6 +152,15 @@ public class GameController implements Controller {
 
 
     private void gameloop() {
+        // TODO: MOVE TO CLASS
+        double speed = 0.1;
+        if (up) move(0, speed);
+        if (down) move(0, -speed);
+        if (left) move(-speed, 0);
+        if (right) move(speed, 0);
+
+
+
         world.gameloop();
         //world.g(camera);
     }
