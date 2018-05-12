@@ -21,6 +21,10 @@ public class SpriteSheet {
     private int multiplier;
     private int frames;
     private boolean directional;
+    private boolean staticImage;
+
+    private int staticX;
+    private int staticY;
 
     /**
      * //TODO: SKRIV OM
@@ -40,6 +44,26 @@ public class SpriteSheet {
     public SpriteSheet(String filename, int bits) {
         this(filename, bits, 1, false);
     }
+
+    public void setStaticImage(int x, int y) {
+        staticImage = true;
+        staticX = x;
+        staticY = y;
+    }
+
+    public boolean isStaticImage() {
+        return staticImage;
+    }
+
+    public int getStaticX() {
+        return staticX;
+    }
+
+    public int getStaticY() {
+        return staticY;
+    }
+
+
 
     /**
      * Loads the sprite.
