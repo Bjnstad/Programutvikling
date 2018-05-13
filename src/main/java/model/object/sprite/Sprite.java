@@ -14,12 +14,22 @@ public class Sprite {
     private Animation animation;
     private boolean directional;
     private Image staticImage;
+    private Image[][] images;
 
     public Sprite(SpriteSheet spriteSheet) {
-        if(spriteSheet == null) {
-            directional = false;
-            return; // TODO: catch null?
-        }
+        if(spriteSheet == null) throw new NullPointerException("spriteSheet cannot be null.");
+
+        images = new Image[spriteSheet.][]
+
+
+
+
+
+
+
+
+
+
 
         if(spriteSheet.isStaticImage()) staticImage = SwingFXUtils.toFXImage(spriteSheet.getSprite(spriteSheet.getStaticX(), spriteSheet.getStaticY()), null);
 
@@ -27,12 +37,6 @@ public class Sprite {
         this.fileName = spriteSheet.getFilename();
         this.directional = spriteSheet.isDirectional();
         animation = directional ? new MultiAnimation(spriteSheet) : new SingleAnimation(spriteSheet);
-    }
-
-    public void setDirection(Direction direction) {
-        if(!directional) return;
-        MultiAnimation cAnimation = (MultiAnimation) animation; // Cast animation to MultiAnimation
-        cAnimation.setDirection(direction);
     }
 
     public Image getSprite() {
@@ -51,6 +55,14 @@ public class Sprite {
         return cAnimation.getDirection();
     }
 
+
+
+
+    public void setDirection(Direction direction) {
+        if(!directional) return;
+        MultiAnimation cAnimation = (MultiAnimation) animation; // Cast animation to MultiAnimation
+        cAnimation.setDirection(direction);
+    }
     public boolean isDirectional() {
         return directional;
     }
