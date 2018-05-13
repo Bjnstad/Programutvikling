@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by henrytran1 on 17/04/2018.
  * Game extends Hac
  */
-public class ExportGame extends ExportHac {
+public class ExportGame extends FileHandler {
     private ArrayList<String> mapList = new ArrayList<>();
     //private ArrayList<String> gameObject = new ArrayList<>();
 
@@ -45,7 +45,8 @@ public class ExportGame extends ExportHac {
         saveCamera();
         saveEnemies();
         savePlayer();
-        exportFile();
+
+        //createFile(new File("assets/maps/newMap.txt"));
 
     }
 
@@ -161,26 +162,5 @@ public class ExportGame extends ExportHac {
         mapList.add(String.valueOf(gameMap.getHeight()));
     }
 
-    /**
-     * Exports a file.
-     */
-    public void exportFile(){
-        String content = sb.toString();
-        File file = new File("assets/maps/newMap.txt");
-
-        try(FileOutputStream outputStream = new FileOutputStream(file)){
-            if(!file.exists()){
-                file.createNewFile();
-            }
-
-            byte[] contentInBytes = content.getBytes();
-
-            outputStream.write(contentInBytes);
-            outputStream.flush();
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

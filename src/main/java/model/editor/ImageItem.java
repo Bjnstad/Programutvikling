@@ -13,6 +13,7 @@ public class ImageItem {
     private int y;
     private Image image;
     private int bits;
+    private int frames;
 
     public ImageItem(ImageView imageView, Image image, String fileName, int x, int y) {
         this.imageView = imageView;
@@ -68,6 +69,13 @@ public class ImageItem {
 
     public void setBits(int bits) {
         this.bits = bits;
+    }
+    public int getFrames() {
+        return frames;
+    }
+
+    public void setFrames(int frames) {
+        this.frames = frames;
     }
 }
 

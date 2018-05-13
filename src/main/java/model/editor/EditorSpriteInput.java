@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.model.filehandler.ExportMap;
 import main.java.model.object.sprite.SpriteSheet;
 
 /**
@@ -55,8 +56,8 @@ public class EditorSpriteInput {
 
                     }
                 }
-                ExportHac exportHac = new ExportHac();
-                exportHac.saveSpriteInput(image, bits, columns,rows, fileName);
+                ExportMap exportSprite = new ExportMap();
+                exportSprite.saveSpriteInput(image, bits, columns,rows, fileName);
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);

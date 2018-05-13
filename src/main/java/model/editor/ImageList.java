@@ -44,6 +44,7 @@ public class ImageList {
     private ListView spriteListView;
     private ListView assetsListView;
     private MapObject mapObject;
+    private ImageItem imageItem;
 
     /**
      * This method contains the imageList.
@@ -73,11 +74,12 @@ public class ImageList {
                 }
                 try {
                     SpriteSheet test = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), imageItem.getX(), false);
-                    for (int y = 0, k = 0; y < imageItem.getY(); y++) {
-                        for (int x = 0; x < imageItem.getX(); x++, k++) {
+                    for (int y = 0; y < imageItem.getY(); y++) {
+                        for (int x = 0; x < imageItem.getX(); x++) {
                             Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
                             ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
                             imageItemExtracted.setBits(imageItem.getBits());
+                            imageItemExtracted.setFrames(imageItem.getX());
                             result.add(imageItemExtracted);
                         }
                     }
@@ -168,7 +170,7 @@ public class ImageList {
                         String filename = String.valueOf(assetsListView.getSelectionModel().getSelectedItems());
                         String[] fileNameArr = filename.split("\\.");
                         filename = fileNameArr[0].substring(1);
-                        ImageItem imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
+                        imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
                         System.out.println(imageItem.getX());
                         System.out.println(imageItem.getY());
 
@@ -178,7 +180,7 @@ public class ImageList {
                         spriteSheet.setStaticImage(imageItem.getX(), imageItem.getY());
                         MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
                         mapObject = object;
-                        graphics.setCursor(new ImageCursor(imageItem.getImage(), 16,16));
+                        graphics.setCursor(new ImageCursor(imageItem.getImage()));
 
 
                         primaryStage.close();
@@ -227,43 +229,6 @@ public class ImageList {
         }
     };
 
-
-
-    public ObservableList<ImageItem> openEditorSave(ObservableList<ImageItem> result){
-
-        for (int i = 0; i < dir.listFiles().length ; i++) {
-            File f = dir.listFiles()[i];
-            BufferedReader b = null;
-                try {
-                    b = new BufferedReader(new FileReader(f));
-                    String str = b.readLine().toString();
-                    String[] values = str.split("#");
-                    String fileName = values[0];
-                    int bits = Integer.parseInt(values[1]);
-                    int cols = Integer.parseInt(values[2]);
-                    int rows = Integer.parseInt(values[3]);
-                    BASE64Decoder decoder = new BASE64Decoder();
-                    byte[] imageByte = decoder.decodeBuffer(values[4]);
-                    ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
-                    BufferedImage spriteImage = ImageIO.read(bis);
-
-
-                    SpriteSheet test = new SpriteSheet(fileName, bits, cols, false);
-                    for (int y = 0, k = 0; y < rows; y++) {
-                        for (int x = 0; x < cols; x++, k++) {
-                            Image img = SwingFXUtils.toFXImage(test.getSprite(x, y), null);
-                            result.add(new ImageItem(new ImageView(img), img ,fileName, x, y));
-                            //result.add(new ImageView(img));
-                        }
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        return result;
-    }
 
     public ObservableList<ImageItem> openSpriteEditorSave(ObservableList<ImageItem> result){
         for(File f : dir.listFiles()){
@@ -412,6 +377,14 @@ public class ImageList {
 
     public void setMapObject(MapObject mapObject) {
         this.mapObject = mapObject;
+    }
+
+    public ImageItem getImageItem() {
+        return imageItem;
+    }
+
+    public void setImageItem(ImageItem imageItem) {
+        this.imageItem = imageItem;
     }
 }
 
