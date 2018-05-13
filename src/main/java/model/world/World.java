@@ -39,7 +39,7 @@ public class World {
         if(enemies.length < 1) levelUp();
 
         if(godmode) {
-            for(Enemy enemy : enemies)enemy.hit(6);
+            for(Enemy enemy : enemies)enemy.hit(1);
         }
 
         Actions actions = new Actions();
