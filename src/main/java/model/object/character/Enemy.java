@@ -40,7 +40,7 @@ public class Enemy extends Character {
 
     @Override
     public void logic(World world, Actions actions) {
-        Player player = world.getPlayer();
+        MainPlayer player = world.getMainPlayer();
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
         double rx = speed * Math.sin(angle) / 100;
         double ry = speed * Math.cos(angle) / 100;

@@ -46,13 +46,13 @@ class EnemyTest {
 
     @Test
     void addPosX() {
-        enemy.addPos(4, 0);
+        //enemy.addPos(4, 0);
         assertEquals(9, enemy.getPosX());
     }
 
     @Test
     void addPosY() {
-        enemy.addPos(0, 5);
+        //enemy.addPos(0, 5);
         assertEquals(10, enemy.getPosY());
     }
 

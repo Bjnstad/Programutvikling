@@ -84,9 +84,9 @@ public abstract class GameObject extends Sprite {
      * If not, it walks right.
      //* @param speed this is the speed to the character walking right or left.
      */
-    public void addPos(double x, double y, World world) {
+    public boolean addPos(double x, double y, World world) {
         for(GameObject object : world.getGameObjects()) {
-            if(willCollide(object,(int)(getPosX() + x), (int)(getPosY() + y))  && object.isCollideable()) return;
+            if(willCollide(object,(int)(getPosX() + x), (int)(getPosY() + y))  && object.isCollideable()) return false;
         }
 
         if(Math.abs(x) > Math.abs(y)) {
@@ -97,6 +97,8 @@ public abstract class GameObject extends Sprite {
 
         this.posX += x;
         this.posY += y;
+
+        return true;
     }
 
     /**

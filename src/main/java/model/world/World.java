@@ -134,7 +134,7 @@ public class World {
                 if(object.willCollide(gameObject)) return false;
             }
 
-            if(gameObject instanceof Player && object instanceof Player) throw new IllegalStateException("A player has already been added, there could only be one.");
+            if(gameObject instanceof MainPlayer && object instanceof MainPlayer) throw new IllegalStateException("A main player has already been added, there could only be one.");
         }
         gameObjects.add(object);
         return true;

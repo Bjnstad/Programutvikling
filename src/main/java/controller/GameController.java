@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
 import main.java.model.object.Bullet;
+import main.java.model.object.character.MainPlayer;
 import main.java.model.object.character.Player;
 import main.java.model.world.World;
 
@@ -144,7 +145,7 @@ public class GameController implements Controller {
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {
             if(!isRunning) return;
-            Player player = world.getPlayer();
+            Player player = world.getMainPlayer();
             double mX = event.getX() - camera.getTranslateX();
             double mY = event.getY() - camera.getTranslateY();
             double pX = (player.getPosX() + (double)player.getSizeX()/2);
@@ -198,7 +199,7 @@ public class GameController implements Controller {
     public void play() {
         if(timeline == null) initTimeline();
 
-        world.loadMap(camera);
+        world.renderMap(camera);
         timeline.play(); // Start timeline
         isRunning = true;
     }
@@ -229,7 +230,8 @@ public class GameController implements Controller {
      */
     public boolean move(double x, double y) {
         if(!isRunning) return false; // Dont move if game not running
-        return world.move(x, y, camera);
+        MainPlayer player = world.getMainPlayer();
+        return player.move(x, y, world);
     }
 
 

@@ -13,7 +13,7 @@ public class MainPlayer extends Player {
         super(spriteName, sizeX, sizeY, posX, posY);
     }
 
-    public void move(double x, double y, World world) {
+    public boolean move(double x, double y, World world) {
         Camera camera = world.getCamera();
 
         int rX = (int) (getPosX() + x);
@@ -27,6 +27,6 @@ public class MainPlayer extends Player {
         if(camera.getDimension() - camera.getZoom()/2 < rY) translateY = 0;
         camera.translate(translateX, translateY);
 
-        addPos(x, -y, world);
+        return addPos(x, -y, world);
     }
 }

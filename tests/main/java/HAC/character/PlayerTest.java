@@ -64,14 +64,14 @@ class PlayerTest {
 
     @Test
     void addPosX() {
-        player.addPos(2.2, 0);
+        //player.addPos(2.2, 0);
         assertEquals(2.2, player.getPosX());
 
     }
 
     @Test
     void addPosY() {
-        player.addPos(0, 5);
+        //player.addPos(0, 5);
         assertEquals(5, player.getPosY());
 
     }
