@@ -5,23 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import main.java.controller.*;
+import main.java.model.filehandler.ImportGame;
 import main.java.controller.Controller;
-import main.java.controller.MainMenuController;
-import main.java.model.filehandler.HacParser;
-import main.java.model.world.GameMap;
+import main.java.model.object.character.Enemy;
+import main.java.model.world.World;
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import main.java.controller.Controller;
-import main.java.controller.MainMenuController;
-import main.java.model.filehandler.HacParser;
-import main.java.model.world.GameMap;
-
-import java.io.File;
 import java.io.File;
 
 public class LoadGameController implements SubController {
@@ -30,7 +19,7 @@ public class LoadGameController implements SubController {
     ListView games;
 
     static final File dir = new File("assets/savegame");
-    private MainMenuController mainMenuController;
+    private GameController gameController;
 
     /**
      * Gets all the names to the observable list.
@@ -41,7 +30,7 @@ public class LoadGameController implements SubController {
         ObservableList<String> res = FXCollections.observableArrayList();
 
         for (final File f : dir.listFiles()) {
-            if(getFileExtension(f).equals("       ")) {
+            if(getFileExtension(f).equals("txt")) {
                 res.add(f.getName());
             }
         }
@@ -70,6 +59,9 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void importMap(ActionEvent event) {
+        File file = new File("assets/maps/newMap.txt");
+        ImportGame ig =  new ImportGame(file);
+
     }
 
     /**
@@ -79,9 +71,19 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        HacParser hacParser = new HacParser();
-        GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString()));
-        mainMenuController.loadMap(gameMap);
+        File file = new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString());
+        ImportGame ig =  new ImportGame(file);
+
+        World world = new World();
+
+        for(Enemy enemy : ig.getEnemies()) world.addGameObject(enemy);
+        world.addGameObject(ig.getPlayer());
+        world.setGameMap(ig.getMap());
+        //world.getGameMap().addGameObject();
+        gameController.getCamera().setTranslateX(ig.getTranslateX());
+        gameController.getCamera().setTranslateY(ig.getTranslateY());
+        gameController.setWorld(world);
+
     }
 
     /**
@@ -90,7 +92,7 @@ public class LoadGameController implements SubController {
      */
     @Override
     public void setSubController(Controller controller) {
-        mainMenuController = (MainMenuController)controller;
+        gameController = (GameController) controller;
     }
 
     /**

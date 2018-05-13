@@ -1,15 +1,12 @@
 package main.java.controller;
 
-import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import main.java.model.Camera;
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
 import main.java.model.filehandler.ExportHac;
 import main.java.model.filehandler.HacParser;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
+import main.java.model.object.MapObject;
 
 import java.io.File;
 
@@ -130,15 +127,15 @@ public class HACEditor {
     }
 
     /**
-     * Sets gameObject.
-     * @param gameObject object int the game.
-     * @return draws current gameObject to gameMap.
+     * Sets mapObject.
+     * @param mapObject object int the game.
+     * @return draws current mapObject to gameMap.
      */
-    public boolean setGameObject(GameObject gameObject) {
-        gameMap.addGameObject(gameObject);
-        exportHac.addElement(gameObject);
+    public boolean setGameObject(MapObject mapObject) {
+        //gameMap.addGameObject(mapObject);
+        exportHac.addElement(mapObject);
 
-        gameMap.drawObject(gameObject, camera);
+        gameMap.drawObject(mapObject, camera);
         return true;
     }
 

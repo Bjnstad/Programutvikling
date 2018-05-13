@@ -1,8 +1,8 @@
 package main.java.HAC.character;
 
 
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class PlayerTest {
      */
     @BeforeEach
     public void setUp() {
-        player = new Player();
+        player = new Player("player_animations_walking", 1,1,1,1);
 
     }
 

@@ -3,8 +3,8 @@ package main.java.model.filehandler;
 
 import javafx.animation.Timeline;
 import main.java.model.Camera;
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import main.java.model.world.GameMap;
 
 /**
@@ -25,8 +25,6 @@ public class Save {
         this.timeline = timeline;
         this.player = player;
     }
-
-
 
 
 

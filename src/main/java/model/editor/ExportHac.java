@@ -1,6 +1,7 @@
 package main.java.model.editor;
 
-import main.java.model.world.GameObject;
+import main.java.model.object.MapObject;
+import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
 
 import javax.imageio.ImageIO;
@@ -16,26 +17,63 @@ import java.util.Base64;
  * This class makes it possible to export a file.
  * @author henrytran
  */
+
+//@TODO: RESTRUCTURE METHODS!!
 public class ExportHac {
     private ArrayList<String> elements = new ArrayList<>();
 
     /**
      * This method adds a element to the game.
-     * @param gameObject is the element that is being added to the game.
+     * @param mapObject is the element that is being added to the game.
      */
-    public void addElement(GameObject gameObject){
-        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(gameObject.getAsset(), null), "png");
+    public void addElement(MapObject mapObject){
+        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(mapObject.getAsset(), null), "png");
         base64String = base64String.substring(0, base64String.length()-5);
 
         StringBuilder sb = new StringBuilder();
         sb.append(base64String + "&");
-        sb.append(gameObject.getSizeX() +"&");
-        sb.append(gameObject.getSizeY() +"&");
-        sb.append(gameObject.getPosX()+ "&");
-        sb.append(gameObject.getPosY()+ "&#");
+        sb.append(mapObject.getSizeX() +"&");
+        sb.append(mapObject.getSizeY() +"&");
+        sb.append(mapObject.getPosX()+ "&");
+        sb.append(mapObject.getPosY()+ "&#");
 
 
         elements.add(sb.toString());
+    }
+
+    public void saveSpriteInput(Image image, int bits, int cols, int rows, String fileName){
+        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(image, null), "png");
+        base64String = base64String.substring(0, base64String.length()-5);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(fileName);
+        sb.append("#");
+        sb.append(bits);
+        sb.append("#");
+        sb.append(cols);
+        sb.append("#");
+        sb.append(rows);
+        sb.append("#");
+        sb.append(base64String);
+
+        String content = sb.toString();
+        File file = new File("assets/editorassets/"+fileName+".ahac");
+        System.out.println("CREATED FILE");
+
+        try(FileOutputStream outputStream = new FileOutputStream(file)){
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            byte[] contentInBytes = content.getBytes();
+
+            outputStream.write(contentInBytes);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -69,6 +107,7 @@ public class ExportHac {
         }
         String content = sb.toString();
         File file = new File("assets/maps/newMap.mhac");
+        System.out.println("CREATED FILE");
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
             if(!file.exists()){

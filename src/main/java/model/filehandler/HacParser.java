@@ -1,8 +1,7 @@
 package main.java.model.filehandler;
 
-import javafx.embed.swing.SwingFXUtils;
+import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -41,7 +40,12 @@ public class HacParser {
                 BufferedImage image = ImageIO.read(bis);
                 bis.close();
 
-                GameObject hf = new GameObject(SwingFXUtils.toFXImage(image, null), Integer.valueOf(objContent[1]), Integer.valueOf(objContent[2]), Integer.valueOf(objContent[3]), Integer.valueOf(objContent[4]));
+                int posY = Integer.valueOf(objContent[4]);
+                int posX = Integer.valueOf(objContent[3]);
+                int sizeX = Integer.valueOf(objContent[1]);
+                int sizeY = Integer.valueOf(objContent[2]);
+                //MapObject hf = new MapObject(SwingFXUtils.toFXImage(image, null), posY, posX, sizeX, sizeY);
+                //map.addGameObject(hf);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

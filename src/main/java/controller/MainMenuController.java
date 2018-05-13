@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import javafx.scene.input.MouseEvent;
 import main.java.model.world.GameMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 /**
  * MainMenu Controller implements Controller.
  */
+
+// TODO: CLEAN
 public class MainMenuController implements Controller {
 
     private MainController mainController = null;
@@ -36,6 +39,16 @@ public class MainMenuController implements Controller {
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
+        return null;
+    }
+
+    @Override
+    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+        return null;
+    }
+
+    @Override
+    public EventHandler<MouseEvent> getMouseEventHandler() {
         return null;
     }
 
@@ -81,10 +94,11 @@ public class MainMenuController implements Controller {
     /**
      * Loads the map.
      * @param gameMap shows us map of game.
+     * @deprecated
      */
     public void loadMap(GameMap gameMap) {
-        mainController.setGameMap(gameMap);
-        mainController.setState(State.GAME);
+        //mainController.setGameMap(gameMap);
+        ///mainController.setState(State.GAME);
     }
 
 

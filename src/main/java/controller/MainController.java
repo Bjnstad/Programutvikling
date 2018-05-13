@@ -1,20 +1,19 @@
 package main.java.controller;
 
 import main.java.controller.subcontroller.*;
-import main.java.model.world.GameMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MainController implements Initializable
+ * MainController loads fxml views with respectively controller class. Set state will be the main // TODO: More javadoc
+ *
  * @author Axel Bjørnstad - S315322
  */
 public class MainController implements Initializable {
@@ -23,7 +22,6 @@ public class MainController implements Initializable {
     AnchorPane mainView;
 
     private Controller controller; // Current controller
-    private GameMap gameMap; // The current gamemap to play
 
     /**
      * Initialize location and resources to the game.
@@ -54,9 +52,7 @@ public class MainController implements Initializable {
                 break;
             case GAME:
                 filepath = "Game";
-
-                // TODO: Move map loader to subcontroller handler
-                controller = new GameController(gameMap);
+                controller = new GameController();
                 break;
         }
 
@@ -64,8 +60,11 @@ public class MainController implements Initializable {
         mainView.getChildren().add(loadPane(filepath)); // Change anchorpane to view
 
         Scene scene = mainView.getScene();
-        if(scene != null) scene.setOnKeyPressed(controller.getEventHandler());
-
+        if(scene != null){
+            scene.setOnKeyPressed(controller.getEventHandler());
+            scene.setOnKeyReleased(controller.getOnRealeasedEventHandler());
+            scene.setOnMouseClicked(controller.getMouseEventHandler());
+        }
         controller.initiate(); // Call initiate for new controller
     }
 
@@ -84,14 +83,6 @@ public class MainController implements Initializable {
         }
 
         return pane;
-    }
-
-    /**
-     * Sets the game map.
-     * @param gameMap is a simple map for testing.
-     */
-    public void setGameMap(GameMap gameMap) {
-        this.gameMap = gameMap;
     }
 
     /**
@@ -124,11 +115,13 @@ public class MainController implements Initializable {
 
             case CHOOSE_MAP:
                 filepath = "ChooseMap";
+                setState(State.GAME);
                 subController = new ChooseMapController();
                 break;
 
             case LOAD_MAP:
                 filepath = "LoadGame";
+                setState(State.GAME);
                 subController = new LoadGameController();
                 break;
 
@@ -162,7 +155,6 @@ public class MainController implements Initializable {
     }
 
     /**
-     * In this method it gets the width to the gameboard.
      * @return the width of the window in pixels.
      */
     public double getWidth() {
@@ -170,7 +162,6 @@ public class MainController implements Initializable {
     }
 
     /**
-     * In this method it gets the height to the gameboard.
      * @return the height of the window in pixels.
      */
     public double getHeight() {

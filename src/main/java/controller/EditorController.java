@@ -1,8 +1,14 @@
 package main.java.controller;
 
-import main.java.model.filehandler.SpriteSheet;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import main.java.model.Camera;
+import main.java.model.editor.ExportHac;
+import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
-import main.java.model.world.GameObject;
+import main.java.model.object.MapObject;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +23,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.model.world.World;
+
 import java.io.File;
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  * Implements the EditorController to Controller.
@@ -27,9 +37,16 @@ public class EditorController implements Controller {
 
     private MainController mainController;
     private ImageList imageList;
+    private World world;
     private HACEditor map;
-    private FileChooser fileChooser = new FileChooser();
+    private Camera camera;
+    private boolean isRunning = false;
     private EditorHandler editorHandler;
+    private MapObject mapObject;
+    private ExportHac exportHac;
+    private ArrayList<String> fileNames = new ArrayList<>();
+
+
 
     @FXML
     Canvas graphics;
@@ -37,9 +54,8 @@ public class EditorController implements Controller {
     @FXML
     ListView listView;
 
-   // public EditorController() {
-   //     super(State.EDITOR);
-   // }
+    @FXML
+    ListView listViewBottom;
 
     /**
      * This method creates a new file.
@@ -64,114 +80,36 @@ public class EditorController implements Controller {
      */
     @Override
     public void initiate () {
-        //FileHandler fileHandler = new FileHandler();
+        this.camera = new Camera(mainController.getWidth(), graphics);
+        this.exportHac = new ExportHac();
+        GameMap gameMap = new GameMap(20, 20, new SpriteSheet("background", 32));
+        this.world = new World();
+        world.setGameMap(gameMap);
+        gameMap.render(camera);
+        imageList = new ImageList(listViewBottom, listView);
 
-        imageList = new ImageList();
-
-        listView.setItems(imageList.getAllNames());
-
-        listView.setCellFactory(param -> imageList.getAllAssets());
-
-
-        map = new HACEditor(new GameMap(25,25, new SpriteSheet("background", 32)), graphics);
-        //map.getCamera().setCanvas(graphics);
-
-
-        editorHandler = new EditorHandler(mainController, map);
-
-        /*
-        graphics.setOnDragDetected(new EventHandler<MouseEvent>() {
-            /**
-             * This method makes the object move with a mouseclick.
-             * @param event allows us to access the properties of MouseEvent.
-
+        //listView.setItems(imageList.openEditorSave(imageList.getResult()));
+        listViewBottom.setItems(imageList.openSpriteEditorSave(imageList.getSpriteBottom()));
+        listViewBottom.setCellFactory(param -> new ListCell<ImageItem>() {
             @Override
-            public void handle(MouseEvent event) {
-                map.move(event.getX(), event.getY());
-            }
-        });*/
-
-
-        listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            /**
-             * This method handles an action of mouseEvent.
-             * @param mouseEvent is an event which indicates that a mouse action occurred in a component.
-             */
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                final Stage primaryStage = new Stage();
-                primaryStage.initModality(Modality.APPLICATION_MODAL);
-                BorderPane root = new BorderPane();
-
-                primaryStage.setTitle("Add asset");
-                primaryStage.setScene(new Scene(root));
-
-                double height = 60;
-                double width = 70;
-
-                Button submit = new Button("Submit");
-
-                submit.setMinSize(3*width, height);
-
-                Label sizeX = new Label("Size X:");
-                TextField inputSizeX = new TextField ();
-
-                Label sizeY = new Label("Size Y:");
-                TextField inputSizeY = new TextField ();
-
-                Label posX = new Label("Pos X:");
-                TextField inputPosX = new TextField ();
-
-                Label posY = new Label("Pos Y:");
-                TextField inputPosY = new TextField ();
-                VBox Vertikalboks = new VBox(sizeX, inputSizeX, sizeY, inputSizeY,posX, inputPosX, posY, inputPosY);
-
-                root.setLeft(Vertikalboks);
-                root.setCenter(submit);
-                primaryStage.show();
-
-                submit.setOnAction(new EventHandler<ActionEvent>() {
-                    /**
-                     * This method handles som type of action.
-                     * This event type is widely used to represent a variety of things
-                     * @param e is a type of ActionEvent, it allows you to access the properties of ActionEvent.
-                     */
-                    @Override public void handle(ActionEvent e) {
-                        int inputX = Integer.parseInt(inputSizeX.getText());
-                        int inputY = Integer.parseInt(inputSizeY.getText());
-
-                        int posX = Integer.parseInt(inputPosX.getText());
-                        int posY = Integer.parseInt(inputPosY.getText());
-                        listView.getSelectionModel().getSelectedItems();
-
-
-                        GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), posX, posY, inputX, inputY);
-                        map.setGameObject(object);
-
-
-
-
-                      /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                GameObject object = new GameObject(imageList.getResource(listView.getSelectionModel().getSelectedItem().toString()), inputX, inputY);
-                                System.out.println(object.getAsset());
-
-                                map.setGameObject(object, (int)event.getX(), (int)event.getY());
-                                System.out.println((int)event.getX());
-                                System.out.println((int)event.getY());
-
-                            }
-                        }));
-*/
-
-
-                    }
-                });
+            protected void updateItem(ImageItem item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setGraphic(item.getImageView());
+                }
             }
         });
+
+
+        //listView.setItems(imageList.getAllNames());
+
+        //listView.setCellFactory(param -> imageList.getAllAssets());
+        imageList.handleSpriteListView();
+        imageList.handleAssetsListView(graphics);
+
     }
 
     /**
@@ -189,7 +127,10 @@ public class EditorController implements Controller {
      */
     @FXML
     private void save(ActionEvent event){
-        map.saveFile();
+        //map.saveFile();
+        exportHac.createFile();
+
+
     }
 
     /**
@@ -198,6 +139,7 @@ public class EditorController implements Controller {
      */
     @FXML
     private void Import(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mHac files", "*.mhac");
         fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
@@ -205,6 +147,27 @@ public class EditorController implements Controller {
         if (file != null) {
             map.openFile(file);
         }
+    }
+
+    @FXML
+    private void ImportSprite(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        if (file != null) {
+            EditorSpriteInput editorSpriteInput = new EditorSpriteInput();
+
+            Image image = new Image(file.toURI().toString());
+            Path path = file.toPath();
+            String[] fileNameA = String.valueOf(path.getFileName()).split("\\.");
+            String fileName = fileNameA[0];
+            System.out.println("Height: " + image.getHeight() + "Width: " + image.getWidth());
+            System.out.println("Bits: " + image.getWidth()/editorSpriteInput.getColumns());
+            editorSpriteInput.popUp(image, fileName, imageList, imageList.getResult()).show();
+
+
+        }
+
     }
 
     /**
@@ -222,7 +185,28 @@ public class EditorController implements Controller {
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
         return (event -> {
-            editorHandler.getEventHandler(event);
+            //editorHandler.getEventHandler(event);
+        });
+    }
+
+    @Override
+    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+        return null;
+    }
+
+    public EventHandler<MouseEvent> getMouseEventHandler(){
+        return (event -> {
+            mapObject = imageList.getMapObject();
+            //exportHac.addElement(mapObject);
+            if(imageList.getMapObject() == null) return;
+            mapObject.setPosX((int)(event.getX()/camera.getScale()));
+            mapObject.setPosY((int)(event.getY()/camera.getScale()));
+            camera.render(mapObject);
+
+            //System.out.println(world.getGameMap().addGameObject(mapObject));
+            //world.getGameMap().drawObject(mapObject, camera);
+            System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());
+            System.out.println("CLICKED EDITORCONTROLLER");
         });
     }
 }

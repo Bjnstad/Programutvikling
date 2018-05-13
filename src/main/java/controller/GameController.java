@@ -4,22 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Point3D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
-import main.java.model.character.Enemy;
-import main.java.model.character.Player;
-import main.java.model.filehandler.ExportGame;
-import main.java.model.filehandler.ImportGame;
-import main.java.model.world.GameMap;
+import main.java.model.world.World;
 
-import java.io.File;
-import java.util.Random;
 
 /**
  * GameController is linking javafx to main game logic
@@ -30,30 +21,22 @@ public class GameController implements Controller {
     private final static double FPS = 60;
 
     private MainController mainController; // Parent controller
-    private GameMap gameMap;
-    private Camera camera;
+    private World world;
     private boolean isRunning = false;
     private Timeline timeline;
-    private Enemy[] enemies;
-    private Player player;
 
-    private int currentLevel;
+    private Camera camera;
+
+
+    //TODO: MOVE TO NEW CLASS
+    private boolean up = false;
+    private boolean down = false;
+    private boolean right = false;
+    private boolean left = false;
+
 
     @FXML
     private Canvas graphics;
-
-
-    /**
-     * This method controls gameMap.
-     * If there´s nothing in gameMap, then it creates a simple map.
-     * @param gameMap is the map in the game.
-     */
-    public GameController(GameMap gameMap) {
-        if(gameMap == null) throw new NullPointerException("Gamemap cannot be null");
-        this.gameMap = gameMap;
-
-        currentLevel = 1;
-    }
 
     /**
      * Initiate on start of state.
@@ -61,15 +44,9 @@ public class GameController implements Controller {
     @Override
     public void initiate() {
         this.camera = new Camera(mainController.getWidth(), graphics);
-        this.player = new Player();
-
-
-
-        generateEnemies(10);
-        play();
     }
 
-     /**
+    /**
      * On state close.
      */
     @Override
@@ -95,11 +72,13 @@ public class GameController implements Controller {
 
     /**
      * Load the game.
+     * @deprecated
      */
     public void load() {
-        ImportGame importGame = new ImportGame();
-        File file = new File("assets/maps/newMap.txt");
-        importGame.parseFile(file);
+        //File file = new File("assets/maps/newMap.txt");
+        //ImportGame ig =  new ImportGame(file);
+
+
     }
 
     /**
@@ -108,24 +87,26 @@ public class GameController implements Controller {
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
-
         // TODO: add acceleration in own controller class
-        double speed = 0.4;
         return (event -> {
+            /*if(event.getCode() == KeyCode.W)move(0, speed);
+            if(event.getCode() == KeyCode.A)move(-speed, 0);
+            if(event.getCode() == KeyCode.S)move(0, -speed);
+            if(event.getCode() == KeyCode.D)move(speed, 0);*/
+
             switch (event.getCode()) {
                 case W:
-                    move(0, speed);
+                    up = true;
                     break;
                 case A:
-                    move(-speed, 0);
+                    left = true;
                     break;
                 case S:
-                    move(0, -speed);
+                    down = true;
                     break;
                 case D:
-                    move(speed, 0);
+                    right = true;
                     break;
-
                 case ESCAPE:
                     pause();
                     mainController.addSubState(SubState.PAUSE_MENU);
@@ -134,6 +115,59 @@ public class GameController implements Controller {
             }
         });
     }
+
+    @Override
+    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+        return  (event ->{
+            switch (event.getCode()){
+                case W:
+                    up = false;
+                    break;
+                case A:
+                    left = false;
+                    break;
+                case S:
+                    down = false;
+                    break;
+                case D:
+                    right = false;
+                    break;
+            }
+
+        });
+
+    }
+
+
+    public EventHandler<MouseEvent> getMouseEventHandler(){
+        return (event -> {
+            if(!isRunning) return;
+            double mX = event.getX() - camera.getTranslateX();
+            double mY = event.getY() - camera.getTranslateY();
+            //world.shoot(mX, mY, camera);
+        });
+    }
+
+
+    private void gameloop() {
+        // TODO: MOVE TO CLASS
+        double speed = 0.1;
+        if(up&&left) speed /= 2;
+        if(up&&right) speed /= 2;
+        if(down&&left) speed /= 2;
+        if(down&&right) speed /= 2;
+
+        if (up) move(0, speed);
+        if (down) move(0, -speed);
+        if (left) move(-speed, 0);
+        if (right) move(speed, 0);
+
+
+
+        world.gameloop();
+        //world.g(camera);
+    }
+
 
     /**
      * Sets mainController(parent).
@@ -148,22 +182,9 @@ public class GameController implements Controller {
      * Save the game.
      */
     public void save() {
-        ExportGame save = new ExportGame(getGameMap(),getCamera(), getEnemies(), getPlayer());
+        //ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
     }
 
-
-    /**
-     *  Generates given number of enemies with random location.
-     *  @param numberOfEnemies how many enemies to create.
-     */
-    private void generateEnemies(int numberOfEnemies) {
-        enemies = new Enemy[numberOfEnemies];
-        Random rand = new Random();
-        for (int i = 0; i < numberOfEnemies; i++) {
-            this.enemies[i] = new Enemy("BODY_skeleton", 1,1,rand.nextInt(20),rand.nextInt(20));
-            this.enemies[i].setSpeed(1 + rand.nextInt(4));
-        }
-    }
 
     /**
      * Starting gameloop running accordingly to FPS.
@@ -171,7 +192,7 @@ public class GameController implements Controller {
     public void play() {
         if(timeline == null) initTimeline();
 
-        gameMap.render(camera); // Render the gameboard to the screen.
+        world.loadMap(camera);
         timeline.play(); // Start timeline
         isRunning = true;
     }
@@ -184,37 +205,15 @@ public class GameController implements Controller {
         isRunning = false;
     }
 
-
-    /**
-     * States that if the player-character collides with enemy-character, then player will die.
-     */
-    private void render() {
-        // Check for player collision and re-render map at enemy position.
-        for(Enemy enemy : enemies) {
-            if(player.willCollide(enemy)) die();
-            enemy.calculateMove(player);
-            gameMap.renderArea(camera, (int)enemy.getPosX() -3, (int)enemy.getPosY() -3,  (int)enemy.getPosX() +2, (int)enemy.getPosY() +2);
-        }
-
-        // Render enemies
-        for (Enemy enemy : enemies) {
-            enemy.render(camera);
-            enemy.renderHealth(camera);
-        }
-
-        player.render(camera);
-        player.renderHealth(camera);
-
-
-        /*
-        GraphicsContext gc = camera.getGraphicsContext();
-        gameMap.renderArea(camera, 1,1,3,1);
-
-        gc.setFill(Color.WHITE);
-        gc.setFont(Font.font("helvetica", 32));
-        gc.fillText("Level: " + currentLevel, camera.fixedX(1), camera.fixedY(1));
-        */
+    public void setWorld(World world) {
+        world.setGameController(this);
+        this.world = world;
+        mainController.toMainView();
+        play();
     }
+
+
+
 
     /**
      * Makes the character move vertical or horizontal.
@@ -224,30 +223,14 @@ public class GameController implements Controller {
      */
     public boolean move(double x, double y) {
         if(!isRunning) return false; // Dont move if game not running
-
-        int rX = (int) (player.getPosX() + x);
-        int rY = (int) (player.getPosY() - y);
-        if(gameMap.willCollide(rX, rY)) return false;
-
-        double translateX = 0;
-        double translateY = 0;
-        if(rX >= ((Math.signum(x) == -1) ? -1 : 0) + camera.getZoom()/2) translateX -= camera.scale(x);
-        if(rY >= ((Math.signum(y) == -1) ? 0 : -1) + camera.getZoom()/2) translateY += camera.scale(y);
-        if(gameMap.getWidth() - camera.getZoom()/2 < rX) translateX = 0;
-        if(gameMap.getHeight() - camera.getZoom()/2 < rY) translateY = 0;
-        camera.translate(translateX, translateY);
-
-        player.addPos(x, -y);
-
-        gameMap.renderArea(camera, rX - player.getSizeX(), rY - player.getSizeY(),  rX +  player.getSizeX(), rY + player.getSizeY());
-        return true;
+        return world.move(x, y, camera);
     }
 
 
     /**
      * Called when character dies.
      */
-    private void die() {
+    public void die() {
         timeline.stop();
         isRunning = false;
         mainController.addSubState(SubState.DIE);
@@ -257,11 +240,18 @@ public class GameController implements Controller {
      * This method initiate a timeline.
      */
     private void initTimeline() {
-        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> render());
+        KeyFrame frame = new KeyFrame(Duration.seconds(1/FPS), event -> gameloop());
         timeline = new Timeline();
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
+
+
+
+    public World getWorld() {
+        return world;
+    }
+
 
     /**
      * Shows the state when we run the game.
@@ -277,29 +267,5 @@ public class GameController implements Controller {
      */
     public Camera getCamera() {
         return camera;
-    }
-
-    /**
-     * Gets the player.
-     * @return the visual of player to gameboard.
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
-     * Gets the gameMap.
-     * @return the visual of gameMap.
-     */
-    public GameMap getGameMap() {
-        return gameMap;
-    }
-
-    /**
-     * Gets the enemies.
-     * @return the visual of enemies.
-     */
-    public Enemy[] getEnemies() {
-        return enemies;
     }
 }

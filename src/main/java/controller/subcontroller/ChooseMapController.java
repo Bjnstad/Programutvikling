@@ -1,15 +1,17 @@
 package main.java.controller.subcontroller;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.controller.Controller;
-import main.java.controller.MainMenuController;
+import main.java.controller.GameController;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import main.java.model.filehandler.HacParser;
 import main.java.model.world.GameMap;
+import main.java.model.world.World;
 
 import java.io.File;
 
@@ -23,7 +25,7 @@ public class ChooseMapController implements SubController {
     ListView maps;
 
     static final File dir = new File("assets/maps");
-    private MainMenuController mainMenuController;
+    private GameController gameController;
 
     /**
      * Gets all the names to the observable list.
@@ -74,7 +76,20 @@ public class ChooseMapController implements SubController {
     public void play(ActionEvent event) {
         HacParser hacParser = new HacParser();
         GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
-        mainMenuController.loadMap(gameMap);
+
+        /** TODO: BAD CODE */
+
+        World w = new World();
+
+        w.addGameObject(new Player("player_animations_walking", 1, 1, 4, 4));
+        w.setGameMap(gameMap);
+       // w.setEnemies(new Enemy[0]);
+
+
+
+        // TODO: CREATE NEW WORLD
+        gameController.setWorld(w);
+        /** --- --*/
     }
 
     /**
@@ -83,7 +98,7 @@ public class ChooseMapController implements SubController {
      */
     @Override
     public void setSubController(Controller controller) {
-        mainMenuController = (MainMenuController)controller;
+        gameController = (GameController) controller;
     }
 
     /**
