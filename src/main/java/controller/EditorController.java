@@ -1,27 +1,21 @@
 package main.java.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import main.java.model.Camera;
-import main.java.model.editor.ExportHac;
+import main.java.model.filehandler.ExportMap;
+import main.java.model.filehandler.HacParser;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.object.MapObject;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import main.java.model.editor.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.model.world.World;
 
@@ -38,12 +32,11 @@ public class EditorController implements Controller {
     private MainController mainController;
     private ImageList imageList;
     private World world;
-    private HACEditor map;
+    //private HACEditor map;
     private Camera camera;
     private boolean isRunning = false;
-    private EditorHandler editorHandler;
     private MapObject mapObject;
-    private ExportHac exportHac;
+    private ExportMap exportMap;
     private ArrayList<String> fileNames = new ArrayList<>();
 
 
@@ -81,8 +74,8 @@ public class EditorController implements Controller {
     @Override
     public void initiate () {
         this.camera = new Camera(mainController.getWidth(), graphics);
-        this.exportHac = new ExportHac();
-        GameMap gameMap = new GameMap(20, 20, new SpriteSheet("background", 32));
+        this.exportMap = new ExportMap();
+        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background", 32));
         this.world = new World();
         world.setGameMap(gameMap);
         gameMap.render(camera);
@@ -127,9 +120,15 @@ public class EditorController implements Controller {
      */
     @FXML
     private void save(ActionEvent event){
-        //map.saveFile();
-        exportHac.createFile();
 
+        StringBuilder sb = new StringBuilder();
+        for(String content : exportMap.getElements()){
+            sb.append(content);
+        }
+        String content = sb.toString();
+        exportMap.createFile(new File("assets/TESTMAP.mHac"), content);
+        //map.saveFile();
+        //exportHac.createFile();
 
     }
 
@@ -145,7 +144,8 @@ public class EditorController implements Controller {
         File file = fileChooser.showOpenDialog(new Stage());
 
         if (file != null) {
-            map.openFile(file);
+            HacParser hacParser = new HacParser();
+            hacParser.parseFile(file);
         }
     }
 
@@ -184,9 +184,34 @@ public class EditorController implements Controller {
      */
     @Override
     public EventHandler<KeyEvent> getEventHandler() {
+
+        // TODO: add acceleration in own controller class
+        double speed = 15.4;
         return (event -> {
-            //editorHandler.getEventHandler(event);
-        });
+            /*if(event.getCode() == KeyCode.W)move(0, speed);
+            if(event.getCode() == KeyCode.A)move(-speed, 0);
+            if(event.getCode() == KeyCode.S)move(0, -speed);
+            if(event.getCode() == KeyCode.D)move(speed, 0);*/
+
+                switch (event.getCode()) {
+                    case W:
+                        camera.translate(0,speed);
+                        break;
+                    case A:
+                        camera.translate(speed, 0);
+                        break;
+                    case S:
+                        camera.translate(0, -speed);
+                        break;
+                    case D:
+                        camera.translate(-speed, 0);
+                        break;
+                    case ESCAPE:
+
+                        break;
+
+                }
+            });
     }
 
     @Override
@@ -196,17 +221,16 @@ public class EditorController implements Controller {
 
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {
-            mapObject = imageList.getMapObject();
-            //exportHac.addElement(mapObject);
             if(imageList.getMapObject() == null) return;
-            mapObject.setPosX((int)(event.getX()/camera.getScale()));
-            mapObject.setPosY((int)(event.getY()/camera.getScale()));
-            camera.render(mapObject);
+            //graphics.setCursor(new ImageCursor(imageList.getImageItem().getImage()));
+            System.out.println("Frames" + imageList.getImageItem().getFrames());
+            imageList.getMapObject().setPosX((int)((event.getX()-camera.getTranslateX())/camera.getScale()));
+            imageList.getMapObject().setPosY((int)((event.getY()-camera.getTranslateY())/camera.getScale()));
+            camera.render(imageList.getMapObject());
+            exportMap.addElement(imageList.getMapObject(), imageList.getImageItem());
 
-            //System.out.println(world.getGameMap().addGameObject(mapObject));
-            //world.getGameMap().drawObject(mapObject, camera);
-            System.out.println("added object: " + mapObject.getSizeY() + "at: " + event.getX()/camera.getScale());
-            System.out.println("CLICKED EDITORCONTROLLER");
+
+
         });
     }
 }

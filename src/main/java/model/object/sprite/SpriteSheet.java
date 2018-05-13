@@ -118,4 +118,6 @@ public class SpriteSheet {
     public boolean isDirectional() {
         return directional;
     }
+
+
 }

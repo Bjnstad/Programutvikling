@@ -3,7 +3,6 @@ package main.java.controller;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import main.java.model.Camera;
-import main.java.model.filehandler.ExportHac;
 import main.java.model.filehandler.HacParser;
 import main.java.model.world.GameMap;
 import main.java.model.object.MapObject;
@@ -22,7 +21,7 @@ public class HACEditor {
     private Camera camera;
     private boolean devMode = false;
     private HacParser hacParser;
-    private ExportHac exportHac;
+
 
     /**
      * Editor to HAC that inserts gameMap and canvas.
@@ -40,7 +39,7 @@ public class HACEditor {
         this.camera = new Camera(800, canvas);
 
         this.hacParser = new HacParser();
-        this.exportHac = new ExportHac();
+
         this.render();
     }
 
@@ -133,7 +132,7 @@ public class HACEditor {
      */
     public boolean setGameObject(MapObject mapObject) {
         //gameMap.addGameObject(mapObject);
-        exportHac.addElement(mapObject);
+        //exportHac.addElement(mapObject);
 
         gameMap.drawObject(mapObject, camera);
         return true;
@@ -143,7 +142,7 @@ public class HACEditor {
      * Saves a file.
      */
     public void saveFile() {
-        exportHac.createFile();
+        //exportHac.createFile();
 
     }
 
@@ -152,8 +151,9 @@ public class HACEditor {
      * @param file implements a selected file to gameMap.
      */
     public void openFile(File file) {
-        gameMap = hacParser.parseFile(file);
-        this.render();
+        //gameMap = hacParser.parseFile(file);
+        hacParser.parseFile(file);
+        //this.render();
 
 
     }
