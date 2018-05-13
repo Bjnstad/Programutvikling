@@ -2,7 +2,6 @@ package main.java.model.filehandler;
 
 import main.java.model.object.character.Enemy;
 import main.java.model.object.character.Player;
-import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.world.GameMap;
 import sun.misc.BASE64Decoder;
 

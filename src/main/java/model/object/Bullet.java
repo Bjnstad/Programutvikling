@@ -2,9 +2,8 @@ package main.java.model.object;
 
 
 import main.java.model.Camera;
-import main.java.model.object.GameObject;
 import main.java.model.object.character.Character;
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.render.Actions;
 import main.java.model.world.World;
 

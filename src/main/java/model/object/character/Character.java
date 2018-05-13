@@ -1,6 +1,6 @@
 package main.java.model.object.character;
 
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.GameObject;
 
 /**

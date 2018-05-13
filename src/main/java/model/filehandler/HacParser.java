@@ -1,16 +1,9 @@
 package main.java.model.filehandler;
 
-import main.java.model.Camera;
-import main.java.model.object.GameObject;
 import main.java.model.object.MapObject;
-import main.java.model.object.sprite.SpriteSheet;
-import main.java.model.render.Actions;
 import main.java.model.world.GameMap;
 import main.java.model.world.World;
-import sun.misc.BASE64Decoder;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 

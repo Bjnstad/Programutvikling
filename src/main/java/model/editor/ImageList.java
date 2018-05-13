@@ -1,6 +1,5 @@
 package main.java.model.editor;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -9,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,15 +17,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.model.object.MapObject;
-import main.java.model.object.sprite.SpriteSheet;
-import main.java.model.world.GameMap;
+import main.java.model.filehandler.SpriteSheet;
 
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

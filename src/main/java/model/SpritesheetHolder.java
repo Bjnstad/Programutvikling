@@ -1,6 +1,6 @@
 package main.java.model;
 
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 
 public class SpritesheetHolder {
 

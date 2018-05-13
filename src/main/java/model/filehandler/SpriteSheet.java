@@ -1,4 +1,4 @@
-package main.java.model.object.sprite;
+package main.java.model.filehandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,6 +14,17 @@ import java.io.IOException;
  */
 public class SpriteSheet {
 
+
+    private BufferedImage spriteSheet;
+    private String filename;
+    private int bits;
+    private int columns;
+    private int row;
+
+
+
+
+    /*
     private BufferedImage spriteSheet;
     private String filename;
 
@@ -25,13 +36,16 @@ public class SpriteSheet {
 
     private int staticX;
     private int staticY;
+*/
+
 
     /**
      * //TODO: SKRIV OM
      * In this method we insert Sprite to the game, we base our sprites on 128-bit spriteSheet, any sizes over 128 will be redjected as of now, lower bits will be multiplied to 128
      * @param filename filename for spritesheet that should be fetched from.
      */
-    public SpriteSheet(String filename, int bits, int frames, boolean directional, int columns, int rows){
+    public SpriteSheet(String filename){
+        /*
         this.columns
 
 
@@ -40,8 +54,8 @@ public class SpriteSheet {
         this.directional = directional;
         this.filename = filename;
         this.multiplier = this.bits / bits;
-
-        load();
+        */
+        load(filename);
     }
 
     public SpriteSheet(String filename, int bits) {

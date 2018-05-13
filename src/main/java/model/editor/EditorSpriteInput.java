@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.model.filehandler.ExportMap;
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 
 /**
  * Created by henrytran1 on 11/05/2018.

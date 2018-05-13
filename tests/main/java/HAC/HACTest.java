@@ -1,7 +1,7 @@
 package main.java.HAC;
 
 import main.java.controller.GameController;
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.world.GameMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

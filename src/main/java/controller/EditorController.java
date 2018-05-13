@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import main.java.model.Camera;
 import main.java.model.filehandler.ExportMap;
 import main.java.model.filehandler.HacParser;
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.world.GameMap;
 import main.java.model.object.MapObject;
 import javafx.event.EventHandler;

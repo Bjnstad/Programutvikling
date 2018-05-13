@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.java.model.Camera;
 import main.java.model.object.MapObject;
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 
 /**
  * GameMap handles all of properties for the board, width, height, static objects and background, does not include player and enemies.

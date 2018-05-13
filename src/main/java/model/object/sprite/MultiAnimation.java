@@ -2,6 +2,7 @@ package main.java.model.object.sprite;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import main.java.model.filehandler.SpriteSheet;
 
 public class MultiAnimation extends Animation {
 

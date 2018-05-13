@@ -1,12 +1,8 @@
 package main.java.model.object;
 
-import javafx.geometry.Rectangle2D;
-import javafx.scene.shape.Rectangle;
 import main.java.model.Camera;
-import main.java.model.object.character.Enemy;
-import main.java.model.object.character.Player;
 import main.java.model.object.sprite.Direction;
-import main.java.model.object.sprite.SpriteSheet;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.sprite.Sprite;
 import main.java.model.render.Actions;
 import main.java.model.world.World;
