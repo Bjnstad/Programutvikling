@@ -11,7 +11,9 @@ import main.java.model.world.World;
  * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
  * @author
  */
-public class Bullet extends GameObject {
+
+// TODO: MAKE CHARACTER MOVABLE
+public class Bullet extends Character {
     private final GameObject parent;
     private final double speed = 10;
     private final double strength = 20;
@@ -24,8 +26,9 @@ public class Bullet extends GameObject {
      * @param endX coordinate of the cell horizontal.
      * @param endY coordinate of the cell vertical.
      */
+    // TODO: fix size
     public Bullet(GameObject parent, double startX, double startY, double endX, double endY){
-        super((int)(startX), (int)(startY), 1, 1, new SpriteSheet("arrow", 64, 1, true));
+        super("WEAPON_arrow" ,(int)(startX), (int)(startY));
         this.parent = parent;
 
         setNoneCollideable();

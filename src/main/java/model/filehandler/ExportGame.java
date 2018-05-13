@@ -117,7 +117,7 @@ public class ExportGame extends FileHandler {
     public void saveEnemies(){
         sb.append("/");
         for (int i = 0; i < enemies.length; i++) {
-            sb.append(enemies[i].getSpriteFileName());
+            //sb.append(enemies[i].getSpriteFileName());
             sb.append(',');
             sb.append(enemies[i].getSizeX());
             sb.append(',');
@@ -137,7 +137,7 @@ public class ExportGame extends FileHandler {
      */
     public void savePlayer(){
         sb.append("!");
-        sb.append(player.getSpriteFileName());
+        //sb.append(player.getSpriteFileName());
         sb.append(',');
         sb.append(player.getPosY());
         sb.append(',');

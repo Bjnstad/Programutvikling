@@ -75,10 +75,10 @@ public class EditorController implements Controller {
     public void initiate () {
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.exportMap = new ExportMap();
-        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background", 32));
+        //GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background", 32));
         this.world = new World();
-        world.setGameMap(gameMap);
-        gameMap.render(camera);
+        //world.setGameMap(gameMap);
+        //gameMap.render(camera);
         imageList = new ImageList(listViewBottom, listView);
 
         //listView.setItems(imageList.openEditorSave(imageList.getResult()));

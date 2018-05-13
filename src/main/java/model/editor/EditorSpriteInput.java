@@ -48,11 +48,11 @@ public class EditorSpriteInput {
 
 
             try {
-                SpriteSheet test = new SpriteSheet(fileName, bits, columns, false);
+                //SpriteSheet test = new SpriteSheet(fileName, bits, columns, false);
                 Image[] imgArray = new Image[rows * columns];
                 for (int y = 0, k = 0; y < rows; y++) {
                     for (int x = 0; x < columns; x++, k++) {
-                        Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                     //   Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
 
                     }
                 }

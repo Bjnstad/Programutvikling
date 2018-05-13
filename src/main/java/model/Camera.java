@@ -3,6 +3,7 @@ package main.java.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import main.java.model.object.GameObject;
+import main.java.model.object.sprite.ImageHandler;
 
 // TODO: Idea: Render all object to screen
 
@@ -12,6 +13,7 @@ import main.java.model.object.GameObject;
  */
 public class Camera {
 
+    private ImageHandler imageHandler = new ImageHandler();
     private int zoom = 12; // How many frames to show
     private Canvas canvas;
     private double translateX; // Movement offset
@@ -28,7 +30,7 @@ public class Camera {
 
     public void render(GameObject object) {
         GraphicsContext gc = getGraphicsContext();
-        gc.drawImage(object.getSprite(), scale(object.getPosX()), scale(object.getPosY()),scale * object.getSizeX(), scale * object.getSizeY()) ;
+        gc.drawImage(object.getImage(imageHandler), scale(object.getPosX()), scale(object.getPosY()),scale * object.getSizeX(), scale * object.getSizeY()) ;
     }
 
     /**

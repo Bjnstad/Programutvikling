@@ -49,8 +49,8 @@ public class ImportGame {
             int mapHeight = Integer.valueOf(mapValues[1]);
             int mapWidth = Integer.valueOf(mapValues[2]);
 
-            GameMap gameMap = new GameMap(mapWidth, mapHeight, new SpriteSheet(background, 32));
-            map = gameMap;
+            //GameMap gameMap = new GameMap(mapWidth, mapHeight, new SpriteSheet(background, 32));
+            //map = gameMap;
 
 
 

@@ -23,8 +23,8 @@ public class HacParser {
     public GameMap parseFile(File file){
         World world = new World();
 
-        GameMap map = new GameMap(20, 20, new SpriteSheet("background", 32));
-        world.setGameMap(map);
+        //GameMap map = new GameMap(20, 20, new SpriteSheet("background", 32));
+        //world.setGameMap(map);
 
         ArrayList<SpriteSheet> spriteSheets = new ArrayList<>();
 
@@ -53,8 +53,8 @@ public class HacParser {
                         for(SpriteSheet spriteSheet : spriteSheets){
                             if(spriteSheet.getFilename().equals(objValues[0])) sprite = spriteSheet ;
                         }
-                        MapObject mapObject = new MapObject(sprite, Integer.parseInt(objValues[4]), Integer.parseInt(objValues[3]), Integer.parseInt(objValues[5]), Integer.parseInt(objValues[6]));
-                        world.addGameObject(mapObject);
+                        //MapObject mapObject = new MapObject(sprite, Integer.parseInt(objValues[4]), Integer.parseInt(objValues[3]), Integer.parseInt(objValues[5]), Integer.parseInt(objValues[6]));
+                       // world.addGameObject(mapObject);
                     }
 
 
@@ -63,8 +63,8 @@ public class HacParser {
                     String fileName = spriteValues[0];
                     int bits = Integer.parseInt(spriteValues[1]);
                     int frames = Integer.parseInt(spriteValues[2]);
-                    SpriteSheet spriteSheet = new SpriteSheet(fileName, bits, frames, false);
-                    spriteSheets.add(spriteSheet);
+                    //SpriteSheet spriteSheet = new SpriteSheet(fileName, bits, frames, false);
+                   // spriteSheets.add(spriteSheet);
                 }
 
             }
@@ -95,6 +95,7 @@ public class HacParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return map;
+        //return map;
+        return null;
     }
 }

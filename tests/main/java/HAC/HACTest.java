@@ -19,7 +19,7 @@ class HACTest {
 
     @BeforeEach
     void setUp() {
-        map = new GameMap(20, 20, new SpriteSheet("background", 64));
+        //map = new GameMap(20, 20, new SpriteSheet("background", 64));
         //game = new GameController(map);
 
 

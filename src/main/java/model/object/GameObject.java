@@ -1,21 +1,25 @@
 package main.java.model.object;
 
+import javafx.scene.image.Image;
 import main.java.model.Camera;
+import main.java.model.object.sprite.Avatar;
 import main.java.model.object.sprite.Direction;
-import main.java.model.filehandler.SpriteSheet;
+import main.java.model.object.sprite.ImageHandler;
 import main.java.model.object.sprite.Sprite;
 import main.java.model.render.Actions;
 import main.java.model.world.World;
 
-public abstract class GameObject extends Sprite {
+public abstract class GameObject {
+
+    protected Avatar avatar;
     private double posX;
     private double posY;
     private int sizeX;
     private int sizeY;
     private boolean collideable = true;
 
-    public GameObject(int posX, int posY, int sizeX, int sizeY, SpriteSheet spritesheet) {
-        super(spritesheet);
+    public GameObject(Avatar avatar, int posX, int posY, int sizeX, int sizeY) {
+        this.avatar = avatar;
         this.posX = posX;
         this.posY = posY;
         this.sizeX = sizeX;
@@ -29,6 +33,7 @@ public abstract class GameObject extends Sprite {
     public void setNoneCollideable() {
         collideable = true;
     }
+
 
 
 
@@ -74,28 +79,7 @@ public abstract class GameObject extends Sprite {
         return posY;
     }
 
-    /**
-     * In this method we add the position to the character in width.
-     * If the speed to the character is less then 0, then it walks left.
-     * If not, it walks right.
-     //* @param speed this is the speed to the character walking right or left.
-     */
-    public boolean addPos(double x, double y, World world) {
-        for(GameObject object : world.getGameObjects()) {
-            if(willCollide(object,(int)(getPosX() + x), (int)(getPosY() + y))  && object.isCollideable()) return false;
-        }
 
-        if(Math.abs(x) > Math.abs(y)) {
-            setDirection(x < 0 ? Direction.LEFT : Direction.RIGHT);
-        } else {
-            setDirection(y < 0 ? Direction.UP : Direction.DOWN);
-        }
-
-        this.posX += x;
-        this.posY += y;
-
-        return true;
-    }
 
     /**
      * Sets position to the character in width in gameboard.
@@ -107,7 +91,6 @@ public abstract class GameObject extends Sprite {
         if (speed == 0) return;
 
         this.posX = posX;
-        if (isDirectional()) setDirection(speed < 0 ? Direction.LEFT : Direction.RIGHT);
     }
 
     /**
@@ -120,11 +103,11 @@ public abstract class GameObject extends Sprite {
         if (speed == 0) return;
 
         this.posY = posY;
-        if (isDirectional()) setDirection(speed < 0 ? Direction.UP : Direction.DOWN);
-
     }
 
-
+    public Image getImage(ImageHandler imageHandler) {
+        return imageHandler.getImage(avatar);
+    }
 
     public int getSizeX() {
         return sizeX;

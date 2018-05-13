@@ -69,14 +69,14 @@ public class ImageList {
                     assetsListView.getItems().clear();
                 }
                 try {
-                    SpriteSheet test = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), imageItem.getX(), false);
+                    //SpriteSheet test = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), imageItem.getX(), false);
                     for (int y = 0; y < imageItem.getY(); y++) {
                         for (int x = 0; x < imageItem.getX(); x++) {
-                            Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
-                            ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
-                            imageItemExtracted.setBits(imageItem.getBits());
-                            imageItemExtracted.setFrames(imageItem.getX());
-                            result.add(imageItemExtracted);
+                          //  Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                           // ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
+                           // imageItemExtracted.setBits(imageItem.getBits());
+                           // imageItemExtracted.setFrames(imageItem.getX());
+                           // result.add(imageItemExtracted);
                         }
                     }
                     assetsListView.setItems(result);
@@ -172,10 +172,10 @@ public class ImageList {
 
 
                         System.out.println(imageItem.getBits());
-                        SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), 1, false );
-                        spriteSheet.setStaticImage(imageItem.getX(), imageItem.getY());
-                        MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
-                        mapObject = object;
+                        //SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), 1, false );
+                        //spriteSheet.setStaticImage(imageItem.getX(), imageItem.getY());
+                        //MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
+                        //mapObject = object;
                         graphics.setCursor(new ImageCursor(imageItem.getImage()));
 
 
