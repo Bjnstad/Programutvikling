@@ -1,6 +1,5 @@
 package main.java.model.object.character;
 
-import main.java.model.Camera;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.GameObject;
 
@@ -10,10 +9,20 @@ import main.java.model.object.GameObject;
  */
 public abstract class Character extends GameObject {
 
-    protected float health = 100;
+    protected double health = 100;
+    protected double threshold = .2;
 
     public boolean isDead() {
         return health < 0;
+    }
+
+    public void hit(double strength) {
+        health -= strength * threshold;
+    }
+
+    public void heal(double heal) {
+        health += heal;
+        if(health > 100) health = 100;
     }
 
 

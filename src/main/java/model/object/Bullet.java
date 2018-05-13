@@ -1,8 +1,9 @@
-package main.java.model.object.character;
+package main.java.model.object;
 
 
 import main.java.model.Camera;
 import main.java.model.object.GameObject;
+import main.java.model.object.character.Character;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.render.Actions;
 import main.java.model.world.World;
@@ -12,9 +13,10 @@ import main.java.model.world.World;
  * @author
  */
 public class Bullet extends GameObject {
+    private final GameObject parent;
     private final double speed = 10;
+    private final double strength = 20;
     private double velocityX, velocityY;
-    private boolean visible;
 
     /**
      * The coordinates to the bullets from start to end, vertical and horizontal.
@@ -23,55 +25,30 @@ public class Bullet extends GameObject {
      * @param endX coordinate of the cell horizontal.
      * @param endY coordinate of the cell vertical.
      */
-    public Bullet(double scale, double startX, double startY, double endX, double endY){
-        super((int)(startX/scale), (int)(startY/scale), 1, 1, new SpriteSheet("arrow", 64, 9, true));
+    public Bullet(GameObject parent, double startX, double startY, double endX, double endY){
+        super((int)(startX), (int)(startY), 1, 1, new SpriteSheet("arrow", 64, 1, true));
+        this.parent = parent;
 
-        visible = true;
+        setNoneCollideable();
+
         double angle = Math.atan2(endX - startX, endY - startY);
         velocityY = (speed) * Math.cos(angle) / 100;
         velocityX = (speed) * Math.sin(angle) / 100;
-
-        System.out.println("------");
-        System.out.println(velocityX);
-        System.out.println(velocityY);
-    }
-
-    /**
-     * Updates the game.
-     */
-    public void update(){
-        addPos(velocityX, velocityY);
-
-        //@TODO: fine tune constraint x and y
-        if (getPosX() > 8000 || getPosX() < -300 ) {
-            visible = false;
-        }
-    }
-
-    /**
-     * Makes the bullets visible.
-     * @return visibility of the bullets in the game.
-     */
-    public boolean isVisible() {
-        return visible;
-    }
-
-    /**
-     * Sets the state to visible.
-     * @param visible
-     */
-    public void setVisible(boolean visible) {
-        this.visible = visible;
     }
 
     @Override
     public void onCollide(GameObject object, Actions actions) {
+        if(object instanceof Character && object != parent) {
+            ((Character) object).hit(strength);
+        }
 
+        actions.removeObject(this); // Delete bullet on hit
     }
 
     @Override
-    public void logic(World world) {
-
+    public void logic(World world, Actions actions) {
+        if(getPosX() < 0 || getPosY() < 0 || getPosX() > world.getCamera().getDimension() || getPosY() > world.getCamera().getDimension()) actions.removeObject(this);
+        addPos(velocityX, velocityY, world);
     }
 
     @Override

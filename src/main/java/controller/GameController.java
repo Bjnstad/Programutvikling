@@ -9,6 +9,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
+import main.java.model.object.Bullet;
+import main.java.model.object.character.Player;
 import main.java.model.world.World;
 
 
@@ -142,9 +144,13 @@ public class GameController implements Controller {
     public EventHandler<MouseEvent> getMouseEventHandler(){
         return (event -> {
             if(!isRunning) return;
+            Player player = world.getPlayer();
             double mX = event.getX() - camera.getTranslateX();
             double mY = event.getY() - camera.getTranslateY();
-            //world.shoot(mX, mY, camera);
+            double pX = (player.getPosX() + (double)player.getSizeX()/2);
+            double pY = (player.getPosY() + (double)player.getSizeY()/2);
+
+            world.addGameObject(new Bullet(player, pX, pY, mX/camera.getScale(), mY/camera.getScale()));
         });
     }
 
@@ -231,9 +237,9 @@ public class GameController implements Controller {
      * Called when character dies.
      */
     public void die() {
-        timeline.stop();
-        isRunning = false;
-        mainController.addSubState(SubState.DIE);
+        //timeline.stop();
+        //isRunning = false;
+        //mainController.addSubState(SubState.DIE);
     }
 
     /**

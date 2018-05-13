@@ -7,15 +7,10 @@ import main.java.model.object.GameObject;
 import main.java.model.render.Actions;
 import main.java.model.world.World;
 
-/**
- * In this class Enemy extends the qualities from character.
- * @author
- */
+
 public class Enemy extends Character {
 
     private float speed = 1;
-    private double threshold= 0.1;
-
     /**
      * This method represents position, size and qualities to the enemy in the game.
      * @param spriteFileName is the name of the file that can be downloaded.
@@ -34,17 +29,28 @@ public class Enemy extends Character {
         this.speed = speed;
     }
 
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
+    public float getSpeed() {
+        return speed;
     }
 
-    public void hit(double strength) {
-        health -= strength * threshold;
+    @Override
+    public void onCollide(GameObject object, Actions actions) {
+
+    }
+
+    @Override
+    public void logic(World world, Actions actions) {
+        Player player = world.getPlayer();
+        double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
+        double rx = speed * Math.sin(angle) / 100;
+        double ry = speed * Math.cos(angle) / 100;
+        addPos(rx, ry, world); // Move towards player.
     }
 
     /**
-     * Render health
+     * Render health bar
      */
+    @Override
     public void renderOptional(Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
 
@@ -58,36 +64,4 @@ public class Enemy extends Character {
 
     }
 
-
-    public boolean isDead() {
-        return health < 0;
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    @Override
-    public void onCollide(GameObject object, Actions actions) {
-
-    }
-
-    @Override
-    public void logic(World world) {
-
-
-        Player player = world.getPlayer();
-
-        double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
-        double rx = speed * Math.sin(angle) / 100;
-        double ry = speed * Math.cos(angle) / 100;
-
-        for(GameObject object : world.getGameObjects()) {
-            if(willCollide(object,(int)(getPosX() + rx), (int)(getPosY() + ry))) return;
-        }
-
-        addPos(rx, ry);
-
-        if (willCollide(player)) world.die(); // Player dies
-    }
 }

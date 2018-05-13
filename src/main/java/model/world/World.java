@@ -2,7 +2,10 @@ package main.java.model.world;
 
 import main.java.controller.GameController;
 import main.java.model.Camera;
+import main.java.model.object.MapObject;
+import main.java.model.object.Bullet;
 import main.java.model.object.character.Enemy;
+import main.java.model.object.character.MainPlayer;
 import main.java.model.object.character.Player;
 import main.java.model.object.GameObject;
 import main.java.model.render.Actions;
@@ -22,11 +25,15 @@ public class World {
 
     private GameController gameController; // Parent
     private GameMap gameMap;
-    private int currentLevel;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
-    private boolean godmode = true;
+
+    private boolean godmode = false;
+    private int currentLevel;
 
 
+    /**
+     * Gameloop initiates defined calls for every GameObject like render and logic for each object. It distributes the load over the available threads on client.
+     */
     public void gameloop() {
         Enemy[] enemies = getObjects(Enemy.class);
         if(enemies.length < 1) levelUp();
@@ -48,77 +55,100 @@ public class World {
         actions.start(gameObjects, gameMap, getCamera());
     }
 
+    /**
+     * MainPlayer dies and game is over.
+     */
+
     public void die() {
         gameController.die();
     }
 
-    public Camera getCamera() {
-        return gameController.getCamera();
-    }
-
-    public void loadMap(Camera camera) {
-        gameMap.render(camera);
-    }
-
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
-
-    public void setGameMap(GameMap map) {
-        this.gameMap = map;
-    }
-
-    public Player getPlayer() {
-        Player[] players = getObjects(Player.class);
-        if(players.length != 1) return null;
-        return players[0];
-    }
-
-    public boolean move(double x, double y, Camera camera) {
-        int rX = (int) (getPlayer().getPosX() + x);
-        int rY = (int) (getPlayer().getPosY() - y);
-        for(GameObject object : gameObjects)if(getPlayer().willCollide(object, rX, rY)) return false;
-
-        double translateX = 0;
-        double translateY = 0;
-        if(rX >= ((Math.signum(x) == -1) ? -1 : 0) + camera.getZoom()/2) translateX -= camera.scale(x);
-        if(rY >= ((Math.signum(y) == -1) ? 0 : -1) + camera.getZoom()/2) translateY += camera.scale(y);
-        if(gameMap.getWidth() - camera.getZoom()/2 < rX) translateX = 0;
-        if(gameMap.getHeight() - camera.getZoom()/2 < rY) translateY = 0;
-        camera.translate(translateX, translateY);
-
-        getPlayer().addPos(x, -y);
-
-        return true;
-    }
-
-    public void levelUp() {
+    /**
+     * Increase the level and generate increased number of enemies.
+     */
+    private void levelUp() {
         currentLevel++;
-        generateEnemies((int)(10 * currentLevel * ENEMY_GENERATION_RATE));
-
-        System.out.println("----------");
-        System.out.println("LEVEL: " + currentLevel);
-        System.out.println("NUMBER OF ENEMIES: " + (int)(10 * currentLevel * ENEMY_GENERATION_RATE));
+        generateEnemies((int)(1 * currentLevel * ENEMY_GENERATION_RATE));
+        // Todo: render number of enemies created to screen?
     }
 
     /**
-     * Add gameobject to world, its only possible to add one player.
-     * @param object
+     *  Generates given number of enemies with random location.
+     *  // TODO: add with threads for better performance
+     *  @param numberOfEnemies how many enemies to create.
      */
-    public void addGameObject(GameObject object) {
-        if (object == null) throw new IllegalStateException("GameObject cannot be null");
-        for(GameObject gameObject : gameObjects) {
-            if(object.willCollide(gameObject)) throw new IllegalStateException("GameObject collide with other objects");
-            if(gameObject instanceof Player && object instanceof Player) throw new IllegalStateException("A player has already been added, there could only be one.");
+    private void generateEnemies(int numberOfEnemies) {
+        Random rand = new Random();
+        for (int i = 0; i < numberOfEnemies; i++) {
+            Enemy enemy = new Enemy("BODY_skeleton", 1, 1, rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
+            enemy.setSpeed(1 + rand.nextInt(4));
+            if (!addGameObject(enemy)) i--; // Failed to add enemy retry creation
         }
-        gameObjects.add(object);
+    }
+
+    /**
+     * Render the whole map.
+     */
+    public void renderMap(Camera camera) {
+        gameMap.render(camera);
+    }
+    
+
+    /**
+     * @return Returns MainPlayer if exist in world.
+     */
+    public MainPlayer getMainPlayer() {
+        MainPlayer[] mainPlayers = getObjects(MainPlayer.class);
+        if(mainPlayers.length != 1) return null;
+        return mainPlayers[0];
+    }
+
+    public Player[] getPlayers() {
+        return getObjects(Player.class);
+    }
+
+    public Enemy[] getEnemies() {
+        return getObjects(Enemy.class);
+    }
+
+    public MapObject[] getMapObjects() {
+        return getObjects(MapObject.class);
+    }
+
+    public Bullet[] getBullets() {
+        return getObjects(Bullet.class);
     }
 
     public ArrayList<GameObject> getGameObjects() {
         return gameObjects;
     }
 
+    /**
+     * Add gameobject to world, its only possible to add one player.
+     * @param object
+     */
+    public boolean addGameObject(GameObject object) {
+        if (object == null) throw new IllegalStateException("GameObject cannot be null");
+        for(GameObject gameObject : gameObjects) {
+            if(gameObject instanceof Player || gameObject instanceof MapObject) {
+                if(object.willCollide(gameObject)) return false;
+            }
+
+            if(gameObject instanceof Player && object instanceof Player) throw new IllegalStateException("A player has already been added, there could only be one.");
+        }
+        gameObjects.add(object);
+        return true;
+    }
+
+    /**
+     * Fetch static array from main gameObjects with the objectClass parameter.
+     * @see World#getEnemies()  used to fetch enemies in array.
+     * @param objectClass Class to fetch
+     * @return Static array of objectClass
+     */
     public <T> T[] getObjects(Class<T> objectClass) {
+
+        // Fetch objects from the ArrayList that exist of the class objectClass
         List<T> objects = new ArrayList<>();
         Iterator itr = gameObjects.iterator();
         while (itr.hasNext()) {
@@ -128,45 +158,33 @@ public class World {
             }
         }
 
+        // Convert to static array
         T[] result = (T[])Array.newInstance(objectClass, objects.size());
         for (int i = 0; i < objects.size(); i++) {
             result[i] = objects.get(i);
         }
+
         return result;
     }
 
-    public <T> boolean removeObject(Class<T> objectClass) {
-        if(objectClass.isInstance(Player.class)) throw new IllegalStateException("Cannot remove player.");
+    /**
+     * Remove object from world.
+     */
+    @SuppressWarnings("SuspiciousMethodCalls")
+    public <T> boolean removeObject(Object objectClass) {
+        if(objectClass == Player.class) throw new IllegalStateException("Cannot remove player.");
         return gameObjects.remove(objectClass);
     }
 
-
-
-
-    /**
-     *  Generates given number of enemies with random location.
-     *  @param numberOfEnemies how many enemies to create.
-     */
-    private void generateEnemies(int numberOfEnemies) {
-        Random rand = new Random();
-        for (int i = 0; i < numberOfEnemies; i++) {
-            Enemy enemy = new Enemy("BODY_skeleton", 1,1,rand.nextInt(20),rand.nextInt(20));
-            //Enemy enemy = new Enemy("BODY_skeleton", 1,1,6, 5);
-            enemy.setSpeed(1 + rand.nextInt(4));
-            addGameObject(enemy);
-        }
+    public Camera getCamera() {
+        return gameController.getCamera();
     }
 
-    public void shoot(GameObject parent, double endX, double endY, Camera camera) {
-        double pX = (parent.getPosX() + (double)parent.getSizeX()/2)* camera.getScale();
-        double pY = (parent.getPosY() + (double)parent.getSizeY()/2)* camera.getScale();
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
 
-
-        System.out.println("Click posX: " + endX);
-        System.out.println("Click posY: " + endY);
-
-        System.out.println("Player posX: " + pX);
-        System.out.println("Player posY: " + pY);
-        //player.shoot(camera.getScale(), pX, pY, endX, endY);
+    public void setGameMap(GameMap map) {
+        this.gameMap = map;
     }
 }

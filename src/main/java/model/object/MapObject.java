@@ -45,7 +45,7 @@ public class MapObject extends GameObject {
     }
 
     @Override
-    public void logic(World world) {
+    public void logic(World world, Actions actions) {
 
     }
 

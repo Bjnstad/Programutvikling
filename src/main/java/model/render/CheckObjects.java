@@ -33,14 +33,16 @@ public class CheckObjects implements Runnable {
 
             if(gameObject instanceof Character) {
                 if((((Character) gameObject).isDead())) {
+                    actions.cleanObject(gameObject);
                     actions.removeObject(gameObject);
                     return;
                 }
             }
 
             // Call object logic parts
-            gameObject.logic(world);
-            for (int j = i +1; j < gameObjects.size(); j++) {
+            gameObject.logic(world, actions);
+            for (int j = 0; j < gameObjects.size(); j++) {
+                if(j==i) continue; // Skip self
                 if(gameObject.willCollide(gameObjects.get(j))) gameObject.onCollide(gameObjects.get(j), actions);
             }
 

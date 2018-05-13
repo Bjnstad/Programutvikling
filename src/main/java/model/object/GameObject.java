@@ -1,6 +1,10 @@
 package main.java.model.object;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 import main.java.model.Camera;
+import main.java.model.object.character.Enemy;
+import main.java.model.object.character.Player;
 import main.java.model.object.sprite.Direction;
 import main.java.model.object.sprite.SpriteSheet;
 import main.java.model.object.sprite.Sprite;
@@ -12,6 +16,7 @@ public abstract class GameObject extends Sprite {
     private double posY;
     private int sizeX;
     private int sizeY;
+    private boolean collideable = true;
 
     public GameObject(int posX, int posY, int sizeX, int sizeY, SpriteSheet spritesheet) {
         super(spritesheet);
@@ -21,11 +26,19 @@ public abstract class GameObject extends Sprite {
         this.sizeY = sizeY;
     }
 
+    public boolean isCollideable() {
+        return collideable;
+    }
+
+    public void setNoneCollideable() {
+        collideable = true;
+    }
+
 
 
     public abstract void onCollide(GameObject object, Actions actions);
 
-    public abstract void logic(World world);
+    public abstract void logic(World world, Actions actions);
     public abstract void renderOptional(Camera camera);
 
 
@@ -45,17 +58,9 @@ public abstract class GameObject extends Sprite {
      * @return the position to enemy in height and width.
      */
     public boolean willCollide(GameObject object, double x, double y) {
-        double a = x - object.getSizeX()/2;
-        double b = x + object.getSizeX()/2;
-        double c = x;
-        boolean xval = b > a ? c > a && c < b : c > b && c < a;
-
-        a = y - object.getSizeY()/2;
-        b = y + object.getSizeY()/2;
-        c = y;
-        boolean yval = b > a ? c > a && c < b : c > b && c < a;
-
-        return xval && yval;
+        if(x > object.getPosX() + object.getSizeX() || object.getPosX() > x + sizeX) return false;
+        if(y < object.getPosY() + object.getSizeY() || object.getPosY() >  y + sizeY) return false;
+        return true;
     }
 
 
@@ -79,7 +84,11 @@ public abstract class GameObject extends Sprite {
      * If not, it walks right.
      //* @param speed this is the speed to the character walking right or left.
      */
-    public void addPos(double x, double y) {
+    public void addPos(double x, double y, World world) {
+        for(GameObject object : world.getGameObjects()) {
+            if(willCollide(object,(int)(getPosX() + x), (int)(getPosY() + y))  && object.isCollideable()) return;
+        }
+
         if(Math.abs(x) > Math.abs(y)) {
             setDirection(x < 0 ? Direction.LEFT : Direction.RIGHT);
         } else {
