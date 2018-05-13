@@ -17,9 +17,8 @@ public class Sprite {
     private Image staticImage;
     private Image[][] images;
 
-    public Sprite(SpriteSheet spriteSheet) {
-        if(spriteSheet == null) throw new NullPointerException("spriteSheet cannot be null.");
-
+    public Sprite(String fileName) {
+        SpriteSheet spriteSheet = new SpriteSheet(fileName);
         images = new Image[spriteSheet.][]
 
 
