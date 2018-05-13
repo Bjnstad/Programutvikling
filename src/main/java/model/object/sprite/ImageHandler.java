@@ -7,6 +7,6 @@ public class ImageHandler {
     List<Sprite> sprites = new ArrayList<>();
 
     private void loadSprite(String filename) {
-        sprites.add(new Sprite);
+        sprites.add(new Sprite(filename));
     }
 }

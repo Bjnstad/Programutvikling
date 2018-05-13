@@ -12,58 +12,28 @@ import main.java.model.filehandler.SpriteSheet;
 public class Sprite {
 
     private String fileName;
-    private Animation animation;
-    private boolean directional;
-    private Image staticImage;
     private Image[][] images;
 
     public Sprite(String fileName) {
         SpriteSheet spriteSheet = new SpriteSheet(fileName);
-        images = new Image[spriteSheet.][]
-
-
-
-
-
-
-
-
-
-
-
-        if(spriteSheet.isStaticImage()) staticImage = SwingFXUtils.toFXImage(spriteSheet.getSprite(spriteSheet.getStaticX(), spriteSheet.getStaticY()), null);
-
-        if(spriteSheet.isDirectional())
-        this.fileName = spriteSheet.getFilename();
-        this.directional = spriteSheet.isDirectional();
-        animation = directional ? new MultiAnimation(spriteSheet) : new SingleAnimation(spriteSheet);
+        images = new Image[spriteSheet.getRows()][spriteSheet.getColumns()];
+        loadImages(spriteSheet);
     }
 
-    public Image getSprite() {
-        if(staticImage != null) return staticImage;
-        if(animation == null) return null;
-        return animation.getImage();
+    private void loadImages(SpriteSheet spriteSheet) {
+        for (int y = 0; y < spriteSheet.getRows(); y++) {
+            for (int x = 0; x < spriteSheet.getColumns(); x++) {
+                images[y][x] = SwingFXUtils.toFXImage(spriteSheet.getSprite(x, y), null);
+            }
+        }
     }
 
-    public String getSpriteFileName(){
+    public Image getSprite(int x, int y) {
+        if(x < 0 || y < 0 || x > images[0].length || y > images.length) return null;
+        return images[y][x];
+    }
+
+    public String getSpriteFileName() {
         return fileName;
-    }
-
-    public Direction getDirection() {
-        if(!directional) return null;
-        MultiAnimation cAnimation = (MultiAnimation) animation; // Cast animation to MultiAnimation
-        return cAnimation.getDirection();
-    }
-
-
-
-
-    public void setDirection(Direction direction) {
-        if(!directional) return;
-        MultiAnimation cAnimation = (MultiAnimation) animation; // Cast animation to MultiAnimation
-        cAnimation.setDirection(direction);
-    }
-    public boolean isDirectional() {
-        return directional;
     }
 }
