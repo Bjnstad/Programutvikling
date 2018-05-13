@@ -48,7 +48,7 @@ public abstract class Character extends GameObject {
         }
 
         setPosX(getPosX() + x);
-        setPosX(getPosY() + y);
+        setPosY(getPosY() + y);
         return true;
     }
 
