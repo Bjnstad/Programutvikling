@@ -15,6 +15,7 @@ public class Sprite {
     private Image[][] images;
 
     public Sprite(String fileName) {
+        this.fileName = fileName;
         SpriteSheet spriteSheet = new SpriteSheet(fileName);
         images = new Image[spriteSheet.getRows()][spriteSheet.getColumns()];
         loadImages(spriteSheet);

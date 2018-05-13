@@ -31,7 +31,7 @@ public class MultiAnimation implements Animation {
     @Override
     public void increaseInterval() {
         interval++;
-        if(interval > frames) interval = 0;
+        if(interval >= frames) interval = 0;
     }
 
     @Override

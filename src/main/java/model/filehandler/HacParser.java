@@ -1,6 +1,8 @@
 package main.java.model.filehandler;
 
 import main.java.model.object.MapObject;
+import main.java.model.object.sprite.Avatar;
+import main.java.model.object.sprite.animation.StaticAnimation;
 import main.java.model.world.GameMap;
 import main.java.model.world.World;
 
@@ -53,8 +55,8 @@ public class HacParser {
                         for(SpriteSheet spriteSheet : spriteSheets){
                             if(spriteSheet.getFilename().equals(objValues[0])) sprite = spriteSheet ;
                         }
-                        //MapObject mapObject = new MapObject(sprite, Integer.parseInt(objValues[4]), Integer.parseInt(objValues[3]), Integer.parseInt(objValues[5]), Integer.parseInt(objValues[6]));
-                       // world.addGameObject(mapObject);
+                        MapObject mapObject = new MapObject(new Avatar(objValues[0], new StaticAnimation(Integer.valueOf(objValues[1]), Integer.valueOf(objValues[2]))), Integer.parseInt(objValues[4]), Integer.parseInt(objValues[3]), Integer.parseInt(objValues[5]), Integer.parseInt(objValues[6]));
+                        world.addGameObject(mapObject);
                     }
 
 

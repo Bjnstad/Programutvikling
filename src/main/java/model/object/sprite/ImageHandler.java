@@ -10,12 +10,14 @@ public class ImageHandler {
 
     private Sprite loadSprite(String filename) {
         Sprite result = new Sprite(filename);
+        if(result == null) return null;
         sprites.add(result);
         return result;
     }
 
     private Sprite getSprite(String filename) {
         for (Sprite sprite : sprites) {
+            if(sprite == null) return null;
             if(sprite.getSpriteFileName().equals(filename)) return sprite;
         }
 

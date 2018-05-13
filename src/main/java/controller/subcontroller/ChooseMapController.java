@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.controller.Controller;
 import main.java.controller.GameController;
+import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.character.Enemy;
 import main.java.model.object.character.MainPlayer;
 import main.java.model.object.character.Player;
@@ -75,15 +76,15 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        HacParser hacParser = new HacParser();
-        GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
+        //HacParser hacParser = new HacParser();
+        //GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
         /** TODO: BAD CODE */
 
         World w = new World();
 
         w.addGameObject(new MainPlayer("player_animations_walking", 1, 1, 4, 4));
-        w.setGameMap(gameMap);
+        w.setGameMap(new GameMap(100, 100, new SpriteSheet("background")));
        // w.setEnemies(new Enemy[0]);
 
 

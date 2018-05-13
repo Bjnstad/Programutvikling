@@ -28,7 +28,7 @@ public class Bullet extends Character {
      */
     // TODO: fix size
     public Bullet(GameObject parent, double startX, double startY, double endX, double endY){
-        super("WEAPON_arrow" ,(int)(startX), (int)(startY));
+        super("arrow" ,(int)(startX), (int)(startY));
         this.parent = parent;
 
         setNoneCollideable();

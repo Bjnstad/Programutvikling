@@ -78,7 +78,7 @@ public class SpriteSheet {
      * @return spritesheet that gets the subImage with sizes in the grid of the gameboard.
      */
     public BufferedImage getSprite(int gridX, int gridY){
-        return spriteSheet.getSubimage(gridX * bits, gridY * bits, bits, bits);
+        return spriteSheet.getSubimage(gridX * max_bits, gridY * max_bits, max_bits, max_bits);
     }
 
 
