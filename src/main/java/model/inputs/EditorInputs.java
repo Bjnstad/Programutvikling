@@ -12,13 +12,12 @@ public class EditorInputs implements Inputs {
     private double speed;
     private Camera camera;
     private final ImageList imageList;
-    private final ExportMap exportMap;
+    private final ExportMap exportMap = new ExportMap();
 
-    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap) {
+    public EditorInputs(double speed, Camera camera, ImageList imageList) {
         this.speed = speed;
         this.camera = camera;
         this.imageList = imageList;
-        this.exportMap = exportMap;
     }
 
     @Override
