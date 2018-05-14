@@ -8,5 +8,6 @@ class GameObjectTest {
 
     @Test
     void willCollide() {
+        // TODO: should test multiple events
     }
 }
