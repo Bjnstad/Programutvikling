@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,15 +16,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.model.object.MapObject;
 import main.java.model.filehandler.SpriteSheet;
-
 import main.java.model.object.sprite.Avatar;
 import main.java.model.object.sprite.animation.SingleAnimation;
 import sun.misc.BASE64Decoder;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.HashMap;
+
 
 /**
  * This class contains a list of images.
@@ -35,8 +31,6 @@ import java.util.HashMap;
 public class ImageList {
 
 
-    private HashMap<String, Image> resourceMap;
-    private Image[] images;
     private ObservableList<ImageItem> result = FXCollections.observableArrayList();
     private ObservableList<ImageItem> spriteBottom = FXCollections.observableArrayList();
     private ListView spriteListView;
@@ -50,14 +44,31 @@ public class ImageList {
     public ImageList(ListView spriteListView, ListView assetsListView) {
         this.spriteListView = spriteListView;
         this.assetsListView = assetsListView;
-        this.resourceMap = new HashMap<>();
+
+        initiateListView();
+        handleSpriteListView();
+        handleAssetsListView();
+
+    }
+
+    public void initiateListView(){
         Label placeholder = new Label();
         placeholder.setText("Please Import SpriteSheet!");
-        if(spriteListView.getItems().size() < 1){
-            spriteListView.setPlaceholder(placeholder);
-        }
+        if(spriteListView.getItems().size() < 1)spriteListView.setPlaceholder(placeholder);
 
-
+        spriteListView.setItems(openSpriteEditorSave(getSpriteBottom()));
+        spriteListView.setCellFactory(param -> new ListCell<ImageItem>() {
+            @Override
+            protected void updateItem(ImageItem item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setGraphic(item.getImageView());
+                }
+            }
+        });
     }
 
     public void handleSpriteListView(){
@@ -109,7 +120,7 @@ public class ImageList {
         });
     }
 
-    public void handleAssetsListView(Canvas graphics){
+    public void handleAssetsListView(){
         assetsListView.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             /**
@@ -163,39 +174,11 @@ public class ImageList {
                     @Override public void handle(ActionEvent e) {
                         int inputX = Integer.parseInt(inputSizeX.getText());
                         int inputY = Integer.parseInt(inputSizeY.getText());
-
-                        String filename = String.valueOf(assetsListView.getSelectionModel().getSelectedItems());
-                        String[] fileNameArr = filename.split("\\.");
-                        filename = fileNameArr[0].substring(1);
                         imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
-
-                        SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName());
-
-
-
-                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new SingleAnimation(imageItem.getFrames(), imageItem.getY())),  1, 1, inputX, inputY);
+                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new SingleAnimation(imageItem.getFrames(), imageItem.getX())),  1, 1, inputX, inputY);
                         mapObject = object;
-                        graphics.setCursor(new ImageCursor(imageItem.getImage()));
-
 
                         primaryStage.close();
-
-                      /*  graphics.setOnMouseClicked((new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                mapObject.setPosX((int)event.getX());
-                                mapObject.setPosY((int)event.getY());
-                                map.addGameObject(object);
-
-                                System.out.println(object.getAsset());
-
-                                System.out.println((int)event.getX());
-                                System.out.println((int)event.getY());
-
-                            }
-                        }));
-
-*/
 
                     }
                 });
@@ -261,102 +244,9 @@ public class ImageList {
 
     }
 
-    /**
-     * Lists the cells to get all assets.
-     * @return list of cells
-     */
-    public ListCell<String> setAssets() {
-        //File folder = new File("assets");
-        //if(folder == null) return null;
-
-        return (new ListCell<String>() {
-            private ImageView imageView = new ImageView();
-            @Override
-            public void updateItem(String name, boolean empty) {
-                super.updateItem(name, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    for(Image img : images){
-                        imageView.setImage(img);
-                    }
-                    setGraphic(imageView);
-                }
-            }
-        });
-    }
-
-
-    /**
-     * Observable list to set all names.
-     * @return names? res?
-     */
-    public ObservableList<String> setAllNames(Image[] images) {
-        ObservableList<String> res = FXCollections.observableArrayList();
-        for (int i = 0; i < images.length; i++) res.add(String.valueOf("Sprite: " + i));
-
-
-        return res;
-    }
-
-    public int[] getName(Image[] images){
-        int[] intArr = new int[images.length];
-        for (int i = 0; i <images.length ; i++) {
-            intArr[i] = i;
-        }
-        return intArr;
-    }
 
 
 
-    /**
-     * Observable list to get all names.
-     * @return names? res?
-     */
-    public ObservableList<String> getAllNames() {
-        ObservableList<String> res = FXCollections.observableArrayList();
-
-        if (dir.isDirectory()) for (final File f : dir.listFiles(IMAGE_FILTER)) {
-            if(getFileExtension(f).equals("png")) {
-                res.add(f.getName());
-            }
-        }
-
-        return res;
-    }
-
-    /**
-     * Gets the file extension from file.
-     * @param file in game.
-     * @return a string of the file.
-     */
-    private String getFileExtension(File file) {
-        String name = file.getName();
-        try {
-            return name.substring(name.lastIndexOf(".") + 1);
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    /**
-     * Gets resource to image.
-     * @param name of the file.
-     * @return map resource
-     */
-    public Image getResource(String name)
-    {
-        return resourceMap.get(name);
-    }
-
-    public Image[] getImages() {
-        return images;
-    }
-
-    public void setImages(Image[] images) {
-        this.images = images;
-    }
 
     public ObservableList<ImageItem> getResult() {
         return result;
@@ -370,17 +260,12 @@ public class ImageList {
         return mapObject;
     }
 
-    public void setMapObject(MapObject mapObject) {
-        this.mapObject = mapObject;
-    }
 
     public ImageItem getImageItem() {
         return imageItem;
     }
 
-    public void setImageItem(ImageItem imageItem) {
-        this.imageItem = imageItem;
-    }
+
 }
 
 

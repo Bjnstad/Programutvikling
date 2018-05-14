@@ -9,7 +9,7 @@ import main.java.controller.mainController.Controller;
 import main.java.controller.mainController.GameController;
 import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.character.MainPlayer;
-import main.java.model.filehandler.HacParser;
+import main.java.model.filehandler.ImportMap;
 import main.java.model.world.GameMap;
 import main.java.model.world.World;
 
@@ -74,8 +74,9 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        HacParser hacParser = new HacParser();
-        World w = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
+
+        ImportMap importMap = new ImportMap();
+        World w = importMap.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
         /** TODO: BAD CODE */
 
