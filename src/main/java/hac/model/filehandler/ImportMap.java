@@ -19,11 +19,9 @@ import java.io.*;
 public class ImportMap extends FileHandler {
 
     /**
-     * This method helps us to parse a file.
-     * ... kommer mer
-     * ...
      *
-     * @param file ......
+     * @param file
+     * @return
      */
     public World parseFile(File file) {
         World world = new World();
