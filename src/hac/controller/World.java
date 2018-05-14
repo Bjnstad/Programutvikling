@@ -43,7 +43,7 @@ public class World {
             for(Enemy enemy : enemies)enemy.hit(1);
         }
 
-        Actions actions = new Actions();
+        Actions actions = new Actions(this);
         int distribution = gameObjects.size() / Runtime.getRuntime().availableProcessors() * 2; // Times two for Hyperthreading
         if(distribution == 0) distribution = 1;
 

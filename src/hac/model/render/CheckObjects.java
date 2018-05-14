@@ -4,9 +4,13 @@ import hac.model.Camera;
 import hac.model.object.GameObject;
 import hac.model.object.character.Character;
 import hac.controller.World;
+import hac.model.object.character.MainPlayer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Axel Bjørnstad - s315322
+ */
 public class CheckObjects implements Runnable {
 
     private final int start;
@@ -33,6 +37,7 @@ public class CheckObjects implements Runnable {
 
             if(gameObject instanceof Character) {
                 if((((Character) gameObject).isDead())) {
+                    if(gameObject instanceof MainPlayer) world.die();
                     actions.cleanObject(gameObject);
                     actions.removeObject(gameObject);
                     return;

@@ -14,15 +14,15 @@
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-opacity: .4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0">
       <children>
-         <Button mnemonicParsing="false" onAction="#resume" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Resume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <Button mnemonicParsing="false" onAction="#resume" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Resume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
                <Font size="22.0" />
             </font></Button>
-         <Button mnemonicParsing="false" onAction="#save" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Save" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <Button mnemonicParsing="false" onAction="#save" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Save" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
             <font>
                <Font size="22.0" />
             </font></Button>
-        <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+        <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #F5F5F5; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
             <font>
                <Font size="22.0" />
             </font></Button>

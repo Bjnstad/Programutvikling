@@ -49,8 +49,7 @@ public class GameController extends Controller {
      */
     @Override
     public void onClose() {
-        // TODO: Auto save
-        save();
+        if (isRunning) save();
     }
 
     /**
@@ -68,6 +67,7 @@ public class GameController extends Controller {
      * Pauses the game.
      */
     public void pause() {
+        if(isRunning) return;
         timeline.pause();
         isRunning = false;
         getParent().addSubState(SubState.PAUSE_MENU);
@@ -131,9 +131,9 @@ public class GameController extends Controller {
      * Called when character dies.
      */
     public void die() {
-        //timeline.stop();
-        //isRunning = false;
-        //mainController.addSubState(SubState.DIE);
+        timeline.stop();
+        isRunning = false;
+        getParent().addSubState(SubState.DIE);
     }
 
     /**

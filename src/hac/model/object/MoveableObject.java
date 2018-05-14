@@ -1,6 +1,7 @@
 package hac.model.object;
 
 import hac.controller.World;
+import hac.model.object.character.MainPlayer;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.Direction;
 import hac.model.object.sprite.animation.MultiAnimation;
@@ -24,7 +25,7 @@ public abstract class MoveableObject extends GameObject {
 
         for(GameObject object : world.getGameObjects()) {
             if(object == this) continue;
-            if(willCollide(object,getPosX() + x, getPosY() + y)  && object.isCollideable() && isCollideable()) return false;
+            if(willCollide(object,getPosX() + x, getPosY() + y)  && object.isCollideable() && isCollideable() && !(object instanceof MainPlayer)) return false;
         }
 
         if(Math.abs(x) > Math.abs(y)) {

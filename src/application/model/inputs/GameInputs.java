@@ -59,6 +59,7 @@ public class GameInputs implements Inputs {
 
     @Override
     public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
+
         return  (event ->{
             switch (event.getCode()){
                 case W:
@@ -80,6 +81,8 @@ public class GameInputs implements Inputs {
 
     @Override
     public EventHandler<MouseEvent> getMouseEventHandler() {
-        return (event -> parent.shoot(event.getX(), event.getY()));
+        return (event -> {
+            parent.shoot(event.getX(), event.getY());
+        });
     }
 }

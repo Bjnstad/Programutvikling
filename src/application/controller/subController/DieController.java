@@ -2,9 +2,9 @@ package application.controller.subController;
 
 import application.controller.mainController.Controller;
 import application.controller.mainController.GameController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import java.awt.event.ActionEvent;
 
 /**
  * This class simulates rolling a die of controller.
@@ -30,15 +30,6 @@ public class DieController implements SubController {
      */
     @Override
     public void init() {
-    }
-
-    /**
-     * retry??
-     * @param event allows us to access the properties of the ActionEvent.
-     */
-    @FXML
-    public void retry(ActionEvent event) {
-        //gameController.new
     }
 
     /**

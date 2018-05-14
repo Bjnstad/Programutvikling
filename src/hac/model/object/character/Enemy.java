@@ -35,7 +35,13 @@ public class Enemy extends Character {
 
     @Override
     public void onCollide(GameObject object, Actions actions) {
-
+        if(object instanceof MainPlayer) {
+            ((MainPlayer) object).hit(30);
+            double angle = Math.atan2(object.getPosX() - getPosX(), object.getPosY() - getPosY());
+            double rx = 50 * Math.sin(angle) / 100;
+            double ry = 50 * Math.cos(angle) / 100;
+            System.out.println(((MainPlayer) object).addPos(rx, ry, actions.getWorld()));
+        }
     }
 
     @Override
