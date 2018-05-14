@@ -136,7 +136,7 @@ public class World {
                 if(object.willCollide(gameObject)) return false;
             }
 
-            if(gameObject instanceof MainPlayer && object instanceof MainPlayer) throw new IllegalStateException("A main player has already been added, there could only be one.");
+            if(gameObject instanceof MainPlayer && object instanceof MainPlayer) return false; // Can only have one MainPlayer
         }
         gameObjects.add(object);
         return true;
@@ -174,7 +174,7 @@ public class World {
      */
     @SuppressWarnings("SuspiciousMethodCalls")
     public <T> boolean removeObject(Object objectClass) {
-        if(objectClass == Player.class) throw new IllegalStateException("Cannot remove player.");
+        if(objectClass instanceof MainPlayer) return false; // Cannot remove MainPlayer
         return gameObjects.remove(objectClass);
     }
 
