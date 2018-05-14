@@ -16,7 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import hac.model.object.MapObject;
 import hac.model.filehandler.SpriteSheet;
-
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.animation.StaticAnimation;
 import sun.misc.BASE64Decoder;
@@ -26,8 +25,9 @@ import java.io.*;
 
 
 /**
- * This class contains a list of images.
- * @author
+ * This class includes the logic behind the vertical and horizontal listView for Editor.
+ *
+ * @author Henry Tran - s315309
  */
 public class ImageList {
 
@@ -38,8 +38,10 @@ public class ImageList {
     private MapObject mapObject;
     private ImageItem imageItem;
 
-
-    static final File dir = new File("assets/spritesheets"); // File representing the folder that you select using a FileChooser
+    /**
+     * Static variable defining the folder that you select using FileChooser
+     */
+    static final File dir = new File("assets/spritesheets");
 
     /**
      * This method contains the imageList.
@@ -136,8 +138,6 @@ public class ImageList {
              * This method handles an action of mouseEvent.
              * @param mouseEvent is an event which indicates that a mouse action occurred in a component.
              */
-
-
             @Override
             public void handle(MouseEvent mouseEvent) {
 
@@ -198,6 +198,13 @@ public class ImageList {
         });
     }
 
+    /**
+     * Loops through directory for ".ahac" files and parses each file.
+     * Adding parsed results in ObservableList result.
+     *
+     * @param result the list to add the results to.
+     * @return the list with the parsed content added.
+     */
     public ObservableList<ImageItem> openSpriteEditorSave(ObservableList<ImageItem> result){
         for(File f : dir.listFiles()){
             BufferedReader b = null;
@@ -209,10 +216,12 @@ public class ImageList {
                 int bits = Integer.parseInt(values[1]);
                 int cols = Integer.parseInt(values[2]);
                 int rows = Integer.parseInt(values[3]);
+
                 BASE64Decoder decoder = new BASE64Decoder();
                 byte[] imageByte = decoder.decodeBuffer(values[4]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage spriteImage = ImageIO.read(bis);
+
                 Image img = SwingFXUtils.toFXImage(spriteImage, null);
                 ImageView imageView = new ImageView(img);
                 imageView.setFitHeight(100);
