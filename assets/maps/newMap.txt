@@ -1,0 +1,2 @@
+@10,101,default_background,1,false,0.0,196.67704371114547@§MapObject,4.0,9.0,1,1,$2,0§MainPlayer,1.1500505925156166,5.9498515445738915,1,1,#,default_player,UP,9,4,0§Enemy,6.701124469348186,16.406004957429868,1,1,#,default_enemy,UP,9,1,0§Enemy,1.7142489094471882,4.991141051604229,1,1,#,default_enemy,DOWN,9,2,2§Bullet,46.87187983510353,7.055981910660777,1,5,#,default_bullet,RIGHT,9,6,3§Bullet,0.0,0.0,1,6,#,default_bullet,DOWN,9,0,2
+

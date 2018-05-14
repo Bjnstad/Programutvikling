@@ -1,5 +1,6 @@
 package hac.model.filehandler;
 
+import hac.model.object.GameMap;
 import javafx.embed.swing.SwingFXUtils;
 import hac.controller.World;
 import hac.model.object.MapObject;
@@ -34,11 +35,21 @@ public class ImportMap extends FileHandler {
 
             String strSprite = b.readLine().toString();
 
+
             String[] spriteSheetString = strSprite.split("§");
 
             for (int i = 0; i < spriteSheetString.length; i++) {
-
+                System.out.println(spriteSheetString[i]);
                 if (spriteSheetString[i].equals("")) continue;
+                if(spriteSheetString[i].substring(0, 1).equals("$")){
+                    String[] mapSize = spriteSheetString[i].substring(1).split(",");
+                    int mapX = Integer.parseInt(mapSize[0]);
+                    int mapY = Integer.parseInt(mapSize[1]);
+                    System.out.println("MapX:" + mapX + "mapY:" + mapY);
+                    GameMap map = new GameMap(mapX, mapY, new SpriteSheet("default_background"));
+                    world.setGameMap(map);
+                    continue;
+                }
                 if (!spriteSheetString[i].substring(0, 1).equals("&")) {
                     String[] spriteSheet = spriteSheetString[i].split(",");
                     String spriteFileName = spriteSheet[0];
@@ -58,12 +69,10 @@ public class ImportMap extends FileHandler {
                     }
 
                 } else {
-
                     String[] objects = spriteSheetString[i].split("&");
 
                     for (int j = 0; j < objects.length; j++) {
                         if (objects[j].equals("")) continue;
-
                         String[] object = objects[j].split(",");
                         String objectFileName = object[0];
                         int objectX = Integer.parseInt(object[1]);

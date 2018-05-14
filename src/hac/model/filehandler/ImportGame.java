@@ -9,12 +9,10 @@ import hac.controller.World;
 import java.io.*;
 
 /**
- * Created by henrytran1 on 02/05/2018.
+ * Imports,
  */
 public class ImportGame {
-    private GameMap map;
-    private Enemy[] enemies;
-    private Player player;
+
     private double translateX;
     private double translateY;
     private World world;
@@ -96,18 +94,6 @@ public class ImportGame {
             e.printStackTrace();
         }
 
-    }
-
-    public GameMap getMap() {
-        return map;
-    }
-
-    public Enemy[] getEnemies() {
-        return enemies;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public double getTranslateX() {
