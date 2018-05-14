@@ -14,8 +14,6 @@ import java.util.ArrayList;
  */
 public class ExportGame extends FileHandler {
     private ArrayList<String> mapList = new ArrayList<>();
-    //private ArrayList<String> gameObject = new ArrayList<>();
-
     private World world;
     private StringBuilder sb = new StringBuilder();
 
@@ -83,7 +81,6 @@ public class ExportGame extends FileHandler {
                 sb.append(",");
                 sb.append(animation.getY());
 
-                // HENT UT DATA
             }
 
             if(object.getAvatar().getAnimation() instanceof SingleAnimation) {

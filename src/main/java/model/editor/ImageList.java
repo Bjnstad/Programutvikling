@@ -18,6 +18,7 @@ import main.java.model.object.MapObject;
 import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.sprite.Avatar;
 import main.java.model.object.sprite.animation.SingleAnimation;
+import main.java.model.object.sprite.animation.StaticAnimation;
 import sun.misc.BASE64Decoder;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -185,7 +186,7 @@ public class ImageList {
 
                         imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
 
-                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new SingleAnimation(imageItem.getFrames(), imageItem.getX())),  1, 1, inputX, inputY);
+                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1, inputX, inputY);
                         mapObject = object;
 
                         primaryStage.close();
