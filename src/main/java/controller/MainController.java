@@ -62,8 +62,8 @@ public class MainController implements Initializable {
         mainView.getChildren().add(loadPane(filename)); // Change MainFrame to new selected view
 
         Scene scene = mainView.getScene();
-        if(scene != null) controller.setEvents(scene); // Set event listeners
         controller.initiate(); // Call initiate for new controller
+        if(scene != null) controller.setEvents(scene); // Set event listeners
     }
 
     private Pane loadPane(String filename) {
