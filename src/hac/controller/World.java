@@ -22,7 +22,7 @@ import java.util.Random;
  * @author Axel Bjørnstad - s315322
  */
 public class World {
-    private final double ENEMY_GENERATION_RATE = 2;
+    private final double ENEMY_GENERATION_RATE = 10;
 
     private GameController gameController; // Parent
     private GameMap gameMap;
@@ -69,7 +69,7 @@ public class World {
      */
     private void levelUp() {
         currentLevel++;
-        generateEnemies((int)(1 * currentLevel * ENEMY_GENERATION_RATE));
+        generateEnemies((int)(0.8 * currentLevel * ENEMY_GENERATION_RATE));
         // Todo: render number of enemies created to screen?
     }
 
@@ -131,6 +131,10 @@ public class World {
      */
     public boolean addGameObject(GameObject object) {
         if (object == null) throw new IllegalStateException("GameObject cannot be null");
+        if (!object.isCollideable()) {
+            gameObjects.add(object);
+            return true;
+        }
         for(GameObject gameObject : gameObjects) {
             if(gameObject instanceof Player || gameObject instanceof MapObject) {
                 if(object.willCollide(gameObject)) return false;

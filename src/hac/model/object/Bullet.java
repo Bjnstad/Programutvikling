@@ -5,6 +5,7 @@ import hac.model.Camera;
 import hac.model.object.character.Character;
 import hac.model.render.Actions;
 import hac.controller.World;
+import javafx.fxml.FXML;
 
 /**
  * The bullet that is used to shoot in the game, and it contains the speed, position and visibility.
@@ -14,25 +15,20 @@ import hac.controller.World;
 // TODO: MAKE CHARACTER MOVABLE
 public class Bullet extends MoveableObject {
     private final GameObject parent;
-    private final double speed = 10;
+    private final double speed = 40;
     private final double strength = 20;
     private double velocityX, velocityY;
 
     /**
      * The coordinates to the bullets from start to end, vertical and horizontal.
-     * @param startX coordinate of the cell horizontal.
-     * @param startY coordinate of the cell vertical.
      * @param endX coordinate of the cell horizontal.
      * @param endY coordinate of the cell vertical.
      */
-    // TODO: fix size
-    public Bullet(GameObject parent, double startX, double startY, double endX, double endY){
-        super("default_bullet" ,(int)startX, (int)startY);
+    public Bullet(GameObject parent, double endX, double endY){
+        super("default_bullet", parent.getPosX() +.5, parent.getPosY() +.5);
         this.parent = parent;
-
         setNoneCollideable(); // Moveable objects shouldn't collide
-
-        double angle = Math.atan2(endX - startX, endY - startY);
+        double angle = Math.atan2(endX - getPosX() +.5, endY - getPosY() +.5);
         velocityY = (speed) * Math.cos(angle) / 100;
         velocityX = (speed) * Math.sin(angle) / 100;
     }
@@ -41,9 +37,8 @@ public class Bullet extends MoveableObject {
     public void onCollide(GameObject object, Actions actions) {
         if(object instanceof Character && object != parent) {
             ((Character) object).hit(strength);
+            actions.removeObject(this); // Delete bullet on hit
         }
-
-        actions.removeObject(this); // Delete bullet on hit
     }
 
     @Override

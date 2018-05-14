@@ -20,12 +20,12 @@ public abstract class GameObject {
         this.posY = posY;
     }
 
-    boolean isCollideable() {
+    public boolean isCollideable() {
         return collideable;
     }
 
     void setNoneCollideable() {
-        collideable = true;
+        collideable = false;
     }
 
 

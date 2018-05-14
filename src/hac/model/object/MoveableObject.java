@@ -24,7 +24,7 @@ public abstract class MoveableObject extends GameObject {
 
         for(GameObject object : world.getGameObjects()) {
             if(object == this) continue;
-            if(willCollide(object,getPosX() + x, getPosY() + y)  && object.isCollideable()) return false;
+            if(willCollide(object,getPosX() + x, getPosY() + y)  && object.isCollideable() && isCollideable()) return false;
         }
 
         if(Math.abs(x) > Math.abs(y)) {
