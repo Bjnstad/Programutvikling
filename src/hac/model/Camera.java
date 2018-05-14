@@ -140,4 +140,9 @@ public class Camera {
     public int getZoom() {
         return this.zoom;
     }
+
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
+        setDimension();
+    }
 }
