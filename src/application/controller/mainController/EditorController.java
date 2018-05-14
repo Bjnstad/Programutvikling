@@ -52,7 +52,7 @@ public class EditorController extends Controller {
         this.imageList = new ImageList(listViewBottom, listView);
         this.world = new World();
         this.exportMap = new ExportMap();
-        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background"));
+        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("default_background"));
         world.setGameMap(gameMap);
         gameMap.render(camera);
 

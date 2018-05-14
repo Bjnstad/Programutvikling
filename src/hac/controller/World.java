@@ -81,7 +81,7 @@ public class World {
     private void generateEnemies(int numberOfEnemies) {
         Random rand = new Random();
         for (int i = 0; i < numberOfEnemies; i++) {
-            Enemy enemy = new Enemy("BODY_skeleton", 1, 1, rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
+            Enemy enemy = new Enemy("default_enemy", 1, 1, rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
             enemy.setSpeed(1 + rand.nextInt(4));
             if (!addGameObject(enemy)) i--; // Failed to add enemy retry creation
         }
