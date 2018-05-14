@@ -40,24 +40,6 @@ public class ImageList {
 
     static final File dir = new File("assets/spritesheets"); // File representing the folder that you select using a FileChooser
 
-    static final String[] EXTENSIONS = new String[]{
-            "gif", "png", "bmp", "jpg, ahac"
-    };
-
-    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() { // filter to identify images based on their extensions
-
-        @Override
-        public boolean accept(final File dir, final String name) {
-            for (final String ext : EXTENSIONS) {
-                if (name.endsWith("." + ext)) {
-                    return (true);
-                }
-            }
-            return (false);
-        }
-    };
-
-
     /**
      * This method contains the imageList.
      */
@@ -215,9 +197,6 @@ public class ImageList {
         });
     }
 
-
-
-
     public ObservableList<ImageItem> openSpriteEditorSave(ObservableList<ImageItem> result){
         for(File f : dir.listFiles()){
             BufferedReader b = null;
@@ -248,10 +227,7 @@ public class ImageList {
             }
 
         }
-
         return result;
-
-
     }
 
 
