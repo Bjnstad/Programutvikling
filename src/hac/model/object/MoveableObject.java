@@ -7,8 +7,8 @@ import hac.model.object.sprite.animation.MultiAnimation;
 
 public abstract class MoveableObject extends GameObject {
 
-    public MoveableObject(String filename, int sizeX, int sizeY) {
-        super(new Avatar(filename, new MultiAnimation(9)),0,0, sizeX, sizeY);
+    public MoveableObject(String filename, double posX, double posY) {
+        super(new Avatar(filename, new MultiAnimation(9)),posX, posY);
     }
 
 

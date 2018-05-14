@@ -103,8 +103,8 @@ public class GameController extends Controller {
         Player player = world.getMainPlayer();
         double mX = x - camera.getTranslateX();
         double mY = y - camera.getTranslateY();
-        double pX = (player.getPosX() + (double)player.getSizeX()/2);
-        double pY = (player.getPosY() + (double)player.getSizeY()/2);
+        double pX = player.getPosX() + .5;
+        double pY = player.getPosY() + .5;
 
         world.addGameObject(new Bullet(player, pX, pY, mX/camera.getScale(), mY/camera.getScale()));
     }

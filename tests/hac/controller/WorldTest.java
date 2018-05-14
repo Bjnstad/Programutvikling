@@ -17,12 +17,12 @@ class WorldTest {
         assertNull(world.getMainPlayer());
 
         // Add player and trying to fetch it
-        MainPlayer mainPlayer = new MainPlayer("default_player", 0,0,0,0);
+        MainPlayer mainPlayer = new MainPlayer("default_player", 0,0);
         assertTrue(world.addGameObject(mainPlayer));
         assertEquals(mainPlayer, world.getMainPlayer());
 
         // Should be the first player even if we add a new one.
-        MainPlayer mainPlayer2 = new MainPlayer("default_player", 0,0,0,0);
+        MainPlayer mainPlayer2 = new MainPlayer("default_player", 0,0);
         assertFalse(world.addGameObject(mainPlayer2));
         assertEquals(mainPlayer, world.getMainPlayer());
 

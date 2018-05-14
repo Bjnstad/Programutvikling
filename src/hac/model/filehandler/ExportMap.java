@@ -79,10 +79,7 @@ public class ExportMap extends FileHandler {
         sb.append(mapObject.getPosX());
         sb.append(",");
         sb.append(mapObject.getPosY());
-        sb.append(",");
-        sb.append(mapObject.getSizeX());
-        sb.append(",");
-        sb.append(mapObject.getSizeY());
+
 
         elements.add(sb.toString());
 

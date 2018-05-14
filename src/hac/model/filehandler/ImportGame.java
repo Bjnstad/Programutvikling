@@ -70,7 +70,7 @@ public class ImportGame {
                         world.addGameObject(enemy);
                     }
                     if(type.equals("MainPlayer")){
-                        MainPlayer mainPlayer = new MainPlayer(fileName, sizeX, sizeY, posX, posY);
+                        MainPlayer mainPlayer = new MainPlayer(fileName, posX, posY);
                         world.addGameObject(mainPlayer);
                     }
                     //System.out.println("Type: " + type + " posX: " + posX + " posY: " + posY + " sizeX: " + sizeX + " sizeY: " + sizeY + " FileName: " + fileName + " direction: " + direction + " frames: " + frames + " x: " + x + " y: " + y);

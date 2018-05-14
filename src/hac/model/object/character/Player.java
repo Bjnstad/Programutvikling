@@ -16,10 +16,8 @@ public class Player extends Character {
      * This method contains the player in the game.
      * It extends its characteristics from character, and it´s coordinates.
      */
-    public Player(String spriteName, int sizeX, int sizeY, double posX, double posY) {
-        super(spriteName, sizeX, sizeY);
-        setPosX(posX);
-        setPosY(posY);
+    public Player(String spriteName, double posX, double posY) {
+        super(spriteName, posX, posY);
     }
 
     @Override

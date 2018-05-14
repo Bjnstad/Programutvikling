@@ -65,10 +65,6 @@ public class ExportGame extends FileHandler {
             sb.append(",");
             sb.append(object.getPosY());
             sb.append(",");
-            sb.append(object.getSizeX());
-            sb.append(",");
-            sb.append(object.getSizeY());
-            sb.append(",");
             if(object.getAvatar().getAnimation() instanceof MultiAnimation) {
                 MultiAnimation animation = (MultiAnimation)object.getAvatar().getAnimation();
                 sb.append("#");

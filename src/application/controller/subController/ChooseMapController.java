@@ -82,7 +82,7 @@ public class ChooseMapController implements SubController {
 
         //World w = new World();
 
-        w.addGameObject(new MainPlayer("default_player", 1, 1, 1, 1));
+        w.addGameObject(new MainPlayer("default_player", 1, 1));
        // w.setEnemies(new Enemy[0]);
 
 

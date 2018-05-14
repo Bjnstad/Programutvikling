@@ -27,7 +27,7 @@ public class Bullet extends MoveableObject {
      */
     // TODO: fix size
     public Bullet(GameObject parent, double startX, double startY, double endX, double endY){
-        super("default_bullet" ,(int)(startX), (int)(startY));
+        super("default_bullet" ,(int)startX, (int)startY);
         this.parent = parent;
 
         setNoneCollideable(); // Moveable objects shouldn't collide

@@ -9,26 +9,22 @@ import hac.controller.World;
 
 public abstract class GameObject {
 
-    protected Avatar avatar;
+    Avatar avatar;
     private double posX;
     private double posY;
-    private int sizeX;
-    private int sizeY;
     private boolean collideable = true;
 
-    public GameObject(Avatar avatar, int posX, int posY, int sizeX, int sizeY) {
+    public GameObject(Avatar avatar, double posX, double posY) {
         this.avatar = avatar;
         this.posX = posX;
         this.posY = posY;
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
     }
 
-    public boolean isCollideable() {
+    boolean isCollideable() {
         return collideable;
     }
 
-    public void setNoneCollideable() {
+    void setNoneCollideable() {
         collideable = true;
     }
 
@@ -56,10 +52,10 @@ public abstract class GameObject {
      * @param object target to check against.
      * @return the position to enemy in height and width.
      */
-    public boolean willCollide(GameObject object, double x, double y) {
-        if(x > object.getPosX() + .99 || x + .99 < object.getPosX()) return false;
-        if(y > object.getPosY() + .99 || y + .99 < object.getPosY()) return false;
-        return true;
+    boolean willCollide(GameObject object, double x, double y) {
+        double deadzone = .001;
+        if(x > object.getPosX() + 1 -deadzone || x + 1 -deadzone < object.getPosX()) return false;
+        return !(y > object.getPosY() + 1 -deadzone) && !(y + 1-deadzone < object.getPosY());
     }
 
 
@@ -105,13 +101,5 @@ public abstract class GameObject {
 
     public Image getImage(ImageHandler imageHandler) {
         return imageHandler.getImage(avatar);
-    }
-
-    public int getSizeX() {
-        return sizeX;
-    }
-
-    public int getSizeY() {
-        return sizeY;
     }
 }

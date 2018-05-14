@@ -44,7 +44,7 @@ public class Actions {
         // Clean objects
         for(GameObject object : clean) {
             if(clean == null) continue;
-            gameMap.renderArea(camera, (int)object.getPosX() -1, (int)object.getPosY() -1, object.getPosX() + object.getSizeX() +1, object.getPosY() + object.getSizeY() +1);
+            gameMap.renderArea(camera, (int)object.getPosX() -1, (int)object.getPosY() -1, object.getPosX() + 2, object.getPosY() +2);
         }
         clean.clear();
 

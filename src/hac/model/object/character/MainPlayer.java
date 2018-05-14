@@ -9,8 +9,8 @@ import hac.controller.World;
  */
 public class MainPlayer extends Player {
 
-    public MainPlayer(String spriteName, int sizeX, int sizeY, double posX, double posY) {
-        super(spriteName, sizeX, sizeY, posX, posY);
+    public MainPlayer(String spriteName, double posX, double posY) {
+        super(spriteName, posX, posY);
     }
 
     public boolean move(double x, double y, World world) {

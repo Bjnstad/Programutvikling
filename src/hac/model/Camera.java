@@ -30,7 +30,7 @@ public class Camera {
 
     public void render(GameObject object) {
         GraphicsContext gc = getGraphicsContext();
-        gc.drawImage(object.getImage(imageHandler), scale(object.getPosX()), scale(object.getPosY()),scale * object.getSizeX(), scale * object.getSizeY()) ;
+        gc.drawImage(object.getImage(imageHandler), scale(object.getPosX()), scale(object.getPosY()), scale, scale) ;
     }
 
     /**
@@ -119,39 +119,7 @@ public class Camera {
     public double fixedY(double pixel) {
         return pixel*scale - translateY;
     }
-
-    /**
-     * Gets the player of x(horizontal).
-     * @return the position to player.
-     */
-    public double getPlayerX() {
-        return (double) zoom / 2 - translateX/scale;
-    }
-
-    /**
-     * Gets the player of y(vertical).
-     * @return the position to player.
-     */
-    public double getPlayerY() {
-        return (double) zoom / 2 - translateY/scale;
-    }
-
-    /**
-     * Gets the center of the screen(x-coordinate).
-     * @return Returns the X coordinate for center of the screen in real pixels.
-     */
-    public double getCenterX() {
-        return (double) zoom / 2 * scale;
-    }
-
-    /**
-     * Gets the center of the screen(y-coordinate).
-     * @return Returns the Y coordinate for center of the screen in real pixels.
-     */
-    public double getCenterY() {
-        return (double) zoom / 2 * scale;
-    }
-
+    
     /**
      * Scale up the given gameboard relative values to according pixels on screen.
      * @param value is the position horizontal.

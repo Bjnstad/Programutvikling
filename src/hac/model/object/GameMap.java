@@ -140,7 +140,7 @@ public class GameMap {
      */
     public void drawObject(MapObject mapObject, Camera camera) {
         GraphicsContext gc = camera.getGraphicsContext();
-        gc.drawImage(mapObject.getAsset(), camera.scale(mapObject.getPosX()), camera.scale(mapObject.getPosY()), mapObject.getSizeX() * camera.getScale(), mapObject.getSizeY() * camera.getScale());
+        gc.drawImage(mapObject.getAsset(), camera.scale(mapObject.getPosX()), camera.scale(mapObject.getPosY()));
     }
 
     public Image[][] getBackground() {

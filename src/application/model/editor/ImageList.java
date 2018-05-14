@@ -187,7 +187,7 @@ public class ImageList {
 
                         imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
 
-                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1, inputX, inputY);
+                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1);
                         mapObject = object;
 
                         primaryStage.close();

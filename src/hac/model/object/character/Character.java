@@ -16,6 +16,11 @@ public abstract class Character extends MoveableObject {
     protected double health = 100;
     protected double threshold = .2;
 
+
+    public Character(String filename, double posX, double posY) {
+        super(filename, posX, posY);
+    }
+
     public boolean isDead() {
         return health < 0;
     }
@@ -27,16 +32,5 @@ public abstract class Character extends MoveableObject {
     public void heal(double heal) {
         health += heal;
         if(health > 100) health = 100;
-    }
-
-    /**
-     * This method represents the character, and it´s size.
-     * @param filename assets file.
-     * @param sizeX this is the size to x in width.
-     * @param sizeY this is the size to y in height.
-     */
-    // TODO: add frames
-    public Character(String filename, int sizeX, int sizeY) {
-        super(filename, sizeX, sizeY);
     }
 }

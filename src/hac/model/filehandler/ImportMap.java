@@ -79,10 +79,8 @@ public class ImportMap extends FileHandler {
                         int objectY = Integer.parseInt(object[2]);
                         double posX = Double.parseDouble(object[3]);
                         double posY = Double.parseDouble(object[4]);
-                        int sizeX = Integer.parseInt(object[5]);
-                        int sizeY = Integer.parseInt(object[6]);
 
-                        MapObject mapObject = new MapObject(new Avatar(objectFileName, new StaticAnimation(objectX, objectY)), (int) posY, (int) posX, sizeX, sizeY);
+                        MapObject mapObject = new MapObject(new Avatar(objectFileName, new StaticAnimation(objectX, objectY)), (int) posY, (int) posX);
                         world.addGameObject(mapObject);
                     }
                 }

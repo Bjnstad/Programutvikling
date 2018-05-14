@@ -57,10 +57,10 @@ public class Enemy extends Character {
 
         // Draw bar
         gc.setFill(Color.BLACK);
-        gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,getSizeX()*camera.getScale(), camera.getScale()/5 * getSizeY());
+        gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7, camera.getScale(), camera.getScale()/5 );
 
         // Draw health
         gc.setFill(Color.GREEN);
-        gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,getSizeX()*camera.getScale() - (100 - health)  * camera.getScale() / 100, camera.getScale()/5 * getSizeY());
+        gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,camera.getScale() - (100 - health)  * camera.getScale() / 100, camera.getScale()/5);
     }
 }
