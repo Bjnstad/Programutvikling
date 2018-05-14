@@ -57,8 +57,8 @@ public abstract class GameObject {
      * @return the position to enemy in height and width.
      */
     public boolean willCollide(GameObject object, double x, double y) {
-        if(x > object.getPosX() + object.getSizeX() || object.getPosX() > x + sizeX) return false;
-        if(y < object.getPosY() + object.getSizeY() || object.getPosY() >  y + sizeY) return false;
+        if(x > object.getPosX() + .99 || x + .99 < object.getPosX()) return false;
+        if(y > object.getPosY() + .99 || y + .99 < object.getPosY()) return false;
         return true;
     }
 
