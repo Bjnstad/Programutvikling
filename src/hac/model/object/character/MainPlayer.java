@@ -17,7 +17,7 @@ public class MainPlayer extends Player {
         Camera camera = world.getCamera();
 
         int rX = (int) (getPosX() + x);
-        int rY = (int) (getPosY() - y);
+        int rY = (int) (getPosY() + y);
 
         double translateX = 0;
         double translateY = 0;
