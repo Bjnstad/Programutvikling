@@ -27,7 +27,7 @@ public class World {
     private GameMap gameMap;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-    private boolean godmode = true;
+    private boolean godmode = false;
     private int currentLevel;
 
 
@@ -188,4 +188,17 @@ public class World {
     public void setGameMap(GameMap map) {
         this.gameMap = map;
     }
+
+    public GameMap getGameMap(){
+        return gameMap;
+    }
+
+    public int getCurrentLevel(){
+        return currentLevel;
+    }
+
+    public boolean isGodmode(){
+        return godmode;
+    }
+
 }

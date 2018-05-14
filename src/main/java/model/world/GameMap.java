@@ -7,6 +7,9 @@ import main.java.model.Camera;
 import main.java.model.object.MapObject;
 import main.java.model.filehandler.SpriteSheet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * GameMap handles all of properties for the board, width, height, static objects and background, does not include player and enemies.
  * Currently this board only support static board size.
@@ -17,6 +20,10 @@ public class GameMap {
     private int height;
     private Image[][] background;
     private String backgroundFileName;
+
+    private String mainPlayer = "";
+    private List<String> enemies = new ArrayList<>();
+
 
     /**
      * Game map represent how many object there is available to put on the map.

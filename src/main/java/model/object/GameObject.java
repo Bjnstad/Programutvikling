@@ -105,6 +105,10 @@ public abstract class GameObject {
         this.posY = posY;
     }
 
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
     public Image getImage(ImageHandler imageHandler) {
         return imageHandler.getImage(avatar);
     }

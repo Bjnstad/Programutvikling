@@ -37,9 +37,7 @@ public class ExportMap extends FileHandler {
             sb.append(",");
             sb.append(imageItem.getFrames());
             sb.append(",");
-            sb.append(imageItem.getX());
-            sb.append(",");
-            sb.append(imageItem.getY());
+            sb.append(imageItem.getColumns());
             sb.append(",");
             sb.append(imageItem.getImage());
             sb.append("§");
@@ -73,7 +71,6 @@ public class ExportMap extends FileHandler {
         sb.append(mapObject.getSizeX());
         sb.append(",");
         sb.append(mapObject.getSizeY());
-        sb.append("&");
 
         elements.add(sb.toString());
 
@@ -83,33 +80,5 @@ public class ExportMap extends FileHandler {
         return elements;
     }
 
-    /**
-     * Method used to save imported spritesheets.
-     * @param image
-     * @param bits
-     * @param cols
-     * @param rows
-     * @param fileName
-     */
-    public void saveSpriteInput(Image image, int bits, int cols, int rows, String fileName){
-        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(image, null), "png");
-        base64String = base64String.substring(0, base64String.length()-5);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(fileName);
-        sb.append("#");
-        sb.append(bits);
-        sb.append("#");
-        sb.append(cols);
-        sb.append("#");
-        sb.append(rows);
-        sb.append("#");
-        sb.append(base64String);
-
-        String content = sb.toString();
-        File file = new File("assets/editorassets/"+fileName+".ahac");
-        createFile(file, content);
-        System.out.println("CREATED FILE");
-
-    }
 }

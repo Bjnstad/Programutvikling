@@ -14,6 +14,7 @@ public class ImageItem {
     private Image image;
     private int bits;
     private int frames;
+    private int columns;
 
     public ImageItem(ImageView imageView, Image image, String fileName, int x, int y) {
         this.imageView = imageView;
@@ -76,6 +77,14 @@ public class ImageItem {
 
     public void setFrames(int frames) {
         this.frames = frames;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
     }
 }
 

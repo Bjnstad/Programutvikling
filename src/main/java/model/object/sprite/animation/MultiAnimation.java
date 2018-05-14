@@ -4,9 +4,9 @@ import main.java.model.object.sprite.Direction;
 
 public class MultiAnimation implements Animation {
 
-    private Direction direction;
+    private Direction direction;//
     private int interval = 0;
-    private int frames;
+    private int frames;//
 
     public MultiAnimation(int frames) {
         this.frames = frames;
@@ -21,6 +21,10 @@ public class MultiAnimation implements Animation {
 
     public Direction getDirection() {
         return this.direction;
+    }
+
+    public int getFrames(){
+        return frames;
     }
 
 

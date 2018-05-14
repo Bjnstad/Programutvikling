@@ -76,8 +76,8 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        //HacParser hacParser = new HacParser();
-        //GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
+        HacParser hacParser = new HacParser();
+        //World world = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
         /** TODO: BAD CODE */
 

@@ -9,10 +9,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.model.Camera;
+import main.java.model.filehandler.ExportGame;
+import main.java.model.filehandler.ImportGame;
 import main.java.model.object.Bullet;
 import main.java.model.object.character.MainPlayer;
 import main.java.model.object.character.Player;
 import main.java.model.world.World;
+
+import java.io.File;
 
 
 /**
@@ -78,8 +82,8 @@ public class GameController implements Controller {
      * @deprecated
      */
     public void load() {
-        //File file = new File("assets/maps/newMap.txt");
-        //ImportGame ig =  new ImportGame(file);
+        File file = new File("assets/maps/newMap.txt");
+        ImportGame ig =  new ImportGame(file);
 
 
     }
@@ -189,6 +193,8 @@ public class GameController implements Controller {
      * Save the game.
      */
     public void save() {
+        ExportGame save = new ExportGame(world);
+
         //ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
     }
 

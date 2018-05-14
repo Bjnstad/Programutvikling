@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import main.java.model.object.MapObject;
 import main.java.model.filehandler.SpriteSheet;
 
+import main.java.model.object.sprite.Avatar;
+import main.java.model.object.sprite.animation.SingleAnimation;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -69,14 +71,15 @@ public class ImageList {
                     assetsListView.getItems().clear();
                 }
                 try {
-                    //SpriteSheet test = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), imageItem.getX(), false);
+                    SpriteSheet test = new SpriteSheet(imageItem.getFileName());
                     for (int y = 0; y < imageItem.getY(); y++) {
                         for (int x = 0; x < imageItem.getX(); x++) {
-                          //  Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
-                           // ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
-                           // imageItemExtracted.setBits(imageItem.getBits());
-                           // imageItemExtracted.setFrames(imageItem.getX());
-                           // result.add(imageItemExtracted);
+                            Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                            ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
+                            imageItemExtracted.setBits(imageItem.getBits());
+                            imageItemExtracted.setFrames(imageItem.getX());
+                            imageItemExtracted.setColumns(imageItem.getY());
+                            result.add(imageItemExtracted);
                         }
                     }
                     assetsListView.setItems(result);
@@ -172,10 +175,12 @@ public class ImageList {
 
 
                         System.out.println(imageItem.getBits());
-                        //SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName(), imageItem.getBits(), 1, false );
-                        //spriteSheet.setStaticImage(imageItem.getX(), imageItem.getY());
-                        //MapObject object = new MapObject(spriteSheet,1, 1, inputX, inputY);
-                        //mapObject = object;
+                        SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName());
+
+
+
+                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new SingleAnimation(imageItem.getFrames(), imageItem.getY())),  1, 1, inputX, inputY);
+                        mapObject = object;
                         graphics.setCursor(new ImageCursor(imageItem.getImage()));
 
 
@@ -206,7 +211,7 @@ public class ImageList {
 
 
 
-    static final File dir = new File("assets/editorassets"); // File representing the folder that you select using a FileChooser
+    static final File dir = new File("assets/spritesheets"); // File representing the folder that you select using a FileChooser
 
     static final String[] EXTENSIONS = new String[]{
             "gif", "png", "bmp", "jpg, ahac"

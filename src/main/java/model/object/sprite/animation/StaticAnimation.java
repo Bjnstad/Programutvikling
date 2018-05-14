@@ -2,8 +2,8 @@ package main.java.model.object.sprite.animation;
 
 public class StaticAnimation implements Animation {
 
-    private int x;
-    private int y;
+    private int x;//
+    private int y;//
 
     public StaticAnimation (int x, int y) {
         this.x = x;
