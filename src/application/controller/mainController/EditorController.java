@@ -92,7 +92,7 @@ public class EditorController extends Controller {
             sb.append(content);
         }
         String content = sb.toString();
-        exportMap.createFile(new File("assets/TESTMAP.mhac"), content);
+        exportMap.createFile(new File("assets/maps/TESTMAP.mhac"), content);
     }
 
     /**
