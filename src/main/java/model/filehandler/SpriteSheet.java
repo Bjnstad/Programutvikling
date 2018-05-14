@@ -41,6 +41,7 @@ public class SpriteSheet {
             this.bits = bits;
             this.columns = cols;
             this.rows = rows;
+            this.filename = fileName;
 
             // Resize
             resize(spriteImage, max_bits / bits);

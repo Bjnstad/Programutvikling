@@ -76,15 +76,15 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        //HacParser hacParser = new HacParser();
-        //GameMap gameMap = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
+        HacParser hacParser = new HacParser();
+        //World world = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
         /** TODO: BAD CODE */
 
         World w = new World();
 
         w.addGameObject(new MainPlayer("player_animations_walking", 1, 1, 4, 4));
-        w.setGameMap(new GameMap(100, 100, new SpriteSheet("background")));
+        w.setGameMap(new GameMap(50, 50, new SpriteSheet("background")));
        // w.setEnemies(new Enemy[0]);
 
 

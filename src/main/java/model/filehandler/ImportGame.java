@@ -1,8 +1,10 @@
 package main.java.model.filehandler;
 
 import main.java.model.object.character.Enemy;
+import main.java.model.object.character.MainPlayer;
 import main.java.model.object.character.Player;
 import main.java.model.world.GameMap;
+import main.java.model.world.World;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -18,6 +20,7 @@ public class ImportGame {
     private Player player;
     private double translateX;
     private double translateY;
+    private World world;
 
 
     public ImportGame(File file) {
@@ -26,7 +29,7 @@ public class ImportGame {
     }
 
     public void parseFile(File file){
-
+        this.world = new World();
 
 
         try {
@@ -34,7 +37,75 @@ public class ImportGame {
             BufferedReader b = new BufferedReader(new FileReader(file));
             String str = b.readLine().toString();
 
+            String[] mapArr = str.split("@");
+            String[] map = mapArr[1].split(",");
+            String[] objArr = mapArr[2].split("§");
 
+            int mapWidth = Integer.parseInt(map[0]);
+            int mapHeight = Integer.parseInt(map[1]);
+            String mapFileName = map[2];
+            int currentLevel = Integer.parseInt(map[3]);
+            boolean isGodMode = Boolean.parseBoolean(map[4]);
+            double translateX = Double.parseDouble(map[5]);
+            double translateY = Double.parseDouble(map[6]);
+
+            world.setGameMap(new GameMap(mapWidth, mapHeight, new SpriteSheet(mapFileName)));
+
+            this.translateX = translateX;
+            this.translateY = translateY;
+
+            System.out.println("Map Width: " + mapWidth);
+            System.out.println("Map Height: " + mapHeight);
+            System.out.println("Map File Name:  " + mapFileName);
+            System.out.println("Current level: " + currentLevel);
+            System.out.println("isGodMode: " + isGodMode);
+            System.out.println("translateX: " + translateX);
+            System.out.println("translateY: " + translateY);
+
+            for (int i = 0; i <objArr.length ; i++) {
+                System.out.println(objArr[i]);
+                String[] object = objArr[i].split(",");
+                if(object[0].equals(""))continue;
+                String type = object[0];
+                double posX = Double.parseDouble(object[1]);
+                double posY = Double.parseDouble(object[2]);
+                int sizeX = Integer.parseInt(object[3]);
+                int sizeY = Integer.parseInt(object[4]);
+                String animationType = object[5];
+
+                if(animationType.equals("#")){  //Multi animation
+                    String fileName = object[6];
+                    String direction  = object[7];
+                    int frames = Integer.parseInt(object[8]);
+                    int x = Integer.parseInt(object[9]);
+                    int y = Integer.parseInt(object[10]);
+
+                    if(type.equals("Enemy")){
+                        Enemy enemy = new Enemy(fileName, sizeX, sizeY, posX, posY);
+                        world.addGameObject(enemy);
+                    }
+                    if(type.equals("MainPlayer")){
+                        MainPlayer mainPlayer = new MainPlayer(fileName, sizeX, sizeY, posX, posY);
+                        world.addGameObject(mainPlayer);
+                    }
+                    //System.out.println("Type: " + type + " posX: " + posX + " posY: " + posY + " sizeX: " + sizeX + " sizeY: " + sizeY + " FileName: " + fileName + " direction: " + direction + " frames: " + frames + " x: " + x + " y: " + y);
+
+                }
+
+                if(animationType.equals("/")){  //Single Animation
+
+                }
+                if(animationType.equals("$")){  //staticAnimation
+
+                }
+
+
+                //System.out.println(objArr[i]);*/
+            }
+
+
+
+            /*
             String[] obj = str.split("@");
             String[] objArr = obj[1].split("§");
             String[] mapSize = obj[2].split("&");
@@ -110,6 +181,7 @@ public class ImportGame {
             player = new Player(playerSprite, sizeX, sizeY, playerPosX, playerPosY);
 
             System.out.println(playerString[1]);
+            */
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -137,5 +209,9 @@ public class ImportGame {
 
     public double getTranslateY() {
         return translateY;
+    }
+
+    public World getWorld(){
+        return world;
     }
 }

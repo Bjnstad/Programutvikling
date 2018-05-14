@@ -7,8 +7,8 @@ import main.java.model.filehandler.SpriteSheet;
 public class SingleAnimation implements Animation {
 
     private int interval = 0;
-    private int frames;
-    private int y;
+    private int frames;//
+    private int y;//
 
     public SingleAnimation(int frames, int y) {
         this.frames = frames;
@@ -29,5 +29,9 @@ public class SingleAnimation implements Animation {
     @Override
     public int getY() {
         return y;
+    }
+
+    public int getFrames() {
+        return frames;
     }
 }

@@ -1,5 +1,14 @@
 package main.java.model.filehandler;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import main.java.model.object.GameObject;
+import main.java.model.object.sprite.animation.MultiAnimation;
+import main.java.model.object.sprite.animation.SingleAnimation;
+import main.java.model.object.sprite.animation.StaticAnimation;
+import main.java.model.world.GameMap;
+import main.java.model.world.World;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -59,6 +68,41 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method used to save imported spritesheets.
+     * @param image
+     * @param bits
+     * @param cols
+     * @param rows
+     * @param fileName
+     */
+    public void saveSpriteInput(Image image, int bits, int cols, int rows, String fileName){
+        String base64String = encodeImageToString(SwingFXUtils.fromFXImage(image, null), "png");
+        base64String = base64String.substring(0, base64String.length()-5);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(fileName);
+        sb.append("#");
+        sb.append(bits);
+        sb.append("#");
+        sb.append(cols);
+        sb.append("#");
+        sb.append(rows);
+        sb.append("#");
+        sb.append(base64String);
+
+        String content = sb.toString();
+        File file = new File("assets/editorassets/"+fileName+".ahac");
+        createFile(file, content);
+        System.out.println("CREATED FILE");
+
+    }
+
+
+
+
+
 
 
 

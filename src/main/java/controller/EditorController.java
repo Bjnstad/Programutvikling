@@ -5,6 +5,7 @@ import main.java.model.Camera;
 import main.java.model.filehandler.ExportMap;
 import main.java.model.filehandler.HacParser;
 import main.java.model.filehandler.SpriteSheet;
+import main.java.model.object.GameObject;
 import main.java.model.world.GameMap;
 import main.java.model.object.MapObject;
 import javafx.event.EventHandler;
@@ -75,10 +76,10 @@ public class EditorController implements Controller {
     public void initiate () {
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.exportMap = new ExportMap();
-        //GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background", 32));
+        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background"));
         this.world = new World();
-        //world.setGameMap(gameMap);
-        //gameMap.render(camera);
+        world.setGameMap(gameMap);
+        gameMap.render(camera);
         imageList = new ImageList(listViewBottom, listView);
 
         //listView.setItems(imageList.openEditorSave(imageList.getResult()));
@@ -126,7 +127,7 @@ public class EditorController implements Controller {
             sb.append(content);
         }
         String content = sb.toString();
-        exportMap.createFile(new File("assets/TESTMAP.mHac"), content);
+        exportMap.createFile(new File("assets/TESTMAP.mhac"), content);
         //map.saveFile();
         //exportHac.createFile();
 
@@ -139,13 +140,18 @@ public class EditorController implements Controller {
     @FXML
     private void Import(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mHac files", "*.mhac");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
         fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
 
         if (file != null) {
             HacParser hacParser = new HacParser();
-            hacParser.parseFile(file);
+            this.world = hacParser.parseFile(file);
+            for(GameObject gameObject : world.getGameObjects()){
+                camera.render(gameObject);
+            }
+
+
         }
     }
 
