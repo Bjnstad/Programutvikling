@@ -3,8 +3,11 @@ package application.model.editor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 /**
- * Created by henrytran1 on 12/05/2018.
+ * This class holds the necessary information for each item in the listView.
+ * Each item in listView are using this class.
+ * Holds information of each item in listView.
  */
 public class ImageItem {
     private ImageView imageView;
@@ -28,24 +31,14 @@ public class ImageItem {
         return imageView;
     }
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
-    }
+
 
     public Image getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
     public String getFileName() {
         return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public int getX() {
