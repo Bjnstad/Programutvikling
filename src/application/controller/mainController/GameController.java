@@ -7,7 +7,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.util.Duration;
 import application.controller.subController.SubState;
 import hac.model.Camera;
-import hac.model.filehandler.ExportGame;
 import application.model.inputs.GameInputs;
 import hac.model.object.Bullet;
 import hac.model.object.character.MainPlayer;
@@ -93,9 +92,10 @@ public class GameController extends Controller {
      * Save the game.
      */
     public void save() {
-        ExportGame save = new ExportGame(world);
-
+        //ExportGame save = new ExportGame(world);
         //ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
+
+        getParent().setState(GameState.MAIN_MENU);
     }
 
     public void shoot(double x, double y) {
@@ -122,8 +122,8 @@ public class GameController extends Controller {
      */
     public boolean move(double x, double y) {
         if(!isRunning) return false; // Dont move if game not running
-        MainPlayer player = world.getMainPlayer();
-        return player.move(x, y, world);
+        MainPlayer mainPlayer = world.getMainPlayer();
+        return mainPlayer.move(x, y, world);
     }
 
 

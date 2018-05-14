@@ -22,15 +22,16 @@ public class GameInputs implements Inputs {
 
 
     public void loop() {
-        if(up&&left) speed /= 2;
-        if(up&&right) speed /= 2;
-        if(down&&left) speed /= 2;
-        if(down&&right) speed /= 2;
+        double rSpeed = speed;
+        if(up&&left) rSpeed /= 2;
+        if(up&&right) rSpeed /= 2;
+        if(down&&left) rSpeed /= 2;
+        if(down&&right) rSpeed /= 2;
 
-        if (up) parent.move(0, speed);
-        if (down) parent.move(0, -speed);
-        if (left) parent.move(-speed, 0);
-        if (right) parent.move(speed, 0);
+        if (up) parent.move(0, rSpeed);
+        if (down) parent.move(0, -rSpeed);
+        if (left) parent.move(-rSpeed, 0);
+        if (right) parent.move(rSpeed, 0);
     }
 
     @Override

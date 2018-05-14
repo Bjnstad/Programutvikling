@@ -62,7 +62,5 @@ public class Enemy extends Character {
         // Draw health
         gc.setFill(Color.GREEN);
         gc.fillRect(camera.scale(getPosX()), camera.scale(getPosY()) - camera.getScale()/7,getSizeX()*camera.getScale() - (100 - health)  * camera.getScale() / 100, camera.getScale()/5 * getSizeY());
-
     }
-
 }

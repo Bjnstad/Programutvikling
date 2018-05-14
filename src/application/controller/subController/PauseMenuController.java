@@ -59,6 +59,4 @@ public class PauseMenuController implements SubController {
     public void exit(ActionEvent event) {
         gameController.exit();
     }
-
-
 }

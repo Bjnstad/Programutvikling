@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,7 +26,7 @@ public class Main extends Application {
 		Scene scene = new Scene(root, 800, 800); //Sets the size of the board.
 
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("HAC"); //Sets the title "main.java.HAC" of the game in a scene.
+		primaryStage.setTitle("HAC"); //Sets the title "HAC" of the game in a scene.
 		primaryStage.setScene(scene); //Sets a scene of the game.
 		primaryStage.show(); //Shows the scene.
 	}

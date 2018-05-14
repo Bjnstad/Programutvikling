@@ -1,6 +1,5 @@
 package hac.model.filehandler;
 
-
 import hac.controller.World;
 import hac.model.object.GameObject;
 import hac.model.object.sprite.animation.MultiAnimation;
@@ -33,6 +32,7 @@ public class ExportGame extends FileHandler {
         createFile(new File("assets/maps/newMap.txt"), sb.toString());
 
     }
+
 
     /**
      *

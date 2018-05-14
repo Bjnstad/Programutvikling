@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-
-
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
-<AnchorPane style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-   <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="200.0">
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-opacity: .4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0">
       <children>
          <Button mnemonicParsing="false" onAction="#resume" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Resume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
@@ -18,13 +22,13 @@
             <font>
                <Font size="22.0" />
             </font></Button>
-        <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
+        <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
             <font>
                <Font size="22.0" />
             </font></Button>
       </children>
    </AnchorPane>
-   <Label alignment="CENTER" layoutX="133.0" layoutY="93.0" style="-fx-text-alignment: center;" text="Pause" textAlignment="CENTER" textFill="BLACK" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+   <Label alignment="CENTER" layoutX="133.0" layoutY="93.0" style="-fx-text-alignment: center;" text="Pause" textAlignment="CENTER" textFill="BLACK" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
       <font>
          <Font size="51.0" />
       </font>

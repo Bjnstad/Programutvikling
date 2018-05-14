@@ -12,7 +12,7 @@ import hac.controller.World;
  */
 
 // TODO: MAKE CHARACTER MOVABLE
-public class Bullet extends Character {
+public class Bullet extends MoveableObject {
     private final GameObject parent;
     private final double speed = 10;
     private final double strength = 20;
