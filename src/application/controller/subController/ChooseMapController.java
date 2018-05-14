@@ -87,7 +87,6 @@ public class ChooseMapController implements SubController {
        // w.setEnemies(new Enemy[0]);
 
 
-
         // TODO: CREATE NEW WORLD
         gameController.setWorld(w);
         /** --- --*/
