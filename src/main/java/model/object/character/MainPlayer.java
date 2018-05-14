@@ -23,10 +23,14 @@ public class MainPlayer extends Player {
         double translateY = 0;
         if(rX >= ((Math.signum(x) == -1) ? -1 : 0) + camera.getZoom()/2) translateX -= camera.scale(x);
         if(rY >= ((Math.signum(y) == -1) ? 0 : -1) + camera.getZoom()/2) translateY += camera.scale(y);
-        if(camera.getDimension() - camera.getZoom()/2 < rX) translateX = 0;
-        if(camera.getDimension() - camera.getZoom()/2 < rY) translateY = 0;
-        camera.translate(translateX, translateY);
+        if(camera.getDimension() - camera.getZoom()/2 <= rX) translateX = 0;
+        if(camera.getDimension() - camera.getZoom()/2 <= rY) translateY = 0;
 
-        return addPos(x, -y, world);
+        if (addPos(x, -y, world)) {
+            camera.translate(translateX, translateY);
+            return true;
+        }
+
+        return false;
     }
 }

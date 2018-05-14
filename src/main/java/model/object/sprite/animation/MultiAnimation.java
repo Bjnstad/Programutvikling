@@ -1,8 +1,5 @@
 package main.java.model.object.sprite.animation;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.sprite.Direction;
 
 public class MultiAnimation implements Animation {
