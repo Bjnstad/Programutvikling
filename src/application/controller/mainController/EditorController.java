@@ -86,13 +86,8 @@ public class EditorController extends Controller {
     @FXML
     private void save(ActionEvent event){
 
-        StringBuilder sb = new StringBuilder();
+        exportMap.handleSaveMapName();
 
-        for(String content : exportMap.getElements()){
-            sb.append(content);
-        }
-        String content = sb.toString();
-        exportMap.createFile(new File("assets/maps/TESTMAP.mhac"), content);
     }
 
     /**

@@ -176,7 +176,7 @@ public class ImageList {
 
                 submit.setOnAction(new EventHandler<ActionEvent>() {
                     /**
-                     * This method handles som type of action.
+                     * This method handles Action event
                      * This event type is widely used to represent a variety of things
                      * @param e is a type of ActionEvent, it allows you to access the properties of ActionEvent.
                      */
