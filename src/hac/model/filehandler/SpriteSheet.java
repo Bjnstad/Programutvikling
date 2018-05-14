@@ -8,6 +8,9 @@ import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 
+/**
+ *
+ */
 public class SpriteSheet {
 
     private final int max_bits = 128;

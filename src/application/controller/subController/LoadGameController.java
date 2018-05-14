@@ -8,6 +8,8 @@ import javafx.scene.control.ListView;
 import application.controller.mainController.GameController;
 import hac.model.filehandler.ImportGame;
 import application.controller.mainController.Controller;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -57,8 +59,11 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void importMap(ActionEvent event) {
-        File file = new File("assets/maps/newMap.txt");
-        ImportGame ig =  new ImportGame(file);
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
+        fileChooser.getExtensionFilters().add(filter);
+        File file = fileChooser.showOpenDialog(new Stage());
+
 
     }
 

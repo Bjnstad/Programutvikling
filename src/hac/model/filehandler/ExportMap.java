@@ -1,5 +1,10 @@
 package hac.model.filehandler;
 
+import hac.controller.World;
+import hac.model.Camera;
+import hac.model.object.GameMap;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import application.model.editor.ImageItem;
 import hac.model.object.MapObject;
@@ -25,7 +30,10 @@ import java.util.ArrayList;
  */
 public class ExportMap extends FileHandler {
     private ArrayList<String> elements = new ArrayList<>();
-    ArrayList<String> filenames = new ArrayList<>();
+    private ArrayList<String> filenames = new ArrayList<>();
+    private int gameMapX;
+    private int gameMapY;
+
 
 
     /**
@@ -43,6 +51,7 @@ public class ExportMap extends FileHandler {
                 break;
             }
         }
+
 
         if(!exist) {
             String base64String = encodeImageToString(SwingFXUtils.fromFXImage(imageItem.getImage(), null), "png");
@@ -80,7 +89,9 @@ public class ExportMap extends FileHandler {
     }
 
 
-
+    /**
+     * This methods shows a new scene to user, where the user inputs a filename for the file to be created.
+     */
     public void handleSaveMapName(){
         final Stage primaryStage = new Stage();
         primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -115,6 +126,71 @@ public class ExportMap extends FileHandler {
             }
         });
     }
+
+    public void handleMapSize(World world, Camera camera){
+        final Stage primaryStage = new Stage();
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
+        BorderPane root = new BorderPane();
+
+        primaryStage.setTitle("Map Size");
+        primaryStage.setScene(new Scene(root));
+
+        Button submit = new Button("Submit");
+
+        Label mapSizeX = new Label("Map size X: ");
+        TextField inputMapSizeX = new TextField ();
+        Label mapSizeY = new Label("Map size Y: ");
+        TextField inputMapSizeY = new TextField ();
+
+        // force the field to be numeric only X
+        inputMapSizeX.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    inputMapSizeX.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // force the field to be numeric only Y
+        inputMapSizeY.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    inputMapSizeY.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        VBox Vertikalboks = new VBox(mapSizeX, inputMapSizeX, mapSizeY, inputMapSizeY);
+
+        root.setLeft(Vertikalboks);
+        root.setBottom(submit);
+        primaryStage.show();
+
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                GameMap gameMap = new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background"));
+                gameMapX = Integer.parseInt(inputMapSizeX.getText());
+                gameMapY = Integer.parseInt(inputMapSizeY.getText());
+                StringBuilder sb = new StringBuilder();
+                sb.append("$");
+                sb.append(gameMapX);
+                sb.append(",");
+                sb.append(gameMapY);
+                elements.add(sb.toString());
+
+
+                world.setGameMap(gameMap);
+                gameMap.render(camera);
+                primaryStage.close();
+
+            }
+        });
+
+    }
     /**
      * Gets the string elements of the constructed maps.
      * @return elements of strings representing the structure of the map.
@@ -122,7 +198,6 @@ public class ExportMap extends FileHandler {
     public ArrayList<String> getElements() {
         return elements;
     }
-
 
 
 }

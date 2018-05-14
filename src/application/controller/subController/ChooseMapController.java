@@ -83,7 +83,6 @@ public class ChooseMapController implements SubController {
         //World w = new World();
 
         w.addGameObject(new MainPlayer("default_player", 1, 1, 1, 1));
-        w.setGameMap(new GameMap(24, 24, new SpriteSheet("default_background")));
        // w.setEnemies(new Enemy[0]);
 
 
