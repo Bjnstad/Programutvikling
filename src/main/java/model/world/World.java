@@ -1,6 +1,6 @@
 package main.java.model.world;
 
-import main.java.controller.GameController;
+import main.java.controller.mainController.GameController;
 import main.java.model.Camera;
 import main.java.model.object.MapObject;
 import main.java.model.object.Bullet;

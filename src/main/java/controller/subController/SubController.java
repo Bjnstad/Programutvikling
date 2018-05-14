@@ -1,4 +1,4 @@
-package main.java.controller.subcontroller;
+package main.java.controller.subController;
 
 import main.java.controller.Controller;
 

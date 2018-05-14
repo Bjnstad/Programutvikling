@@ -1,34 +1,52 @@
 package main.java.controller;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.Scene;
+import main.java.model.inputs.Inputs;
 
 /**
  * Interface that represents the controller of the game.
- * @author
+ * @author Axel Bjørnstad - s315322
  */
-public interface Controller {
-    State state = null; //There is differents states in the game.
+public abstract class Controller {
+
+    protected MainController mainController;
+    protected Inputs inputs;
+    private GameState state;
+
+    public Controller(GameState state) {
+        this.state = state;
+    }
 
     /**
      * Called when controller is to be set.
      */
-    void initiate();
+    public abstract void initiate();
 
     /**
      * Called when controller is being replaced.
      */
-    void onClose();
+    public abstract void onClose();
 
-    //TODO: need rework
-    EventHandler<KeyEvent> getEventHandler();
-    EventHandler<KeyEvent> getOnRealeasedEventHandler();
-    EventHandler<MouseEvent> getMouseEventHandler();
+    /**
+     * Set event listener to scene from controller.
+     */
+    void setEvents(Scene scene) {
+        if(inputs == null) return; // No inputs added.
+        scene.setOnKeyPressed(inputs.getEventHandler());
+        scene.setOnKeyReleased(inputs.getOnRealeasedEventHandler());
+        scene.setOnMouseClicked(inputs.getMouseEventHandler());
+    }
+
+    protected void setInputs(Inputs inputs) {
+        if (inputs == null) throw new IllegalStateException("Inputs cannot be null.");
+        this.inputs = inputs;
+    }
 
     /**
      * This method sets the main controller of the game.
      * @param mainController shows what on the screen of the game.
      */
-    void setMainController(MainController mainController);
+    void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 }

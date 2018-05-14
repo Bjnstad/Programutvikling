@@ -1,10 +1,13 @@
-package main.java.controller;
+package main.java.controller.mainController;
 
 import javafx.scene.image.Image;
+import main.java.controller.Controller;
+import main.java.controller.GameState;
 import main.java.model.Camera;
 import main.java.model.filehandler.ExportMap;
 import main.java.model.filehandler.HacParser;
 import main.java.model.filehandler.SpriteSheet;
+import main.java.model.inputs.EditorInputs;
 import main.java.model.object.GameObject;
 import main.java.model.world.GameMap;
 import main.java.model.object.MapObject;
@@ -28,9 +31,40 @@ import java.util.ArrayList;
  * Implements the EditorController to Controller.
  * @author
  */
-public class EditorController implements Controller {
+public class EditorController extends Controller {
 
-    private MainController mainController;
+
+
+
+    public EditorController() {
+        super(GameState.EDITOR);
+    }
+
+    @Override
+    public void initiate() {
+        this.camera = new Camera(mainController.getWidth(), graphics);
+
+        // TODO: Trenger du imageList og exportMap her?
+        setInputs(new EditorInputs(15.1, camera, imageList, exportMap));
+    }
+
+
+
+
+
+    // TODO: clean bellow
+
+
+
+
+
+
+
+
+
+
+
+
     private ImageList imageList;
     private World world;
     //private HACEditor map;
@@ -39,6 +73,20 @@ public class EditorController implements Controller {
     private MapObject mapObject;
     private ExportMap exportMap;
     private ArrayList<String> fileNames = new ArrayList<>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -51,29 +99,23 @@ public class EditorController implements Controller {
     @FXML
     ListView listViewBottom;
 
+
     /**
      * This method creates a new file.
      * @param event allows us to access the properties of ActionEvent
      */
     @FXML
     public void newFile(ActionEvent event){
-        mainController.setState(State.MAIN_MENU);
+        mainController.setState(GameState.MAIN_MENU);
     }
 
-    /**
-     * This method sets the mainController.
-     * @param mainController shows what on the screen of the game.
-     */
-    @Override
-    public void setMainController (MainController mainController) {
-        this.mainController = mainController;
-    }
 
     /**
      * Initiates imageList (fileHandler)
-     */
+     *
     @Override
     public void initiate () {
+
         this.camera = new Camera(mainController.getWidth(), graphics);
         this.exportMap = new ExportMap();
         GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background"));
@@ -104,7 +146,7 @@ public class EditorController implements Controller {
         imageList.handleSpriteListView();
         imageList.handleAssetsListView(graphics);
 
-    }
+    }*/
 
     /**
      * This method closes the state of the game.
@@ -112,7 +154,7 @@ public class EditorController implements Controller {
      */
     @FXML
     private void close(ActionEvent event) {
-        mainController.setState(State.MAIN_MENU);
+        mainController.setState(GameState.MAIN_MENU);
     }
 
     /**
@@ -184,59 +226,4 @@ public class EditorController implements Controller {
 
     }
 
-    /**
-     * This method gets the event handler.
-     * @return the current event.
-     */
-    @Override
-    public EventHandler<KeyEvent> getEventHandler() {
-
-        // TODO: add acceleration in own controller class
-        double speed = 15.4;
-        return (event -> {
-            /*if(event.getCode() == KeyCode.W)move(0, speed);
-            if(event.getCode() == KeyCode.A)move(-speed, 0);
-            if(event.getCode() == KeyCode.S)move(0, -speed);
-            if(event.getCode() == KeyCode.D)move(speed, 0);*/
-
-                switch (event.getCode()) {
-                    case W:
-                        camera.translate(0,speed);
-                        break;
-                    case A:
-                        camera.translate(speed, 0);
-                        break;
-                    case S:
-                        camera.translate(0, -speed);
-                        break;
-                    case D:
-                        camera.translate(-speed, 0);
-                        break;
-                    case ESCAPE:
-
-                        break;
-
-                }
-            });
-    }
-
-    @Override
-    public EventHandler<KeyEvent> getOnRealeasedEventHandler() {
-        return null;
-    }
-
-    public EventHandler<MouseEvent> getMouseEventHandler(){
-        return (event -> {
-            if(imageList.getMapObject() == null) return;
-            //graphics.setCursor(new ImageCursor(imageList.getImageItem().getImage()));
-            System.out.println("Frames" + imageList.getImageItem().getFrames());
-            imageList.getMapObject().setPosX((int)((event.getX()-camera.getTranslateX())/camera.getScale()));
-            imageList.getMapObject().setPosY((int)((event.getY()-camera.getTranslateY())/camera.getScale()));
-            camera.render(imageList.getMapObject());
-            exportMap.addElement(imageList.getMapObject(), imageList.getImageItem());
-
-
-
-        });
-    }
 }

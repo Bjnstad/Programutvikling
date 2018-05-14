@@ -18,11 +18,7 @@
             <font>
                <Font size="22.0" />
             </font></Button>
-         <Button mnemonicParsing="false" onAction="#load" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Load" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
-            <font>
-               <Font size="22.0" />
-            </font></Button>
-         <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
+        <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #587291; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
             <font>
                <Font size="22.0" />
             </font></Button>

@@ -31,7 +31,7 @@ public class Bullet extends Character {
         super("arrow" ,(int)(startX), (int)(startY));
         this.parent = parent;
 
-        setNoneCollideable();
+        setNoneCollideable(); // Moveable objects shouldn't collide
 
         double angle = Math.atan2(endX - startX, endY - startY);
         velocityY = (speed) * Math.cos(angle) / 100;

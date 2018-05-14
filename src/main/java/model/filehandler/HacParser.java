@@ -56,7 +56,7 @@ public class HacParser extends FileHandler {
                     bis.close();
 
                     //Create AHAC file if file is not in directory.
-                    File f = new File("assets/editorassets/"+spriteFileName+".ahac");
+                    File f = new File("assets/spritesheets/"+spriteFileName+".ahac");
                     if(!f.exists()){
                         saveSpriteInput(SwingFXUtils.toFXImage(image, null), bits, columns, rows, spriteFileName);
                     }

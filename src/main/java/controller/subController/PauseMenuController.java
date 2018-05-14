@@ -1,8 +1,8 @@
-package main.java.controller.subcontroller;
+package main.java.controller.subController;
 
 
 import main.java.controller.Controller;
-import main.java.controller.GameController;
+import main.java.controller.mainController.GameController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -49,15 +49,6 @@ public class PauseMenuController implements SubController {
     @FXML
     public void save(ActionEvent event) {
         gameController.save();
-    }
-
-    /**
-     * Loads the game.
-     * @param event allows us to access the properties of the ActionEvent.
-     */
-    @FXML
-    public void load(ActionEvent event) {
-        gameController.load();
     }
 
     /**

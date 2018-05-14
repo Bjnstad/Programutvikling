@@ -1,6 +1,9 @@
 package main.java.controller;
 
-import main.java.controller.subcontroller.*;
+import main.java.controller.mainController.EditorController;
+import main.java.controller.mainController.GameController;
+import main.java.controller.mainController.MainMenuController;
+import main.java.controller.subController.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,81 +15,75 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MainController loads fxml views with respectively controller class. Set state will be the main // TODO: More javadoc
- *
+ * MainController loads fxml views with respectively controller class.
  * @author Axel Bjørnstad - S315322
  */
 public class MainController implements Initializable {
 
     @FXML
-    AnchorPane mainView;
-
-    private Controller controller; // Current controller
+    AnchorPane mainView; // Main frame for content
+    private Controller controller; // Active controller
 
     /**
-     * Initialize location and resources to the game.
-     * @param location in the game.
-     * @param resources in the game.
+     * We set our main view to Main Menu
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setState(State.MAIN_MENU);
+        setState(GameState.MAIN_MENU);
     }
 
     /**
-     * Here we sets the state of application in mainframe.
+     * Change out the controller and view for MainFrame, SubControllers will be removed.
+     * @see GameState
      * @param state what state of application should be shown in the main frame.
      */
-    public void setState(State state) {
+    public void setState(GameState state) {
         if(controller != null) controller.onClose(); // Call close for the previous controller.
 
-        String filepath = ""; // Path of the current file
+        // Fetch filename for view
+        String filename = "";
         switch (state) {
             case MAIN_MENU:
-                filepath = "MainMenu";
+                filename = "MainMenu";
                 controller = new MainMenuController();
                 break;
             case EDITOR:
-                filepath = "Editor";
+                filename = "Editor";
                 controller = new EditorController();
                 break;
             case GAME:
-                filepath = "Game";
+                filename = "Game";
                 controller = new GameController();
                 break;
         }
 
+
         mainView.getChildren().clear(); // Clear old view
-        mainView.getChildren().add(loadPane(filepath)); // Change anchorpane to view
+        mainView.getChildren().add(loadPane(filename)); // Change MainFrame to new selected view
 
         Scene scene = mainView.getScene();
-        if(scene != null){
-            scene.setOnKeyPressed(controller.getEventHandler());
-            scene.setOnKeyReleased(controller.getOnRealeasedEventHandler());
-            scene.setOnMouseClicked(controller.getMouseEventHandler());
-        }
+        if(scene != null) controller.setEvents(scene); // Set event listeners
         controller.initiate(); // Call initiate for new controller
     }
 
-    private Pane loadPane(String filepath) {
+    private Pane loadPane(String filename) {
         FXMLLoader loader;
         Pane pane;
 
         try {
-            loader = new FXMLLoader(getClass().getResource("/main/resources/view/" + filepath + ".fxml"));
+            loader = new FXMLLoader(getClass().getResource("/main/resources/view/" + filename + ".fxml"));
             controller.setMainController(this); // Set ref to main controller
             loader.setController(controller); // Set controller to view
             pane = loader.load();
         } catch (IOException e) {
-            System.exit(-1);
-            return null;
+            throw new IllegalArgumentException(filename + " was not found.");
         }
 
         return pane;
     }
 
     /**
-     * A method that shows MainView.
+     * Removes all subviews and controller, leaving only the current GameState view/controller shown
      */
     public void toMainView() {
         if(mainView.getChildren().size() > 1) {
@@ -95,8 +92,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * This method adds the SubState in the game.
-     * @param subState is
+     * This method add SubState on top of the already GameState, remove the view by toMainView().
      */
     public void addSubState(SubState subState) {
         SubController subController;
@@ -115,13 +111,13 @@ public class MainController implements Initializable {
 
             case CHOOSE_MAP:
                 filepath = "ChooseMap";
-                setState(State.GAME);
+                setState(GameState.GAME);
                 subController = new ChooseMapController();
                 break;
 
             case LOAD_MAP:
                 filepath = "LoadGame";
-                setState(State.GAME);
+                setState(GameState.GAME);
                 subController = new LoadGameController();
                 break;
 
@@ -138,12 +134,7 @@ public class MainController implements Initializable {
             subController.setSubController(controller); // Set ref to main controller
             loader.setController(subController); // Set controller to view
             pane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("FXML file for " + filepath + " could not be found or is invalid.");
-            System.exit(1);
-            return;
-        } catch (IllegalStateException e) {
+        } catch (IOException | IllegalStateException e) {
             e.printStackTrace();
             System.err.println("FXML file for " + filepath + " could not be found or is invalid.");
             System.exit(1);

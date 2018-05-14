@@ -41,6 +41,7 @@ public class Enemy extends Character {
     @Override
     public void logic(World world, Actions actions) {
         MainPlayer player = world.getMainPlayer();
+        if(player == null) throw new IllegalStateException("Player not set");
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
         double rx = speed * Math.sin(angle) / 100;
         double ry = speed * Math.cos(angle) / 100;

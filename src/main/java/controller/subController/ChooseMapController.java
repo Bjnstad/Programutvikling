@@ -1,24 +1,30 @@
-package main.java.controller.subcontroller;
+package main.java.controller.subController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import main.java.controller.*;
-import main.java.model.filehandler.ImportGame;
 import main.java.controller.Controller;
-import main.java.model.object.character.Enemy;
+import main.java.controller.mainController.GameController;
+import main.java.model.filehandler.SpriteSheet;
+import main.java.model.object.character.MainPlayer;
+import main.java.model.filehandler.HacParser;
+import main.java.model.world.GameMap;
 import main.java.model.world.World;
 
 import java.io.File;
 
-public class LoadGameController implements SubController {
+/**
+ * This class contain
+ * @author
+ */
+public class ChooseMapController implements SubController {
 
     @FXML
-    ListView games;
+    ListView maps;
 
-    static final File dir = new File("assets/savegame");
+    static final File dir = new File("assets/maps");
     private GameController gameController;
 
     /**
@@ -30,7 +36,7 @@ public class LoadGameController implements SubController {
         ObservableList<String> res = FXCollections.observableArrayList();
 
         for (final File f : dir.listFiles()) {
-            if(getFileExtension(f).equals("txt")) {
+            if(getFileExtension(f).equals("mhac")) {
                 res.add(f.getName());
             }
         }
@@ -59,9 +65,6 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void importMap(ActionEvent event) {
-        File file = new File("assets/maps/newMap.txt");
-        ImportGame ig =  new ImportGame(file);
-
     }
 
     /**
@@ -71,21 +74,22 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        File file = new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString());
-        ImportGame ig =  new ImportGame(file);
+        HacParser hacParser = new HacParser();
+        World w = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
-        gameController.setWorld(ig.getWorld());
+        /** TODO: BAD CODE */
+
+        //World w = new World();
+
+        w.addGameObject(new MainPlayer("player_animations_walking", 1, 1, 1, 1));
+        w.setGameMap(new GameMap(24, 24, new SpriteSheet("background")));
+       // w.setEnemies(new Enemy[0]);
 
 
-        /*for(Enemy enemy : ig.getEnemies()) world.addGameObject(enemy);
-        world.addGameObject(ig.getPlayer());
-        world.setGameMap(ig.getMap());
-        //world.getGameMap().addGameObject();*/
 
-       // gameController.getCamera().setTranslateX(ig.getTranslateX());
-       // gameController.getCamera().setTranslateY(ig.getTranslateY());
-       // gameController.setWorld(world);
-
+        // TODO: CREATE NEW WORLD
+        gameController.setWorld(w);
+        /** --- --*/
     }
 
     /**
@@ -102,6 +106,6 @@ public class LoadGameController implements SubController {
      */
     @Override
     public void init() {
-        games.setItems(getAllNames());
+        maps.setItems(getAllNames());
     }
 }

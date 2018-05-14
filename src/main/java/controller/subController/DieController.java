@@ -1,7 +1,7 @@
-package main.java.controller.subcontroller;
+package main.java.controller.subController;
 
 import main.java.controller.Controller;
-import main.java.controller.GameController;
+import main.java.controller.mainController.GameController;
 import javafx.fxml.FXML;
 
 import java.awt.event.ActionEvent;

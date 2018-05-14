@@ -37,6 +37,9 @@ public abstract class Character extends GameObject {
      //* @param speed this is the speed to the character walking right or left.
      */
     public boolean addPos(double x, double y, World world) {
+        if(getPosX() + x < 0 || getPosY() + y < 0 || getPosX() + x > world.getCamera().getDimension() || getPosY() + y > world.getCamera().getDimension()) return false;
+
+
         for(GameObject object : world.getGameObjects()) {
             if(willCollide(object,(int)(getPosX() + x), (int)(getPosY() + y))  && object.isCollideable()) return false;
         }

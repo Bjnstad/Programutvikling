@@ -25,7 +25,7 @@ public class Main extends Application {
 		Scene scene = new Scene(root, 800, 800); //Sets the size of the board.
 
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("main/java/HAC"); //Sets the title "main.java.HAC" of the game in a scene.
+		primaryStage.setTitle("HAC"); //Sets the title "main.java.HAC" of the game in a scene.
 		primaryStage.setScene(scene); //Sets a scene of the game.
 		primaryStage.show(); //Shows the scene.
 	}
