@@ -20,7 +20,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("../resources/view/Main.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../../resources/view/Main.fxml"));
 
 		Scene scene = new Scene(root, 800, 800); //Sets the size of the board.
 

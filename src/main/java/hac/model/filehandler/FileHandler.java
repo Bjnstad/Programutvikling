@@ -2,7 +2,6 @@ package main.java.hac.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -12,16 +11,22 @@ import java.io.IOException;
 import java.util.Base64;
 
 /**
- * Created by henrytran1 on 13/05/2018.
+ * FileHandler is the base class for all file I/O. Which allows the application to
+ * export, import games and maps.
+ *
+ * @see ExportMap
+ * @see ImportGame
+ * @author Henry Tran - s315309
+ *
  */
 public class FileHandler {
 
 
     /**
-     *
-     * @param image
-     * @param type
-     * @return string of the image
+     * Returns an image in Byte64 String.
+     * @param image desired image to be converted to Byte64 String.
+     * @param type image extension. (".png", ".jpg" etc..)
+     * @return Byte64 string of image.
      */
     public String encodeImageToString(BufferedImage image, String type) {
         String imageString = null;
@@ -39,13 +44,12 @@ public class FileHandler {
     }
 
 
+    /**
+     * Creates file to machine.
+     * @param file desired file to be written.
+     * @param content the content to be written to machine.
+     */
     public void createFile(File file, String content){
-        //StringBuilder sb = new StringBuilder();
-        //for(String content: elements) sb.append(elements);
-
-        //String content = sb.toString();
-
-        //File file = new File("assets/maps/newMap.mhac");
 
         try(FileOutputStream outputStream = new FileOutputStream(file)){
             if(!file.exists()){
@@ -63,12 +67,12 @@ public class FileHandler {
     }
 
     /**
-     * Method used to save imported spritesheets.
-     * @param image
-     * @param bits
-     * @param cols
-     * @param rows
-     * @param fileName
+     * Creates .ahac files from imported spritesheets.
+     * @param image the image of the spritesheet.
+     * @param bits  pixel size per sub image in spritesheet (e.g 32x32, 64x64, 128x128...).
+     * @param cols  number of columns on image/spritesheet.
+     * @param rows  number of rows on image/spritesheet.
+     * @param fileName the name of the image file.
      */
     public void saveSpriteInput(Image image, int bits, int cols, int rows, String fileName){
         String base64String = encodeImageToString(SwingFXUtils.fromFXImage(image, null), "png");
@@ -86,17 +90,9 @@ public class FileHandler {
         sb.append(base64String);
 
         String content = sb.toString();
-        File file = new File("assets/editorassets/"+fileName+".ahac");
+        File file = new File("assets/spritesheets/"+fileName+".ahac");
         createFile(file, content);
+
     }
-
-
-
-
-
-
-
-
-
 
 }

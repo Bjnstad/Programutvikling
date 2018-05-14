@@ -7,11 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import main.java.application.controller.mainController.Controller;
 import main.java.application.controller.mainController.GameController;
-import main.java.hac.model.filehandler.SpriteSheet;
-import main.java.hac.model.object.character.MainPlayer;
-import main.java.hac.model.filehandler.HacParser;
-import main.java.hac.model.object.GameMap;
 import main.java.hac.controller.World;
+import main.java.hac.model.filehandler.SpriteSheet;
+import main.java.hac.model.object.GameMap;
+import main.java.hac.model.object.character.MainPlayer;
+import main.java.hac.model.filehandler.ImportMap;
 
 import java.io.File;
 
@@ -74,8 +74,9 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        HacParser hacParser = new HacParser();
-        World w = hacParser.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
+
+        ImportMap importMap = new ImportMap();
+        World w = importMap.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
 
         /** TODO: BAD CODE */
 

@@ -72,6 +72,9 @@ public class LoadGameController implements SubController {
         File file = new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString());
         ImportGame ig =  new ImportGame(file);
 
+
+        gameController.getCamera().setTranslateX(ig.getTranslateX());
+        gameController.getCamera().setTranslateY(ig.getTranslateY());
         gameController.setWorld(ig.getWorld());
 
 
@@ -80,8 +83,7 @@ public class LoadGameController implements SubController {
         world.setGameMap(ig.getMap());
         //world.getGameMap().addGameObject();*/
 
-       // gameController.getCamera().setTranslateX(ig.getTranslateX());
-       // gameController.getCamera().setTranslateY(ig.getTranslateY());
+
        // gameController.setWorld(world);
 
     }

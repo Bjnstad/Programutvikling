@@ -1,18 +1,18 @@
 package main.java.hac.model.filehandler;
 
+
+import main.java.hac.controller.World;
 import main.java.hac.model.object.GameObject;
 import main.java.hac.model.object.sprite.animation.MultiAnimation;
 import main.java.hac.model.object.sprite.animation.SingleAnimation;
 import main.java.hac.model.object.sprite.animation.StaticAnimation;
-import main.java.hac.model.object.GameMap;
-import main.java.hac.controller.World;
 
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by henrytran1 on 17/04/2018.
- * Game extends Hac
+ *
+ * @see FileHandler
  */
 public class ExportGame extends FileHandler {
     private ArrayList<String> mapList = new ArrayList<>();
@@ -35,6 +35,11 @@ public class ExportGame extends FileHandler {
         createFile(new File("assets/maps/newMap.txt"), sb.toString());
 
     }
+
+    /**
+     *
+     * @param world
+     */
     public void saveGame(World world) {
         sb.append("@");
         sb.append(world.getGameMap().getWidth());
@@ -103,113 +108,4 @@ public class ExportGame extends FileHandler {
             }
         }
     }
-/*
-    /**
-     * Saves the map.
-     */
-    public void saveMap() {
-
-        /*
-        MapObject[] object = ;
-        if(object == null){
-            sb.append("@!");
-            sb.append('@');
-            sb.append('&');
-            sb.append(gameMap.getBackgroundFileName());
-            sb.append(',');
-            sb.append(gameMap.getHeight());
-            sb.append(',');
-            sb.append(gameMap.getWidth());
-            sb.append('&');
-            return;
-        }
-
-        sb.append("@");
-        if(object != null) {
-            for (int i = 0; i < object.length; i++) {
-                if (object[i] == null) continue;
-                sb.append(object[i].getSizeY());
-                sb.append(',');
-                sb.append(object[i].getSizeX());
-                sb.append(',');
-                sb.append(object[i].getPosX());
-                sb.append(',');
-                sb.append(object[i].getPosY());
-                sb.append(',');
-                String base64String = encodeImageToString(SwingFXUtils.fromFXImage(object[i].getAsset(), null), "png");
-                sb.append(base64String);
-                sb.append("BILDESTRENG");
-                sb.append("§");
-            }
-        }
-        sb.append('@');
-        sb.append('&');
-        sb.append(gameMap.getBackgroundFileName());
-        sb.append(',');
-        sb.append(gameMap.getHeight());
-        sb.append(',');
-        sb.append(gameMap.getWidth());
-        sb.append('&');
-        */
-    }
-
-/*
-
-    public void saveCamera(){
-        sb.append("#");
-        sb.append(camera.getTranslateX());
-        sb.append(",");
-        sb.append(camera.getTranslateY());
-        sb.append("#");
-    }
-
-
-    public void saveEnemies(){
-        sb.append("/");
-        for (int i = 0; i < enemies.length; i++) {
-            //sb.append(enemies[i].getSpriteFileName());
-            sb.append(',');
-            sb.append(enemies[i].getSizeX());
-            sb.append(',');
-            sb.append(enemies[i].getSizeY());
-            sb.append(',');
-            sb.append(enemies[i].getPosX());
-            sb.append(',');
-            sb.append(enemies[i].getPosY());
-            sb.append("§");
-        }
-
-        sb.append("/");
-    }
-
-
-    public void savePlayer(){
-        sb.append("!");
-        //sb.append(player.getSpriteFileName());
-        sb.append(',');
-        sb.append(player.getPosY());
-        sb.append(',');
-        sb.append(player.getPosX());
-        sb.append(',');
-        sb.append(player.getSizeX());
-        sb.append(',');
-        sb.append(player.getSizeY());
-        sb.append("!");
-
-    }
-    */
-
-
-
-    /**
-     * Adds element.
-     * @param gameMap
-     */
-    public void addElement(GameMap gameMap) {
-        gameMap.getBackground();
-        mapList.add(String.valueOf(gameMap.getWidth()));
-        mapList.add(String.valueOf(gameMap.getHeight()));
-    }
-
-
 }

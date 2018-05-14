@@ -65,10 +65,6 @@ public abstract class GameObject {
 
 
 
-
-
-
-
     public double getPosX() {
         return posX;
     }

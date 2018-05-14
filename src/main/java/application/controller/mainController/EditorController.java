@@ -1,24 +1,25 @@
 package main.java.application.controller.mainController;
 
-import javafx.scene.image.Image;
-import main.java.hac.model.Camera;
-import main.java.hac.model.filehandler.ExportMap;
-import main.java.hac.model.filehandler.HacParser;
-import main.java.application.model.inputs.EditorInputs;
-import main.java.hac.model.object.GameObject;
-import main.java.hac.model.object.MapObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
-import main.java.application.model.editor.*;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.java.application.model.editor.EditorSpriteInput;
+import main.java.application.model.editor.ImageList;
+import main.java.application.model.inputs.EditorInputs;
 import main.java.hac.controller.World;
+import main.java.hac.model.Camera;
+import main.java.hac.model.filehandler.ExportMap;
+import main.java.hac.model.filehandler.SpriteSheet;
+import main.java.hac.model.object.GameMap;
+import main.java.hac.model.object.GameObject;
+import main.java.hac.model.filehandler.ImportMap;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 /**
  * Implements the EditorController to Controller.
@@ -26,62 +27,10 @@ import java.util.ArrayList;
  */
 public class EditorController extends Controller {
 
-
-
-
-    public EditorController() {
-        super(GameState.EDITOR);
-    }
-
-    @Override
-    public void initiate() {
-        this.camera = new Camera(getParent().getWidth(), graphics);
-
-        // TODO: Trenger du imageList og exportMap her?
-        setInputs(new EditorInputs(15.1, camera, imageList, exportMap));
-    }
-
-
-
-
-
-    // TODO: clean bellow
-
-
-
-
-
-
-
-
-
-
-
-
     private ImageList imageList;
     private World world;
-    //private HACEditor map;
     private Camera camera;
-    private boolean isRunning = false;
-    private MapObject mapObject;
     private ExportMap exportMap;
-    private ArrayList<String> fileNames = new ArrayList<>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @FXML
     Canvas graphics;
@@ -93,6 +42,24 @@ public class EditorController extends Controller {
     ListView listViewBottom;
 
 
+    public EditorController() {
+        super(GameState.EDITOR);
+    }
+
+    @Override
+    public void initiate() {
+        this.camera = new Camera(getParent().getWidth(), graphics);
+        this.imageList = new ImageList(listViewBottom, listView);
+        this.world = new World();
+        this.exportMap = new ExportMap();
+        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background"));
+        world.setGameMap(gameMap);
+        gameMap.render(camera);
+
+        setInputs(new EditorInputs(15.1, camera, imageList, exportMap));
+    }
+
+
     /**
      * This method creates a new file.
      * @param event allows us to access the properties of ActionEvent
@@ -102,44 +69,6 @@ public class EditorController extends Controller {
         getParent().setState(GameState.MAIN_MENU);
     }
 
-
-    /**
-     * Initiates imageList (fileHandler)
-     *
-    @Override
-    public void initiate () {
-
-        this.camera = new Camera(mainController.getWidth(), graphics);
-        this.exportMap = new ExportMap();
-        GameMap gameMap = new GameMap(30, 30, new SpriteSheet("background"));
-        this.world = new World();
-        world.setGameMap(gameMap);
-        gameMap.render(camera);
-        imageList = new ImageList(listViewBottom, listView);
-
-        //listView.setItems(imageList.openEditorSave(imageList.getResult()));
-        listViewBottom.setItems(imageList.openSpriteEditorSave(imageList.getSpriteBottom()));
-        listViewBottom.setCellFactory(param -> new ListCell<ImageItem>() {
-            @Override
-            protected void updateItem(ImageItem item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    setGraphic(item.getImageView());
-                }
-            }
-        });
-
-
-        //listView.setItems(imageList.getAllNames());
-
-        //listView.setCellFactory(param -> imageList.getAllAssets());
-        imageList.handleSpriteListView();
-        imageList.handleAssetsListView(graphics);
-
-    }*/
 
     /**
      * This method closes the state of the game.
@@ -158,14 +87,12 @@ public class EditorController extends Controller {
     private void save(ActionEvent event){
 
         StringBuilder sb = new StringBuilder();
+
         for(String content : exportMap.getElements()){
             sb.append(content);
         }
         String content = sb.toString();
         exportMap.createFile(new File("assets/TESTMAP.mhac"), content);
-        //map.saveFile();
-        //exportHac.createFile();
-
     }
 
     /**
@@ -180,13 +107,11 @@ public class EditorController extends Controller {
         File file = fileChooser.showOpenDialog(new Stage());
 
         if (file != null) {
-            HacParser hacParser = new HacParser();
-            this.world = hacParser.parseFile(file);
+            ImportMap importMap = new ImportMap();
+            this.world = importMap.parseFile(file);
             for(GameObject gameObject : world.getGameObjects()){
                 camera.render(gameObject);
             }
-
-
         }
     }
 
@@ -204,9 +129,7 @@ public class EditorController extends Controller {
             String fileName = fileNameA[0];
             editorSpriteInput.popUp(image, fileName, imageList, imageList.getResult()).show();
 
-
         }
-
     }
 
     /**
