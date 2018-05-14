@@ -1,8 +1,8 @@
 package main.java.HAC.character;
 
 
-import main.java.model.object.character.Enemy;
-import main.java.model.object.character.Player;
+import main.java.hac.model.object.character.Enemy;
+import main.java.hac.model.object.character.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

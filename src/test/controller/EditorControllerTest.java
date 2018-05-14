@@ -1,7 +1,7 @@
 package test.controller;
 
-import main.java.controller.mainController.EditorController;
-import main.java.controller.MainController;
+import main.java.application.controller.mainController.EditorController;
+import main.java.application.controller.MainController;
 import org.junit.jupiter.api.Test;
 
 

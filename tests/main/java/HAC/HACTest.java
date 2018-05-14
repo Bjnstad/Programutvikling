@@ -1,7 +1,7 @@
 package main.java.HAC;
 
-import main.java.controller.mainController.GameController;
-import main.java.model.world.GameMap;
+import main.java.application.controller.mainController.GameController;
+import main.java.hac.model.object.GameMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
