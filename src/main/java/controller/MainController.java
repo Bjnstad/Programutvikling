@@ -1,8 +1,6 @@
 package main.java.controller;
 
-import main.java.controller.mainController.EditorController;
-import main.java.controller.mainController.GameController;
-import main.java.controller.mainController.MainMenuController;
+import main.java.controller.mainController.*;
 import main.java.controller.subController.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

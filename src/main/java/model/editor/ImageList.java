@@ -65,8 +65,6 @@ public class ImageList {
             @Override
             public void handle(MouseEvent event) {
                 ImageItem imageItem = spriteBottom.get(spriteListView.getSelectionModel().getSelectedIndex());
-                System.out.println(imageItem.getFileName());
-
                 if(result.size() > 1){
                     assetsListView.getItems().clear();
                 }
@@ -170,11 +168,7 @@ public class ImageList {
                         String[] fileNameArr = filename.split("\\.");
                         filename = fileNameArr[0].substring(1);
                         imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
-                        System.out.println(imageItem.getX());
-                        System.out.println(imageItem.getY());
 
-
-                        System.out.println(imageItem.getBits());
                         SpriteSheet spriteSheet = new SpriteSheet(imageItem.getFileName());
 
 

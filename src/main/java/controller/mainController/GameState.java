@@ -1,4 +1,4 @@
-package main.java.controller;
+package main.java.controller.mainController;
 
 /**
  * State of mainmenu, editor and game.

@@ -1,8 +1,6 @@
 package main.java.controller.mainController;
 
-import main.java.controller.Controller;
-import main.java.controller.GameState;
-import main.java.controller.SubState;
+import main.java.controller.subController.SubState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -30,7 +28,7 @@ public class MainMenuController extends Controller {
      */
     @FXML
     public void editor(ActionEvent event) {
-        mainController.setState(GameState.EDITOR);
+        getParent().setState(GameState.EDITOR);
     }
 
     /**
@@ -38,7 +36,7 @@ public class MainMenuController extends Controller {
      */
     @FXML
     public void newGame(ActionEvent event) {
-        mainController.addSubState(SubState.CHOOSE_MAP);
+        getParent().addSubState(SubState.CHOOSE_MAP);
     }
 
     /**
@@ -46,6 +44,6 @@ public class MainMenuController extends Controller {
      */
     @FXML
     public void loadGame(ActionEvent event) {
-        mainController.addSubState(SubState.LOAD_MAP);
+        getParent().addSubState(SubState.LOAD_MAP);
     }
 }

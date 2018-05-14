@@ -53,17 +53,7 @@ public class ImportGame {
 
             this.translateX = translateX;
             this.translateY = translateY;
-
-            System.out.println("Map Width: " + mapWidth);
-            System.out.println("Map Height: " + mapHeight);
-            System.out.println("Map File Name:  " + mapFileName);
-            System.out.println("Current level: " + currentLevel);
-            System.out.println("isGodMode: " + isGodMode);
-            System.out.println("translateX: " + translateX);
-            System.out.println("translateY: " + translateY);
-
-            for (int i = 0; i <objArr.length ; i++) {
-                System.out.println(objArr[i]);
+               for (int i = 0; i <objArr.length ; i++) {
                 String[] object = objArr[i].split(",");
                 if(object[0].equals(""))continue;
                 String type = object[0];

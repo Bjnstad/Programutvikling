@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import main.java.controller.Controller;
+import main.java.controller.mainController.Controller;
 import main.java.controller.mainController.GameController;
 import main.java.model.filehandler.SpriteSheet;
 import main.java.model.object.character.MainPlayer;

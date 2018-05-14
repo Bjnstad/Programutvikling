@@ -95,8 +95,6 @@ public class FileHandler {
         String content = sb.toString();
         File file = new File("assets/editorassets/"+fileName+".ahac");
         createFile(file, content);
-        System.out.println("CREATED FILE");
-
     }
 
 

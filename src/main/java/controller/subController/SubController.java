@@ -1,6 +1,6 @@
 package main.java.controller.subController;
 
-import main.java.controller.Controller;
+import main.java.controller.mainController.Controller;
 
 /**
  * Interface to sub controller that

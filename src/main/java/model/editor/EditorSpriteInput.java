@@ -40,8 +40,6 @@ public class EditorSpriteInput {
         Button submit = new Button("Submit");
 
         submit.setOnAction(e -> {
-            System.out.println("Row: " + inputRow.textProperty().getValue());
-            System.out.println("Column: " + inputColumns.textProperty().getValue());
             rows = Integer.valueOf(inputRow.textProperty().getValue());
             columns = Integer.valueOf(inputColumns.textProperty().getValue());
             bits = ((int)image.getWidth()/columns);

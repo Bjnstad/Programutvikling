@@ -1,4 +1,4 @@
-package main.java.controller;
+package main.java.controller.subController;
 
 /**
  * Enables for a variable to be a set of predefined constants.

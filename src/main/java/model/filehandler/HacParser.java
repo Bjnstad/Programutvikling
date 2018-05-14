@@ -81,7 +81,6 @@ public class HacParser extends FileHandler {
                         MapObject mapObject = new MapObject(new Avatar(objectFileName, new StaticAnimation(objectX, objectY)),(int)posY, (int)posX, sizeX, sizeY);
                         world.addGameObject(mapObject);
 
-                        System.out.println(objects[j]);
 
 
 

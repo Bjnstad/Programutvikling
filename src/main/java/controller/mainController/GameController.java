@@ -5,10 +5,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.util.Duration;
-import main.java.controller.Controller;
-import main.java.controller.GameState;
-import main.java.controller.MainController;
-import main.java.controller.SubState;
+import main.java.controller.subController.SubState;
 import main.java.model.Camera;
 import main.java.model.filehandler.ExportGame;
 import main.java.model.inputs.GameInputs;
@@ -44,7 +41,7 @@ public class GameController extends Controller {
      */
     @Override
     public void initiate() {
-        this.camera = new Camera(mainController.getWidth(), canvas);
+        this.camera = new Camera(getParent().getWidth(), canvas);
         setInputs(new GameInputs(this, 0.1));
     }
 
@@ -74,14 +71,14 @@ public class GameController extends Controller {
     public void pause() {
         timeline.pause();
         isRunning = false;
-        mainController.addSubState(SubState.PAUSE_MENU);
+        getParent().addSubState(SubState.PAUSE_MENU);
     }
 
     /**
      * Continue the game.
      */
     public void resume() {
-        mainController.toMainView();
+        getParent().toMainView();
         play();
     }
 
@@ -89,7 +86,7 @@ public class GameController extends Controller {
      * Exit the game.
      */
     public void exit() {
-        mainController.setState(GameState.MAIN_MENU);
+        getParent().setState(GameState.MAIN_MENU);
     }
 
     /**
@@ -154,7 +151,7 @@ public class GameController extends Controller {
     public void setWorld(World world) {
         world.setGameController(this);
         this.world = world;
-        mainController.toMainView();
+        getParent().toMainView();
         play();
     }
 

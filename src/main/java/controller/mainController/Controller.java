@@ -1,6 +1,7 @@
-package main.java.controller;
+package main.java.controller.mainController;
 
 import javafx.scene.Scene;
+import main.java.controller.MainController;
 import main.java.model.inputs.Inputs;
 
 /**
@@ -9,8 +10,8 @@ import main.java.model.inputs.Inputs;
  */
 public abstract class Controller {
 
-    protected MainController mainController;
-    protected Inputs inputs;
+    private MainController mainController;
+    Inputs inputs;
     private GameState state;
 
     public Controller(GameState state) {
@@ -30,14 +31,14 @@ public abstract class Controller {
     /**
      * Set event listener to scene from controller.
      */
-    void setEvents(Scene scene) {
+    public void setEvents(Scene scene) {
         if(inputs == null) return; // No inputs added.
         scene.setOnKeyPressed(inputs.getEventHandler());
         scene.setOnKeyReleased(inputs.getOnRealeasedEventHandler());
         scene.setOnMouseClicked(inputs.getMouseEventHandler());
     }
 
-    protected void setInputs(Inputs inputs) {
+    void setInputs(Inputs inputs) {
         if (inputs == null) throw new IllegalStateException("Inputs cannot be null.");
         this.inputs = inputs;
     }
@@ -46,7 +47,11 @@ public abstract class Controller {
      * This method sets the main controller of the game.
      * @param mainController shows what on the screen of the game.
      */
-    void setMainController(MainController mainController) {
+    public void setMainController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    MainController getParent() {
+        return mainController;
     }
 }

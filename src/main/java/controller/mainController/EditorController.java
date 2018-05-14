@@ -1,24 +1,17 @@
 package main.java.controller.mainController;
 
 import javafx.scene.image.Image;
-import main.java.controller.Controller;
-import main.java.controller.GameState;
 import main.java.model.Camera;
 import main.java.model.filehandler.ExportMap;
 import main.java.model.filehandler.HacParser;
-import main.java.model.filehandler.SpriteSheet;
 import main.java.model.inputs.EditorInputs;
 import main.java.model.object.GameObject;
-import main.java.model.world.GameMap;
 import main.java.model.object.MapObject;
-import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import main.java.model.editor.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.java.model.world.World;
@@ -42,7 +35,7 @@ public class EditorController extends Controller {
 
     @Override
     public void initiate() {
-        this.camera = new Camera(mainController.getWidth(), graphics);
+        this.camera = new Camera(getParent().getWidth(), graphics);
 
         // TODO: Trenger du imageList og exportMap her?
         setInputs(new EditorInputs(15.1, camera, imageList, exportMap));
@@ -106,7 +99,7 @@ public class EditorController extends Controller {
      */
     @FXML
     public void newFile(ActionEvent event){
-        mainController.setState(GameState.MAIN_MENU);
+        getParent().setState(GameState.MAIN_MENU);
     }
 
 
@@ -154,7 +147,7 @@ public class EditorController extends Controller {
      */
     @FXML
     private void close(ActionEvent event) {
-        mainController.setState(GameState.MAIN_MENU);
+        getParent().setState(GameState.MAIN_MENU);
     }
 
     /**
@@ -209,8 +202,6 @@ public class EditorController extends Controller {
             Path path = file.toPath();
             String[] fileNameA = String.valueOf(path.getFileName()).split("\\.");
             String fileName = fileNameA[0];
-            System.out.println("Height: " + image.getHeight() + "Width: " + image.getWidth());
-            System.out.println("Bits: " + image.getWidth()/editorSpriteInput.getColumns());
             editorSpriteInput.popUp(image, fileName, imageList, imageList.getResult()).show();
 
 
