@@ -87,6 +87,7 @@ public class ImageList {
             @Override
             public void handle(MouseEvent event) {
                 ImageItem imageItem = spriteBottom.get(spriteListView.getSelectionModel().getSelectedIndex());
+                System.out.println(imageItem.getFileName());
                 if(result.size() > 1){
                     assetsListView.getItems().clear();
                 }

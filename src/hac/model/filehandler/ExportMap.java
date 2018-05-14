@@ -1,8 +1,5 @@
 package hac.model.filehandler;
 
-
-import hac.model.object.sprite.Avatar;
-import hac.model.object.sprite.animation.StaticAnimation;
 import javafx.embed.swing.SwingFXUtils;
 import application.model.editor.ImageItem;
 import hac.model.object.MapObject;
@@ -10,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -115,7 +111,6 @@ public class ExportMap extends FileHandler {
                 createFile(new File("assets/maps/"+inputFileName.getText()+".mhac"), content);
 
                 primaryStage.close();
-
 
             }
         });
