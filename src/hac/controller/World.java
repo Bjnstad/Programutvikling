@@ -24,6 +24,7 @@ import java.util.Random;
 public class World {
     private final double ENEMY_GENERATION_RATE = 10;
 
+
     private GameController gameController; // Parent
     private GameMap gameMap;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();

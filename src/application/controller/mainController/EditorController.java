@@ -1,10 +1,14 @@
 package application.controller.mainController;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import application.model.editor.EditorSpriteInput;
@@ -41,6 +45,8 @@ public class EditorController extends Controller {
     @FXML
     ListView listViewBottom;
 
+    @FXML
+    Slider zoomMap;
 
     public EditorController() {
         super(GameState.EDITOR);
@@ -53,10 +59,14 @@ public class EditorController extends Controller {
         this.world = new World();
         this.exportMap = new ExportMap();
         exportMap.handleMapSize(world, camera);
+        zoomMap.setMin(8);
+        zoomMap.setMax(35);
 
 
         setInputs(new EditorInputs(15.1, camera, imageList, exportMap));
+
     }
+
 
 
     /**
@@ -85,6 +95,14 @@ public class EditorController extends Controller {
     @FXML
     private void save(ActionEvent event){
         exportMap.handleSaveMapName();
+
+
+    }
+    @FXML
+    private void zoomSlider(MouseEvent event){
+        camera.setZoom((int)zoomMap.getValue());
+        exportMap.getGameMap().render(camera);
+        System.out.println((int)zoomMap.getValue());
 
     }
 

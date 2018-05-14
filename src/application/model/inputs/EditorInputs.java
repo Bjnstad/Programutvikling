@@ -1,6 +1,7 @@
 package application.model.inputs;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import hac.model.Camera;
@@ -57,8 +58,11 @@ public class EditorInputs implements Inputs {
             System.out.println("Frames" + imageList.getImageItem().getFrames());
             imageList.getMapObject().setPosX((int)((event.getX()-camera.getTranslateX())/camera.getScale()));
             imageList.getMapObject().setPosY((int)((event.getY()-camera.getTranslateY())/camera.getScale()));
+
             camera.render(imageList.getMapObject());
             exportMap.addElement(imageList.getMapObject(), imageList.getImageItem());
         });
     }
+
+
 }

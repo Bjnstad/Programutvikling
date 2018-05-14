@@ -33,6 +33,7 @@ public class ExportMap extends FileHandler {
     private ArrayList<String> filenames = new ArrayList<>();
     private int gameMapX;
     private int gameMapY;
+    private GameMap gameMap;
 
 
 
@@ -169,7 +170,7 @@ public class ExportMap extends FileHandler {
 
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                GameMap gameMap = new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background"));
+                gameMap = new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background"));
                 gameMapX = Integer.parseInt(inputMapSizeX.getText());
                 gameMapY = Integer.parseInt(inputMapSizeY.getText());
                 StringBuilder sb = new StringBuilder();
@@ -178,6 +179,7 @@ public class ExportMap extends FileHandler {
                 sb.append(",");
                 sb.append(gameMapY);
                 elements.add(sb.toString());
+
 
 
                 world.setGameMap(gameMap);
@@ -196,5 +198,7 @@ public class ExportMap extends FileHandler {
         return elements;
     }
 
-
+    public GameMap getGameMap() {
+        return gameMap;
+    }
 }

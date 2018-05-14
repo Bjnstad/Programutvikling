@@ -37,7 +37,6 @@ public class ImageList {
     private ListView assetsListView;
     private MapObject mapObject;
     private ImageItem imageItem;
-
     /**
      * Static variable defining the folder that you select using FileChooser
      */
@@ -141,60 +140,11 @@ public class ImageList {
              */
             @Override
             public void handle(MouseEvent mouseEvent) {
-
-                final Stage primaryStage = new Stage();
-                primaryStage.initModality(Modality.APPLICATION_MODAL);
-                BorderPane root = new BorderPane();
-
-                primaryStage.setTitle("Add asset");
-                primaryStage.setScene(new Scene(root));
-
-                double height = 60;
-                double width = 70;
-
-                Button submit = new Button("Submit");
-
-                submit.setMinSize(3*width, height);
-
-                Label sizeX = new Label("Size X:");
-                TextField inputSizeX = new TextField ();
-
-                Label sizeY = new Label("Size Y:");
-                TextField inputSizeY = new TextField ();
-
-                Label posX = new Label("Pos X:");
-                TextField inputPosX = new TextField ();
-
-                Label posY = new Label("Pos Y:");
-                TextField inputPosY = new TextField ();
-
-                CheckBox checkBox = new CheckBox("Collision?");
-                VBox Vertikalboks = new VBox(sizeX, inputSizeX, sizeY, inputSizeY,checkBox);
-
-                root.setLeft(Vertikalboks);
-                root.setCenter(submit);
-                primaryStage.show();
-
-                submit.setOnAction(new EventHandler<ActionEvent>() {
-                    /**
-                     * This method handles Action event
-                     * This event type is widely used to represent a variety of things
-                     * @param e is a type of ActionEvent, it allows you to access the properties of ActionEvent.
-                     */
-                    @Override public void handle(ActionEvent e) {
-                        int inputX = Integer.parseInt(inputSizeX.getText());
-                        int inputY = Integer.parseInt(inputSizeY.getText());
-
-                        imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
-
-                        MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1);
-                        mapObject = object;
-
-                        primaryStage.close();
+                imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
+                MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1);
+                mapObject = object;
 
 
-                    }
-                });
             }
         });
     }
