@@ -30,13 +30,33 @@ import java.io.*;
  */
 public class ImageList {
 
-
     private ObservableList<ImageItem> result = FXCollections.observableArrayList();
     private ObservableList<ImageItem> spriteBottom = FXCollections.observableArrayList();
     private ListView spriteListView;
     private ListView assetsListView;
     private MapObject mapObject;
     private ImageItem imageItem;
+
+
+    static final File dir = new File("assets/spritesheets"); // File representing the folder that you select using a FileChooser
+
+    static final String[] EXTENSIONS = new String[]{
+            "gif", "png", "bmp", "jpg, ahac"
+    };
+
+    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() { // filter to identify images based on their extensions
+
+        @Override
+        public boolean accept(final File dir, final String name) {
+            for (final String ext : EXTENSIONS) {
+                if (name.endsWith("." + ext)) {
+                    return (true);
+                }
+            }
+            return (false);
+        }
+    };
+
 
     /**
      * This method contains the imageList.
@@ -45,18 +65,23 @@ public class ImageList {
         this.spriteListView = spriteListView;
         this.assetsListView = assetsListView;
 
-        initiateListView();
+
+
+        initiateSpriteListView();
         handleSpriteListView();
         handleAssetsListView();
 
     }
 
-    public void initiateListView(){
+
+    public void initiateSpriteListView(){
         Label placeholder = new Label();
         placeholder.setText("Please Import SpriteSheet!");
-        if(spriteListView.getItems().size() < 1)spriteListView.setPlaceholder(placeholder);
+        if(spriteListView.getItems().size() < 1) spriteListView.setPlaceholder(placeholder);
+
 
         spriteListView.setItems(openSpriteEditorSave(getSpriteBottom()));
+
         spriteListView.setCellFactory(param -> new ListCell<ImageItem>() {
             @Override
             protected void updateItem(ImageItem item, boolean empty) {
@@ -69,6 +94,7 @@ public class ImageList {
                 }
             }
         });
+
     }
 
     public void handleSpriteListView(){
@@ -174,11 +200,14 @@ public class ImageList {
                     @Override public void handle(ActionEvent e) {
                         int inputX = Integer.parseInt(inputSizeX.getText());
                         int inputY = Integer.parseInt(inputSizeY.getText());
+
                         imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
+
                         MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new SingleAnimation(imageItem.getFrames(), imageItem.getX())),  1, 1, inputX, inputY);
                         mapObject = object;
 
                         primaryStage.close();
+
 
                     }
                 });
@@ -187,25 +216,6 @@ public class ImageList {
     }
 
 
-
-    static final File dir = new File("assets/spritesheets"); // File representing the folder that you select using a FileChooser
-
-    static final String[] EXTENSIONS = new String[]{
-            "gif", "png", "bmp", "jpg, ahac"
-    };
-
-    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() { // filter to identify images based on their extensions
-
-        @Override
-        public boolean accept(final File dir, final String name) {
-            for (final String ext : EXTENSIONS) {
-                if (name.endsWith("." + ext)) {
-                    return (true);
-                }
-            }
-            return (false);
-        }
-    };
 
 
     public ObservableList<ImageItem> openSpriteEditorSave(ObservableList<ImageItem> result){
@@ -246,8 +256,6 @@ public class ImageList {
 
 
 
-
-
     public ObservableList<ImageItem> getResult() {
         return result;
     }
@@ -261,9 +269,11 @@ public class ImageList {
     }
 
 
+
     public ImageItem getImageItem() {
         return imageItem;
     }
+
 
 
 }

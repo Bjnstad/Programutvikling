@@ -53,13 +53,13 @@ public class SpriteSheet {
             e.printStackTrace();
         }
 
-
-
-
-
     }
 
-
+    /**
+     *
+     * @param upload
+     * @param multiplier
+     */
     private void resize(BufferedImage upload, int multiplier) {
         double width = upload.getWidth();
         double height = upload.getHeight();
