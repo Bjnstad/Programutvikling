@@ -129,6 +129,22 @@ public class World {
     }
 
     /**
+     * Get gameobject from posX and posY
+     *
+     * @param posX for GameObject
+     * @param posY for GameObject
+     * @return
+     */
+    public GameObject getGameObject(double posX, double posY){
+        for(GameObject gameObject : gameObjects){
+            if(posX < gameObject.getPosX() || posX > gameObject.getPosX() + 1) continue;
+            if(posY < gameObject.getPosY() || posY > gameObject.getPosY() + 1) continue;
+            return gameObject;
+        }
+        return null;
+    }
+
+    /**
      * Render the whole map.
      */
     public void renderMap(Camera camera) {

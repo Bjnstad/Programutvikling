@@ -6,7 +6,9 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -52,6 +54,13 @@
             <ListView fx:id="listViewBottom" layoutX="166.0" maxHeight="150.0" minHeight="127.0" orientation="HORIZONTAL" prefHeight="127.0" prefWidth="484.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="0.0" />
             <Slider fx:id="zoomMap" layoutX="14.0" layoutY="56.0" onMouseDragged="#zoomSlider" />
             <Label layoutX="18.0" layoutY="31.0" text="Zoom:" />
+            <RadioButton fx:id="addRadioBtn" layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#onAdd" selected="true" text="Add">
+               <toggleGroup>
+                  <ToggleGroup fx:id="buttonGroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="deleteRadioBtn" layoutX="74.0" layoutY="82.0" mnemonicParsing="false" onAction="#onRemove" text="Remove" toggleGroup="$buttonGroup" />
+            <RadioButton fx:id="snapRadioBtn" layoutX="13.0" layoutY="104.0" mnemonicParsing="false" onAction="#onSnap" text="Snap " toggleGroup="$buttonGroup" />
          </children>
       </AnchorPane>
    </children>

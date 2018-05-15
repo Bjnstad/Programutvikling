@@ -26,9 +26,7 @@ public class ExportGame extends FileHandler {
      */
     public ExportGame(World world) {
         this.world = world;
-
         saveGame(world);
-
         createFile(new File("assets/maps/newMap.txt"), sb.toString());
 
     }
