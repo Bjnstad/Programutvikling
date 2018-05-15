@@ -11,7 +11,6 @@ public class Actions {
     private ArrayList<Runnable> checkTask = new ArrayList<>();
 
     private ArrayList<GameObject> remove = new ArrayList<>();
-    private ArrayList<GameObject> clean = new ArrayList<>();
     private ArrayList<GameObject> render = new ArrayList<>();
 
     private World world;
@@ -29,10 +28,6 @@ public class Actions {
         render.add(object);
     }
 
-    public void cleanObject(GameObject object) {
-        clean.add(object);
-    }
-
     public void removeObject(GameObject object) {
         remove.add(object);
     }
@@ -46,14 +41,7 @@ public class Actions {
         // Remove objects
         for(GameObject object : remove) gameObjects.remove(object);
         remove.clear();
-
-        // Clean objects
-        for(GameObject object : clean) {
-            if(clean == null) continue;
-            gameMap.renderArea(camera, (int)object.getPosX() -1, (int)object.getPosY() -1, object.getPosX() + 2, object.getPosY() +2);
-        }
-        clean.clear();
-
+        
         // Render objects
         for(GameObject object : render) {
             if(object == null) continue;
