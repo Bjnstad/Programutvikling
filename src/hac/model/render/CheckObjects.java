@@ -38,7 +38,6 @@ public class CheckObjects implements Runnable {
             if(gameObject instanceof Character) {
                 if((((Character) gameObject).isDead())) {
                     if(gameObject instanceof MainPlayer) world.die();
-                    actions.cleanObject(gameObject);
                     actions.removeObject(gameObject);
                     return;
                 }
@@ -61,7 +60,6 @@ public class CheckObjects implements Runnable {
 
             if(gameObject.getPosY() > startY && gameObject.getPosY() < endY) {
                 if(gameObject.getPosX() > startX && gameObject.getPosX() < endX) {
-                    actions.cleanObject(gameObject);
                     actions.renderObject(gameObject);
                 }
             }

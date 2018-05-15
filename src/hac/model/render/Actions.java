@@ -41,7 +41,7 @@ public class Actions {
         // Remove objects
         for(GameObject object : remove) gameObjects.remove(object);
         remove.clear();
-        
+
         // Render objects
         for(GameObject object : render) {
             if(object == null) continue;
