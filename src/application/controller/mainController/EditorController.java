@@ -1,10 +1,11 @@
 package application.controller.mainController;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -17,9 +18,9 @@ import hac.model.Camera;
 import hac.model.filehandler.ExportMap;
 import hac.model.object.GameObject;
 import hac.model.filehandler.ImportMap;
-
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  * Implements the EditorController to Controller.
@@ -28,21 +29,23 @@ import java.nio.file.Path;
 public class EditorController extends Controller {
 
     private ImageList imageList;
-    private World world;
     private Camera camera;
     private ExportMap exportMap;
+    private EditorInputs editorInputs;
+
 
     @FXML
-    Canvas graphics;
+    private Canvas graphics;
 
     @FXML
-    ListView listView;
+    private ListView listView;
 
     @FXML
-    ListView listViewBottom;
+    private ListView listViewBottom;
 
     @FXML
-    Slider zoomMap;
+    private Slider zoomMap;
+
 
     public EditorController() {
         super(GameState.EDITOR);
@@ -52,12 +55,13 @@ public class EditorController extends Controller {
     public void initiate() {
         this.camera = new Camera(getParent().getWidth(), graphics);
         this.imageList = new ImageList(listViewBottom, listView);
-        this.world = new World();
-        this.exportMap = new ExportMap(world);
-        exportMap.handleMapSize(world, camera);
+        //this.world = new World();
+        this.exportMap = new ExportMap();
+        editorInputs = new EditorInputs(15.1, camera, imageList, exportMap);
+        editorInputs.handleMapSize();
         zoomMap.setMin(8);
         zoomMap.setMax(35);
-        setInputs(new EditorInputs(15.1, camera, imageList, exportMap, zoomMap));
+        setInputs(editorInputs);
 
     }
 
@@ -96,7 +100,14 @@ public class EditorController extends Controller {
     private void onDelete(){
 
     }
-
+    @FXML
+    private void zoomSlider(MouseEvent event){
+        camera.setZoom((int)zoomMap.getValue());
+        editorInputs.getWorld().getGameMap().render(camera);
+        for(GameObject gameObject : editorInputs.getWorld().getGameObjects()){
+            camera.render(gameObject);
+        }
+    }
 
     /**
      * This method makes it possible to import a file.
@@ -111,10 +122,11 @@ public class EditorController extends Controller {
 
         if (file != null) {
             ImportMap importMap = new ImportMap();
-            this.world = importMap.parseFile(file);
-            for(GameObject gameObject : world.getGameObjects()){
-                camera.render(gameObject);
-            }
+            //world = importMap.parseFile(file);
+            //world.getGameMap().render(camera);
+           // for(GameObject gameObject : world.getGameObjects()){
+            //    camera.render(gameObject);
+           // }
         }
     }
 
@@ -134,6 +146,24 @@ public class EditorController extends Controller {
 
         }
     }
+
+    @FXML
+    private void onAdd(ActionEvent event){
+        editorInputs.setAddRemoveState(true);
+        editorInputs.setSnapState(false);
+    }
+
+    @FXML
+    private void onRemove(ActionEvent event){
+        editorInputs.setAddRemoveState(false);
+        editorInputs.setSnapState(false);
+    }
+
+    @FXML
+    private void onSnap(ActionEvent event){
+        editorInputs.setSnapState(true);
+    }
+
 
     /**
      * Is being used to decorate a method that is being called when a session is closing.

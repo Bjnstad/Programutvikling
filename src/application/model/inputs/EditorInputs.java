@@ -1,13 +1,29 @@
 package application.model.inputs;
 
+import hac.controller.World;
+import hac.model.filehandler.SpriteSheet;
+import hac.model.object.GameMap;
+import hac.model.object.GameObject;
 import hac.model.object.MapObject;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import hac.model.Camera;
 import application.model.editor.ImageList;
 import hac.model.filehandler.ExportMap;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Handles inout for editor.
@@ -18,8 +34,11 @@ public class EditorInputs implements Inputs {
     private Camera camera;
     private final ImageList imageList;
     private final ExportMap exportMap;
+    private World world = new World();
+    private boolean addObj = true;
+    private boolean snapObj = false;
 
-    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap, Slider zoomMap) {
+    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap) {
         this.speed = speed;
         this.camera = camera;
         this.imageList = imageList;
@@ -54,17 +73,111 @@ public class EditorInputs implements Inputs {
         return null;
     }
 
+    /**
+     * Gets object from Listview, creates new MapObject with new posX and posY based on mouseinput.
+     * @return
+     */
     @Override
     public EventHandler<MouseEvent> getMouseEventHandler() {
         return (event -> {
-            if(imageList.getMapObject() == null) return;
-            imageList.getMapObject().setPosX((int)((event.getX()-camera.getTranslateX())/camera.getScale()));
-            imageList.getMapObject().setPosY((int)((event.getY()-camera.getTranslateY())/camera.getScale()));
-            MapObject mapObject = new MapObject(imageList.getMapObject().getAvatar(), (int)imageList.getMapObject().getPosY(), (int)imageList.getMapObject().getPosX());
+            double posX = (event.getX() - camera.getTranslateX()) / camera.getScale() - .5;
+            double posY = (event.getY() - camera.getTranslateY()) / camera.getScale() - 1;
 
-            camera.render(imageList.getMapObject());
-            exportMap.addElement(mapObject, imageList.getImageItem());
+
+            if(addObj == true && snapObj == false) {
+                if (imageList.getMapObject() == null) return;
+
+                MapObject mapObject = new MapObject(imageList.getMapObject().getAvatar(), imageList.getMapObject().getPosY(), imageList.getMapObject().getPosX());
+                mapObject.setPosX(posX);
+                mapObject.setPosY(posY);
+
+                world.addGameObject(mapObject);
+                exportMap.addElement(mapObject, imageList.getImageItem());
+            }else if(addObj == false && snapObj == false){
+                world.removeObject(world.getGameObject(posX, posY));
+            }
+
+            if(snapObj == true){
+                int nTileX = (int)(posX / camera.getZoom() / camera.getScale());
+                int nTileY = (int)(posY / camera.getZoom() / camera.getScale());
+
+            }
+
+            //Render map and objects after adding or removing object
+            world.getGameMap().render(camera);
+            for(GameObject gameObject : world.getGameObjects()) camera.render(gameObject);
+
+
         });
+    }
+
+
+    public void handleMapSize(){
+        final Stage primaryStage = new Stage();
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
+        BorderPane root = new BorderPane();
+
+        primaryStage.setTitle("Map Size");
+        primaryStage.setScene(new Scene(root));
+
+        Button submit = new Button("Submit");
+
+        Label mapSizeX = new Label("Map size X: ");
+        TextField inputMapSizeX = new TextField ();
+        Label mapSizeY = new Label("Map size Y: ");
+        TextField inputMapSizeY = new TextField ();
+
+        // force the field to be numeric only X
+        inputMapSizeX.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    inputMapSizeX.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // force the field to be numeric only Y
+        inputMapSizeY.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    inputMapSizeY.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        VBox Vertikalboks = new VBox(mapSizeX, inputMapSizeX, mapSizeY, inputMapSizeY);
+
+        root.setLeft(Vertikalboks);
+        root.setBottom(submit);
+        primaryStage.show();
+
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                world.setGameMap(new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background")));
+                int gameMapX = Integer.parseInt(inputMapSizeX.getText());
+                int gameMapY = Integer.parseInt(inputMapSizeY.getText());
+                exportMap.addMapSize(gameMapX, gameMapY);
+                world.getGameMap().render(camera);
+                primaryStage.close();
+
+            }
+        });
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setAddRemoveState(Boolean state){
+        addObj = state;
+    }
+
+    public void setSnapState(Boolean state){
+        snapObj = state;
     }
 
 
