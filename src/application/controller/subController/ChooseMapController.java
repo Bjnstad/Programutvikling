@@ -1,5 +1,7 @@
 package application.controller.subController;
 
+import application.model.objects.Zombie1;
+import application.model.objects.Zombie2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -82,6 +84,9 @@ public class ChooseMapController implements SubController {
 
         w.addGameObject(new MainPlayer("default_player", 1, 1));
        // w.setEnemies(new Enemy[0]);
+
+        w.addEnemyType(new Zombie1(0,0));
+        w.addEnemyType(new Zombie2(0,0));
 
 
         // TODO: CREATE NEW WORLD

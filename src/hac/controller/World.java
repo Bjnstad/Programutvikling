@@ -11,9 +11,15 @@ import hac.model.object.character.Player;
 import hac.model.object.GameObject;
 import hac.model.object.defaults.Skeleton;
 import hac.model.render.Actions;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +33,7 @@ import java.util.Random;
 public class World {
     private final double ENEMY_GENERATION_RATE = 2;
 
+    private ArrayList<Enemy> enemiesTypes = new ArrayList<>(); // Used for choosing generated enemies.
 
     private GameController gameController; // Parent
     private GameMap gameMap;
@@ -35,6 +42,27 @@ public class World {
     private boolean godmode = false;
     private int currentLevel;
     private double barHeight = .8; // Game relative is multiplied with scale
+
+
+    private Image bar;
+    private Image barDec;
+
+
+    public World() {
+        File file1 = new File("/assets/images/health_bar_decoration.png");
+        File file2 = new File("/assets/images/health_bar.png");
+        BufferedImage img;
+        try {
+            img = ImageIO.read(file1);
+            barDec = SwingFXUtils.toFXImage(img, null);
+            img = ImageIO.read(file2);
+            bar = SwingFXUtils.toFXImage(img, null);
+        } catch (IOException e) {
+            // TODO: Corupted files
+        }
+    }
+
+
 
 
     /**
@@ -86,14 +114,12 @@ public class World {
         double healthWidth = camera.getScale() * 3;
         double healthPos = camera.scale(camera.getZoom()/2-healthWidth/2/camera.getScale());
 
+        gc.drawImage(barDec, -camera.getTranslateX() + camera.getScale(), -camera.getTranslateY() + camera.getDimension() - camera.scale(barHeight), camera.getScale(), camera.getScale());
 
-        gc.setFill(Color.RED);
-        gc.fillRect(-camera.getTranslateX() + healthPos, -camera.getTranslateY() + camera.getDimension() - camera.scale(.7), healthWidth - (healthWidth/mainPlayer.getHealth()), camera.scale(.6));
+    }
 
-        gc.setFill(Color.WHITE);
-        gc.fillText((int)mainPlayer.getHealth()+"/100",-camera.getTranslateX() + camera.scale(camera.getZoom()/2),-camera.getTranslateY() + camera.getDimension() - camera.scale(barHeight/2));
-
-
+    public void addEnemyType(Enemy enemy) {
+        enemiesTypes.add(enemy);
     }
 
     /**
@@ -121,7 +147,15 @@ public class World {
     private void generateEnemies(int numberOfEnemies) {
         Random rand = new Random();
         for (int i = 0; i < numberOfEnemies; i++) {
-            Enemy enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
+            Enemy enemy;
+            if(enemiesTypes.size() == 0) {
+                 enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
+            } else {
+                int k = rand.nextInt(enemiesTypes.size());
+                enemy = enemiesTypes.get(k);
+                enemy.setPosX(rand.nextInt(gameMap.getWidth()));
+                enemy.setPosY(rand.nextInt(gameMap.getHeight()));
+            }
             enemy.setSpeed(1 + rand.nextInt(4));
             if (!addGameObject(enemy)) i--; // Failed to add enemy retry creation
         }

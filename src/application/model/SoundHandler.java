@@ -22,7 +22,7 @@ public class SoundHandler {
                 FloatControl volume= (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
                 volume.setValue(1.0f); // Reduce volume by 10 decibels.
-
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
                 clip.start();
                 clip.drain();
             } catch (Exception e) {
