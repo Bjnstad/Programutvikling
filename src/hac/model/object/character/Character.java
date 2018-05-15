@@ -33,4 +33,8 @@ public abstract class Character extends MoveableObject {
         health += heal;
         if(health > 100) health = 100;
     }
+
+    public double getHealth() {
+        return health;
+    }
 }

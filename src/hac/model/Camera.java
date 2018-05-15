@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import hac.model.object.GameObject;
 import hac.model.object.sprite.ImageHandler;
+import javafx.scene.paint.Color;
 
 /**
  * Camera is used to calculate differences between game content and the real pixel values for canvas.
@@ -68,7 +69,11 @@ public class Camera {
         return value * scale;
     }
 
-
+    public void clearView(double barHeight) {
+        GraphicsContext gc = getGraphicsContext();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(-getTranslateX(), -getTranslateY(), -getTranslateX() + dimension +scale, -getTranslateY() + dimension + barHeight*scale);
+    }
     /**
      * Zoom is how many background tiles shown on screen simultaneously, 2 in zoom is 2 tiles on x axis and 2 on y axis.
      * @param zoom how many tiles shown to screen

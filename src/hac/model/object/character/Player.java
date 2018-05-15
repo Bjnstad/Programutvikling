@@ -8,7 +8,7 @@ import hac.controller.World;
 /**
  * This class represents the player in the game.
  * Player extends the qualities from character.
- * @author
+ * @author s315322 - Axel Bjørnstad
  */
 public abstract class Player extends Character {
 
@@ -18,20 +18,5 @@ public abstract class Player extends Character {
      */
     public Player(String spriteName, double posX, double posY, int frames) {
         super(spriteName, posX, posY, 9);
-    }
-
-    @Override
-    public void onCollide(GameObject object, Actions actions) {
-
-    }
-
-    @Override
-    public void logic(World world, Actions actions) {
-
-    }
-
-    @Override
-    public void renderOptional(Camera camera) {
-
     }
 }
