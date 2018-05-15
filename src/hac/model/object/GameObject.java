@@ -53,7 +53,7 @@ public abstract class GameObject {
      * @return the position to enemy in height and width.
      */
     boolean willCollide(GameObject object, double x, double y) {
-        double deadzone = .001;
+        double deadzone = .01;
         if(x > object.getPosX() + 1 -deadzone || x + 1 -deadzone < object.getPosX()) return false;
         return !(y > object.getPosY() + 1 -deadzone) && !(y + 1-deadzone < object.getPosY());
     }

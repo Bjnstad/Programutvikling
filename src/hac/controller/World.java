@@ -11,6 +11,8 @@ import hac.model.object.character.Player;
 import hac.model.object.GameObject;
 import hac.model.object.defaults.Skeleton;
 import hac.model.render.Actions;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -56,7 +58,24 @@ public class World {
             }
             actions.checkGamelogic(gameObjects, i, i + distribution, this);
         }
+
+
         actions.start(gameObjects, gameMap, getCamera());
+
+
+        drawUserStats();
+    }
+
+    private void drawUserStats() {
+        double barHeight = 1.2;
+
+        gameMap.renderArea(getCamera(), getCamera().getTranslateX()/getCamera().getScale(), getCamera().getZoom() - Math.ceil(barHeight), getCamera().getTranslateX()/getCamera().getScale() + getCamera().getZoom(), getCamera().getZoom());
+
+        GraphicsContext gc = getCamera().getGraphicsContext();
+
+        gc.setFill(Color.BLACK);
+        gc.fillRect(-getCamera().getTranslateX(), -getCamera().getTranslateY() + getCamera().getDimension() - (barHeight*getCamera().getScale() -1),-getCamera().getTranslateX() + getCamera().getDimension(),-getCamera().getTranslateY() + getCamera().getDimension());
+
     }
 
     /**

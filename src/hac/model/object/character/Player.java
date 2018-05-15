@@ -8,7 +8,7 @@ import hac.controller.World;
 /**
  * This class represents the player in the game.
  * Player extends the qualities from character.
- * @author
+ * @author s315322 - Axel Bjørnstad
  */
 public abstract class Player extends Character {
 
