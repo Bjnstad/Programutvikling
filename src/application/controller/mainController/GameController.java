@@ -27,6 +27,7 @@ public class GameController extends Controller {
 
     private Camera camera;
 
+
     @FXML
     private Canvas canvas;
 

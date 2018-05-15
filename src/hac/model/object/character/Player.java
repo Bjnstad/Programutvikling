@@ -19,19 +19,4 @@ public abstract class Player extends Character {
     public Player(String spriteName, double posX, double posY, int frames) {
         super(spriteName, posX, posY, 9);
     }
-
-    @Override
-    public void onCollide(GameObject object, Actions actions) {
-
-    }
-
-    @Override
-    public void logic(World world, Actions actions) {
-
-    }
-
-    @Override
-    public void renderOptional(Camera camera) {
-
-    }
 }

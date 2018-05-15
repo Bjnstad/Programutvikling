@@ -94,6 +94,10 @@ public class GameMap {
         return null;
     }
 
+    public void clearView(Camera camera, double barHeight) {
+        renderArea(camera, -camera.getTranslateX()/camera.getScale(), -camera.getTranslateY()/camera.getScale(), -camera.getTranslateX()/camera.getScale()+ camera.getZoom(), -camera.getTranslateY()/camera.getScale() + camera.getZoom() + barHeight);
+    }
+
     /**
      * This method gets the width of gameMap.
      *

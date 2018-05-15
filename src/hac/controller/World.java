@@ -34,6 +34,7 @@ public class World {
 
     private boolean godmode = false;
     private int currentLevel;
+    private double barHeight = .8; // Game relative is multiplied with scale
 
 
     /**
@@ -48,6 +49,10 @@ public class World {
             getMainPlayer().heal(100);
         }
 
+        // Reset view
+        getCamera().clearView(barHeight);
+        gameMap.clearView(getCamera(), barHeight);
+
         Actions actions = new Actions(this);
         int distribution = gameObjects.size() / Runtime.getRuntime().availableProcessors() * 2; // Times two for Hyperthreading
         if(distribution == 0) distribution = 1;
@@ -61,20 +66,33 @@ public class World {
 
 
         actions.start(gameObjects, gameMap, getCamera());
-
-
         drawUserStats();
+
     }
 
     private void drawUserStats() {
-        double barHeight = 1.2;
-
-        gameMap.renderArea(getCamera(), getCamera().getTranslateX()/getCamera().getScale(), getCamera().getZoom() - Math.ceil(barHeight), getCamera().getTranslateX()/getCamera().getScale() + getCamera().getZoom(), getCamera().getZoom());
-
         GraphicsContext gc = getCamera().getGraphicsContext();
+        Camera camera = getCamera();
 
         gc.setFill(Color.BLACK);
         gc.fillRect(-getCamera().getTranslateX(), -getCamera().getTranslateY() + getCamera().getDimension() - (barHeight*getCamera().getScale() -1),-getCamera().getTranslateX() + getCamera().getDimension(),-getCamera().getTranslateY() + getCamera().getDimension());
+
+        gc.setFill(Color.WHITE);
+        gc.fillText("Level: " + currentLevel,-camera.getTranslateX() + camera.getScale(),-camera.getTranslateY() + camera.getDimension() - camera.scale(barHeight/2));
+
+
+        // Draw health
+        MainPlayer mainPlayer = getMainPlayer();
+        double healthWidth = camera.getScale() * 3;
+        double healthPos = camera.scale(camera.getZoom()/2-healthWidth/2/camera.getScale());
+
+
+        gc.setFill(Color.RED);
+        gc.fillRect(-camera.getTranslateX() + healthPos, -camera.getTranslateY() + camera.getDimension() - camera.scale(.7), healthWidth - (healthWidth/mainPlayer.getHealth()), camera.scale(.6));
+
+        gc.setFill(Color.WHITE);
+        gc.fillText((int)mainPlayer.getHealth()+"/100",-camera.getTranslateX() + camera.scale(camera.getZoom()/2),-camera.getTranslateY() + camera.getDimension() - camera.scale(barHeight/2));
+
 
     }
 
@@ -222,6 +240,10 @@ public class World {
 
     public int getCurrentLevel(){
         return currentLevel;
+    }
+
+    public double getBarHeight() {
+        return barHeight;
     }
 
     public boolean isGodmode(){

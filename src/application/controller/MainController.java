@@ -2,13 +2,20 @@ package application.controller;
 
 import application.controller.mainController.*;
 import application.controller.subController.*;
+import application.model.SoundHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,11 +29,15 @@ public class MainController implements Initializable {
     AnchorPane mainView; // Main frame for content
     private Controller controller; // Active controller
 
+    private SoundHandler soundHandler = new SoundHandler();
+
     /**
      * We set our main view to Main Menu
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        SoundHandler.playSound("Lobby.wav");
+
         setState(GameState.MAIN_MENU);
     }
 
