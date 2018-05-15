@@ -19,7 +19,7 @@ import java.util.Base64;
  * @author Henry Tran - s315309
  *
  */
-public class FileHandler {
+public abstract class FileHandler {
 
 
     /**

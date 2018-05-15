@@ -19,7 +19,7 @@ public class MapObject extends GameObject {
      * @param posY  position to gameObject in height.
      * @param posX position to gameObject in width.
      */
-    public MapObject(Avatar avatar, int posY, int posX) {
+    public MapObject(Avatar avatar, double posY, double posX) {
         super(avatar, posX, posY);
         this.image = image;
 

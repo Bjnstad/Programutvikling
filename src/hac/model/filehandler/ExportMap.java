@@ -32,9 +32,7 @@ import java.util.ArrayList;
 public class ExportMap extends FileHandler {
     private ArrayList<String> elements = new ArrayList<>();
     private ArrayList<String> filenames = new ArrayList<>();
-    private int gameMapX;
-    private int gameMapY;
-    private GameMap gameMap;
+
 
 
 
@@ -45,7 +43,7 @@ public class ExportMap extends FileHandler {
      * @param imageItem the item being used.
      */
     public void addElement(MapObject mapObject, ImageItem imageItem){
-            StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         boolean exist = false;
         for(String fileName : filenames){
             if (fileName.equals(imageItem.getFileName())) {
@@ -53,7 +51,6 @@ public class ExportMap extends FileHandler {
                 break;
             }
         }
-
 
         if(!exist) {
             String base64String = encodeImageToString(SwingFXUtils.fromFXImage(imageItem.getImage(), null), "png");
@@ -81,7 +78,16 @@ public class ExportMap extends FileHandler {
         sb.append(mapObject.getPosX());
         sb.append(",");
         sb.append(mapObject.getPosY());
+        elements.add(sb.toString());
 
+    }
+
+    public void addMapSize(int gameMapX, int gameMapY){
+        StringBuilder sb = new StringBuilder();
+        sb.append("$");
+        sb.append(gameMapX);
+        sb.append(",");
+        sb.append(gameMapY);
         elements.add(sb.toString());
 
     }
@@ -125,70 +131,7 @@ public class ExportMap extends FileHandler {
         });
     }
 
-    public void handleMapSize(World world, Camera camera){
-        final Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.APPLICATION_MODAL);
-        BorderPane root = new BorderPane();
-
-        primaryStage.setTitle("Map Size");
-        primaryStage.setScene(new Scene(root));
-
-        Button submit = new Button("Submit");
-
-        Label mapSizeX = new Label("Map size X: ");
-        TextField inputMapSizeX = new TextField ();
-        Label mapSizeY = new Label("Map size Y: ");
-        TextField inputMapSizeY = new TextField ();
-
-        // force the field to be numeric only X
-        inputMapSizeX.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    inputMapSizeX.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-
-        // force the field to be numeric only Y
-        inputMapSizeY.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    inputMapSizeY.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-
-        VBox Vertikalboks = new VBox(mapSizeX, inputMapSizeX, mapSizeY, inputMapSizeY);
-
-        root.setLeft(Vertikalboks);
-        root.setBottom(submit);
-        primaryStage.show();
-
-        submit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                gameMap = new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background"));
-                gameMapX = Integer.parseInt(inputMapSizeX.getText());
-                gameMapY = Integer.parseInt(inputMapSizeY.getText());
-                StringBuilder sb = new StringBuilder();
-                sb.append("$");
-                sb.append(gameMapX);
-                sb.append(",");
-                sb.append(gameMapY);
-                elements.add(sb.toString());
-
-                world.setGameMap(gameMap);
-                gameMap.render(camera);
-                primaryStage.close();
-
-            }
-        });
-
-    }
-    /**
+        /**
      * Gets the string elements of the constructed maps.
      * @return elements of strings representing the structure of the map.
      */
@@ -196,8 +139,4 @@ public class ExportMap extends FileHandler {
         return elements;
     }
 
-
-    public GameMap getGameMap() {
-        return gameMap;
-    }
 }
