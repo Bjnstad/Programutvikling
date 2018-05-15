@@ -1,7 +1,7 @@
 package application.model.inputs;
 
+import hac.controller.World;
 import javafx.event.EventHandler;
-import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import hac.model.Camera;

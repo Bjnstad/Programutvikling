@@ -98,11 +98,20 @@ public class EditorController extends Controller {
 
 
     }
+
+
+    @FXML
+    private void onDelete(){
+
+    }
     @FXML
     private void zoomSlider(MouseEvent event){
         camera.setZoom((int)zoomMap.getValue());
         exportMap.getGameMap().render(camera);
-        System.out.println((int)zoomMap.getValue());
+        for (int i = 0; i < exportMap.getGameObjects().size(); i++) {
+
+        }
+
 
     }
 

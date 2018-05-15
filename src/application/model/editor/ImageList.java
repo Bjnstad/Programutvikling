@@ -3,17 +3,11 @@ package application.model.editor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import hac.model.object.MapObject;
 import hac.model.filehandler.SpriteSheet;
 import hac.model.object.sprite.Avatar;
@@ -186,7 +180,6 @@ public class ImageList {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
         return result;
     }
