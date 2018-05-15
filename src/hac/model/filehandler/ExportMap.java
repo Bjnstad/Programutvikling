@@ -1,11 +1,10 @@
 package hac.model.filehandler;
 
 import hac.controller.World;
-import hac.model.Camera;
-import hac.model.object.GameMap;
 import hac.model.object.GameObject;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import hac.model.object.sprite.animation.MultiAnimation;
+import hac.model.object.sprite.animation.SingleAnimation;
+import hac.model.object.sprite.animation.StaticAnimation;
 import javafx.embed.swing.SwingFXUtils;
 import application.model.editor.ImageItem;
 import hac.model.object.MapObject;
@@ -20,7 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -30,10 +29,16 @@ import java.util.ArrayList;
  * @author Henry Tran - s315309
  */
 public class ExportMap extends FileHandler {
+    private World world;
     private ArrayList<String> elements = new ArrayList<>();
     private ArrayList<String> filenames = new ArrayList<>();
 
+    public ExportMap(World world){
+        this.world = world;
+    }
+    public ExportMap(){
 
+    }
 
 
     /**
@@ -84,21 +89,123 @@ public class ExportMap extends FileHandler {
 
     }
 
-    public void addMapSize(int gameMapX, int gameMapY){
+    public void addMapSize(){
         StringBuilder sb = new StringBuilder();
         sb.append("$");
-        sb.append(gameMapX);
+        sb.append(world.getGameMap().getWidth());
         sb.append(",");
-        sb.append(gameMapY);
+        sb.append(world.getGameMap().getHeight());
         elements.add(sb.toString());
 
     }
+
+    public void saveGame(){
+        StringBuilder saveBuilder = new StringBuilder();
+
+        saveBuilder.append(appendAhac());
+        saveBuilder.append(saveGameState());
+        saveBuilder.append(addObject());
+        elements.add(saveBuilder.toString());
+        handleSaveMapName(false);
+
+    }
+
+    public String addObject(){
+        StringBuilder sb = new StringBuilder();
+
+        for (GameObject object : world.getGameObjects()) {
+            sb.append("§");
+            String type = object.getClass().getSimpleName();
+            sb.append(type);
+            sb.append(",");
+            sb.append(object.getPosX());
+            sb.append(",");
+            sb.append(object.getPosY());
+            sb.append(",");
+            if(object.getAvatar().getAnimation() instanceof MultiAnimation) {
+                MultiAnimation animation = (MultiAnimation)object.getAvatar().getAnimation();
+                sb.append("#");
+                sb.append(",");
+                sb.append(object.getAvatar().getFilename());
+                sb.append(",");
+                sb.append(animation.getDirection());
+                sb.append(",");
+                sb.append(animation.getFrames());
+                sb.append(",");
+                sb.append(animation.getX());
+                sb.append(",");
+                sb.append(animation.getY());
+
+            }
+
+            if(object.getAvatar().getAnimation() instanceof SingleAnimation) {
+                SingleAnimation animation = (SingleAnimation)object.getAvatar().getAnimation();
+                sb.append("/");
+                sb.append(animation.getFrames());
+                sb.append(",");
+                sb.append(animation.getY());
+                // HENT UT DATA
+            }
+
+            if(object.getAvatar().getAnimation() instanceof StaticAnimation) {
+                StaticAnimation animation = (StaticAnimation)object.getAvatar().getAnimation();
+                sb.append("$");
+                sb.append(animation.getX());
+                sb.append(",");
+                sb.append(animation.getY());
+
+                // HENT UT DATA
+            }
+        }
+        return sb.toString();
+
+    }
+
+    public String appendAhac(){
+
+        try {
+            BufferedReader b = new BufferedReader(new FileReader(new File("assets/maps/" + world.getGameMap().getMapFileName())));
+
+            String str = b.readLine().toString();
+            System.out.println(str);
+            return str;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String saveGameState(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("@");
+        sb.append(world.getGameMap().getWidth());
+        sb.append(",");
+        sb.append(world.getGameMap().getHeight());
+        sb.append(",");
+        sb.append(world.getGameMap().getBackgroundFileName());
+        sb.append(",");
+        sb.append(world.getCurrentLevel());
+        sb.append(",");
+        sb.append(world.isGodmode());
+        sb.append(",");
+        sb.append(world.getCamera().getTranslateX());
+        sb.append(",");
+        sb.append(world.getCamera().getTranslateY());
+        sb.append("@");
+        return sb.toString();
+
+
+    }
+
 
 
     /**
      * This methods shows a new scene to user, where the user inputs a filename for the file to be created.
      */
-    public void handleSaveMapName(){
+    public void handleSaveMapName(boolean onlyMap){
         final Stage primaryStage = new Stage();
         primaryStage.initModality(Modality.APPLICATION_MODAL);
         BorderPane root = new BorderPane();
@@ -125,7 +232,12 @@ public class ExportMap extends FileHandler {
                     sb.append(content);
                 }
                 String content = sb.toString();
-                createFile(new File("assets/maps/"+inputFileName.getText()+".mhac"), content);
+                if(onlyMap == true){
+                    createFile(new File("assets/maps/"+inputFileName.getText()+".mhac"), content);
+                }else{
+                    createFile(new File("assets/savegame/"+inputFileName.getText()+".mhac"), content);
+
+                }
 
                 primaryStage.close();
 

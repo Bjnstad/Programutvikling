@@ -33,16 +33,18 @@ public class EditorInputs implements Inputs {
     private double speed;
     private Camera camera;
     private final ImageList imageList;
-    private final ExportMap exportMap;
-    private World world = new World();
+    private ExportMap exportMap;
+    private World world;
     private boolean addObj = true;
     private boolean snapObj = false;
 
-    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap) {
+
+    public EditorInputs(double speed, Camera camera, ImageList imageList) {
         this.speed = speed;
         this.camera = camera;
         this.imageList = imageList;
-        this.exportMap = exportMap;
+        this.world = new World();
+        this.exportMap = new ExportMap(world);
     }
 
     @Override
@@ -160,7 +162,7 @@ public class EditorInputs implements Inputs {
                 world.setGameMap(new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background")));
                 int gameMapX = Integer.parseInt(inputMapSizeX.getText());
                 int gameMapY = Integer.parseInt(inputMapSizeY.getText());
-                exportMap.addMapSize(gameMapX, gameMapY);
+                exportMap.addMapSize();
                 world.getGameMap().render(camera);
                 primaryStage.close();
 
@@ -180,5 +182,7 @@ public class EditorInputs implements Inputs {
         snapObj = state;
     }
 
-
+    public ExportMap getExportMap() {
+        return exportMap;
+    }
 }

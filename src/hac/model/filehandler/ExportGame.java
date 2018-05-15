@@ -26,7 +26,7 @@ public class ExportGame extends FileHandler {
      */
     public ExportGame(World world) {
         this.world = world;
-        saveGame(world);
+        //saveGame();
         createFile(new File("assets/maps/newMap.txt"), sb.toString());
 
     }
@@ -34,9 +34,8 @@ public class ExportGame extends FileHandler {
 
     /**
      *
-     * @param world
-     */
-    public void saveGame(World world) {
+     *
+    public void saveGame() {
         sb.append("@");
         sb.append(world.getGameMap().getWidth());
         sb.append(",");
@@ -98,5 +97,5 @@ public class ExportGame extends FileHandler {
                 // HENT UT DATA
             }
         }
-    }
+    }*/
 }

@@ -27,8 +27,6 @@ public class ImportMap extends FileHandler {
     public World parseFile(File file) {
         World world = new World();
 
-        //GameMap map = new GameMap(20, 20, new SpriteSheet("background", 32));
-        //world.setGameMap(map);
         try {
 
             BufferedReader b = new BufferedReader(new FileReader(file));

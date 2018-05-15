@@ -4,6 +4,7 @@ import application.model.objects.Zombie1;
 import application.model.objects.Zombie2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -75,10 +76,11 @@ public class ChooseMapController implements SubController {
     @FXML
     public void play(ActionEvent event) {
 
+
         ImportMap importMap = new ImportMap();
         World w = importMap.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()));
+        w.getGameMap().setMapFileName(maps.getSelectionModel().getSelectedItem().toString());
 
-        /** TODO: BAD CODE */
 
         //World w = new World();
 

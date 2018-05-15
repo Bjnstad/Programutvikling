@@ -19,6 +19,7 @@ public class GameMap {
     private int height;
     private Image[][] background;
     private String backgroundFileName;
+    private String mapFileName;
 
     private String mainPlayer = "";
     private List<String> enemies = new ArrayList<>();
@@ -155,5 +156,11 @@ public class GameMap {
         return backgroundFileName;
     }
 
+    public String getMapFileName() {
+        return mapFileName;
+    }
 
+    public void setMapFileName(String mapFileName) {
+        this.mapFileName = mapFileName;
+    }
 }
