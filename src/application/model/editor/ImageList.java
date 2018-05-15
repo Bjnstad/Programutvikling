@@ -88,12 +88,13 @@ public class ImageList {
                     SpriteSheet test = new SpriteSheet(imageItem.getFileName());
                     for (int y = 0; y < imageItem.getY(); y++) {
                         for (int x = 0; x < imageItem.getX(); x++) {
-                            Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
-                            ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
-                            imageItemExtracted.setBits(imageItem.getBits());
-                            imageItemExtracted.setFrames(imageItem.getX());
-                            imageItemExtracted.setColumns(imageItem.getY());
-                            result.add(imageItemExtracted);
+                            //Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                            //ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
+                            //imageItemExtracted.setSpriteHeight(imageItem.getSpriteHeight());
+                            //imageItemExtracted.setSpriteWidth(imageItem.getSpriteWidth());
+                            //imageItemExtracted.setFrames(imageItem.getX());
+                            //imageItemExtracted.setColumns(imageItem.getY());
+                            //result.add(imageItemExtracted);
                         }
                     }
                     assetsListView.setItems(result);
@@ -158,12 +159,13 @@ public class ImageList {
                 String str = b.readLine().toString();
                 String[] values = str.split("#");
                 String fileName = values[0];
-                int bits = Integer.parseInt(values[1]);
-                int cols = Integer.parseInt(values[2]);
-                int rows = Integer.parseInt(values[3]);
+                int spriteHeight = Integer.parseInt(values[1]);
+                int spriteWidth = Integer.parseInt(values[2]);
+                int cols = Integer.parseInt(values[3]);
+                int rows = Integer.parseInt(values[4]);
 
                 BASE64Decoder decoder = new BASE64Decoder();
-                byte[] imageByte = decoder.decodeBuffer(values[4]);
+                byte[] imageByte = decoder.decodeBuffer(values[5]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage spriteImage = ImageIO.read(bis);
 
@@ -172,7 +174,8 @@ public class ImageList {
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);
                 ImageItem imageItem = new ImageItem(imageView,img,fileName,cols,rows);
-                imageItem.setBits(bits);
+                imageItem.setSpriteWidth(spriteWidth);
+                imageItem.setSpriteHeight(spriteHeight);
                 result.add(imageItem);
 
             } catch (FileNotFoundException e) {

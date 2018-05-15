@@ -9,6 +9,6 @@ public class Zombie2 extends Enemy {
      * @param posY           is the position to the enemy in heigth(y).
      */
     public Zombie2(double posX, double posY) {
-        super("zombie2", posX, posY, 3);
+        super("zombie2", posX, posY, 9);
     }
 }

@@ -151,7 +151,7 @@ public class World {
             if(enemiesTypes.size() == 0) {
                  enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
             } else {
-                int k = rand.nextInt(enemiesTypes.size());
+                int k = rand.nextInt(enemiesTypes.size() );
                 enemy = enemiesTypes.get(k);
                 enemy.setPosX(rand.nextInt(gameMap.getWidth()));
                 enemy.setPosY(rand.nextInt(gameMap.getHeight()));

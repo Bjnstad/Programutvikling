@@ -11,6 +11,6 @@ public class Skeleton extends Enemy {
      * @param posY           is the position to the enemy in heigth(y).
      */
     public Skeleton(double posX, double posY) {
-        super("default_enemy", posX, posY, 9);
+        super("default_enemy", posX, posY, 8);
     }
 }

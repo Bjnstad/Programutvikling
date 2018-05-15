@@ -41,7 +41,8 @@ public class GameController extends Controller {
      */
     @Override
     public void initiate() {
-        this.camera = new Camera(getParent().getWidth(), canvas);
+        double dimension = (getParent().getWidth() > getParent().getHeight()) ? getParent().getHeight() : getParent().getWidth();
+        this.camera = new Camera(dimension, canvas);
         setInputs(new GameInputs(this, 0.1));
     }
 

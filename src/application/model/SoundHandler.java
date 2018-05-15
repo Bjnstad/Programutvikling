@@ -1,7 +1,5 @@
 package application.model;
 
-import application.Main;
-
 import javax.sound.sampled.*;
 import java.io.File;
 
@@ -19,11 +17,10 @@ public class SoundHandler {
 
 
                 clip.open(audioStream);
-                FloatControl volume= (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-
-                volume.setValue(1.0f); // Reduce volume by 10 decibels.
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-                clip.start();
+                //FloatControl volume= (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                //volume.setValue(1.0f); // Reduce volume by 10 decibels.
+                //clip.loop(Clip.LOOP_CONTINUOUSLY);
+                //clip.start();
                 clip.drain();
             } catch (Exception e) {
                 System.err.println(e.getMessage());

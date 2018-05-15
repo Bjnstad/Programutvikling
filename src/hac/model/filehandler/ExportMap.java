@@ -59,7 +59,9 @@ public class ExportMap extends FileHandler {
             sb.append("§");
             sb.append(imageItem.getFileName());
             sb.append(",");
-            sb.append(imageItem.getBits());
+            sb.append(imageItem.getSpriteHeight());
+            sb.append(",");
+            sb.append(imageItem.getSpriteWidth());
             sb.append(",");
             sb.append(imageItem.getFrames());
             sb.append(",");

@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import hac.model.object.GameObject;
 import hac.model.object.sprite.ImageHandler;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -13,7 +14,7 @@ import javafx.scene.paint.Color;
 public class Camera {
 
     private ImageHandler imageHandler = new ImageHandler();
-    private int zoom = 12; // How many frames to show
+    private int zoom = 20; // How many frames to show
     private Canvas canvas;
     private double translateX; // Movement offset
     private double translateY; // Movement offset
@@ -38,7 +39,19 @@ public class Camera {
      */
     public void render(GameObject object) {
         GraphicsContext gc = getGraphicsContext();
-        gc.drawImage(object.getImage(imageHandler), scale(object.getPosX()), scale(object.getPosY()), scale, scale) ;
+        Image image = object.getImage(imageHandler);
+        System.out.println(image);
+
+        double h = imageHandler.getHeight(object.getAvatar().getFilename());
+        double w = imageHandler.getWidth(object.getAvatar().getFilename());
+
+        double l = h < w ? h : w;
+
+        double s = -1 + l / scale;
+
+
+
+        gc.drawImage(image, scale(object.getPosX()), scale(object.getPosY()), imageHandler.getWidth(object.getAvatar().getFilename()) / s, imageHandler.getHeight(object.getAvatar().getFilename()) / s) ;
     }
 
     /**

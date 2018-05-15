@@ -53,11 +53,12 @@ public class ImportMap extends FileHandler {
                 if (!spriteSheetString[i].substring(0, 1).equals("&")) {
                     String[] spriteSheet = spriteSheetString[i].split(",");
                     String spriteFileName = spriteSheet[0];
-                    int bits = Integer.parseInt(spriteSheet[1]);
-                    int columns = Integer.parseInt(spriteSheet[2]);
-                    int rows = Integer.parseInt(spriteSheet[3]);
+                    int spriteHeight = Integer.parseInt(spriteSheet[1]);
+                    int spriteWidth = Integer.parseInt(spriteSheet[2]);
+                    int columns = Integer.parseInt(spriteSheet[3]);
+                    int rows = Integer.parseInt(spriteSheet[4]);
                     BASE64Decoder decoder = new BASE64Decoder();
-                    byte[] imageByte = decoder.decodeBuffer(spriteSheet[4]);
+                    byte[] imageByte = decoder.decodeBuffer(spriteSheet[5]);
                     ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                     BufferedImage image = ImageIO.read(bis);
                     bis.close();
@@ -65,7 +66,7 @@ public class ImportMap extends FileHandler {
                     //Create AHAC file if file is not in directory.
                     File f = new File("assets/spritesheets/" + spriteFileName + ".ahac");
                     if (!f.exists()) {
-                        saveSpriteInput(SwingFXUtils.toFXImage(image, null), bits, columns, rows, spriteFileName);
+                        saveSpriteInput(SwingFXUtils.toFXImage(image, null), spriteHeight, spriteWidth, columns, rows, spriteFileName);
                     }
 
                 } else {

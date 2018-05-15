@@ -69,19 +69,22 @@ public abstract class FileHandler {
     /**
      * Creates .ahac files from imported spritesheets.
      * @param image the image of the spritesheet.
-     * @param bits  pixel size per sub image in spritesheet (e.g 32x32, 64x64, 128x128...).
+     * @param spriteWidth  pixel size per sub image in spritesheet (e.g 32x32, 64x64, 128x128...).
+     * @param spriteHeight pixel size per sub image in spritesheet (e.g 32x32, 64x64, 128x128...).
      * @param cols  number of columns on image/spritesheet.
      * @param rows  number of rows on image/spritesheet.
      * @param fileName the name of the image file.
      */
-    public void saveSpriteInput(Image image, int bits, int cols, int rows, String fileName){
+    public void saveSpriteInput(Image image, int spriteHeight, int spriteWidth, int cols, int rows, String fileName){
         String base64String = encodeImageToString(SwingFXUtils.fromFXImage(image, null), "png");
         base64String = base64String.substring(0, base64String.length()-5);
 
         StringBuilder sb = new StringBuilder();
         sb.append(fileName);
         sb.append("#");
-        sb.append(bits);
+        sb.append(spriteHeight);
+        sb.append("#");
+        sb.append(spriteWidth);
         sb.append("#");
         sb.append(cols);
         sb.append("#");
