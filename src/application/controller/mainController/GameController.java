@@ -9,7 +9,7 @@ import application.controller.subController.SubState;
 import hac.model.Camera;
 import application.model.inputs.GameInputs;
 import hac.model.object.Bullet;
-import hac.model.object.character.MainPlayer;
+import hac.model.object.defaults.MainPlayer;
 import hac.model.object.character.Player;
 import hac.controller.World;
 
@@ -67,7 +67,7 @@ public class GameController extends Controller {
      * Pauses the game.
      */
     public void pause() {
-        if(isRunning) return;
+        if(!isRunning) return;
         timeline.pause();
         isRunning = false;
         getParent().addSubState(SubState.PAUSE_MENU);
@@ -123,7 +123,7 @@ public class GameController extends Controller {
     public boolean move(double x, double y) {
         if(!isRunning) return false; // Dont move if game not running
         MainPlayer mainPlayer = world.getMainPlayer();
-        return mainPlayer.move(x, y, world);
+        return mainPlayer.addPos(x, y, world);
     }
 
 

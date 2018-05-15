@@ -1,6 +1,6 @@
 package hac.controller;
 
-import hac.model.object.character.MainPlayer;
+import hac.model.object.defaults.MainPlayer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -4,7 +4,7 @@ import hac.model.Camera;
 import hac.model.object.GameObject;
 import hac.model.object.character.Character;
 import hac.controller.World;
-import hac.model.object.character.MainPlayer;
+import hac.model.object.defaults.MainPlayer;
 
 import java.util.ArrayList;
 

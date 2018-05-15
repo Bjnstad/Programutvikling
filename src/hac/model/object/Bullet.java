@@ -25,7 +25,7 @@ public class Bullet extends MoveableObject {
      * @param endY coordinate of the cell vertical.
      */
     public Bullet(GameObject parent, double endX, double endY){
-        super("default_bullet", parent.getPosX() +.5, parent.getPosY() +.5);
+        super("default_bullet", parent.getPosX() +.5, parent.getPosY() +.5, 7);
         this.parent = parent;
         setNoneCollideable(); // Moveable objects shouldn't collide
         double angle = Math.atan2(endX - getPosX() +.5, endY - getPosY() +.5);

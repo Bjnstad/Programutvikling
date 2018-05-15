@@ -1,5 +1,6 @@
 package hac.model.object.character;
 
+import hac.model.object.defaults.MainPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import hac.model.Camera;
@@ -8,19 +9,17 @@ import hac.model.render.Actions;
 import hac.controller.World;
 
 
-public class Enemy extends Character {
+public abstract class Enemy extends Character {
 
     private float speed = 1;
     /**
      * This method represents position, size and qualities to the enemy in the game.
      * @param spriteFileName is the name of the file that can be downloaded.
-     * @param sizeX is the size of the enemy in width(x).
-     * @param sizeY is the size of the enemy in height(y).
      * @param posX is the position to the enemy in width(x).
      * @param posY is the position to the enemy in heigth(y).
      */
-    public Enemy(String spriteFileName, int sizeX, int sizeY, double posX, double posY) {
-        super(spriteFileName, sizeX, sizeY);
+    public Enemy(String spriteFileName, double posX, double posY, int frames) {
+        super(spriteFileName, posX, posY, frames);
         super.setPosX(posX);
         super.setPosY(posY);
     }
@@ -40,7 +39,7 @@ public class Enemy extends Character {
             double angle = Math.atan2(object.getPosX() - getPosX(), object.getPosY() - getPosY());
             double rx = 50 * Math.sin(angle) / 100;
             double ry = 50 * Math.cos(angle) / 100;
-            System.out.println(((MainPlayer) object).addPos(rx, ry, actions.getWorld()));
+            ((MainPlayer) object).addPos(rx, ry, actions.getWorld());
         }
     }
 

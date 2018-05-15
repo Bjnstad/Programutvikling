@@ -78,8 +78,7 @@ public class LoadGameController implements SubController {
         ImportGame ig =  new ImportGame(file);
 
 
-        gameController.getCamera().setTranslateX(ig.getTranslateX());
-        gameController.getCamera().setTranslateY(ig.getTranslateY());
+        gameController.getCamera().translate(ig.getTranslateX(), ig.getTranslateY());
         gameController.setWorld(ig.getWorld());
 
 

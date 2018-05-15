@@ -1,15 +1,15 @@
 package hac.model.object;
 
 import hac.controller.World;
-import hac.model.object.character.MainPlayer;
+import hac.model.object.defaults.MainPlayer;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.Direction;
 import hac.model.object.sprite.animation.MultiAnimation;
 
 public abstract class MoveableObject extends GameObject {
 
-    public MoveableObject(String filename, double posX, double posY) {
-        super(new Avatar(filename, new MultiAnimation(9)),posX, posY);
+    public MoveableObject(String filename, double posX, double posY, int frames) {
+        super(new Avatar(filename, new MultiAnimation(frames)),posX, posY);
     }
 
 
@@ -20,7 +20,7 @@ public abstract class MoveableObject extends GameObject {
      //* @param speed this is the speed to the character walking right or left.
      */
     public boolean addPos(double x, double y, World world) {
-        if(getPosX() + x < 0 || getPosY() + y < 0 || getPosX() + x > world.getCamera().getDimension() || getPosY() + y > world.getCamera().getDimension()) return false;
+        if(getPosX() + x < 0 || getPosY() + y < 0 || getPosX() + x > world.getGameMap().getWidth() || getPosY() + y > world.getGameMap().getHeight()) return false;
 
 
         for(GameObject object : world.getGameObjects()) {

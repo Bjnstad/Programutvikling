@@ -6,9 +6,10 @@ import hac.model.Camera;
 import hac.model.object.MapObject;
 import hac.model.object.Bullet;
 import hac.model.object.character.Enemy;
-import hac.model.object.character.MainPlayer;
+import hac.model.object.defaults.MainPlayer;
 import hac.model.object.character.Player;
 import hac.model.object.GameObject;
+import hac.model.object.defaults.Skeleton;
 import hac.model.render.Actions;
 
 import java.lang.reflect.Array;
@@ -22,7 +23,7 @@ import java.util.Random;
  * @author Axel Bjørnstad - s315322
  */
 public class World {
-    private final double ENEMY_GENERATION_RATE = 10;
+    private final double ENEMY_GENERATION_RATE = 2;
 
 
     private GameController gameController; // Parent
@@ -41,7 +42,8 @@ public class World {
         if(enemies.length < 1) levelUp();
 
         if(godmode) {
-            for(Enemy enemy : enemies)enemy.hit(1);
+            for(Enemy enemy : enemies)enemy.hit(10);
+            getMainPlayer().heal(100);
         }
 
         Actions actions = new Actions(this);
@@ -82,7 +84,7 @@ public class World {
     private void generateEnemies(int numberOfEnemies) {
         Random rand = new Random();
         for (int i = 0; i < numberOfEnemies; i++) {
-            Enemy enemy = new Enemy("default_enemy", 1, 1, rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
+            Enemy enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
             enemy.setSpeed(1 + rand.nextInt(4));
             if (!addGameObject(enemy)) i--; // Failed to add enemy retry creation
         }

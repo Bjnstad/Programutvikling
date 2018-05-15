@@ -8,9 +8,7 @@ import javafx.scene.control.ListView;
 import application.controller.mainController.Controller;
 import application.controller.mainController.GameController;
 import hac.controller.World;
-import hac.model.filehandler.SpriteSheet;
-import hac.model.object.GameMap;
-import hac.model.object.character.MainPlayer;
+import hac.model.object.defaults.MainPlayer;
 import hac.model.filehandler.ImportMap;
 
 import java.io.File;

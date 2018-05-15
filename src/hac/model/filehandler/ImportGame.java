@@ -1,10 +1,10 @@
 package hac.model.filehandler;
 
 import hac.model.object.character.Enemy;
-import hac.model.object.character.MainPlayer;
-import hac.model.object.character.Player;
+import hac.model.object.defaults.MainPlayer;
 import hac.model.object.GameMap;
 import hac.controller.World;
+import hac.model.object.defaults.Skeleton;
 
 import java.io.*;
 
@@ -66,7 +66,7 @@ public class ImportGame {
                     int y = Integer.parseInt(object[10]);
 
                     if(type.equals("Enemy")){
-                        Enemy enemy = new Enemy(fileName, sizeX, sizeY, posX, posY);
+                        Enemy enemy = new Skeleton(posX, posY);
                         world.addGameObject(enemy);
                     }
                     if(type.equals("MainPlayer")){

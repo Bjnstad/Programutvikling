@@ -5,8 +5,6 @@ import javafx.scene.canvas.GraphicsContext;
 import hac.model.object.GameObject;
 import hac.model.object.sprite.ImageHandler;
 
-// TODO: Idea: Render all object to screen
-
 /**
  * Camera is used to calculate differences between game content and the real pixel values for canvas.
  * @author Axel Bjørnstad - s315322
@@ -21,65 +19,29 @@ public class Camera {
     private double scale; // Multiplier for correctly display gameboard and sizes
     private double dimension;
 
+    /**
+     * @param dimension
+     * @param canvas cavas to
+     */
     public Camera(double dimension, Canvas canvas) {
         this.canvas = canvas;
         this.dimension = dimension;
+        canvas.setHeight(dimension);
+        canvas.setWidth(dimension);
         setDimension();
     }
 
-
+    /**
+     * Draw method for object rendering to the screen.
+     * @param object Object to draw on screen
+     */
     public void render(GameObject object) {
         GraphicsContext gc = getGraphicsContext();
         gc.drawImage(object.getImage(imageHandler), scale(object.getPosX()), scale(object.getPosY()), scale, scale) ;
     }
 
     /**
-     * Sets width and height of the window, then calculates scale to make game content relate to real on screen pixels values.
-     */
-    public void setDimension() {
-        scale = dimension / zoom;
-    }
-
-    public double getDimension() {
-        return dimension;
-    }
-
-    /**
-     * Sets canvas to draw on.
-     * @param canvas javafx canvas uses GraphicsContext to draw on.
-     */
-    public void setCanvas(Canvas canvas) {
-        if(canvas == null) throw new NullPointerException("Canvas cannot be null.");
-        this.canvas = canvas;
-    }
-
-    /**
-     * Gets the Canvas vertical.
-     * @return the current view of Canvas(height).
-     */
-    public double getTranslateX() {
-        return translateX;
-    }
-
-    /**
-     * Gets the Canvas horizontal.
-     * @return the current view of Canvas(width).
-     */
-    public double getTranslateY() {
-        return translateY;
-    }
-
-    public void setTranslateX(double translateX) {
-        this.translateX = translateX;
-    }
-
-    public void setTranslateY(double translateY) {
-        this.translateY = translateY;
-    }
-
-    /**
-     * This method is used to draw into Canvas.
-     * @return the current canvas.
+     * @return GraphicsContext of Canvas
      */
     public GraphicsContext getGraphicsContext() {
         return canvas.getGraphicsContext2D();
@@ -98,29 +60,6 @@ public class Camera {
     }
 
     /**
-     * Sets player position to tiles.
-     * @param x is the position horizontal.
-     * @param y is the position vertical.
-     */
-    public void setPlayerPosition(int x, int y) {
-        scale(x);
-        scale(x);
-        //double cx = (((double)x + .5) - (double) zoom /2) * scale;
-        //double cy = (((double)y + .5) - (double) zoom /2) * scale;
-
-        //setPOX(-cx);
-        //setPOY(-cy);
-    }
-
-    public double fixedX(double pixel) {
-        return pixel*scale - translateX;
-    }
-
-    public double fixedY(double pixel) {
-        return pixel*scale - translateY;
-    }
-    
-    /**
      * Scale up the given gameboard relative values to according pixels on screen.
      * @param value is the position horizontal.
      * @return the position to x.
@@ -129,9 +68,43 @@ public class Camera {
         return value * scale;
     }
 
+
     /**
-     * Gets the scale either up or out.
-     * @return the current scale to the board.
+     * Zoom is how many background tiles shown on screen simultaneously, 2 in zoom is 2 tiles on x axis and 2 on y axis.
+     * @param zoom how many tiles shown to screen
+     */
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
+        setDimension();
+    }
+
+    /**
+     * Sets width and height of the window, then calculates scale to make game content relate to real on screen pixels values.
+     */
+    public void setDimension() {
+        scale = dimension / zoom;
+    }
+
+    public double getDimension() {
+        return dimension;
+    }
+
+    /**
+     * @return current translate x value set to Canvas
+     */
+    public double getTranslateX() {
+        return translateX;
+    }
+
+    /**
+     * @return current translate y value set to Canvas
+     */
+    public double getTranslateY() {
+        return translateY;
+    }
+
+    /**
+     * @return Board values to pixels values, the length of 1 size in board
      */
     public double getScale() {
         return scale;
@@ -139,10 +112,5 @@ public class Camera {
 
     public int getZoom() {
         return this.zoom;
-    }
-
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
-        setDimension();
     }
 }

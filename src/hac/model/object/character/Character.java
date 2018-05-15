@@ -17,8 +17,8 @@ public abstract class Character extends MoveableObject {
     protected double threshold = .2;
 
 
-    public Character(String filename, double posX, double posY) {
-        super(filename, posX, posY);
+    public Character(String filename, double posX, double posY, int frames) {
+        super(filename, posX, posY, frames);
     }
 
     public boolean isDead() {
