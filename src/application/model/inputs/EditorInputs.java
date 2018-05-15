@@ -1,13 +1,17 @@
 package application.model.inputs;
 
-import hac.controller.World;
+import hac.model.object.MapObject;
 import javafx.event.EventHandler;
+import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import hac.model.Camera;
 import application.model.editor.ImageList;
 import hac.model.filehandler.ExportMap;
 
+/**
+ * Handles inout for editor.
+ */
 public class EditorInputs implements Inputs {
 
     private double speed;
@@ -15,7 +19,7 @@ public class EditorInputs implements Inputs {
     private final ImageList imageList;
     private final ExportMap exportMap;
 
-    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap) {
+    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap, Slider zoomMap) {
         this.speed = speed;
         this.camera = camera;
         this.imageList = imageList;
@@ -54,13 +58,12 @@ public class EditorInputs implements Inputs {
     public EventHandler<MouseEvent> getMouseEventHandler() {
         return (event -> {
             if(imageList.getMapObject() == null) return;
-            //graphics.setCursor(new ImageCursor(imageList.getImageItem().getImage()));
-            System.out.println("Frames" + imageList.getImageItem().getFrames());
             imageList.getMapObject().setPosX((int)((event.getX()-camera.getTranslateX())/camera.getScale()));
             imageList.getMapObject().setPosY((int)((event.getY()-camera.getTranslateY())/camera.getScale()));
+            MapObject mapObject = new MapObject(imageList.getMapObject().getAvatar(), (int)imageList.getMapObject().getPosY(), (int)imageList.getMapObject().getPosX());
 
             camera.render(imageList.getMapObject());
-            exportMap.addElement(imageList.getMapObject(), imageList.getImageItem());
+            exportMap.addElement(mapObject, imageList.getImageItem());
         });
     }
 

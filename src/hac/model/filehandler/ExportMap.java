@@ -35,7 +35,15 @@ public class ExportMap extends FileHandler {
     private int gameMapX;
     private int gameMapY;
     private GameMap gameMap;
+    private World world;
 
+    public ExportMap(World world){
+        this.world = world;
+    }
+
+    public ExportMap(){
+
+    }
 
 
     /**
@@ -45,7 +53,8 @@ public class ExportMap extends FileHandler {
      * @param imageItem the item being used.
      */
     public void addElement(MapObject mapObject, ImageItem imageItem){
-            StringBuilder sb = new StringBuilder();
+        world.addGameObject(mapObject);
+        StringBuilder sb = new StringBuilder();
         boolean exist = false;
         for(String fileName : filenames){
             if (fileName.equals(imageItem.getFileName())) {
@@ -53,7 +62,6 @@ public class ExportMap extends FileHandler {
                 break;
             }
         }
-
 
         if(!exist) {
             String base64String = encodeImageToString(SwingFXUtils.fromFXImage(imageItem.getImage(), null), "png");
@@ -81,7 +89,6 @@ public class ExportMap extends FileHandler {
         sb.append(mapObject.getPosX());
         sb.append(",");
         sb.append(mapObject.getPosY());
-
         elements.add(sb.toString());
 
     }
@@ -196,6 +203,9 @@ public class ExportMap extends FileHandler {
         return elements;
     }
 
+    public World getWorld() {
+        return world;
+    }
 
     public GameMap getGameMap() {
         return gameMap;

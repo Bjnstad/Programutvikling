@@ -1,7 +1,5 @@
 package application.controller.mainController;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -17,8 +15,6 @@ import application.model.inputs.EditorInputs;
 import hac.controller.World;
 import hac.model.Camera;
 import hac.model.filehandler.ExportMap;
-import hac.model.filehandler.SpriteSheet;
-import hac.model.object.GameMap;
 import hac.model.object.GameObject;
 import hac.model.filehandler.ImportMap;
 
@@ -57,13 +53,11 @@ public class EditorController extends Controller {
         this.camera = new Camera(getParent().getWidth(), graphics);
         this.imageList = new ImageList(listViewBottom, listView);
         this.world = new World();
-        this.exportMap = new ExportMap();
+        this.exportMap = new ExportMap(world);
         exportMap.handleMapSize(world, camera);
         zoomMap.setMin(8);
         zoomMap.setMax(35);
-
-
-        setInputs(new EditorInputs(15.1, camera, imageList, exportMap));
+        setInputs(new EditorInputs(15.1, camera, imageList, exportMap, zoomMap));
 
     }
 
@@ -95,8 +89,6 @@ public class EditorController extends Controller {
     @FXML
     private void save(ActionEvent event){
         exportMap.handleSaveMapName();
-
-
     }
 
 
@@ -104,14 +96,7 @@ public class EditorController extends Controller {
     private void onDelete(){
 
     }
-    @FXML
-    private void zoomSlider(MouseEvent event){
-        camera.setZoom((int)zoomMap.getValue());
-        exportMap.getGameMap().render(camera);
 
-
-
-    }
 
     /**
      * This method makes it possible to import a file.
