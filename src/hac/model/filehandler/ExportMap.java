@@ -3,6 +3,7 @@ package hac.model.filehandler;
 import hac.controller.World;
 import hac.model.Camera;
 import hac.model.object.GameMap;
+import hac.model.object.GameObject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
@@ -80,7 +81,6 @@ public class ExportMap extends FileHandler {
         sb.append(mapObject.getPosX());
         sb.append(",");
         sb.append(mapObject.getPosY());
-
 
         elements.add(sb.toString());
 
@@ -180,8 +180,6 @@ public class ExportMap extends FileHandler {
                 sb.append(gameMapY);
                 elements.add(sb.toString());
 
-
-
                 world.setGameMap(gameMap);
                 gameMap.render(camera);
                 primaryStage.close();
@@ -197,6 +195,7 @@ public class ExportMap extends FileHandler {
     public ArrayList<String> getElements() {
         return elements;
     }
+
 
     public GameMap getGameMap() {
         return gameMap;
