@@ -49,17 +49,7 @@ public class World {
 
 
     public World() {
-        File file1 = new File("/assets/images/health_bar_decoration.png");
-        File file2 = new File("/assets/images/health_bar.png");
-        BufferedImage img;
-        try {
-            img = ImageIO.read(file1);
-            barDec = SwingFXUtils.toFXImage(img, null);
-            img = ImageIO.read(file2);
-            bar = SwingFXUtils.toFXImage(img, null);
-        } catch (IOException e) {
-            // TODO: Corupted files
-        }
+
     }
 
 
