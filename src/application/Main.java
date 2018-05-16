@@ -1,7 +1,6 @@
 package application;
 
 import javafx.application.Application;
-import javafx.scene.SceneAntialiasing;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

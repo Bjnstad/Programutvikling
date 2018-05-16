@@ -1,11 +1,8 @@
 package hac.model.object.character;
 
-import hac.model.object.GameObject;
+
 import hac.model.object.MoveableObject;
-import hac.model.object.sprite.Avatar;
-import hac.model.object.sprite.Direction;
-import hac.model.object.sprite.animation.MultiAnimation;
-import hac.controller.World;
+
 
 /**
  * This class contains the position and size to the character in the game.

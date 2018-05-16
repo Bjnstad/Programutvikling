@@ -11,10 +11,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -40,7 +39,6 @@ public class EditorInputs implements Inputs {
     private ExportMap exportMap;
     private World world;
     private boolean addObj = true;
-    private boolean snapObj = false;
 
 
     public EditorInputs(double speed, Camera camera, ImageList imageList) {
@@ -90,7 +88,7 @@ public class EditorInputs implements Inputs {
             double posY = (event.getY() - camera.getTranslateY()) / camera.getScale() - 1;
 
 
-            if(addObj == true && snapObj == false) {
+            if(addObj == true) {
                 if (imageList.getMapObject() == null) return;
 
                 MapObject mapObject = new MapObject(imageList.getMapObject().getAvatar(), imageList.getMapObject().getPosY(), imageList.getMapObject().getPosX());
@@ -99,19 +97,19 @@ public class EditorInputs implements Inputs {
 
                 world.addGameObject(mapObject);
                 exportMap.addElement(mapObject, imageList.getImageItem());
-            }else if(addObj == false && snapObj == false){
+            }else if(addObj == false){
                 world.removeObject(world.getGameObject(posX, posY));
             }
 
-            if(snapObj == true){
-                int nTileX = (int)(posX / camera.getZoom() / camera.getScale());
-                int nTileY = (int)(posY / camera.getZoom() / camera.getScale());
-
-            }
 
             //Render map and objects after adding or removing object
-            world.getGameMap().render(camera);
-            for(GameObject gameObject : world.getGameObjects()) camera.render(gameObject);
+            try {
+                world.getGameMap().render(camera);
+                for(GameObject gameObject : world.getGameObjects()) camera.render(gameObject);
+
+            }catch (Exception e){
+                handleMapSize();
+            }
 
 
         });
@@ -130,8 +128,11 @@ public class EditorInputs implements Inputs {
 
         Label mapSizeX = new Label("Map size X: ");
         TextField inputMapSizeX = new TextField ();
+        inputMapSizeX.setPromptText("20");
+
         Label mapSizeY = new Label("Map size Y: ");
         TextField inputMapSizeY = new TextField ();
+        inputMapSizeY.setPromptText("20");
 
         // force the field to be numeric only X
         inputMapSizeX.textProperty().addListener(new ChangeListener<String>() {
@@ -191,6 +192,15 @@ public class EditorInputs implements Inputs {
         }
     }
 
+    public void handleInstructions(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Editor instructions");
+        alert.setHeaderText("Instructions for editor");
+        alert.setContentText("It is only static objects that can be added to the map, such as walls etc.\n\nChoose a spritesheet below, then select the desired asset, listed on the right side. Afterwards you can click anywhere on the map to place the object.\n\nYou can also import custom spritesheets, under file->import spritesheets. Make sure each sub image is of size 16x16, 32x32, 64x64 or 128x128.\n\nIt is also possible to import already made gamemaps, under file->import GameMap");
+
+        alert.showAndWait();
+    }
+
     public World getWorld() {
         return world;
     }
@@ -199,9 +209,6 @@ public class EditorInputs implements Inputs {
         addObj = state;
     }
 
-    public void setSnapState(Boolean state){
-        snapObj = state;
-    }
 
     public ExportMap getExportMap() {
         return exportMap;

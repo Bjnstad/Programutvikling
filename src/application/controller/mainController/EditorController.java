@@ -1,7 +1,6 @@
 package application.controller.mainController;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -13,14 +12,11 @@ import javafx.stage.Stage;
 import application.model.editor.EditorSpriteInput;
 import application.model.editor.ImageList;
 import application.model.inputs.EditorInputs;
-import hac.controller.World;
 import hac.model.Camera;
-import hac.model.filehandler.ExportMap;
 import hac.model.object.GameObject;
-import hac.model.filehandler.ImportMap;
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
+
 
 /**
  * Implements the EditorController to Controller.
@@ -136,19 +132,25 @@ public class EditorController extends Controller {
     @FXML
     private void onAdd(ActionEvent event){
         editorInputs.setAddRemoveState(true);
-        editorInputs.setSnapState(false);
+
     }
 
     @FXML
     private void onRemove(ActionEvent event){
         editorInputs.setAddRemoveState(false);
-        editorInputs.setSnapState(false);
+
     }
 
     @FXML
-    private void onSnap(ActionEvent event){
-        editorInputs.setSnapState(true);
+    private void onChangeMap(ActionEvent event){
+        editorInputs.handleMapSize();
     }
+
+    @FXML
+    private void onInstructions(ActionEvent event){
+        editorInputs.handleInstructions();
+    }
+
 
 
     /**

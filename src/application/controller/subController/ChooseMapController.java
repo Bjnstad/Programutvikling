@@ -1,10 +1,8 @@
 package application.controller.subController;
 
-import application.model.objects.Zombie1;
-import application.model.objects.Zombie2;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;

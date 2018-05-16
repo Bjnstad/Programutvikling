@@ -3,8 +3,6 @@ package application.controller.subController;
 import application.controller.mainController.Controller;
 import application.controller.mainController.GameController;
 import application.model.ScoreBoard;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;

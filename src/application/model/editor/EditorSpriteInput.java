@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import hac.model.filehandler.ExportMap;
 
 /**
- * Created by henrytran1 on 11/05/2018.
+ *
  */
 public class EditorSpriteInput {
     private int rows;

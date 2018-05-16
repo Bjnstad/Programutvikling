@@ -12,7 +12,7 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="6.0" layoutY="36.0" prefHeight="500.0" prefWidth="658.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="36.0">
          <children>
@@ -30,20 +30,20 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
-                      <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-                      <MenuItem mnemonicParsing="false" onAction="#Import" text="Import" />
+                      <MenuItem mnemonicParsing="false" onAction="#save" text="Save Map" />
+                      <MenuItem mnemonicParsing="false" onAction="#Import" text="Import GameMap" />
                       <MenuItem mnemonicParsing="false" onAction="#ImportSprite" text="Import SpriteSheet" />
+                    <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+                    <MenuItem fx:id="changeMap" mnemonicParsing="false" onAction="#onChangeMap" text="Change Map Size" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#onInstructions" text="Instructions" />
                   </items>
                 </Menu>
               </menus>
@@ -56,15 +56,14 @@
       <AnchorPane layoutX="1.0" layoutY="531.0" prefHeight="113.0" prefWidth="650.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0">
          <children>
             <ListView fx:id="listViewBottom" layoutX="166.0" maxHeight="150.0" minHeight="127.0" orientation="HORIZONTAL" prefHeight="127.0" prefWidth="484.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="0.0" />
-            <Slider fx:id="zoomMap" layoutX="14.0" layoutY="56.0" onMouseDragged="#zoomSlider" />
-            <Label layoutX="18.0" layoutY="31.0" text="Zoom:" />
+            <Slider fx:id="zoomMap" layoutX="14.0" layoutY="49.0" onMouseDragged="#zoomSlider" />
+            <Label layoutX="18.0" layoutY="24.0" text="Zoom:" />
             <RadioButton fx:id="addRadioBtn" layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#onAdd" selected="true" text="Add">
                <toggleGroup>
                   <ToggleGroup fx:id="buttonGroup" />
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="deleteRadioBtn" layoutX="74.0" layoutY="82.0" mnemonicParsing="false" onAction="#onRemove" text="Remove" toggleGroup="$buttonGroup" />
-            <RadioButton fx:id="snapRadioBtn" layoutX="13.0" layoutY="104.0" mnemonicParsing="false" onAction="#onSnap" text="Snap " toggleGroup="$buttonGroup" />
          </children>
       </AnchorPane>
    </children>
