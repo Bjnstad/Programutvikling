@@ -10,7 +10,6 @@ import javafx.util.Duration;
 import application.controller.subController.SubState;
 import hac.model.Camera;
 import application.model.inputs.GameInputs;
-import hac.model.object.predefined.Bullet;
 import hac.model.object.defaults.MainPlayer;
 import hac.model.object.predefined.character.Player;
 import hac.controller.World;
@@ -111,7 +110,7 @@ public class GameController extends Controller {
         double pX = player.getPosX() + .5;
         double pY = player.getPosY() + .5;
 
-        world.addGameObject(new Arrow(player, mX/camera.getScale(), mY/camera.getScale(), 20, 40));
+        world.addGameObject(new Arrow(player, mX/camera.getScale(), mY/camera.getScale()));
     }
 
     private void gameloop() {

@@ -11,7 +11,7 @@ public class Arrow extends Bullet {
      * @param endX   coordinate of the cell horizontal.
      * @param endY   coordinate of the cell vertical.
      */
-    public Arrow(GameObject parent, double endX, double endY, double speed, double strength) {
-        super(parent, endX, endY, speed, strength);
+    public Arrow(GameObject parent, double endX, double endY) {
+        super(parent, endX, endY, 20, 100);
     }
 }

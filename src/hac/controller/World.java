@@ -39,7 +39,7 @@ public class World {
     private GameMap gameMap;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-    private boolean godmode = false;
+    private boolean godmode = true;
     private int currentLevel;
     private double barHeight = .8; // Game relative is multiplied with scale
 
