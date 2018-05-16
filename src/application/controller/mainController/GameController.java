@@ -1,6 +1,7 @@
 package application.controller.mainController;
 
 import hac.model.object.defaults.Bolt;
+import hac.model.filehandler.ExportMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -97,8 +98,10 @@ public class GameController extends Controller {
     public void save() {
         //ExportGame save = new ExportGame(world);
         //ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
+        ExportMap exportMap = new ExportMap(world);
+        exportMap.saveGame();
 
-        getParent().setState(GameState.MAIN_MENU);
+        //getParent().setState(GameState.MAIN_MENU);
     }
 
     public void shoot(double x, double y) {

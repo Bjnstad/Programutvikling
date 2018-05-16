@@ -1,6 +1,7 @@
 package application.model.inputs;
 
 import hac.controller.World;
+import hac.model.filehandler.ImportMap;
 import hac.model.filehandler.SpriteSheet;
 import hac.model.object.GameMap;
 import hac.model.object.GameObject;
@@ -22,8 +23,11 @@ import application.model.editor.ImageList;
 import hac.model.filehandler.ExportMap;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * Handles inout for editor.
@@ -33,16 +37,18 @@ public class EditorInputs implements Inputs {
     private double speed;
     private Camera camera;
     private final ImageList imageList;
-    private final ExportMap exportMap;
-    private World world = new World();
+    private ExportMap exportMap;
+    private World world;
     private boolean addObj = true;
     private boolean snapObj = false;
 
-    public EditorInputs(double speed, Camera camera, ImageList imageList, ExportMap exportMap) {
+
+    public EditorInputs(double speed, Camera camera, ImageList imageList) {
         this.speed = speed;
         this.camera = camera;
         this.imageList = imageList;
-        this.exportMap = exportMap;
+        this.world = new World();
+        this.exportMap = new ExportMap(world);
     }
 
     @Override
@@ -160,12 +166,29 @@ public class EditorInputs implements Inputs {
                 world.setGameMap(new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background")));
                 int gameMapX = Integer.parseInt(inputMapSizeX.getText());
                 int gameMapY = Integer.parseInt(inputMapSizeY.getText());
-                exportMap.addMapSize(gameMapX, gameMapY);
+                exportMap.addMapSize();
                 world.getGameMap().render(camera);
                 primaryStage.close();
 
             }
         });
+    }
+
+
+    public void handleImport(){
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
+        fileChooser.getExtensionFilters().add(filter);
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        if (file != null) {
+            ImportMap importMap = new ImportMap();
+            world = importMap.parseFile(file, camera);
+            world.getGameMap().render(camera);
+            for(GameObject gameObject : world.getGameObjects()){
+                camera.render(gameObject);
+            }
+        }
     }
 
     public World getWorld() {
@@ -180,5 +203,7 @@ public class EditorInputs implements Inputs {
         snapObj = state;
     }
 
-
+    public ExportMap getExportMap() {
+        return exportMap;
+    }
 }

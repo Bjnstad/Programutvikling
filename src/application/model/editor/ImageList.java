@@ -1,5 +1,6 @@
 package application.model.editor;
 
+import hac.model.filehandler.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -136,6 +137,7 @@ public class ImageList {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
+                System.out.println(imageItem.getFileName());
                 MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1);
                 mapObject = object;
 

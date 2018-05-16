@@ -30,7 +30,6 @@ public class EditorController extends Controller {
 
     private ImageList imageList;
     private Camera camera;
-    private ExportMap exportMap;
     private EditorInputs editorInputs;
 
 
@@ -56,8 +55,7 @@ public class EditorController extends Controller {
         this.camera = new Camera(getParent().getWidth(), graphics);
         this.imageList = new ImageList(listViewBottom, listView);
         //this.world = new World();
-        this.exportMap = new ExportMap();
-        editorInputs = new EditorInputs(15.1, camera, imageList, exportMap);
+        editorInputs = new EditorInputs(15.1, camera, imageList);
         editorInputs.handleMapSize();
         zoomMap.setMin(8);
         zoomMap.setMax(35);
@@ -92,7 +90,7 @@ public class EditorController extends Controller {
      */
     @FXML
     private void save(ActionEvent event){
-        exportMap.handleSaveMapName();
+        editorInputs.getExportMap().handleSaveMapName(true);
     }
 
 
@@ -115,19 +113,7 @@ public class EditorController extends Controller {
      */
     @FXML
     private void Import(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
-        fileChooser.getExtensionFilters().add(filter);
-        File file = fileChooser.showOpenDialog(new Stage());
-
-        if (file != null) {
-            ImportMap importMap = new ImportMap();
-            //world = importMap.parseFile(file);
-            //world.getGameMap().render(camera);
-           // for(GameObject gameObject : world.getGameObjects()){
-            //    camera.render(gameObject);
-           // }
-        }
+        editorInputs.handleImport();
     }
 
     @FXML

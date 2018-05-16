@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-opacity: .4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <effect>
@@ -18,7 +19,7 @@
          </effect></Pane>
         <AnchorPane layoutY="116.0" prefHeight="284.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="116.0">
             <children>
-                <Button layoutY="92.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
+                <Button layoutY="215.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="215.0">
                     <font>
                         <Font size="22.0" />
                     </font>
@@ -26,6 +27,7 @@
                   <InnerShadow choke="0.08" height="69.29" radius="33.3875" width="66.26" />
                </effect>
             </Button>
+            <ListView fx:id="HighScore" layoutX="-5.0" layoutY="70.0" prefHeight="88.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             </children>
         </AnchorPane>
         <Label alignment="CENTER" layoutX="133.0" layoutY="93.0" prefHeight="146.0" prefWidth="300.0" style="-fx-text-alignment: center;" text="YOU DIED!" textAlignment="CENTER" textFill="BLACK" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">

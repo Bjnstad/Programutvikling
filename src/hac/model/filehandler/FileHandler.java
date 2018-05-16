@@ -1,13 +1,13 @@
 package hac.model.filehandler;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import sun.misc.BASE64Decoder;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Base64;
 
 /**
@@ -15,12 +15,21 @@ import java.util.Base64;
  * export, import games and maps.
  *
  * @see ExportMap
- * @see ImportGame
+ * @see ImportMap
  * @author Henry Tran - s315309
  *
  */
 public abstract class FileHandler {
-
+    public String SPRITE_CONTENT = "%";
+    public String SPRITE_POSITION ="&";
+    public String NEW_LINE ="§";
+    public String INLINE_CONTENT =",";
+    public String MAP_SIZE = "$";
+    public String GAME_SAVE_STATE = "@";
+    public String OBJECT = "!";
+    public String MULTI_ANIMATION = "#";
+    public String SINGLE_ANIMATION = "=";
+    public String STATIC_ANIMATION = "?";
 
     /**
      * Returns an image in Byte64 String.
@@ -41,6 +50,16 @@ public abstract class FileHandler {
             e.printStackTrace();
         }
         return imageString;
+    }
+    
+    public BufferedImage encodeStringToImage(String imageString) throws IOException {
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] imageByte = decoder.decodeBuffer(imageString);
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+        BufferedImage image = ImageIO.read(bis);
+        bis.close();
+        
+        return image;
     }
 
 
@@ -96,6 +115,15 @@ public abstract class FileHandler {
         File file = new File("assets/spritesheets/"+fileName+".ahac");
         createFile(file, content);
 
+    }
+
+    public static void showAlert(String headerText, String contentText){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+
+        alert.showAndWait();
     }
 
 }
