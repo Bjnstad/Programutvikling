@@ -13,10 +13,14 @@ public class Sprite {
 
     private String fileName;
     private Image[][] images;
+    private double width;
+    private double height;
 
     public Sprite(String fileName) {
         this.fileName = fileName;
         SpriteSheet spriteSheet = new SpriteSheet(fileName);
+        this.width = spriteSheet.getSpriteWidth();
+        this.height = spriteSheet.getSpriteHeigth();
         images = new Image[spriteSheet.getRows()][spriteSheet.getColumns()];
         loadImages(spriteSheet);
     }
@@ -36,5 +40,13 @@ public class Sprite {
 
     public String getSpriteFileName() {
         return fileName;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
     }
 }

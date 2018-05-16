@@ -1,12 +1,12 @@
 package application.controller.subController;
 
+import hac.model.filehandler.ImportMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import application.controller.mainController.GameController;
-import hac.model.filehandler.ImportGame;
 import application.controller.mainController.Controller;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -30,7 +30,7 @@ public class LoadGameController implements SubController {
         ObservableList<String> res = FXCollections.observableArrayList();
 
         for (final File f : dir.listFiles()) {
-            if(getFileExtension(f).equals("txt")) {
+            if(getFileExtension(f).equals("mhac")) {
                 res.add(f.getName());
             }
         }
@@ -74,21 +74,10 @@ public class LoadGameController implements SubController {
      */
     @FXML
     public void play(ActionEvent event) {
-        File file = new File("assets/maps/" + games.getSelectionModel().getSelectedItem().toString());
-        ImportGame ig =  new ImportGame(file);
+        File file = new File("assets/savegame/" + games.getSelectionModel().getSelectedItem().toString());
+        ImportMap im = new ImportMap();
 
-
-        gameController.getCamera().translate(ig.getTranslateX(), ig.getTranslateY());
-        gameController.setWorld(ig.getWorld());
-
-
-        /*for(Enemy enemy : ig.getEnemies()) world.addGameObject(enemy);
-        world.addGameObject(ig.getPlayer());
-        world.setGameMap(ig.getMap());
-        //world.getGameMap().addGameObject();*/
-
-
-       // gameController.setWorld(world);
+        gameController.setWorld(im.parseFile(file, gameController.getCamera()));
 
     }
 

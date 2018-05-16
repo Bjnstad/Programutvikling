@@ -1,5 +1,7 @@
 package application.controller.mainController;
 
+import hac.model.object.defaults.Bolt;
+import hac.model.filehandler.ExportMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -41,7 +43,8 @@ public class GameController extends Controller {
      */
     @Override
     public void initiate() {
-        this.camera = new Camera(getParent().getWidth(), canvas);
+        double dimension = (getParent().getWidth() > getParent().getHeight()) ? getParent().getHeight() : getParent().getWidth();
+        this.camera = new Camera(dimension, canvas);
         setInputs(new GameInputs(this, 0.1));
     }
 
@@ -95,8 +98,10 @@ public class GameController extends Controller {
     public void save() {
         //ExportGame save = new ExportGame(world);
         //ExportGame save = new ExportGame(world.getGameMap(),getCamera(), world.getEnemies(), world.getPlayer());
+        ExportMap exportMap = new ExportMap(world);
+        exportMap.saveGame();
 
-        getParent().setState(GameState.MAIN_MENU);
+        //getParent().setState(GameState.MAIN_MENU);
     }
 
     public void shoot(double x, double y) {
@@ -107,7 +112,9 @@ public class GameController extends Controller {
         double pX = player.getPosX() + .5;
         double pY = player.getPosY() + .5;
 
-        world.addGameObject(new Bullet(player, mX/camera.getScale(), mY/camera.getScale()));
+
+        Bolt bolt = new Bolt(player, mX/camera.getScale(), mY/camera.getScale());
+        world.addGameObject(bolt);
     }
 
     private void gameloop() {

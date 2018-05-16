@@ -1,6 +1,5 @@
 package hac.model.filehandler;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -17,7 +16,8 @@ public class SpriteSheet {
 
     private BufferedImage spriteSheet;
     private String filename;
-    private int bits;
+    private int spriteWidth;
+    private int spriteHeigth;
     private int columns;
     private int rows;
 
@@ -30,24 +30,28 @@ public class SpriteSheet {
 
         BufferedReader b = null;
         try {
-            b = new BufferedReader(new FileReader(file));
+           b = new BufferedReader(new FileReader(file));
             String str = b.readLine().toString();
             String[] values = str.split("#");
-            String fileName = values[0];
-            int bits = Integer.parseInt(values[1]);
-            int cols = Integer.parseInt(values[2]);
-            int rows = Integer.parseInt(values[3]);
+
+            String fileName = values[0].substring(1);
+            int spriteHeigth = Integer.parseInt(values[1]);
+            int spriteWidth = Integer.parseInt(values[2]);
+            int cols = Integer.parseInt(values[3]);
+            int rows = Integer.parseInt(values[4]);
+
             BASE64Decoder decoder = new BASE64Decoder();
-            byte[] imageByte = decoder.decodeBuffer(values[4]);
+            byte[] imageByte = decoder.decodeBuffer(values[5]);
             ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
             BufferedImage spriteImage = ImageIO.read(bis);
-            this.bits = bits;
+            this.spriteWidth = spriteWidth;
+            this.spriteHeigth = spriteHeigth;
             this.columns = cols;
             this.rows = rows;
             this.filename = fileName;
 
             // Resize
-            resize(spriteImage, max_bits / bits);
+            spriteSheet = spriteImage;
 
 
         } catch (FileNotFoundException e) {
@@ -67,12 +71,14 @@ public class SpriteSheet {
         double width = upload.getWidth();
         double height = upload.getHeight();
 
+        /*
         BufferedImage resizedImage = new BufferedImage((int)(width * multiplier), (int)(height * multiplier), upload.getType());
         Graphics2D g = resizedImage.createGraphics();
         g.drawImage(upload, 0, 0, (int)(width * multiplier), (int)(height * multiplier), null);
         g.dispose();
+        */
 
-        this.spriteSheet = resizedImage;
+        this.spriteSheet = upload;
     }
 
     /**
@@ -82,7 +88,7 @@ public class SpriteSheet {
      * @return spritesheet that gets the subImage with sizes in the grid of the gameboard.
      */
     public BufferedImage getSprite(int gridX, int gridY){
-        return spriteSheet.getSubimage(gridX * max_bits, gridY * max_bits, max_bits, max_bits);
+        return spriteSheet.getSubimage(gridX * spriteWidth, gridY * spriteHeigth, spriteWidth, spriteHeigth);
     }
 
 
@@ -98,5 +104,12 @@ public class SpriteSheet {
         return rows;
     }
 
+    public double getSpriteHeigth() {
+        return spriteHeigth;
+    }
+
+    public double getSpriteWidth() {
+        return spriteWidth;
+    }
 
 }

@@ -1,5 +1,6 @@
 package application.model.editor;
 
+import hac.model.filehandler.FileHandler;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -40,7 +41,8 @@ public class EditorSpriteInput {
         submit.setOnAction(e -> {
             rows = Integer.valueOf(inputRow.textProperty().getValue());
             columns = Integer.valueOf(inputColumns.textProperty().getValue());
-            bits = ((int)image.getWidth()/columns);
+            int spriteWidth = ((int)image.getWidth()/columns);
+            int spriteHeight = ((int)image.getHeight()/rows);
 
 
             try {
@@ -53,16 +55,18 @@ public class EditorSpriteInput {
                     }
                 }
                 ExportMap exportSprite = new ExportMap();
-                exportSprite.saveSpriteInput(image, bits, columns,rows, fileName);
+                exportSprite.saveSpriteInput(image, spriteHeight, spriteWidth, columns,rows, fileName);
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);
                 ImageItem imageItem = new ImageItem(imageView,image,fileName,columns,rows);
-                imageItem.setBits(bits);
+                imageItem.setSpriteHeight(spriteHeight);
+                imageItem.setSpriteWidth(spriteWidth);
                 imageList.getSpriteBottom().add(imageItem);
                 primaryStage.close();
             }catch(Exception y) {
                 y.printStackTrace();
+                FileHandler.showAlert("Import error!", "Are you sure each sub image is one of the following size? 16x16, 32x32, 64x64, 128x128?");
             }
         });
 

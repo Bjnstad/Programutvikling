@@ -7,11 +7,12 @@ import hac.model.object.sprite.ImageHandler;
 import hac.model.render.Actions;
 import hac.controller.World;
 
-public abstract class GameObject {
+public abstract class GameObject implements Cloneable  {
 
     Avatar avatar;
     private double posX;
     private double posY;
+    private double scale = -1;
     private boolean collideable = true;
 
     public GameObject(Avatar avatar, double posX, double posY) {
@@ -30,14 +31,15 @@ public abstract class GameObject {
 
 
 
-
     public abstract void onCollide(GameObject object, Actions actions);
 
     public abstract void logic(World world, Actions actions);
     public abstract void renderOptional(Camera camera);
 
 
-
+    public GameObject clone() throws CloneNotSupportedException {
+        return (GameObject) super.clone();
+    }
 
 
     public boolean willCollide(GameObject object) {
@@ -93,6 +95,14 @@ public abstract class GameObject {
         if (speed == 0) return;
 
         this.posY = posY;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public double getScale() {
+        return scale;
     }
 
     public Avatar getAvatar() {
