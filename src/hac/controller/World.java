@@ -155,6 +155,7 @@ public class World {
                 try {
                     enemy = (Enemy)enemiesTypes.get(k).clone();
                 } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
                     enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
                 }
                 enemy.setPosX(rand.nextInt(gameMap.getWidth()));
