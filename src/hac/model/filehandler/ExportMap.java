@@ -1,13 +1,15 @@
 package hac.model.filehandler;
 
+
+import application.model.editor.ImageItem;
 import hac.controller.World;
 import hac.model.object.GameObject;
+import hac.model.object.MapObject;
+import hac.model.object.character.Enemy;
 import hac.model.object.sprite.animation.MultiAnimation;
 import hac.model.object.sprite.animation.SingleAnimation;
 import hac.model.object.sprite.animation.StaticAnimation;
 import javafx.embed.swing.SwingFXUtils;
-import application.model.editor.ImageItem;
-import hac.model.object.MapObject;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -140,6 +142,11 @@ public class ExportMap extends FileHandler {
                 sb.append(animation.getX());
                 sb.append(INLINE_CONTENT);
                 sb.append(animation.getY());
+                if(object.getClass().getSimpleName().equals("Skeleton")){
+                    sb.append(INLINE_CONTENT);
+                    String health = String.valueOf(((Enemy) object).getHealth());
+                    sb.append(health);
+                }
             }
 
             if(object.getAvatar().getAnimation() instanceof SingleAnimation) {
