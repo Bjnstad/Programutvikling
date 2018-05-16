@@ -120,8 +120,14 @@ public class ImportMap extends FileHandler {
                         int x = Integer.parseInt(object[7]);
                         int y = Integer.parseInt(object[8]);
 
-                        if(type.equals("Enemy")){
+                        if(type.equals("Skeleton")){
                             Enemy enemy = new Skeleton(posX, posY);
+
+                            if(object.length == 10){
+                                double health = Double.parseDouble(object[9]);
+                                enemy.setHealth(health);
+                            }
+
                             world.addGameObject(enemy);
                         }
                         if(type.equals("MainPlayer")){
