@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import hac.model.Camera;
 import hac.model.object.sprite.Avatar;
 import hac.model.render.Actions;
-import hac.controller.World;
 
 /**
  * This class defines the gameObject.

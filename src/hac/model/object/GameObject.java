@@ -7,7 +7,7 @@ import hac.model.object.sprite.ImageHandler;
 import hac.model.render.Actions;
 
 /**
- * Main object used in World, best practise
+ * Main object used in World
  * @author Axel Bjørnstad - s315322
  */
 public abstract class GameObject {
