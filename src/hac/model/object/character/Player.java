@@ -17,6 +17,6 @@ public abstract class Player extends Character {
      * It extends its characteristics from character, and it´s coordinates.
      */
     public Player(String spriteName, double posX, double posY, int frames) {
-        super(spriteName, posX, posY, frames);
+        super(spriteName, posX, posY, 9);
     }
 }

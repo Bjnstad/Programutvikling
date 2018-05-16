@@ -1,6 +1,5 @@
 package application.model.editor;
 
-import hac.model.filehandler.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -91,8 +90,7 @@ public class ImageList {
                         for (int x = 0; x < imageItem.getX(); x++) {
                             Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
                             ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
-                            imageItemExtracted.setSpriteHeight(imageItem.getSpriteHeight());
-                            imageItemExtracted.setSpriteWidth(imageItem.getSpriteWidth());
+                            imageItemExtracted.setBits(imageItem.getBits());
                             imageItemExtracted.setFrames(imageItem.getX());
                             imageItemExtracted.setColumns(imageItem.getY());
                             result.add(imageItemExtracted);
@@ -161,13 +159,12 @@ public class ImageList {
                 String str = b.readLine().toString();
                 String[] values = str.split("#");
                 String fileName = values[0];
-                int spriteHeight = Integer.parseInt(values[1]);
-                int spriteWidth = Integer.parseInt(values[2]);
-                int cols = Integer.parseInt(values[3]);
-                int rows = Integer.parseInt(values[4]);
+                int bits = Integer.parseInt(values[1]);
+                int cols = Integer.parseInt(values[2]);
+                int rows = Integer.parseInt(values[3]);
 
                 BASE64Decoder decoder = new BASE64Decoder();
-                byte[] imageByte = decoder.decodeBuffer(values[5]);
+                byte[] imageByte = decoder.decodeBuffer(values[4]);
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 BufferedImage spriteImage = ImageIO.read(bis);
 
@@ -176,8 +173,7 @@ public class ImageList {
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);
                 ImageItem imageItem = new ImageItem(imageView,img,fileName,cols,rows);
-                imageItem.setSpriteWidth(spriteWidth);
-                imageItem.setSpriteHeight(spriteHeight);
+                imageItem.setBits(bits);
                 result.add(imageItem);
 
             } catch (FileNotFoundException e) {

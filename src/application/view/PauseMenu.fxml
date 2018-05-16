@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -11,63 +14,54 @@
 
 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <effect>
-            <InnerShadow color="#3c2424" height="136.0" radius="62.75" width="117.0" />
-         </effect></Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-opacity: .4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0">
       <children>
-         <Button layoutX="41.0" mnemonicParsing="false" onAction="#resume" opacity="0.8" prefHeight="44.0" prefWidth="117.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Resume" textAlignment="CENTER" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="0.0">
+         <Button mnemonicParsing="false" onAction="#resume" opacity="0.69" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Resume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
                <Font size="22.0" />
             </font>
                <effect>
-                  <InnerShadow height="45.0" radius="15.25" width="18.0" />
-               </effect>
-               <textFill>
-                  <LinearGradient endX="0.9136690647482014" endY="0.5491606714628298" startX="0.7050359712230215" startY="0.5179856115107914">
-                     <stops>
-                        <Stop color="#900c0cab" />
-                        <Stop color="#8d4545a6" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill></Button>
-         <Button layoutX="42.0" mnemonicParsing="false" onAction="#save" opacity="0.8" prefHeight="44.0" prefWidth="117.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Save" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="55.0">
+                  <InnerShadow choke="0.43" color="#512b2b" height="33.07" radius="19.052500000000002" width="45.14" />
+               </effect></Button>
+         <Button mnemonicParsing="false" onAction="#save" opacity="0.73" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Save" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
             <font>
                <Font size="22.0" />
             </font>
                <effect>
-                  <InnerShadow height="72.0" radius="22.0" width="18.0" />
-               </effect>
-               <textFill>
-                  <LinearGradient endX="0.9136690647482014" endY="0.5491606714628298" startX="0.7050359712230215" startY="0.5179856115107914">
-                     <stops>
-                        <Stop color="#900c0cab" />
-                        <Stop color="#8d4545a6" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill></Button>
-        <Button layoutX="41.0" mnemonicParsing="false" onAction="#exit" opacity="0.8" prefHeight="44.0" prefWidth="117.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Exit" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="110.0">
+                  <InnerShadow choke="0.4" color="#391717" height="41.44" radius="18.8825" width="36.09" />
+               </effect></Button>
+        <Button mnemonicParsing="false" onAction="#exit" opacity="0.73" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
             <font>
                <Font size="22.0" />
             </font>
                <effect>
-                  <InnerShadow height="72.0" radius="22.0" width="18.0" />
-               </effect>
-               <textFill>
-                  <LinearGradient endX="0.9136690647482014" endY="0.5491606714628298" startX="0.7050359712230215" startY="0.5179856115107914">
-                     <stops>
-                        <Stop color="#900c0cab" />
-                        <Stop color="#8d4545a6" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill></Button>
+                  <InnerShadow choke="0.27" color="#2c0f0f" height="38.73" radius="17.45" width="33.07" />
+               </effect></Button>
       </children>
    </AnchorPane>
-   <Label alignment="CENTER" layoutX="133.0" layoutY="93.0" style="-fx-text-alignment: center;" text="Pause" textAlignment="CENTER" textFill="#660d0d" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+   <Label alignment="CENTER" layoutX="133.0" layoutY="93.0" style="-fx-text-alignment: center;" text="Pause" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
       <font>
-         <Font name="Lucida Sans Demibold" size="45.0" />
+         <Font size="51.0" />
       </font>
+         <effect>
+            <Lighting diffuseConstant="1.81" specularConstant="1.13" specularExponent="39.29" surfaceScale="9.88">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="#7c2222" />
+               </light>
+            </Lighting>
+         </effect>
+         <textFill>
+            <LinearGradient endX="0.9136690647482014" endY="0.5491606714628298" startX="0.7050359712230215" startY="0.5179856115107914">
+               <stops>
+                  <Stop color="#900c0cab" />
+                  <Stop color="#8d4545a6" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
    </Label>
    </children>
 </AnchorPane>

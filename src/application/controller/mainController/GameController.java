@@ -1,6 +1,5 @@
 package application.controller.mainController;
 
-import hac.model.object.defaults.Bolt;
 import hac.model.filehandler.ExportMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -43,8 +42,7 @@ public class GameController extends Controller {
      */
     @Override
     public void initiate() {
-        double dimension = (getParent().getWidth() > getParent().getHeight()) ? getParent().getHeight() : getParent().getWidth();
-        this.camera = new Camera(dimension, canvas);
+        this.camera = new Camera(getParent().getWidth(), canvas);
         setInputs(new GameInputs(this, 0.1));
     }
 
@@ -112,9 +110,7 @@ public class GameController extends Controller {
         double pX = player.getPosX() + .5;
         double pY = player.getPosY() + .5;
 
-
-        Bolt bolt = new Bolt(player, mX/camera.getScale(), mY/camera.getScale());
-        world.addGameObject(bolt);
+        world.addGameObject(new Bullet(player, mX/camera.getScale(), mY/camera.getScale()));
     }
 
     private void gameloop() {

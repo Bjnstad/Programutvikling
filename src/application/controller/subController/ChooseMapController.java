@@ -1,6 +1,7 @@
 package application.controller.subController;
 
 import application.model.objects.Zombie1;
+import application.model.objects.Zombie2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -76,10 +77,10 @@ public class ChooseMapController implements SubController {
     @FXML
     public void play(ActionEvent event) {
 
+
         ImportMap importMap = new ImportMap();
         World w = importMap.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()), gameController.getCamera());
         w.addGameObject(new MainPlayer("default_player", 1, 1));
-        w.addEnemyType(new Zombie1(0,0));
         gameController.setWorld(w);
     }
 

@@ -41,8 +41,7 @@ public class EditorSpriteInput {
         submit.setOnAction(e -> {
             rows = Integer.valueOf(inputRow.textProperty().getValue());
             columns = Integer.valueOf(inputColumns.textProperty().getValue());
-            int spriteWidth = ((int)image.getWidth()/columns);
-            int spriteHeight = ((int)image.getHeight()/rows);
+            bits = ((int)image.getWidth()/columns);
 
 
             try {
@@ -55,13 +54,12 @@ public class EditorSpriteInput {
                     }
                 }
                 ExportMap exportSprite = new ExportMap();
-                exportSprite.saveSpriteInput(image, spriteHeight, spriteWidth, columns,rows, fileName);
+                exportSprite.saveSpriteInput(image, bits, columns,rows, fileName);
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);
                 ImageItem imageItem = new ImageItem(imageView,image,fileName,columns,rows);
-                imageItem.setSpriteHeight(spriteHeight);
-                imageItem.setSpriteWidth(spriteWidth);
+                imageItem.setBits(bits);
                 imageList.getSpriteBottom().add(imageItem);
                 primaryStage.close();
             }catch(Exception y) {

@@ -15,8 +15,7 @@ public class ImageItem {
     private int x;
     private int y;
     private Image image;
-    private int spriteWidth;
-    private int spriteHeight;
+    private int bits;
     private int frames;
     private int columns;
 
@@ -58,20 +57,12 @@ public class ImageItem {
         this.y = y;
     }
 
-    public int getSpriteHeight() {
-        return spriteHeight;
+    public int getBits() {
+        return bits;
     }
 
-    public void setSpriteHeight(int bits) {
-        this.spriteHeight = bits;
-    }
-
-    public int getSpriteWidth() {
-        return spriteWidth;
-    }
-
-    public void setSpriteWidth(int bits) {
-        this.spriteWidth = bits;
+    public void setBits(int bits) {
+        this.bits = bits;
     }
     public int getFrames() {
         return frames;

@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 public class MainPlayer extends Player {
 
     public MainPlayer(String spriteName, double posX, double posY) {
-        super(spriteName, posX, posY, 7);
+        super(spriteName, posX, posY, 9);
     }
 
     @Override

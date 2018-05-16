@@ -28,12 +28,4 @@ public class ImageHandler {
         Sprite sprite = getSprite(avatar.getFilename());
         return  sprite.getSprite(avatar.getX(), avatar.getY());
     }
-
-    public double getWidth(String filename) {
-        return getSprite(filename).getWidth();
-    }
-
-    public double getHeight(String filename) {
-        return getSprite(filename).getHeight();
-    }
 }

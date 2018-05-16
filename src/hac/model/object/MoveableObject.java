@@ -5,17 +5,11 @@ import hac.model.object.defaults.MainPlayer;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.Direction;
 import hac.model.object.sprite.animation.MultiAnimation;
-import hac.model.object.sprite.animation.SingleAnimation;
-
-import java.sql.Timestamp;
 
 public abstract class MoveableObject extends GameObject {
 
-    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-
     public MoveableObject(String filename, double posX, double posY, int frames) {
-        super(new Avatar(filename, new SingleAnimation(frames, 0)),posX, posY);
+        super(new Avatar(filename, new MultiAnimation(frames)),posX, posY);
     }
 
 
@@ -26,15 +20,6 @@ public abstract class MoveableObject extends GameObject {
      //* @param speed this is the speed to the character walking right or left.
      */
     public boolean addPos(double x, double y, World world) {
-        Timestamp now = new Timestamp(System.currentTimeMillis() - 100);
-
-        if(now.after(timestamp)) {
-            timestamp = new Timestamp(System.currentTimeMillis());
-            ((SingleAnimation)getAvatar().getAnimation()).increaseInterval();
-        }
-
-
-
         if(getPosX() + x < 0 || getPosY() + y < 0 || getPosX() + x > world.getGameMap().getWidth() || getPosY() + y > world.getGameMap().getHeight()) return false;
 
 
@@ -43,6 +28,11 @@ public abstract class MoveableObject extends GameObject {
             if(willCollide(object,getPosX() + x, getPosY() + y)  && object.isCollideable() && isCollideable() && !(object instanceof MainPlayer)) return false;
         }
 
+        if(Math.abs(x) > Math.abs(y)) {
+            ((MultiAnimation) avatar.getAnimation()).setDirection(x < 0 ? Direction.LEFT : Direction.RIGHT);
+        } else {
+            ((MultiAnimation) avatar.getAnimation()).setDirection(y < 0 ? Direction.UP : Direction.DOWN);
+        }
 
         setPosX(getPosX() + x);
         setPosY(getPosY() + y);

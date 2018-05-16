@@ -31,7 +31,7 @@ import java.util.Random;
  * @author Axel Bjørnstad - s315322
  */
 public class World {
-    private final double ENEMY_GENERATION_RATE = 8;
+    private final double ENEMY_GENERATION_RATE = 2;
 
     private ArrayList<Enemy> enemiesTypes = new ArrayList<>(); // Used for choosing generated enemies.
 
@@ -96,8 +96,8 @@ public class World {
         actions.start(gameObjects, gameMap, getCamera());
         drawUserStats();
 
+    }
 
-}
     private void drawUserStats() {
         GraphicsContext gc = getCamera().getGraphicsContext();
         Camera camera = getCamera();
@@ -151,13 +151,8 @@ public class World {
             if(enemiesTypes.size() == 0) {
                  enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
             } else {
-                int k = 0;
-                try {
-                    enemy = (Enemy)enemiesTypes.get(k).clone();
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                    enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
-                }
+                int k = rand.nextInt(enemiesTypes.size());
+                enemy = enemiesTypes.get(k);
                 enemy.setPosX(rand.nextInt(gameMap.getWidth()));
                 enemy.setPosY(rand.nextInt(gameMap.getHeight()));
             }
