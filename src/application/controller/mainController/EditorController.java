@@ -113,19 +113,7 @@ public class EditorController extends Controller {
      */
     @FXML
     private void Import(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
-        fileChooser.getExtensionFilters().add(filter);
-        File file = fileChooser.showOpenDialog(new Stage());
-
-        if (file != null) {
-            ImportMap importMap = new ImportMap();
-            //world = importMap.parseFile(file);
-            //world.getGameMap().render(camera);
-           // for(GameObject gameObject : world.getGameObjects()){
-            //    camera.render(gameObject);
-           // }
-        }
+        editorInputs.handleImport();
     }
 
     @FXML

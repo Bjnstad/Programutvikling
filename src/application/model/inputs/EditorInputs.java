@@ -1,6 +1,7 @@
 package application.model.inputs;
 
 import hac.controller.World;
+import hac.model.filehandler.ImportMap;
 import hac.model.filehandler.SpriteSheet;
 import hac.model.object.GameMap;
 import hac.model.object.GameObject;
@@ -22,8 +23,11 @@ import application.model.editor.ImageList;
 import hac.model.filehandler.ExportMap;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * Handles inout for editor.
@@ -168,6 +172,23 @@ public class EditorInputs implements Inputs {
 
             }
         });
+    }
+
+
+    public void handleImport(){
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
+        fileChooser.getExtensionFilters().add(filter);
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        if (file != null) {
+            ImportMap importMap = new ImportMap();
+            world = importMap.parseFileTest(file, camera);
+            world.getGameMap().render(camera);
+            for(GameObject gameObject : world.getGameObjects()){
+                camera.render(gameObject);
+            }
+        }
     }
 
     public World getWorld() {

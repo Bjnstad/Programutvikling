@@ -33,6 +33,8 @@ public class ExportMap extends FileHandler {
     private ArrayList<String> elements = new ArrayList<>();
     private ArrayList<String> filenames = new ArrayList<>();
 
+
+
     public ExportMap(World world){
         this.world = world;
     }
@@ -61,40 +63,44 @@ public class ExportMap extends FileHandler {
             String base64String = encodeImageToString(SwingFXUtils.fromFXImage(imageItem.getImage(), null), "png");
             base64String = base64String.substring(0, base64String.length()-5);
             filenames.add(imageItem.getFileName());
-            sb.append("§");
+            sb.append(NEW_LINE);
+            sb.append(SPRITE_CONTENT);
             sb.append(imageItem.getFileName());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(imageItem.getSpriteHeight());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(imageItem.getSpriteWidth());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(imageItem.getFrames());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(imageItem.getColumns());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(base64String);
-            sb.append("§");
         }
-        sb.append("&");
+        sb.append(NEW_LINE);
+        sb.append(SPRITE_POSITION);
         sb.append(imageItem.getFileName());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(imageItem.getX());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(imageItem.getY());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(mapObject.getPosX());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(mapObject.getPosY());
+
         elements.add(sb.toString());
 
     }
 
+
     public void addMapSize(){
         StringBuilder sb = new StringBuilder();
-        sb.append("$");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getGameMap().getWidth());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getGameMap().getHeight());
+
         elements.add(sb.toString());
 
     }
@@ -104,57 +110,55 @@ public class ExportMap extends FileHandler {
 
         saveBuilder.append(appendAhac());
         saveBuilder.append(saveGameState());
-        saveBuilder.append(addObject());
+        saveBuilder.append(saveObjects());
         elements.add(saveBuilder.toString());
         handleSaveMapName(false);
 
     }
 
-    public String addObject(){
+    public String saveObjects(){
         StringBuilder sb = new StringBuilder();
 
         for (GameObject object : world.getGameObjects()) {
-            sb.append("§");
+            sb.append(NEW_LINE);
+            sb.append(OBJECT);
             String type = object.getClass().getSimpleName();
             sb.append(type);
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(object.getPosX());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             sb.append(object.getPosY());
-            sb.append(",");
+            sb.append(INLINE_CONTENT);
             if(object.getAvatar().getAnimation() instanceof MultiAnimation) {
                 MultiAnimation animation = (MultiAnimation)object.getAvatar().getAnimation();
-                sb.append("#");
-                sb.append(",");
+                sb.append(MULTI_ANIMATION);
+                sb.append(INLINE_CONTENT);
                 sb.append(object.getAvatar().getFilename());
-                sb.append(",");
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getDirection());
-                sb.append(",");
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getFrames());
-                sb.append(",");
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getX());
-                sb.append(",");
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getY());
-
             }
 
             if(object.getAvatar().getAnimation() instanceof SingleAnimation) {
                 SingleAnimation animation = (SingleAnimation)object.getAvatar().getAnimation();
-                sb.append("/");
+                sb.append(SINGLE_ANIMATION);
                 sb.append(animation.getFrames());
-                sb.append(",");
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getY());
-                // HENT UT DATA
             }
 
             if(object.getAvatar().getAnimation() instanceof StaticAnimation) {
                 StaticAnimation animation = (StaticAnimation)object.getAvatar().getAnimation();
-                sb.append("$");
+                sb.append(STATIC_ANIMATION);
                 sb.append(animation.getX());
-                sb.append(",");
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getY());
 
-                // HENT UT DATA
             }
         }
         return sb.toString();
@@ -164,6 +168,7 @@ public class ExportMap extends FileHandler {
     public String appendAhac(){
 
         try {
+            System.out.println("assets/maps/" + world.getGameMap().getMapFileName());
             BufferedReader b = new BufferedReader(new FileReader(new File("assets/maps/" + world.getGameMap().getMapFileName())));
 
             String str = b.readLine().toString();
@@ -180,21 +185,21 @@ public class ExportMap extends FileHandler {
 
     public String saveGameState(){
         StringBuilder sb = new StringBuilder();
-        sb.append("@");
+        sb.append(NEW_LINE);
+        sb.append(GAME_SAVE_STATE);
         sb.append(world.getGameMap().getWidth());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getGameMap().getHeight());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getGameMap().getBackgroundFileName());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getCurrentLevel());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.isGodmode());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getCamera().getTranslateX());
-        sb.append(",");
+        sb.append(INLINE_CONTENT);
         sb.append(world.getCamera().getTranslateY());
-        sb.append("@");
         return sb.toString();
 
 
@@ -228,19 +233,22 @@ public class ExportMap extends FileHandler {
             @Override public void handle(ActionEvent e) {
                 StringBuilder sb = new StringBuilder();
 
+                if(onlyMap == true) {
+                    sb.append(MAP_SIZE);
+                 sb.append(inputFileName.getText());
+
+                }
                 for(String content : getElements()){
                     sb.append(content);
                 }
+
                 String content = sb.toString();
                 if(onlyMap == true){
                     createFile(new File("assets/maps/"+inputFileName.getText()+".mhac"), content);
                 }else{
                     createFile(new File("assets/savegame/"+inputFileName.getText()+".mhac"), content);
-
                 }
-
                 primaryStage.close();
-
             }
         });
     }

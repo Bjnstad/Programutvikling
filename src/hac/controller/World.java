@@ -300,4 +300,11 @@ public class World {
         return godmode;
     }
 
+    public void setGodmode(boolean godmode) {
+        this.godmode = godmode;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
 }

@@ -30,14 +30,16 @@ public class SpriteSheet {
 
         BufferedReader b = null;
         try {
-            b = new BufferedReader(new FileReader(file));
+           b = new BufferedReader(new FileReader(file));
             String str = b.readLine().toString();
             String[] values = str.split("#");
-            String fileName = values[0];
-            int spriteWidth = Integer.parseInt(values[2]);
+
+            String fileName = values[0].substring(1);
             int spriteHeigth = Integer.parseInt(values[1]);
+            int spriteWidth = Integer.parseInt(values[2]);
             int cols = Integer.parseInt(values[3]);
             int rows = Integer.parseInt(values[4]);
+
             BASE64Decoder decoder = new BASE64Decoder();
             byte[] imageByte = decoder.decodeBuffer(values[5]);
             ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
