@@ -17,7 +17,7 @@ import java.io.*;
 /**
  * This class content
  *
- * @author
+ * @author Henry Tran - S315309
  */
 public class ImportMap extends FileHandler {
 
