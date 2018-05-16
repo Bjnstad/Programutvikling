@@ -5,10 +5,10 @@ import hac.model.Camera;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.ImageHandler;
 import hac.model.render.Actions;
-import hac.controller.World;
 
 /**
  * Main object used in World, best practise
+ * @author Axel Bjørnstad - s315322
  */
 public abstract class GameObject {
 

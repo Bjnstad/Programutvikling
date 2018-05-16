@@ -7,6 +7,9 @@ import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.Direction;
 import hac.model.object.sprite.animation.MultiAnimation;
 
+/**
+ * @author Axel Bjørnstad - s315322
+ */
 public abstract class MoveableObject extends GameObject {
 
     public MoveableObject(String filename, double posX, double posY, int frames) {

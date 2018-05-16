@@ -11,7 +11,6 @@ public abstract class Character extends MoveableObject {
     protected double health = 100;
     protected double threshold = .2;
 
-
     public Character(String filename, double posX, double posY, int frames) {
         super(filename, posX, posY, frames);
     }
