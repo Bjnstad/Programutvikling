@@ -21,16 +21,19 @@ import java.io.*;
  */
 public class ImportMap extends FileHandler {
 
-    /**
-     *
-     * @param
-     * @return
-     */
+
 
     public String[] splitString(String str){
         String[] res = str.substring(1).split(INLINE_CONTENT);
         return res;
     }
+
+    /**
+     * This method is used to parse .mhac files, which is map saves and game saves.
+     * @param file .mhac
+     * @param camera
+     * @return
+     */
 
     public World parseFile(File file, Camera camera){
         try {
