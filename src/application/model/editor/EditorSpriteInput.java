@@ -50,12 +50,6 @@ public class EditorSpriteInput {
             try {
                 SpriteSheet testSprite = new SpriteSheet(fileName);
                 Image[] imgArray = new Image[rows * columns];
-                for (int y = 0, k = 0; y < rows; y++) {
-                    for (int x = 0; x < columns; x++, k++) {
-                        //Image img = SwingFXUtils.toFXImage(testSprite.getSprite(x,y), null);
-
-                    }
-                }
                 ExportMap exportSprite = new ExportMap();
                 exportSprite.saveSpriteInput(image, bits, columns,rows, fileName);
                 ImageView imageView = new ImageView(image);

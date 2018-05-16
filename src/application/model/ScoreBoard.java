@@ -19,6 +19,7 @@ import java.io.*;
 
 /**
  * Class handling scoreboards.
+ * @author Cecilie Thoresen - s315587
  * @author Henry Tran - s315309
  */
 public class ScoreBoard {
@@ -36,9 +37,6 @@ public class ScoreBoard {
 
         this.mapName = mapNameNoExt[0] + ".txt";
     }
-
-
-
 
     public void handlePlayerName(){
         final Stage primaryStage = new Stage();
@@ -62,10 +60,8 @@ public class ScoreBoard {
 
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-
                 saveScore(inputName.getText());
                 parseScore();
-
 
                 primaryStage.close();
 
