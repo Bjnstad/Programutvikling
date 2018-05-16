@@ -1,7 +1,9 @@
 package application.model.editor;
 
 import hac.model.filehandler.FileHandler;
+import hac.model.filehandler.SpriteSheet;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -45,11 +47,11 @@ public class EditorSpriteInput {
 
 
             try {
-                //SpriteSheet test = new SpriteSheet(fileName, bits, columns, false);
+                SpriteSheet testSprite = new SpriteSheet(fileName);
                 Image[] imgArray = new Image[rows * columns];
                 for (int y = 0, k = 0; y < rows; y++) {
                     for (int x = 0; x < columns; x++, k++) {
-                     //   Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                        Image img = SwingFXUtils.toFXImage(testSprite.getSprite(x,y), null);
 
                     }
                 }

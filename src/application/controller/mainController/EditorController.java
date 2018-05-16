@@ -5,17 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import application.model.editor.EditorSpriteInput;
 import application.model.editor.ImageList;
 import application.model.inputs.EditorInputs;
 import hac.model.Camera;
 import hac.model.object.GameObject;
-import java.io.File;
-import java.nio.file.Path;
+
 
 
 /**
@@ -89,11 +84,10 @@ public class EditorController extends Controller {
         editorInputs.getExportMap().handleSaveMapName(true);
     }
 
-
-    @FXML
-    private void onDelete(){
-
-    }
+    /**
+     * This method handles zoom for editor.
+     * @param event
+     */
     @FXML
     private void zoomSlider(MouseEvent event){
         camera.setZoom((int)zoomMap.getValue());

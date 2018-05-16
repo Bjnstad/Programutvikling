@@ -94,7 +94,6 @@ public class ScoreBoard {
 
             String[] scoreSeperate = score.split(",");
             for (int i = 0; i <scoreSeperate.length; i++) {
-                System.out.println(scoreSeperate[i]);
                 if(scoreSeperate[i].equals(""))continue;
                 scoreList.add(scoreSeperate[i]);
 
