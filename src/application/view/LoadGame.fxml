@@ -3,18 +3,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane style="-fx-background-color: #696969#696969;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView fx:id="games" layoutX="50.0" layoutY="95.0" prefHeight="299.0" prefWidth="474.0" style="-fx-background-color: #DCDCDC#DCDCDC;" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="95.0">
+      <ListView fx:id="games" layoutX="50.0" layoutY="95.0" prefHeight="299.0" prefWidth="474.0" style="-fx-background-color: #808080#808080 #808080#808080;" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="95.0">
          <effect>
-            <DropShadow color="#2f2e2e" height="202.06" radius="101.285" spread="0.27" width="205.08" />
+            <InnerShadow height="113.0" radius="45.75" width="72.0" />
          </effect></ListView>
-      <Label layoutX="119.0" layoutY="51.0" text="My Games" textFill="#660d0d" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0">
+      <Label layoutX="119.0" layoutY="47.0" prefHeight="38.0" prefWidth="524.0" text="My Games" textFill="#660d0d" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="Lucida Sans Demibold" size="28.0" />
          </font>
@@ -22,14 +23,30 @@
             <InnerShadow color="#322929" height="27.03" radius="9.2425" width="11.94" />
          </effect>
       </Label>
-      <Button layoutX="50.0" layoutY="413.80000000000007" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#importMap" prefHeight="50.0" text="Import new map" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <Button layoutX="193.0" layoutY="413.80000000000007" maxHeight="50.0" minHeight="27.0" mnemonicParsing="false" onAction="#importMap" opacity="0.94" prefHeight="38.0" prefWidth="206.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Import new map" textAlignment="CENTER" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="175.0">
          <effect>
-            <InnerShadow blurType="ONE_PASS_BOX" choke="0.2" color="#3907077a" height="141.43" radius="75.22" width="161.45" />
-         </effect></Button>
-      <Button layoutX="271.0" layoutY="421.0" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#play" prefHeight="50.0" text="Play" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <InnerShadow height="72.0" radius="22.0" width="18.0" />
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7836538461538461" startX="1.0" startY="0.09615384615384616">
+               <stops>
+                  <Stop color="#8d8d8d" />
+                  <Stop color="#610c0ce5" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <Button layoutX="193.0" layoutY="459.0" maxHeight="50.0" minHeight="27.0" mnemonicParsing="false" onAction="#play" opacity="0.93" prefHeight="38.0" prefWidth="206.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Play" textAlignment="CENTER" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="175.0">
          <effect>
-            <InnerShadow color="#250606" height="99.46" radius="29.615" />
-         </effect></Button>
+            <InnerShadow height="72.0" radius="22.0" width="18.0" />
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7793764988009593" startX="1.0" startY="0.04326923076923077">
+               <stops>
+                  <Stop color="#8d8d8d" />
+                  <Stop color="#600c0ce5" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
    </children>
    <effect>
       <InnerShadow choke="0.29" color="#3c2424" height="193.02" radius="77.14750000000001" width="117.57" />
