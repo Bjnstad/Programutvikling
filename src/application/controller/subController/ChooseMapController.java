@@ -66,6 +66,7 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void importMap(ActionEvent event) {
+
     }
 
     /**
@@ -78,21 +79,9 @@ public class ChooseMapController implements SubController {
 
 
         ImportMap importMap = new ImportMap();
-
-        World w = importMap.parseFileTest(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()), gameController.getCamera());
-
-        //w.getGameMap().setMapFileName(maps.getSelectionModel().getSelectedItem().toString());
-
-
-
+        World w = importMap.parseFile(new File("assets/maps/" + maps.getSelectionModel().getSelectedItem().toString()), gameController.getCamera());
         w.addGameObject(new MainPlayer("default_player", 1, 1));
-        //w.addEnemyType(new Zombie1(0,0));
-        //w.addEnemyType(new Zombie2(0,0));
-
-
-        // TODO: CREATE NEW WORLD
         gameController.setWorld(w);
-        /** --- --*/
     }
 
     /**

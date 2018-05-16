@@ -77,17 +77,7 @@ public class LoadGameController implements SubController {
         File file = new File("assets/savegame/" + games.getSelectionModel().getSelectedItem().toString());
         ImportMap im = new ImportMap();
 
-        //gameController.getCamera().translate(ig.getTranslateX(), ig.getTranslateY());
-        //gameController.setWorld(ig.getWorld());
-
-
-        /*for(Enemy enemy : ig.getEnemies()) world.addGameObject(enemy);
-        world.addGameObject(ig.getPlayer());
-        world.setGameMap(ig.getMap());
-        //world.getGameMap().addGameObject();*/
-
-
-        gameController.setWorld(im.parseFileTest(file, gameController.getCamera()));
+        gameController.setWorld(im.parseFile(file, gameController.getCamera()));
 
     }
 

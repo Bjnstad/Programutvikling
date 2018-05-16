@@ -183,7 +183,7 @@ public class EditorInputs implements Inputs {
 
         if (file != null) {
             ImportMap importMap = new ImportMap();
-            world = importMap.parseFileTest(file, camera);
+            world = importMap.parseFile(file, camera);
             world.getGameMap().render(camera);
             for(GameObject gameObject : world.getGameObjects()){
                 camera.render(gameObject);

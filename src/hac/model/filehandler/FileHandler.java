@@ -117,11 +117,11 @@ public abstract class FileHandler {
 
     }
 
-    public void showAlert(){
+    public static void showAlert(String headerText, String contentText){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Corrupt file!");
-        alert.setContentText("This file is corrupted.");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
 
         alert.showAndWait();
     }

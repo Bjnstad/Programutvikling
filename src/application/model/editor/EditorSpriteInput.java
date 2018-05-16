@@ -1,5 +1,6 @@
 package application.model.editor;
 
+import hac.model.filehandler.FileHandler;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -65,6 +66,7 @@ public class EditorSpriteInput {
                 primaryStage.close();
             }catch(Exception y) {
                 y.printStackTrace();
+                FileHandler.showAlert("Import error!", "Are you sure each sub image is one of the following size? 16x16, 32x32, 64x64, 128x128?");
             }
         });
 
