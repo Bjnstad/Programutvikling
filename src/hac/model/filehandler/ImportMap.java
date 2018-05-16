@@ -95,7 +95,6 @@ public class ImportMap extends FileHandler {
 
                     camera.translate(translateX, translateY);
 
-                   // world.getGameMap().setMapFileName(backgroundFileName);
                     world.setCurrentLevel(currentLevel);
                     world.setGodmode(isGodMode);
 
@@ -107,10 +106,11 @@ public class ImportMap extends FileHandler {
                     String type = object[0];
                     double posX = Double.parseDouble(object[1]);
                     double posY = Double.parseDouble(object[2]);
-                    String animationType = object[3];
+                    String fileName = object[3];
+                    String animationType = object[4];
 
                     if(animationType.equals(MULTI_ANIMATION)){
-                        String fileName = object[4];
+
                         String direction  = object[5];
                         int frames = Integer.parseInt(object[6]);
                         int x = Integer.parseInt(object[7]);
@@ -127,10 +127,25 @@ public class ImportMap extends FileHandler {
 
                     }
 
+                    if(animationType.equals(SINGLE_ANIMATION)){
+                        int x = Integer.parseInt(object[5]);
+                        int y = Integer.parseInt(object[6]);
+                        if(type.equals("Enemy")){
+                            Enemy enemy = new Skeleton(posX, posY);
+                            world.addGameObject(enemy);
+                        }
+                        if(type.equals("MainPlayer")){
+                            MainPlayer mainPlayer = new MainPlayer(fileName, posX, posY);
+                            world.addGameObject(mainPlayer);
+                        }
+
+
+                    }
+
                     System.out.println("OJECT: " +spriteSheetString[i]);
                 }
 
-                System.out.println(spriteSheetString[i]);
+                +
 
             }return world;
         }catch (FileNotFoundException e) {

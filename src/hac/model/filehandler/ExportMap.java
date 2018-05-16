@@ -129,11 +129,12 @@ public class ExportMap extends FileHandler {
             sb.append(INLINE_CONTENT);
             sb.append(object.getPosY());
             sb.append(INLINE_CONTENT);
+            sb.append(object.getAvatar().getFilename());
+            sb.append(INLINE_CONTENT);
+
             if(object.getAvatar().getAnimation() instanceof MultiAnimation) {
                 MultiAnimation animation = (MultiAnimation)object.getAvatar().getAnimation();
                 sb.append(MULTI_ANIMATION);
-                sb.append(INLINE_CONTENT);
-                sb.append(object.getAvatar().getFilename());
                 sb.append(INLINE_CONTENT);
                 sb.append(animation.getDirection());
                 sb.append(INLINE_CONTENT);
@@ -147,6 +148,7 @@ public class ExportMap extends FileHandler {
             if(object.getAvatar().getAnimation() instanceof SingleAnimation) {
                 SingleAnimation animation = (SingleAnimation)object.getAvatar().getAnimation();
                 sb.append(SINGLE_ANIMATION);
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getFrames());
                 sb.append(INLINE_CONTENT);
                 sb.append(animation.getY());
@@ -155,6 +157,7 @@ public class ExportMap extends FileHandler {
             if(object.getAvatar().getAnimation() instanceof StaticAnimation) {
                 StaticAnimation animation = (StaticAnimation)object.getAvatar().getAnimation();
                 sb.append(STATIC_ANIMATION);
+                sb.append(INLINE_CONTENT);
                 sb.append(animation.getX());
                 sb.append(INLINE_CONTENT);
                 sb.append(animation.getY());
