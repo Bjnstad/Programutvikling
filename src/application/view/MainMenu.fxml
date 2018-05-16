@@ -14,12 +14,12 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="483.0" prefWidth="300.0" style="-fx-background-color: #000000#000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="946.0" prefWidth="927.0" style="-fx-background-color: #000000#000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutY="-4.0" prefHeight="200.0" prefWidth="686.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-326.0">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" />
-            <ImageView fitHeight="175.0" fitWidth="300.0" layoutX="300.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.8" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <ImageView fitHeight="137.0" fitWidth="276.0" layoutX="353.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.61" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="660.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../res/skull.jpg" />
                </image>
@@ -27,27 +27,27 @@
                   <ColorAdjust />
                </effect>
             </ImageView>
+            <Label alignment="CENTER" layoutX="126.0" layoutY="14.0" prefHeight="55.0" prefWidth="664.0" style="-fx-text-alignment: center;" text="HAC" wrapText="true" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="499.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="43.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop color="#940a0a" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </AnchorPane>
-      <Label alignment="CENTER" layoutX="30.0" layoutY="14.0" prefHeight="75.0" prefWidth="240.0" style="-fx-text-alignment: center;" text="HAC" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font name="System Bold" size="43.0" />
-         </font>
-         <textFill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-               <stops>
-                  <Stop color="#940a0a" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </textFill>
-      </Label>
-      <AnchorPane layoutY="172.0" prefHeight="277.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="172.0">
+      <AnchorPane layoutX="36.0" layoutY="165.0" prefHeight="690.0" prefWidth="876.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="165.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#newGame" opacity="0.61" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: ;" text="New Game" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button layoutX="62.0" mnemonicParsing="false" onAction="#newGame" opacity="0.61" prefHeight="32.0" prefWidth="737.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: ;" text="New Game" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Sinhala Sangam MN" size="15.0" />
                </font>
@@ -63,7 +63,7 @@
                   <InnerShadow height="27.09" radius="15.295000000000002" width="36.09" />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#loadGame" opacity="0.81" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Load  Game" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+            <Button layoutX="63.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.81" prefHeight="29.0" prefWidth="737.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3;" text="Load  Game" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -79,7 +79,7 @@
                   <InnerShadow choke="0.38" color="#00000073" height="27.16" radius="22.857499999999998" width="66.27" />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#editor" opacity="0.86" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Editor" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+            <Button layoutX="63.0" mnemonicParsing="false" onAction="#editor" opacity="0.86" prefHeight="29.0" prefWidth="737.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Editor" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="110.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -95,7 +95,7 @@
                   <InnerShadow choke="0.04" height="48.16" radius="29.615" width="72.3" />
                </effect>
             </Button>
-            <Button fx:id="options" mnemonicParsing="false" opacity="0.84" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Options" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
+            <Button fx:id="options" layoutX="63.0" mnemonicParsing="false" opacity="0.84" prefHeight="32.0" prefWidth="737.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Options" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="165.0">
                <font>
                   <Font name="Sinhala Sangam MN" size="15.0" />
                </font>
@@ -111,7 +111,7 @@
                   <InnerShadow height="36.09" radius="18.3" width="39.11" />
                </effect>
             </Button>
-            <Button fx:id="hightscore" mnemonicParsing="false" opacity="0.89" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Highscore" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0">
+            <Button fx:id="hightscore" layoutX="63.0" mnemonicParsing="false" opacity="0.89" prefHeight="32.0" prefWidth="737.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Highscore" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="220.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -127,6 +127,36 @@
                   <InnerShadow radius="16.035" width="45.14" />
                </effect>
             </Button>
+            <ImageView fitHeight="200.0" fitWidth="282.0" layoutY="249.0" opacity="0.13" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="227.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="572.3333435058594" AnchorPane.topAnchor="249.0">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="216.0" fitWidth="305.0" layoutX="274.0" layoutY="255.0" opacity="0.23" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="216.0" fitWidth="305.0" layoutX="562.0" layoutY="255.0" opacity="0.29" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="192.0" fitWidth="288.0" layoutX="5.0" layoutY="472.0" opacity="0.16" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="244.0" fitWidth="297.0" layoutX="261.0" layoutY="464.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="237.0" fitWidth="305.0" layoutX="558.0" layoutY="464.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/background.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

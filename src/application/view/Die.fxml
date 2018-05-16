@@ -8,6 +8,8 @@
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
@@ -18,13 +20,22 @@
          </effect></Pane>
         <AnchorPane layoutY="116.0" prefHeight="284.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="116.0">
             <children>
-                <Button layoutY="92.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3 #D3D3D3#D3D3D3; -fx-background-radius: 0;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
+                <Button layoutY="92.0" mnemonicParsing="false" onAction="#exit" opacity="0.76" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #D3D3D3#D3D3D3 #D3D3D3#D3D3D33;" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
                     <font>
                         <Font size="22.0" />
                     </font>
                <effect>
-                  <InnerShadow choke="0.08" height="69.29" radius="33.3875" width="66.26" />
+                  <InnerShadow height="72.0" radius="22.0" width="18.0" />
                </effect>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.5432692307692308">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="#660d0d" offset="0.765886287625418" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
             </Button>
             </children>
         </AnchorPane>

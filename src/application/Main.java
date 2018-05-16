@@ -23,7 +23,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
 
-				Scene scene = new Scene(root, 800, 800); //Sets the size of the board.
+				Scene scene = new Scene(root, 1000, 1000); //Sets the size of the board.
 
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("HAC"); //Sets the title "HAC" of the game in a scene.
