@@ -3,10 +3,8 @@ package hac.model.object.defaults;
 import hac.model.Camera;
 import hac.controller.World;
 import hac.model.object.GameObject;
-import hac.model.object.character.Player;
+import hac.model.object.predefined.character.Player;
 import hac.model.render.Actions;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 
 /**
@@ -52,7 +50,7 @@ public class MainPlayer extends Player {
     }
 
     @Override
-    public void logic(World world, Actions actions) {
+    public void logic(Actions actions) {
 
     }
 

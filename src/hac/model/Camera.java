@@ -18,11 +18,12 @@ public class Camera {
     private double translateX; // Movement offset
     private double translateY; // Movement offset
     private double scale; // Multiplier for correctly display gameboard and sizes
-    private double dimension;
+    private double dimension; // Width or height of board
 
     /**
-     * @param dimension
-     * @param canvas cavas to
+     * At this moment we do not support anything other than square dimension of the camera size.
+     * @param dimension either height or widht of the main frame size
+     * @param canvas Canvas to draw on
      */
     public Camera(double dimension, Canvas canvas) {
         this.canvas = canvas;
@@ -69,13 +70,18 @@ public class Camera {
         return value * scale;
     }
 
+    /**
+     * Clear the screen by making view black.
+     * @param barHeight
+     */
     public void clearView(double barHeight) {
         GraphicsContext gc = getGraphicsContext();
         gc.setFill(Color.BLACK);
         gc.fillRect(-getTranslateX(), -getTranslateY(), -getTranslateX() + dimension +scale, -getTranslateY() + dimension + barHeight*scale);
     }
+
     /**
-     * Zoom is how many background tiles shown on screen simultaneously, 2 in zoom is 2 tiles on x axis and 2 on y axis.
+     * Zoom is how many background tiles shown on screen simultaneously, 2 in zoom is 2 tiles on x axis and 2 on y axis, higher number for zoom out.
      * @param zoom how many tiles shown to screen
      */
     public void setZoom(int zoom) {

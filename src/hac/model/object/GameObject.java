@@ -7,6 +7,9 @@ import hac.model.object.sprite.ImageHandler;
 import hac.model.render.Actions;
 import hac.controller.World;
 
+/**
+ * Main object used in World, best practise
+ */
 public abstract class GameObject {
 
     Avatar avatar;
@@ -24,74 +27,49 @@ public abstract class GameObject {
         return collideable;
     }
 
-    void setNoneCollideable() {
+    public void setNoneCollideable() {
         collideable = false;
     }
 
-
-
-
+    /**
+     * If this object collides with an other object as parameter, game actions can be done through actions.
+     * @param object Object colliding with this.
+     * @param actions Call actions based on your wanted logic
+     */
     public abstract void onCollide(GameObject object, Actions actions);
 
-    public abstract void logic(World world, Actions actions);
+    /**
+     * Called on every gameloop, giving you opportunity to do logic for object.
+     * @param actions Call actions based on your wanted logic
+     */
+    public abstract void logic(Actions actions);
+
+    /**
+     * Called on every render, giving you opportunity to draw on screen.
+     * @param camera use GraficalContext to draw to screen.
+     */
     public abstract void renderOptional(Camera camera);
 
-
-
-
-
     public boolean willCollide(GameObject object) {
-        return willCollide(object, getPosX(), getPosY());
+        return willCollide(object, posX, posY);
     }
-
-
-
 
     /**
      * This checks if this character crashes with other character.
      * @param object target to check against.
      * @return the position to enemy in height and width.
      */
-    boolean willCollide(GameObject object, double x, double y) {
+    public boolean willCollide(GameObject object, double x, double y) {
         double deadzone = .01;
         if(x > object.getPosX() + 1 -deadzone || x + 1 -deadzone < object.getPosX()) return false;
         return !(y > object.getPosY() + 1 -deadzone) && !(y + 1-deadzone < object.getPosY());
     }
 
-
-
-
-    public double getPosX() {
-        return posX;
-    }
-
-    public double getPosY() {
-        return posY;
-    }
-
-
-
-    /**
-     * Sets position to the character in width in gameboard.
-     * If the speed is less then 1, then the character walk left, if not it walks right.
-     * @param posX This is the position to the character in width.
-     */
     public void setPosX(double posX) {
-        double speed = posX - getPosX();
-        if (speed == 0) return;
-
         this.posX = posX;
     }
 
-    /**
-     * Sets position to the character in height in gameboard.
-     * If the speed to the character is faster then 1, then it walks up, if not it walks down.
-     * @param posY This is the position to the character in height.
-     */
     public void setPosY(double posY) {
-        double speed = posY - this.posY;
-        if (speed == 0) return;
-
         this.posY = posY;
     }
 
@@ -101,5 +79,13 @@ public abstract class GameObject {
 
     public Image getImage(ImageHandler imageHandler) {
         return imageHandler.getImage(avatar);
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
     }
 }

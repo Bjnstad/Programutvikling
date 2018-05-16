@@ -1,5 +1,6 @@
-package hac.model.object;
+package hac.model.object.predefined;
 
+import hac.model.object.GameObject;
 import javafx.scene.image.Image;
 import hac.model.Camera;
 import hac.model.object.sprite.Avatar;
@@ -40,7 +41,7 @@ public class MapObject extends GameObject {
     }
 
     @Override
-    public void logic(World world, Actions actions) {
+    public void logic(Actions actions) {
 
     }
 

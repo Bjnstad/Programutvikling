@@ -1,18 +1,16 @@
 package hac.model.filehandler;
 
 import hac.model.Camera;
-import hac.model.object.GameMap;
-import hac.model.object.character.Enemy;
+import hac.model.GameMap;
+import hac.model.object.predefined.character.Enemy;
 import hac.model.object.defaults.MainPlayer;
 import hac.model.object.defaults.Skeleton;
 import javafx.embed.swing.SwingFXUtils;
 import hac.controller.World;
-import hac.model.object.MapObject;
+import hac.model.object.predefined.MapObject;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.animation.StaticAnimation;
-import javafx.scene.image.Image;
-import sun.misc.BASE64Decoder;
-import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
 import java.io.*;
 

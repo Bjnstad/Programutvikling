@@ -1,4 +1,4 @@
-package hac.model.object.character;
+package hac.model.object.predefined.character;
 
 import hac.model.object.defaults.MainPlayer;
 import javafx.scene.canvas.GraphicsContext;
@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import hac.model.Camera;
 import hac.model.object.GameObject;
 import hac.model.render.Actions;
-import hac.controller.World;
 
 
 public abstract class Enemy extends Character {
@@ -44,13 +43,13 @@ public abstract class Enemy extends Character {
     }
 
     @Override
-    public void logic(World world, Actions actions) {
-        MainPlayer player = world.getMainPlayer();
+    public void logic(Actions actions) {
+        MainPlayer player = actions.getWorld().getMainPlayer();
         if(player == null) throw new IllegalStateException("Player not set");
         double angle = Math.atan2(player.getPosX() - getPosX(), player.getPosY() - getPosY());
         double rx = speed * Math.sin(angle) / 100;
         double ry = speed * Math.cos(angle) / 100;
-        addPos(rx, ry, world); // Move towards player.
+        addPos(rx, ry, actions.getWorld()); // Move towards player.
     }
 
     /**

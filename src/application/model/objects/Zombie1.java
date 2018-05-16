@@ -1,6 +1,6 @@
 package application.model.objects;
 
-import hac.model.object.character.Enemy;
+import hac.model.object.predefined.character.Enemy;
 
 public class Zombie1 extends Enemy {
     /**

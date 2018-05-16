@@ -1,6 +1,6 @@
 package hac.model.object.defaults;
 
-import hac.model.object.character.Enemy;
+import hac.model.object.predefined.character.Enemy;
 
 public class Skeleton extends Enemy {
 

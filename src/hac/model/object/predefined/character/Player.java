@@ -1,9 +1,4 @@
-package hac.model.object.character;
-
-import hac.model.Camera;
-import hac.model.object.GameObject;
-import hac.model.render.Actions;
-import hac.controller.World;
+package hac.model.object.predefined.character;
 
 /**
  * This class represents the player in the game.

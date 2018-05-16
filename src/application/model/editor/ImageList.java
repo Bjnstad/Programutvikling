@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import hac.model.object.MapObject;
+import hac.model.object.predefined.MapObject;
 import hac.model.filehandler.SpriteSheet;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.animation.StaticAnimation;

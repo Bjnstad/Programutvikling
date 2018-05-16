@@ -1,6 +1,7 @@
-package hac.model.object;
+package hac.model.object.predefined;
 
 import hac.controller.World;
+import hac.model.object.GameObject;
 import hac.model.object.defaults.MainPlayer;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.Direction;
@@ -29,9 +30,9 @@ public abstract class MoveableObject extends GameObject {
         }
 
         if(Math.abs(x) > Math.abs(y)) {
-            ((MultiAnimation) avatar.getAnimation()).setDirection(x < 0 ? Direction.LEFT : Direction.RIGHT);
+            ((MultiAnimation) getAvatar().getAnimation()).setDirection(x < 0 ? Direction.LEFT : Direction.RIGHT);
         } else {
-            ((MultiAnimation) avatar.getAnimation()).setDirection(y < 0 ? Direction.UP : Direction.DOWN);
+            ((MultiAnimation) getAvatar().getAnimation()).setDirection(y < 0 ? Direction.UP : Direction.DOWN);
         }
 
         setPosX(getPosX() + x);

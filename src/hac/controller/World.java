@@ -1,13 +1,13 @@
 package hac.controller;
 
-import hac.model.object.GameMap;
+import hac.model.GameMap;
 import application.controller.mainController.GameController;
 import hac.model.Camera;
-import hac.model.object.MapObject;
-import hac.model.object.Bullet;
-import hac.model.object.character.Enemy;
+import hac.model.object.predefined.MapObject;
+import hac.model.object.predefined.Bullet;
+import hac.model.object.predefined.character.Enemy;
 import hac.model.object.defaults.MainPlayer;
-import hac.model.object.character.Player;
+import hac.model.object.predefined.character.Player;
 import hac.model.object.GameObject;
 import hac.model.object.defaults.Skeleton;
 import hac.model.render.Actions;

@@ -2,7 +2,7 @@ package hac.model.render;
 
 import hac.model.Camera;
 import hac.model.object.GameObject;
-import hac.model.object.GameMap;
+import hac.model.GameMap;
 import hac.controller.World;
 
 import java.util.ArrayList;

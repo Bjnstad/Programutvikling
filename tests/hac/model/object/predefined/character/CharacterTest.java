@@ -1,8 +1,6 @@
-package hac.model.object.character;
+package hac.model.object.predefined.character;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterTest {
 

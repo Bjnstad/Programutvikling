@@ -1,5 +1,6 @@
-package hac.model.object;
+package hac.model;
 
+import hac.model.object.predefined.MapObject;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

@@ -2,7 +2,7 @@ package hac.model.render;
 
 import hac.model.Camera;
 import hac.model.object.GameObject;
-import hac.model.object.character.Character;
+import hac.model.object.predefined.character.Character;
 import hac.controller.World;
 import hac.model.object.defaults.MainPlayer;
 
@@ -44,7 +44,7 @@ public class CheckObjects implements Runnable {
             }
 
             // Call object logic parts
-            gameObject.logic(world, actions);
+            gameObject.logic(actions);
             for (int j = 0; j < gameObjects.size(); j++) {
                 if(j==i) continue; // Skip self
                 if(gameObject.willCollide(gameObjects.get(j))) gameObject.onCollide(gameObjects.get(j), actions);
