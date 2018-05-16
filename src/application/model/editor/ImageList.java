@@ -89,13 +89,13 @@ public class ImageList {
                     SpriteSheet test = new SpriteSheet(imageItem.getFileName());
                     for (int y = 0; y < imageItem.getY(); y++) {
                         for (int x = 0; x < imageItem.getX(); x++) {
-                            //Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
-                            //ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
-                            //imageItemExtracted.setSpriteHeight(imageItem.getSpriteHeight());
-                            //imageItemExtracted.setSpriteWidth(imageItem.getSpriteWidth());
-                            //imageItemExtracted.setFrames(imageItem.getX());
-                            //imageItemExtracted.setColumns(imageItem.getY());
-                            //result.add(imageItemExtracted);
+                            Image img = SwingFXUtils.toFXImage(test.getSprite(x,y), null);
+                            ImageItem imageItemExtracted = new ImageItem(new ImageView(img), img, imageItem.getFileName(), x,y);
+                            imageItemExtracted.setSpriteHeight(imageItem.getSpriteHeight());
+                            imageItemExtracted.setSpriteWidth(imageItem.getSpriteWidth());
+                            imageItemExtracted.setFrames(imageItem.getX());
+                            imageItemExtracted.setColumns(imageItem.getY());
+                            result.add(imageItemExtracted);
                         }
                     }
                     assetsListView.setItems(result);

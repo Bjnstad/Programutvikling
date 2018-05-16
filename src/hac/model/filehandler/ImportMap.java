@@ -139,7 +139,7 @@ public class ImportMap extends FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Corrupt File!", "File is corrupt.");
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (Exception e){
             showAlert("Corrupt File!", "File is corrupt.");
         }
 
