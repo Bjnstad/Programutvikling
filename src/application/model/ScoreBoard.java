@@ -18,7 +18,8 @@ import javafx.stage.Stage;
 import java.io.*;
 
 /**
- * Created by henrytran1 on 16/05/2018.
+ * Class handling scoreboards.
+ * @author Henry Tran - s315309
  */
 public class ScoreBoard {
 

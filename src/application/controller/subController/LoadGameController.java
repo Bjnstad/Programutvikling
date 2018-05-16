@@ -1,6 +1,8 @@
 package application.controller.subController;
 
+import hac.controller.World;
 import hac.model.filehandler.ImportMap;
+import hac.model.object.defaults.MainPlayer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,6 +65,10 @@ public class LoadGameController implements SubController {
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
         fileChooser.getExtensionFilters().add(filter);
         File file = fileChooser.showOpenDialog(new Stage());
+        ImportMap importMap = new ImportMap();
+        World w = importMap.parseFile(file, gameController.getCamera());
+
+        gameController.setWorld(w);
 
 
     }

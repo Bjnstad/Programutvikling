@@ -11,6 +11,8 @@ import application.controller.mainController.GameController;
 import hac.controller.World;
 import hac.model.object.defaults.MainPlayer;
 import hac.model.filehandler.ImportMap;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -64,6 +66,15 @@ public class ChooseMapController implements SubController {
      */
     @FXML
     public void importMap(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("mhac files", "*.mhac");
+        fileChooser.getExtensionFilters().add(filter);
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        ImportMap importMap = new ImportMap();
+        World w = importMap.parseFile(file, gameController.getCamera());
+        w.addGameObject(new MainPlayer("default_player", 1, 1));
+        gameController.setWorld(w);
 
     }
 

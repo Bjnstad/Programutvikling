@@ -32,7 +32,7 @@ public class ImportMap extends FileHandler {
      * This method is used to parse .mhac files, which is map saves and game saves.
      * @param file .mhac
      * @param camera
-     * @return
+     * @return the world created from .mhac
      */
 
     public World parseFile(File file, Camera camera){

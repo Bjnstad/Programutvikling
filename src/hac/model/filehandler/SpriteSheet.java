@@ -9,7 +9,9 @@ import sun.misc.BASE64Decoder;
 import javax.imageio.ImageIO;
 
 /**
+ * SpriteSheet Class
  *
+ * @author Henry Tran - s315309
  */
 public class SpriteSheet {
 

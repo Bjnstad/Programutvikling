@@ -3,7 +3,6 @@ package application.model.editor;
 import hac.model.filehandler.FileHandler;
 import hac.model.filehandler.SpriteSheet;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -15,7 +14,9 @@ import javafx.stage.Stage;
 import hac.model.filehandler.ExportMap;
 
 /**
+ * This class handles Import spriteSheet.
  *
+ * @author Henry Tran - s315309
  */
 public class EditorSpriteInput {
     private int rows;
@@ -69,7 +70,6 @@ public class EditorSpriteInput {
                 FileHandler.showAlert("Import error!", "Are you sure each sub image is one of the following size? 16x16, 32x32, 64x64, 128x128?");
             }
         });
-
 
         VBox Vertikalboks = new VBox(rowLabel, inputRow, columnLabel, inputColumns,submit);
 
