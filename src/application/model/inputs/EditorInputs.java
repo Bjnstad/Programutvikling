@@ -1,5 +1,6 @@
 package application.model.inputs;
 
+import application.model.editor.EditorSpriteInput;
 import hac.controller.World;
 import hac.model.filehandler.ImportMap;
 import hac.model.filehandler.SpriteSheet;
@@ -15,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import hac.model.Camera;
@@ -27,6 +29,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Handles inout for editor.
@@ -165,8 +168,6 @@ public class EditorInputs implements Inputs {
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 world.setGameMap(new GameMap(Integer.parseInt(inputMapSizeX.getText()), Integer.parseInt(inputMapSizeY.getText()), new SpriteSheet("default_background")));
-                int gameMapX = Integer.parseInt(inputMapSizeX.getText());
-                int gameMapY = Integer.parseInt(inputMapSizeY.getText());
                 exportMap.addMapSize();
                 world.getGameMap().render(camera);
                 primaryStage.close();
@@ -189,6 +190,24 @@ public class EditorInputs implements Inputs {
             for(GameObject gameObject : world.getGameObjects()){
                 camera.render(gameObject);
             }
+        }
+    }
+
+    public void handleImportSprite(){
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("PNG files", "*.png");
+        fileChooser.getExtensionFilters().add(filter);
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        if (file != null) {
+            EditorSpriteInput editorSpriteInput = new EditorSpriteInput();
+
+            Image image = new Image(file.toURI().toString());
+            Path path = file.toPath();
+            String[] fileNameA = String.valueOf(path.getFileName()).split("\\.");
+            String fileName = fileNameA[0];
+            editorSpriteInput.popUp(image, fileName, imageList, imageList.getResult()).show();
+
         }
     }
 

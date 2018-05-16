@@ -114,19 +114,7 @@ public class EditorController extends Controller {
 
     @FXML
     private void ImportSprite(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(new Stage());
-
-        if (file != null) {
-            EditorSpriteInput editorSpriteInput = new EditorSpriteInput();
-
-            Image image = new Image(file.toURI().toString());
-            Path path = file.toPath();
-            String[] fileNameA = String.valueOf(path.getFileName()).split("\\.");
-            String fileName = fileNameA[0];
-            editorSpriteInput.popUp(image, fileName, imageList, imageList.getResult()).show();
-
-        }
+        editorInputs.handleImportSprite();
     }
 
     @FXML
