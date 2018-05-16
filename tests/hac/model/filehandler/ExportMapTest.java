@@ -1,5 +1,7 @@
 package hac.model.filehandler;
 
+import hac.controller.World;
+import hac.model.object.GameMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,9 @@ class ExportMapTest {
 
     @BeforeEach
     void setUp() {
-        exportMap = new ExportMap();
+        World world = new World();
+
+        exportMap = new ExportMap(world);
 
     }
 
