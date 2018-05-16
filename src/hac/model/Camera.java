@@ -34,7 +34,7 @@ public class Camera {
     }
 
     /**
-     * Draw method for object rendering to the screen.
+     * Draw method for object rendering to the screen.´
      * @param object Object to draw on screen
      */
     public void render(GameObject object) {
@@ -48,7 +48,7 @@ public class Camera {
         double l = h < w ? h : w;
 
         double s = -1 + l / scale;
-
+        if(object.getScale() != -1)s *= object.getScale();
 
 
         gc.drawImage(image, scale(object.getPosX()), scale(object.getPosY()), imageHandler.getWidth(object.getAvatar().getFilename()) / s, imageHandler.getHeight(object.getAvatar().getFilename()) / s) ;

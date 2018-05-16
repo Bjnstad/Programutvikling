@@ -31,7 +31,7 @@ import java.util.Random;
  * @author Axel Bjørnstad - s315322
  */
 public class World {
-    private final double ENEMY_GENERATION_RATE = 2;
+    private final double ENEMY_GENERATION_RATE = 8;
 
     private ArrayList<Enemy> enemiesTypes = new ArrayList<>(); // Used for choosing generated enemies.
 
@@ -151,7 +151,7 @@ public class World {
             if(enemiesTypes.size() == 0) {
                  enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
             } else {
-                int k = rand.nextInt(enemiesTypes.size() );
+                int k = 0;
                 enemy = enemiesTypes.get(k);
                 enemy.setPosX(rand.nextInt(gameMap.getWidth()));
                 enemy.setPosY(rand.nextInt(gameMap.getHeight()));

@@ -12,6 +12,7 @@ public abstract class GameObject {
     Avatar avatar;
     private double posX;
     private double posY;
+    private double scale = -1;
     private boolean collideable = true;
 
     public GameObject(Avatar avatar, double posX, double posY) {
@@ -27,7 +28,6 @@ public abstract class GameObject {
     void setNoneCollideable() {
         collideable = false;
     }
-
 
 
 
@@ -93,6 +93,14 @@ public abstract class GameObject {
         if (speed == 0) return;
 
         this.posY = posY;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public double getScale() {
+        return scale;
     }
 
     public Avatar getAvatar() {

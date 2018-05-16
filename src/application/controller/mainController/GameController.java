@@ -1,5 +1,6 @@
 package application.controller.mainController;
 
+import hac.model.object.defaults.Bolt;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -108,7 +109,7 @@ public class GameController extends Controller {
         double pX = player.getPosX() + .5;
         double pY = player.getPosY() + .5;
 
-        world.addGameObject(new Bullet(player, mX/camera.getScale(), mY/camera.getScale()));
+        world.addGameObject(new Bolt(player, mX/camera.getScale(), mY/camera.getScale()));
     }
 
     private void gameloop() {
