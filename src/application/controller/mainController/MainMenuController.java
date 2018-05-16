@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 
 /**
  * MainMenu, navigate to all other States
+ * @author Axel Bjørnstad - s315322
  */
 public class MainMenuController extends Controller {
 

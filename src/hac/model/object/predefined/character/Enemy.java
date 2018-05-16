@@ -7,7 +7,9 @@ import hac.model.Camera;
 import hac.model.object.GameObject;
 import hac.model.render.Actions;
 
-
+/**
+ * @author Axel Bjørnstad - s315322
+ */
 public abstract class Enemy extends Character {
 
     private float speed = 1;
