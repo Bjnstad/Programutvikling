@@ -2,6 +2,7 @@ package application.model.inputs;
 
 import application.model.editor.EditorSpriteInput;
 import hac.controller.World;
+import hac.model.filehandler.FileHandler;
 import hac.model.filehandler.ImportMap;
 import hac.model.filehandler.SpriteSheet;
 import hac.model.GameMap;
@@ -111,7 +112,7 @@ public class EditorInputs implements Inputs {
                 for(GameObject gameObject : world.getGameObjects()) camera.render(gameObject);
 
             }catch (Exception e){
-                handleMapSize();
+                FileHandler.showAlert("Error", "Something went wrong, please restart map");
             }
 
 

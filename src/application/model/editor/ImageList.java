@@ -1,5 +1,6 @@
 package application.model.editor;
 
+import hac.model.filehandler.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -80,7 +81,7 @@ public class ImageList {
             @Override
             public void handle(MouseEvent event) {
                 ImageItem imageItem = spriteBottom.get(spriteListView.getSelectionModel().getSelectedIndex());
-                System.out.println(imageItem.getFileName());
+
                 if(result.size() > 1){
                     assetsListView.getItems().clear();
                 }
@@ -109,15 +110,9 @@ public class ImageList {
                             }
                         }
                     });
-
                 }catch(Exception y){
                     y.printStackTrace();
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Dialog");
-                    alert.setHeaderText("Look, an Error Dialog");
-                    alert.setContentText("Ooops, there was an error!");
-
-                    alert.showAndWait();
+                    FileHandler.showAlert("Error","Something went wrong");
                 }
 
 
@@ -135,7 +130,7 @@ public class ImageList {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 imageItem = result.get(assetsListView.getSelectionModel().getSelectedIndex());
-                System.out.println(imageItem.getFileName());
+
                 MapObject object = new MapObject(new Avatar(imageItem.getFileName(), new StaticAnimation(imageItem.getX(), imageItem.getY())),  1, 1);
                 mapObject = object;
 

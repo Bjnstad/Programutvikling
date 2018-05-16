@@ -44,7 +44,6 @@ public class ExportMap extends FileHandler {
 
     }
 
-
     /**
      * Adds element to list, used to structure the map with objects and spritesheets used.
      *
@@ -105,6 +104,9 @@ public class ExportMap extends FileHandler {
 
     }
 
+    /**
+     * Method to save game.
+     */
     public void saveGame(){
         StringBuilder saveBuilder = new StringBuilder();
 
@@ -115,6 +117,12 @@ public class ExportMap extends FileHandler {
         handleSaveMapName(false);
 
     }
+
+    /**
+     * Helper method to savegame.
+     * This method loops through all objects in the world gamemap, and appends this to String.
+     * @return String with information about all objects on the map.
+     */
 
     public String saveObjects(){
         StringBuilder sb = new StringBuilder();
@@ -170,14 +178,16 @@ public class ExportMap extends FileHandler {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String appendAhac(){
 
         try {
-            System.out.println("assets/maps/" + world.getGameMap().getMapFileName());
             BufferedReader b = new BufferedReader(new FileReader(new File("assets/maps/" + world.getGameMap().getMapFileName())));
 
             String str = b.readLine().toString();
-            System.out.println(str);
             return str;
 
         } catch (FileNotFoundException e) {
@@ -188,6 +198,10 @@ public class ExportMap extends FileHandler {
         return null;
     }
 
+    /**
+     * Helper method to save game.
+     * @return String with information about the current Game State.
+     */
     public String saveGameState(){
         StringBuilder sb = new StringBuilder();
         sb.append(NEW_LINE);
@@ -258,7 +272,7 @@ public class ExportMap extends FileHandler {
         });
     }
 
-        /**
+    /**
      * Gets the string elements of the constructed maps.
      * @return elements of strings representing the structure of the map.
      */

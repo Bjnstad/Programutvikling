@@ -10,7 +10,6 @@ import hac.controller.World;
 import hac.model.object.predefined.MapObject;
 import hac.model.object.sprite.Avatar;
 import hac.model.object.sprite.animation.StaticAnimation;
-
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -54,8 +53,6 @@ public class ImportMap extends FileHandler {
 
                     world.getGameMap().setMapFileName(mapFileName);
 
-
-                    System.out.println("MAPSIZE: " + mapWidth + " height: " + mapHeight );
                 }
 
                 if(spriteSheetString[i].substring(0, 1).equals(SPRITE_CONTENT) || spriteSheetString[i].equals("")){
@@ -70,8 +67,6 @@ public class ImportMap extends FileHandler {
                     if (!f.exists()) {
                         saveSpriteInput(SwingFXUtils.toFXImage(image, null), spriteBits, cols, rows, spriteFileName);
                     }
-
-                    System.out.println("SPRITE POSITION " + spriteSheetString[i]);
                 }
 
                 if(spriteSheetString[i].substring(0, 1).equals(SPRITE_POSITION)){
@@ -84,7 +79,6 @@ public class ImportMap extends FileHandler {
                     MapObject mapObject = new MapObject(new Avatar(objectFileName, new StaticAnimation(objectX, objectY)), (int) posY, (int) posX);
                     world.addGameObject(mapObject);
 
-                    System.out.println("Sprite position used: " + spriteSheetString[i]);
                 }
 
                 if(spriteSheetString[i].substring(0, 1).equals(GAME_SAVE_STATE)){
@@ -97,11 +91,9 @@ public class ImportMap extends FileHandler {
 
                     camera.translate(translateX, translateY);
 
-                   // world.getGameMap().setMapFileName(backgroundFileName);
                     world.setCurrentLevel(currentLevel);
                     world.setGodmode(isGodMode);
 
-                    System.out.println("GAME SAVE STATE: " + spriteSheetString[i]);
                 }
 
                 if(spriteSheetString[i].substring(0, 1).equals(OBJECT)){
@@ -135,12 +127,8 @@ public class ImportMap extends FileHandler {
 
                     }
 
-                    System.out.println("OJECT: " +spriteSheetString[i]);
                 }
-
-                System.out.println(spriteSheetString[i]);
-
-            }return world;
+            }   return world;
         }catch (FileNotFoundException e) {
             e.printStackTrace();
             showAlert("Corrupt File!", "File is corrupt.");
