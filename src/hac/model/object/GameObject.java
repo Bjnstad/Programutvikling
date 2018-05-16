@@ -7,7 +7,7 @@ import hac.model.object.sprite.ImageHandler;
 import hac.model.render.Actions;
 import hac.controller.World;
 
-public abstract class GameObject {
+public abstract class GameObject implements Cloneable  {
 
     Avatar avatar;
     private double posX;
@@ -37,7 +37,9 @@ public abstract class GameObject {
     public abstract void renderOptional(Camera camera);
 
 
-
+    public GameObject clone() throws CloneNotSupportedException {
+        return (GameObject) super.clone();
+    }
 
 
     public boolean willCollide(GameObject object) {

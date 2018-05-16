@@ -109,7 +109,9 @@ public class GameController extends Controller {
         double pX = player.getPosX() + .5;
         double pY = player.getPosY() + .5;
 
-        world.addGameObject(new Bolt(player, mX/camera.getScale(), mY/camera.getScale()));
+
+        Bolt bolt = new Bolt(player, mX/camera.getScale(), mY/camera.getScale());
+        world.addGameObject(bolt);
     }
 
     private void gameloop() {

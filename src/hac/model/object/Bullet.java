@@ -15,7 +15,6 @@ public abstract class Bullet extends MoveableObject {
     private final double speed = 40;
     private final double strength = 20;
     private double velocityX, velocityY;
-    private double rotationX, rotationY = -1;
 
     /**
      * The coordinates to the bullets from start to end, vertical and horizontal.
@@ -30,11 +29,6 @@ public abstract class Bullet extends MoveableObject {
         double angle = Math.atan2(endX - getPosX() + .5, endY - getPosY() + .5);
         velocityY = (speed) * Math.cos(angle) / 100;
         velocityX = (speed) * Math.sin(angle) / 100;
-    }
-
-    public void setRotation(double rotationX, double rotationY) {
-        this.rotationX = rotationX;
-        this.rotationY = rotationY;
     }
 
     @Override

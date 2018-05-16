@@ -1,5 +1,6 @@
 package hac.model;
 
+import hac.model.object.Bullet;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import hac.model.object.GameObject;
@@ -50,8 +51,9 @@ public class Camera {
         double s = -1 + l / scale;
         if(object.getScale() != -1)s *= object.getScale();
 
-
         gc.drawImage(image, scale(object.getPosX()), scale(object.getPosY()), imageHandler.getWidth(object.getAvatar().getFilename()) / s, imageHandler.getHeight(object.getAvatar().getFilename()) / s) ;
+
+
     }
 
     /**

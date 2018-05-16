@@ -96,8 +96,8 @@ public class World {
         actions.start(gameObjects, gameMap, getCamera());
         drawUserStats();
 
-    }
 
+}
     private void drawUserStats() {
         GraphicsContext gc = getCamera().getGraphicsContext();
         Camera camera = getCamera();
@@ -152,7 +152,11 @@ public class World {
                  enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
             } else {
                 int k = 0;
-                enemy = enemiesTypes.get(k);
+                try {
+                    enemy = (Enemy)enemiesTypes.get(k).clone();
+                } catch (CloneNotSupportedException e) {
+                    enemy = new Skeleton(rand.nextInt(gameMap.getWidth()), rand.nextInt(gameMap.getHeight()));
+                }
                 enemy.setPosX(rand.nextInt(gameMap.getWidth()));
                 enemy.setPosY(rand.nextInt(gameMap.getHeight()));
             }
